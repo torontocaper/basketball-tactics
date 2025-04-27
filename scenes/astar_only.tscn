@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://bfvlp7cngcarf"]
+
+[ext_resource type="Script" uid="uid://duttm3d34iirw" path="res://scripts/astar_only.gd" id="1_etebd"]
+[ext_resource type="Texture2D" uid="uid://gosw77tlyk0s" path="res://icon.svg" id="2_nyb5g"]
+
+[node name="AstarOnly" type="Node2D"]
+script = ExtResource("1_etebd")
+
+[node name="NavPath" type="Line2D" parent="."]
+
+[node name="PlayerSprite" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_nyb5g")
