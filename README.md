@@ -13,7 +13,7 @@ This project is very early in development and currently focuses on building core
 A simple proof-of-concept for grid-based movement using Godot's `AStarGrid2D`.  
 Click on the court to move the player along an automatically generated path.
 
-![astar_only](screenshots/astar_only.png)
+![astar_only](docs/screenshots/astar_only.png)
 
 ---
 
