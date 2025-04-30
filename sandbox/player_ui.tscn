@@ -1,0 +1,70 @@
+[gd_scene load_steps=11 format=3 uid="uid://b04lohcga4vrc"]
+
+[ext_resource type="PackedScene" uid="uid://dus1uicsiiy5" path="res://sandbox/player_sprite.tscn" id="1_lwly5"]
+[ext_resource type="Script" uid="uid://dps6gwewnvkoe" path="res://sandbox/player_ui.gd" id="1_wky54"]
+[ext_resource type="Texture2D" uid="uid://dx8m8qlohgjgb" path="res://assets/textures/blue-face-bart.png" id="2_cwfts"]
+[ext_resource type="Texture2D" uid="uid://cp53qlb84picn" path="res://assets/textures/earthy-green-horn.png" id="3_7mgj5"]
+[ext_resource type="Texture2D" uid="uid://c3332obmrak88" path="res://assets/textures/ghostly-pink-pants.png" id="4_hbbui"]
+[ext_resource type="Texture2D" uid="uid://8f7irsfdrgdi" path="res://assets/textures/green-ears-fangs-legs.png" id="5_63b5x"]
+[ext_resource type="Texture2D" uid="uid://ccgs51xt0fkmb" path="res://assets/textures/orange-eyebrows-blob.png" id="6_y7dg0"]
+[ext_resource type="Texture2D" uid="uid://bcpvalxcvv2bc" path="res://assets/textures/top-hat-blob.png" id="7_jq46f"]
+[ext_resource type="Texture2D" uid="uid://ngdltpqle2l0" path="res://assets/textures/tusks-legs.png" id="8_u61ds"]
+[ext_resource type="Texture2D" uid="uid://bd2phdbh8esip" path="res://assets/textures/yellow-face-tusk-blob.png" id="9_6r0kd"]
+
+[node name="PlayerUI" type="Control" node_paths=PackedStringArray("player_sprite")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_wky54")
+player_sprite = NodePath("Buttons/SpriteHolder/TestPlayerSprite")
+textures = Array[Texture2D]([ExtResource("2_cwfts"), ExtResource("3_7mgj5"), ExtResource("4_hbbui"), ExtResource("5_63b5x"), ExtResource("6_y7dg0"), ExtResource("7_jq46f"), ExtResource("8_u61ds"), ExtResource("9_6r0kd")])
+
+[node name="Buttons" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -80.0
+offset_top = -155.0
+offset_right = 80.0
+offset_bottom = 155.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SpriteHolder" type="Control" parent="Buttons"]
+custom_minimum_size = Vector2(160, 240)
+layout_mode = 2
+
+[node name="TestPlayerSprite" parent="Buttons/SpriteHolder" instance=ExtResource("1_lwly5")]
+scale = Vector2(10, 10)
+centered = false
+
+[node name="AnimButtons" type="HBoxContainer" parent="Buttons"]
+layout_mode = 2
+alignment = 1
+
+[node name="IdleButton" type="Button" parent="Buttons/AnimButtons"]
+layout_mode = 2
+text = "Idle"
+
+[node name="RunButton" type="Button" parent="Buttons/AnimButtons"]
+layout_mode = 2
+text = "Run"
+
+[node name="StopButton" type="Button" parent="Buttons/AnimButtons"]
+layout_mode = 2
+text = "Stop"
+
+[node name="TextureButton" type="Button" parent="Buttons"]
+layout_mode = 2
+text = "Change Texture"
+
+[connection signal="pressed" from="Buttons/AnimButtons/IdleButton" to="." method="_on_idle_button_pressed"]
+[connection signal="pressed" from="Buttons/AnimButtons/RunButton" to="." method="_on_run_button_pressed"]
+[connection signal="pressed" from="Buttons/AnimButtons/StopButton" to="." method="_on_stop_button_pressed"]
+[connection signal="pressed" from="Buttons/TextureButton" to="." method="_on_texture_button_pressed"]
