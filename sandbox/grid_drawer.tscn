@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dj25q3vhrwgr2"]
+
+[ext_resource type="Script" uid="uid://b3o5blv73pnf" path="res://sandbox/grid_drawer.gd" id="1_tn6rx"]
+
+[node name="GridDrawer" type="Node2D"]
+script = ExtResource("1_tn6rx")
