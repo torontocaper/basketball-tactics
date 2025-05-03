@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dkafd6dipglj7"
-path="res://.godot/imported/orange_body_gray_hat.png-9d05520f9e8ac22c75741396baa4274c.ctex"
+uid="uid://ccgs51xt0fkmb"
+path="res://.godot/imported/orange-eyebrows-blob.png-157861076b63619e5757d5968cdfd148.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/characters/island_joy/orange_body_gray_hat.png"
-dest_files=["res://.godot/imported/orange_body_gray_hat.png-9d05520f9e8ac22c75741396baa4274c.ctex"]
+source_file="res://assets/textures/characters/orange-eyebrows-blob.png"
+dest_files=["res://.godot/imported/orange-eyebrows-blob.png-157861076b63619e5757d5968cdfd148.ctex"]
 
 [params]
 

@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ctx42f0q15por"
-path="res://.godot/imported/pink_body_green_pants.png-ef2c1369412ddb6a063720a5290a8e77.ctex"
+path="res://.godot/imported/pink_body_green_pants.png-4a33b91538fe57beb4e9035c1c75d465.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/characters/island_joy/pink_body_green_pants.png"
-dest_files=["res://.godot/imported/pink_body_green_pants.png-ef2c1369412ddb6a063720a5290a8e77.ctex"]
+source_file="res://assets/textures/characters/island_joy/pink_body_green_pants.png"
+dest_files=["res://.godot/imported/pink_body_green_pants.png-4a33b91538fe57beb4e9035c1c75d465.ctex"]
 
 [params]
 

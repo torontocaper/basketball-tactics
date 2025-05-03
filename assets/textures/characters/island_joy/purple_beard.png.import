@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bt3kvoog5sws8"
-path="res://.godot/imported/purple_beard.png-3b7bb3e55cb237ed320b952f5aceec07.ctex"
+path="res://.godot/imported/purple_beard.png-5cc7149f1aaae1cde1e26d7a1ede5b24.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/characters/island_joy/purple_beard.png"
-dest_files=["res://.godot/imported/purple_beard.png-3b7bb3e55cb237ed320b952f5aceec07.ctex"]
+source_file="res://assets/textures/characters/island_joy/purple_beard.png"
+dest_files=["res://.godot/imported/purple_beard.png-5cc7149f1aaae1cde1e26d7a1ede5b24.ctex"]
 
 [params]
 

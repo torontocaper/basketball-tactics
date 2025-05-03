@@ -1,0 +1,14 @@
+[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://1pg00ognuafd"]
+
+[ext_resource type="Texture2D" uid="uid://h1v6gm781pg0" path="res://assets/textures/court/parquet-iso-1.png" id="1_5s8bd"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yacg5"]
+texture = ExtResource("1_5s8bd")
+texture_region_size = Vector2i(32, 16)
+0:0/0 = 0
+
+[resource]
+tile_shape = 1
+tile_layout = 5
+tile_size = Vector2i(32, 16)
+sources/0 = SubResource("TileSetAtlasSource_yacg5")

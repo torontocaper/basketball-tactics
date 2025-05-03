@@ -2,14 +2,14 @@
 
 [ext_resource type="PackedScene" uid="uid://dus1uicsiiy5" path="res://sandbox/player_sprite.tscn" id="1_lwly5"]
 [ext_resource type="Script" uid="uid://dps6gwewnvkoe" path="res://sandbox/player_ui.gd" id="1_wky54"]
-[ext_resource type="Texture2D" uid="uid://dx8m8qlohgjgb" path="res://assets/textures/blue-face-bart.png" id="2_cwfts"]
-[ext_resource type="Texture2D" uid="uid://cp53qlb84picn" path="res://assets/textures/earthy-green-horn.png" id="3_7mgj5"]
-[ext_resource type="Texture2D" uid="uid://c3332obmrak88" path="res://assets/textures/ghostly-pink-pants.png" id="4_hbbui"]
-[ext_resource type="Texture2D" uid="uid://8f7irsfdrgdi" path="res://assets/textures/green-ears-fangs-legs.png" id="5_63b5x"]
-[ext_resource type="Texture2D" uid="uid://ccgs51xt0fkmb" path="res://assets/textures/orange-eyebrows-blob.png" id="6_y7dg0"]
-[ext_resource type="Texture2D" uid="uid://bcpvalxcvv2bc" path="res://assets/textures/top-hat-blob.png" id="7_jq46f"]
-[ext_resource type="Texture2D" uid="uid://ngdltpqle2l0" path="res://assets/textures/tusks-legs.png" id="8_u61ds"]
-[ext_resource type="Texture2D" uid="uid://bd2phdbh8esip" path="res://assets/textures/yellow-face-tusk-blob.png" id="9_6r0kd"]
+[ext_resource type="Texture2D" uid="uid://dx8m8qlohgjgb" path="res://assets/textures/characters/blue-face-bart.png" id="2_cwfts"]
+[ext_resource type="Texture2D" uid="uid://cp53qlb84picn" path="res://assets/textures/characters/earthy-green-horn.png" id="3_7mgj5"]
+[ext_resource type="Texture2D" uid="uid://c3332obmrak88" path="res://assets/textures/characters/ghostly-pink-pants.png" id="4_hbbui"]
+[ext_resource type="Texture2D" uid="uid://8f7irsfdrgdi" path="res://assets/textures/characters/green-ears-fangs-legs.png" id="5_63b5x"]
+[ext_resource type="Texture2D" uid="uid://ccgs51xt0fkmb" path="res://assets/textures/characters/orange-eyebrows-blob.png" id="6_y7dg0"]
+[ext_resource type="Texture2D" uid="uid://bcpvalxcvv2bc" path="res://assets/textures/characters/top-hat-blob.png" id="7_jq46f"]
+[ext_resource type="Texture2D" uid="uid://ngdltpqle2l0" path="res://assets/textures/characters/tusks-legs.png" id="8_u61ds"]
+[ext_resource type="Texture2D" uid="uid://bd2phdbh8esip" path="res://assets/textures/characters/yellow-face-tusk-blob.png" id="9_6r0kd"]
 
 [node name="PlayerUI" type="Control" node_paths=PackedStringArray("player_sprite")]
 layout_mode = 3

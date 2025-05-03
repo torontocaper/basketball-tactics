@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dx8m8qlohgjgb"
-path="res://.godot/imported/blue-face-bart.png-6443378966c8ef89d6a18a524f33b476.ctex"
+uid="uid://h1v6gm781pg0"
+path="res://.godot/imported/parquet-iso-1.png-dc7fb0e2bdadc95ce1f061b6d54fe519.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/blue-face-bart.png"
-dest_files=["res://.godot/imported/blue-face-bart.png-6443378966c8ef89d6a18a524f33b476.ctex"]
+source_file="res://assets/textures/court/parquet-iso-1.png"
+dest_files=["res://.godot/imported/parquet-iso-1.png-dc7fb0e2bdadc95ce1f061b6d54fe519.ctex"]
 
 [params]
 
@@ -21,7 +21,7 @@ compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=true
+mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
@@ -31,4 +31,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=0
+detect_3d/compress_to=1

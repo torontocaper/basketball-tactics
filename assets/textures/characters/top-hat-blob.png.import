@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ngdltpqle2l0"
-path="res://.godot/imported/tusks-legs.png-e23e2c75a39b45e38af2a01bd4f97e24.ctex"
+uid="uid://bcpvalxcvv2bc"
+path="res://.godot/imported/top-hat-blob.png-78a5c2e007ddd50d868b491f890d7c0f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/tusks-legs.png"
-dest_files=["res://.godot/imported/tusks-legs.png-e23e2c75a39b45e38af2a01bd4f97e24.ctex"]
+source_file="res://assets/textures/characters/top-hat-blob.png"
+dest_files=["res://.godot/imported/top-hat-blob.png-78a5c2e007ddd50d868b491f890d7c0f.ctex"]
 
 [params]
 

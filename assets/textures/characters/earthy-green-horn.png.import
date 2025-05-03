@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bd2phdbh8esip"
-path="res://.godot/imported/yellow-face-tusk-blob.png-6c8fee12fca03a7982403c0af3770b68.ctex"
+uid="uid://cp53qlb84picn"
+path="res://.godot/imported/earthy-green-horn.png-7fafee90f2d5b4eb997d1329f61a8cd2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/yellow-face-tusk-blob.png"
-dest_files=["res://.godot/imported/yellow-face-tusk-blob.png-6c8fee12fca03a7982403c0af3770b68.ctex"]
+source_file="res://assets/textures/characters/earthy-green-horn.png"
+dest_files=["res://.godot/imported/earthy-green-horn.png-7fafee90f2d5b4eb997d1329f61a8cd2.ctex"]
 
 [params]
 

@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=4 uid="uid://brs7dk5e7jtfj"]
+
+[ext_resource type="TileSet" uid="uid://1pg00ognuafd" path="res://src/world/court/tileset_court_floor_isometric.tres" id="1_e3mf2"]
+[ext_resource type="Script" uid="uid://pehpx4svpqrw" path="res://src/world/court/court_floor_isometric.gd" id="2_x6qpo"]
+[ext_resource type="Script" uid="uid://dmbqm1u45lobc" path="res://src/world/court/clicked_polygon.gd" id="3_68w7t"]
+[ext_resource type="Script" uid="uid://b0pe347o0sxmp" path="res://src/world/court/hovered_polyline.gd" id="4_3q4fa"]
+
+[node name="CourtFloorIsometric" type="TileMapLayer"]
+z_index = -1
+y_sort_enabled = true
+tile_map_data = PackedByteArray("AAD/////AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAIAAAAAAAAAAAD//wEAAAAAAAAAAAD//wAAAAAAAAAAAAD+/wEAAAAAAAAAAAD//wIAAAAAAAAAAAD//wMAAAAAAAAAAAAAAAMAAAAAAAAAAAABAAIAAAAAAAAAAAABAAEAAAAAAAAAAAABAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAP7/AAAAAAAAAAD///3/AAAAAAAAAAD///7/AAAAAAAAAAD+////AAAAAAAAAAD+/wAAAAAAAAAAAAD9/wEAAAAAAAAAAAD+/wIAAAAAAAAAAAD+/wMAAAAAAAAAAAABAAMAAAAAAAAAAAACAAIAAAAAAAAAAAACAAEAAAAAAAAAAAACAAAAAAAAAAAAAAABAP//AAAAAAAAAAABAP7/AAAAAAAAAAAAAP3/AAAAAAAAAAAAAPz/AAAAAAAAAAD///z/AAAAAAAAAAD+//3/AAAAAAAAAAD+//7/AAAAAAAAAAD9////AAAAAAAAAAD9/wAAAAAAAAAAAAD8/wEAAAAAAAAAAAD9/wIAAAAAAAAAAAD9/wMAAAAAAAAAAAD8/wAAAAAAAAAAAAD8////AAAAAAAAAAD9//7/AAAAAAAAAAD9//3/AAAAAAAAAAD+//z/AAAAAAAAAAABAPz/AAAAAAAAAAABAP3/AAAAAAAAAAACAP7/AAAAAAAAAAACAP//AAAAAAAAAAADAAAAAAAAAAAAAAACAAMAAAAAAAAAAAADAAIAAAAAAAAAAAADAAEAAAAAAAAAAAADAP//AAAAAAAAAAADAP3/AAAAAAAAAAADAP7/AAAAAAAAAAACAPz/AAAAAAAAAAACAP3/AAAAAAAAAAADAPz/AAAAAAAAAAD9//z/AAAAAAAAAAD8//z/AAAAAAAAAAD7//z/AAAAAAAAAAD6//z/AAAAAAAAAAD6//3/AAAAAAAAAAD6//7/AAAAAAAAAAD6////AAAAAAAAAAD6/wAAAAAAAAAAAAD6/wEAAAAAAAAAAAD6/wIAAAAAAAAAAAD6/wMAAAAAAAAAAAD7/wMAAAAAAAAAAAD8/wMAAAAAAAAAAAADAAMAAAAAAAAAAAD8//3/AAAAAAAAAAD8//7/AAAAAAAAAAD7//7/AAAAAAAAAAD7//3/AAAAAAAAAAD7////AAAAAAAAAAD7/wAAAAAAAAAAAAD7/wEAAAAAAAAAAAD7/wIAAAAAAAAAAAD8/wIAAAAAAAAAAAA=")
+tile_set = ExtResource("1_e3mf2")
+script = ExtResource("2_x6qpo")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(4, 4)
+
+[node name="ClickedPolygon" type="Polygon2D" parent="."]
+z_index = 10
+script = ExtResource("3_68w7t")
+
+[node name="HoveredPolyline" type="Line2D" parent="."]
+z_index = 100
+script = ExtResource("4_3q4fa")
+
+[connection signal="clicked" from="." to="ClickedPolygon" method="_on_court_floor_isometric_clicked"]
+[connection signal="hovered" from="." to="HoveredPolyline" method="_on_court_floor_isometric_hovered"]
