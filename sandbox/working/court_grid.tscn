@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://bht835jeenty3"]
+
+[ext_resource type="Script" uid="uid://dybh7q78e6o02" path="res://sandbox/working/court_grid.gd" id="1_vlwfk"]
+
+[node name="CourtGrid" type="GridContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+columns = 11
+script = ExtResource("1_vlwfk")
+rows = 6
+cell_size = 100
+timer_length = 0.2

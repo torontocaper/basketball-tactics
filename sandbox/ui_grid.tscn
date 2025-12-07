@@ -1,0 +1,29 @@
+[gd_scene load_steps=2 format=3 uid="uid://c443r5lavk8l6"]
+
+[ext_resource type="Script" uid="uid://dknc5vr4x1eap" path="res://sandbox/ui_grid.gd" id="1_xtc1w"]
+
+[node name="UIGrid" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_xtc1w")
+columns = 5
+rows = 4
+cell_size = 100
+
+[node name="GridContainer" type="GridContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
