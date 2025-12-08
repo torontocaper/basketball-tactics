@@ -10,6 +10,7 @@ extends ColorRect
 ## @export variables
 ## Regular variables
 var cell_coords : Vector2i
+var cell_index : int
 ## @onready variables
 @onready var coords_label: Label = $CoordsLabel
 ## Overridden built-in virtual methods
@@ -24,6 +25,6 @@ func _ready() -> void:
 ## Remaining methods
 ## Subclasses
 
-
 func _on_mouse_entered() -> void:
-	print_debug("You've hovered on cell %s" % cell_coords)
+	#print_debug("You've hovered on cell %s" % cell_coords)
+	pass
