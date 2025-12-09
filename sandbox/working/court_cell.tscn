@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://b6djhn1s3wqn2" path="res://sandbox/working/court_cell.gd" id="1_mkiru"]
 
 [node name="CourtCell" type="ColorRect"]
+z_index = -10
 offset_right = 40.0
 offset_bottom = 40.0
 size_flags_horizontal = 3
@@ -26,4 +27,5 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Test"
 
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]

@@ -5,6 +5,7 @@ extends ColorRect
 ## Documentation comments
 
 ## Signals
+signal clicked(coords : Vector2i)
 ## Enums
 ## Constants
 ## @export variables
@@ -28,3 +29,8 @@ func _ready() -> void:
 func _on_mouse_entered() -> void:
 	#print_debug("You've hovered on cell %s" % cell_coords)
 	pass
+
+func _on_gui_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton and event.is_pressed() and event.button_index == MOUSE_BUTTON_LEFT:
+		#print_debug("You clicked on cell %s" % cell_coords)
+		clicked.emit(cell_coords)

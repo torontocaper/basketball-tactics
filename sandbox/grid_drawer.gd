@@ -2,9 +2,10 @@
 
 extends Node2D
 
+@export var cell_size : int = 128
+
 var columns : int
 var rows : int
-var dark_square : bool = true
 
 @onready var window_size := get_window().get_size()
 
@@ -12,20 +13,19 @@ func _ready() -> void:
 	queue_redraw()
 	
 func _draw() -> void:
-	columns = window_size.x / 128
-	rows = window_size.y / 128
+	@warning_ignore("integer_division")
+	columns = window_size.x / cell_size
+	if columns % 2 == 0:
+		columns -= 1 
+	@warning_ignore("integer_division")
+	rows = window_size.y / cell_size
+	var cell_index : int = 0
 	for column in columns:
-		if dark_square: 
-			print_debug("Starting column %s with a dark square" % column)
-		else: 
-			print_debug("Starting column %s with a light square" % column)
 		for row in rows:
-			if dark_square:
+			if cell_index % 2 == 0:
 				print_debug("Drawing a dark square at column %s, row %s" % [column, row])
-				draw_rect(Rect2(Vector2(column * 128, row * 128), Vector2(128, 128)), Color.DARK_GRAY)
-				dark_square = false
+				draw_rect(Rect2(Vector2(column * cell_size, row * cell_size), Vector2(cell_size, cell_size)), Color.DARK_GRAY)
 			else:
 				print_debug("Drawing a light square at column %s, row %s" % [column, row])
-				draw_rect(Rect2(Vector2(column * 128, row * 128), Vector2(128, 128)), Color.LIGHT_GRAY)
-				dark_square = true
-			draw_string(ThemeDB.fallback_font, Vector2(column * 128 + 4, row * 128 + 16), str(column) + "," + str(row))
+				draw_rect(Rect2(Vector2(column * cell_size, row * cell_size), Vector2(cell_size, cell_size)), Color.LIGHT_GRAY)
+			cell_index += 1
