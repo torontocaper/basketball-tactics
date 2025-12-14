@@ -19,7 +19,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_wky54")
-player_sprite = NodePath("Buttons/CenterContainer/SpriteHolder/TestPlayerSprite")
+player_sprite = NodePath("Buttons/CenterContainer/TestPlayerSprite")
 textures = Array[Texture2D]([ExtResource("2_cwfts"), ExtResource("3_7mgj5"), ExtResource("4_hbbui"), ExtResource("5_63b5x"), ExtResource("6_y7dg0"), ExtResource("7_jq46f"), ExtResource("8_u61ds"), ExtResource("9_6r0kd")])
 
 [node name="Buttons" type="VBoxContainer" parent="."]
@@ -41,11 +41,7 @@ custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="SpriteHolder" type="Control" parent="Buttons/CenterContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="TestPlayerSprite" parent="Buttons/CenterContainer/SpriteHolder" instance=ExtResource("1_lwly5")]
+[node name="TestPlayerSprite" parent="Buttons/CenterContainer" instance=ExtResource("1_lwly5")]
 centered = false
 
 [node name="AnimButtons" type="HBoxContainer" parent="Buttons"]

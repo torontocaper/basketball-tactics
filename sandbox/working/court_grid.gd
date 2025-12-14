@@ -1,4 +1,4 @@
-#@tool
+@tool
 #@icon
 class_name CourtGrid
 extends GridContainer
@@ -8,11 +8,15 @@ extends GridContainer
 ## Enums
 ## Constants
 ## @export variables
-@export var cell_size : int
-@export var color_gap : float = 0.2
-@export var line_width : float = 1.0
-@export var primary_color : Color = Color.SADDLE_BROWN
+@export_group("Grid")
+@export_subgroup("Grid Layout")
+@export_range(16.0, 128.0, 4.0) var cell_size : int = 48
 @export var timer_length : float
+@export_subgroup("Grid Colors")
+@export var primary_color : Color = Color.SADDLE_BROWN
+@export var color_gap : float = 0.2
+@export_group("Astar Path")
+@export var line_width : float = 1.0
 ## Regular variables
 var astar_grid : AStarGrid2D
 var cells : Array[CourtCell]
@@ -31,14 +35,17 @@ func _draw() -> void:
 #func _init() -> void:
 #func _enter_tree() -> void:
 func _ready() -> void:
-	var window_size = get_window().size
+	var window_size : Vector2 = Vector2(
+		ProjectSettings.get_setting("display/window/size/viewport_width"), 
+		ProjectSettings.get_setting("display/window/size/viewport_height")
+		)
 	print_debug("The window is %s by %s pixels" % [window_size.x, window_size.y])
-	@warning_ignore("integer_division")
-	columns = get_window().size.x / cell_size
+	@warning_ignore("integer_division", "narrowing_conversion")
+	columns = window_size.x / cell_size
 	if columns % 2 == 0:
 		columns -= 1
-	@warning_ignore("integer_division")
-	rows = get_window().size.y / cell_size
+	@warning_ignore("integer_division", "narrowing_conversion")
+	rows = window_size.y / cell_size
 	print_debug("With a cell size of %s, that means there will be %s columns and %s rows\nSo %s cells total" % [cell_size, columns, rows, columns * rows])
 	draw_grid()
 #func _process(delta: float) -> void:
@@ -70,7 +77,7 @@ func draw_grid():
 			else:
 				cell.color = secondary_color
 			add_child(cell)
-			cell.clicked.connect(on_cell_clicked)
+			cell.connect("clicked", on_cell_clicked)
 			cells.append(cell)
 			cell_index += 1
 	# Draw the AstarGrid
@@ -79,6 +86,7 @@ func draw_grid():
 		cells[0].position, Vector2(cell_size * columns, cell_size * rows)
 	)
 	astar_grid.cell_size = Vector2(cell_size, cell_size)
+	astar_grid.offset = Vector2.ONE * (cell_size / 2.0)
 	astar_grid.update()
 
 func draw_path(points_array : Array[Vector2i]) -> void:
@@ -88,7 +96,7 @@ func draw_path(points_array : Array[Vector2i]) -> void:
 func on_cell_clicked(cell_coords : Vector2i) -> void:
 	print_debug("Grid registers click on cell %s" % cell_coords)
 	target_cell = cell_coords
-	var astar_path = astar_grid.get_point_path(starting_cell, target_cell)
+	var astar_path = astar_grid.get_point_path(starting_cell, target_cell) 
 	draw_path(astar_path)
 	print_debug("Found a path between starting cell %s and target cell %s\nIt has %s points" % [starting_cell, target_cell, astar_path.size()])
 	starting_cell = target_cell
