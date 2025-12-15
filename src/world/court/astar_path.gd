@@ -21,6 +21,6 @@ extends Line2D
 ## Overridden custom methods
 ## Remaining methods
 func draw_astar_path(astar_path_points: PackedVector2Array) -> void:
-	print_debug("Drawing a path with %s points" % astar_path_points.size())
+	#print_debug("Drawing a path with %s points" % astar_path_points.size())
 	points = astar_path_points
 ## Subclasses

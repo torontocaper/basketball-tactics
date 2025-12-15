@@ -29,7 +29,8 @@ func _ready() -> void: ## called when the Node enters the tree
 
 func _process(_delta: float) -> void: ## called every frame
 	hovered_cell = _update_hovered_cell(get_local_mouse_position())
-	astar_end_cell = hovered_cell
+	if astar_grid.is_in_boundsv(hovered_cell):
+		astar_end_cell = hovered_cell
 	astar_path_points = _get_astar_path(astar_start_cell, astar_end_cell)
 	astar_path_node.draw_astar_path(astar_path_points)
 	_update_ui()
@@ -39,15 +40,16 @@ func _process(_delta: float) -> void: ## called every frame
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.is_pressed() and event.button_index == 1:
 		clicked_cell = local_to_map(get_local_mouse_position())
+		if astar_grid.is_in_boundsv(clicked_cell):
 		#print_debug("You clicked a tile at point " + str(clicked_cell))
-		clicked_cell_polygon_points = _make_polygon(clicked_cell)
-		clicked_polygon.draw_clicked_polygon(clicked_cell_polygon_points)
+			clicked_cell_polygon_points = _make_polygon(clicked_cell)
+			clicked_polygon.draw_clicked_polygon(clicked_cell_polygon_points)
 		#astar_end_cell = clicked_cell
 		#astar_path_points = _get_astar_path(astar_start_cell, astar_end_cell)
 		#print_debug("Got a path with %s points" % astar_path_points.size())
 		#astar_path_node.draw_astar_path(astar_path_points)
 		#astar_start_cell = astar_end_cell
-		astar_start_cell = clicked_cell
+			astar_start_cell = clicked_cell
 
 
 func _make_polygon(map_position : Vector2) -> PackedVector2Array:
