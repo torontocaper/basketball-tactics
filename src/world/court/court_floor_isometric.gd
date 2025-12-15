@@ -1,46 +1,53 @@
 extends TileMapLayer
 
-var click_position_map : Vector2
-var click_polygon_points : PackedVector2Array
-var hover_position_map : Vector2
-var hover_polygon_points : PackedVector2Array
-var starting_cell := Vector2i.ZERO
-var target_cell : Vector2i
+
+var clicked_cell : Vector2
+var clicked_cell_polygon_points : PackedVector2Array
+
+var hovered_cell : Vector2
+var hovered_cell_polygon_points : PackedVector2Array
+
+var astar_start_cell := Vector2i.ZERO
+var astar_end_cell : Vector2i
+
 var astar_grid : AStarGrid2D
 var astar_path_points : PackedVector2Array
 
-@onready var clicked_polygon: Polygon2D = $ClickedPolygon
-@onready var hovered_polyline: Line2D = $HoveredPolyline
-@onready var astar_path: AstarPath = $AstarPath
+
+@onready var clicked_polygon: Polygon2D = %ClickedPolygon
+@onready var hovered_polyline: Line2D = %HoveredPolyline
+@onready var astar_path_node: AstarPath = %AstarPath
 @onready var hovered_coords_label: Label = %HoveredCoordsLabel
 @onready var clicked_coords_label: Label = %ClickedCoordsLabel
-@onready var start_cell_coords: Label = %StartCellCoords
-@onready var target_cell_coords: Label = %TargetCellCoords
+@onready var start_cell_coords_label: Label = %StartCellCoords
+@onready var target_cell_coords_label: Label = %TargetCellCoords
 
-func _ready() -> void:
+
+func _ready() -> void: ## called when the Node enters the tree
 	astar_grid = _draw_astar_grid()
-	start_cell_coords.text = "Starting cell coords: %s" % starting_cell
 
-func _process(_delta: float) -> void:
-	hover_position_map = local_to_map(get_local_mouse_position())
-	hovered_coords_label.text = "Hovered coords: %s" % hover_position_map
-	hover_polygon_points = _make_polygon(hover_position_map)
-	hovered_polyline.draw_hovered_polyline(hover_polygon_points)
+
+func _process(_delta: float) -> void: ## called every frame
+	hovered_cell = _update_hovered_cell(get_local_mouse_position())
+	astar_end_cell = hovered_cell
+	astar_path_points = _get_astar_path(astar_start_cell, astar_end_cell)
+	astar_path_node.draw_astar_path(astar_path_points)
+	_update_ui()
+
+
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.is_pressed() and event.button_index == 1:
-		click_position_map = local_to_map(get_local_mouse_position())
-		clicked_coords_label.text = "Clicked coords: %s" % click_position_map
-		print_debug("You clicked a tile at point " + str(click_position_map))
-		click_polygon_points = _make_polygon(click_position_map)
-		clicked_polygon.draw_clicked_polygon(click_polygon_points)
-		target_cell = click_position_map
-		target_cell_coords.text = "Target cell coords: %s" % target_cell
-		astar_path_points = _get_astar_path(starting_cell, target_cell)
-		print_debug("Got a path with %s points" % astar_path_points.size())
-		astar_path.draw_astar_path(astar_path_points)
-		starting_cell = target_cell
-		start_cell_coords.text = "Starting cell coords: %s" % starting_cell
+		clicked_cell = local_to_map(get_local_mouse_position())
+		#print_debug("You clicked a tile at point " + str(clicked_cell))
+		clicked_cell_polygon_points = _make_polygon(clicked_cell)
+		clicked_polygon.draw_clicked_polygon(clicked_cell_polygon_points)
+		#astar_end_cell = clicked_cell
+		#astar_path_points = _get_astar_path(astar_start_cell, astar_end_cell)
+		#print_debug("Got a path with %s points" % astar_path_points.size())
+		#astar_path_node.draw_astar_path(astar_path_points)
+		#astar_start_cell = astar_end_cell
+		astar_start_cell = clicked_cell
 
 
 func _make_polygon(map_position : Vector2) -> PackedVector2Array:
@@ -52,12 +59,12 @@ func _make_polygon(map_position : Vector2) -> PackedVector2Array:
 	])
 	return polygon_points
 
+
 func _draw_astar_grid() -> AStarGrid2D:
 	var new_astar_grid = AStarGrid2D.new()
 	new_astar_grid.cell_shape = AStarGrid2D.CELL_SHAPE_ISOMETRIC_RIGHT
 	var cell_size = tile_set.tile_size
 	new_astar_grid.cell_size = cell_size
-	#new_astar_grid.offset = Vector2(cell_size.x / 2.0, cell_size.y / 2.0)
 	new_astar_grid.region = get_used_rect()
 	new_astar_grid.update()
 	return new_astar_grid
@@ -66,3 +73,17 @@ func _draw_astar_grid() -> AStarGrid2D:
 func _get_astar_path(start : Vector2i, end : Vector2i) -> PackedVector2Array:
 	var path = astar_grid.get_point_path(start, end)
 	return path
+
+
+func _update_hovered_cell(mouse_position : Vector2) -> Vector2i:
+	var hovered_cell_coords = local_to_map(mouse_position)
+	hovered_cell_polygon_points = _make_polygon(hovered_cell_coords)
+	hovered_polyline.draw_hovered_polyline(hovered_cell_polygon_points)
+	return hovered_cell_coords
+
+
+func _update_ui() -> void:
+	hovered_coords_label.text = "Hovered coords: %s" % hovered_cell
+	clicked_coords_label.text = "Clicked coords: %s" % clicked_cell
+	start_cell_coords_label.text = "Starting cell coords: %s" % astar_start_cell
+	target_cell_coords_label.text = "Target cell coords: %s" % astar_end_cell
