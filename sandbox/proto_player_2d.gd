@@ -1,14 +1,13 @@
 #@tool
 #@icon
-class_name AstarPath
-extends Line2D
+#class_name
+extends AnimatedSprite2D
 ## Documentation comments
 
 ## Signals
 ## Enums
 ## Constants
 ## @export variables
-@export var line_speed := 0.5
 ## Regular variables
 ## @onready variables
 
@@ -20,8 +19,10 @@ extends Line2D
 #func _physics_process(delta: float) -> void:
 ## Remaining virtual methods
 ## Overridden custom methods
+func move_along_path(path_points:PackedVector2Array) -> void:
+	for point in path_points:
+		await get_tree().create_timer(0.5).timeout
+		print_debug("Translating player by %s pixels" % point)
+		position = point
 ## Remaining methods
-func draw_astar_path(astar_path_points: PackedVector2Array) -> void:
-	#print_debug("Drawing a path with %s points" % astar_path_points.size())
-	points = astar_path_points
 ## Subclasses

@@ -1,5 +1,7 @@
+class_name CourtFloorIsometric
 extends TileMapLayer
 
+signal cell_clicked(path_points: PackedVector2Array) ## Emitted when a cell is clicked on
 
 var clicked_cell : Vector2
 var clicked_cell_polygon_points : PackedVector2Array
@@ -23,32 +25,29 @@ var astar_path_points : PackedVector2Array
 @onready var target_cell_coords_label: Label = %TargetCellCoords
 
 
-func _ready() -> void: ## called when the Node enters the tree
-	astar_grid = _draw_astar_grid()
+#func _ready() -> void: ## called when the Node enters the tree
+	#astar_grid = _draw_astar_grid()
 
 
 func _process(_delta: float) -> void: ## called every frame
-	hovered_cell = _update_hovered_cell(get_local_mouse_position())
+	#hovered_cell = _update_hovered_cell(get_local_mouse_position())
 	if astar_grid.is_in_boundsv(hovered_cell):
 		astar_end_cell = hovered_cell
 	astar_path_points = _get_astar_path(astar_start_cell, astar_end_cell)
 	astar_path_node.draw_astar_path(astar_path_points)
+	hovered_cell_polygon_points = _make_polygon(hovered_cell)
+	hovered_polyline.draw_hovered_polyline(hovered_cell_polygon_points)
 	_update_ui()
-
 
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.is_pressed() and event.button_index == 1:
 		clicked_cell = local_to_map(get_local_mouse_position())
 		if astar_grid.is_in_boundsv(clicked_cell):
-		#print_debug("You clicked a tile at point " + str(clicked_cell))
 			clicked_cell_polygon_points = _make_polygon(clicked_cell)
 			clicked_polygon.draw_clicked_polygon(clicked_cell_polygon_points)
-		#astar_end_cell = clicked_cell
-		#astar_path_points = _get_astar_path(astar_start_cell, astar_end_cell)
-		#print_debug("Got a path with %s points" % astar_path_points.size())
-		#astar_path_node.draw_astar_path(astar_path_points)
-		#astar_start_cell = astar_end_cell
+			cell_clicked.emit(astar_path_points)
+			#_animate_journey(astar_start_cell, clicked_cell)
 			astar_start_cell = clicked_cell
 
 
@@ -62,14 +61,15 @@ func _make_polygon(map_position : Vector2) -> PackedVector2Array:
 	return polygon_points
 
 
-func _draw_astar_grid() -> AStarGrid2D:
-	var new_astar_grid = AStarGrid2D.new()
-	new_astar_grid.cell_shape = AStarGrid2D.CELL_SHAPE_ISOMETRIC_RIGHT
-	var cell_size = tile_set.tile_size
-	new_astar_grid.cell_size = cell_size
-	new_astar_grid.region = get_used_rect()
-	new_astar_grid.update()
-	return new_astar_grid
+
+#func _draw_astar_grid() -> AStarGrid2D:
+	#var new_astar_grid = AStarGrid2D.new()
+	#new_astar_grid.cell_shape = AStarGrid2D.CELL_SHAPE_ISOMETRIC_RIGHT
+	#var cell_size = tile_set.tile_size
+	#new_astar_grid.cell_size = cell_size
+	#new_astar_grid.region = get_used_rect()
+	#new_astar_grid.update()
+	#return new_astar_grid
 
 
 func _get_astar_path(start : Vector2i, end : Vector2i) -> PackedVector2Array:

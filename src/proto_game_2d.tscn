@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://dj6xicxtbnqmg"]
+
+[ext_resource type="PackedScene" uid="uid://brs7dk5e7jtfj" path="res://src/world/court/court_floor_isometric.tscn" id="1_4fwyr"]
+[ext_resource type="Script" uid="uid://dwk6g3ghr5sbm" path="res://src/proto_game_2d.gd" id="1_n6y7u"]
+[ext_resource type="PackedScene" uid="uid://dxdel3465w1qe" path="res://sandbox/proto_player_2D.tscn" id="2_0cwsy"]
+
+[node name="ProtoGame2d" type="Node2D"]
+script = ExtResource("1_n6y7u")
+
+[node name="CourtFloorIsometric" parent="." instance=ExtResource("1_4fwyr")]
+unique_name_in_owner = true
+
+[node name="ProtoPlayer2d" parent="." instance=ExtResource("2_0cwsy")]
+unique_name_in_owner = true

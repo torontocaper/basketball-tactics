@@ -1,0 +1,86 @@
+[gd_scene load_steps=12 format=3 uid="uid://dxdel3465w1qe"]
+
+[ext_resource type="Texture2D" uid="uid://ber545ynci6cy" path="res://assets/textures/characters/blue-uniform/blue-uniform-1.png" id="1_s6pnb"]
+[ext_resource type="Script" uid="uid://of6rettoqamd" path="res://sandbox/proto_player_2d.gd" id="2_r1425"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r1425"]
+atlas = ExtResource("1_s6pnb")
+region = Rect2(0, 24, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mhdko"]
+atlas = ExtResource("1_s6pnb")
+region = Rect2(16, 24, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_24klt"]
+atlas = ExtResource("1_s6pnb")
+region = Rect2(32, 24, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_he0of"]
+atlas = ExtResource("1_s6pnb")
+region = Rect2(48, 24, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s6pnb"]
+atlas = ExtResource("1_s6pnb")
+region = Rect2(0, 48, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j06h7"]
+atlas = ExtResource("1_s6pnb")
+region = Rect2(16, 48, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eitp6"]
+atlas = ExtResource("1_s6pnb")
+region = Rect2(32, 48, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_usd28"]
+atlas = ExtResource("1_s6pnb")
+region = Rect2(48, 48, 16, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_j06h7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r1425")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mhdko")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_24klt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_he0of")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s6pnb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j06h7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eitp6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_usd28")
+}],
+"loop": true,
+"name": &"run",
+"speed": 5.0
+}]
+
+[node name="ProtoPlayer2d" type="AnimatedSprite2D"]
+z_index = 10
+y_sort_enabled = true
+sprite_frames = SubResource("SpriteFrames_j06h7")
+animation = &"idle"
+autoplay = "idle"
+centered = false
+offset = Vector2(8, -13)
+script = ExtResource("2_r1425")
+
+[node name="PlayerCamera" type="Camera2D" parent="."]
+zoom = Vector2(4, 4)
