@@ -1,8 +1,5 @@
-[gd_scene load_steps=2 format=3 uid="uid://ripy1740sh2e"]
-
-[ext_resource type="Script" uid="uid://dmbqm1u45lobc" path="res://src/world/court/clicked_polygon.gd" id="1_mljwj"]
+[gd_scene format=3 uid="uid://ripy1740sh2e"]
 
 [node name="ClickedPolygon" type="Polygon2D"]
 z_index = 10
 color = Color(1, 1, 1, 0.39215687)
-script = ExtResource("1_mljwj")

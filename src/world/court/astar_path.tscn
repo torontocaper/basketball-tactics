@@ -1,8 +1,5 @@
-[gd_scene load_steps=2 format=3 uid="uid://d1533t65iejbi"]
-
-[ext_resource type="Script" uid="uid://dlqijgjw25088" path="res://src/world/court/astar_path.gd" id="1_ygxrw"]
+[gd_scene format=3 uid="uid://d1533t65iejbi"]
 
 [node name="AstarPath" type="Line2D"]
 z_index = 100
 width = 1.0
-script = ExtResource("1_ygxrw")

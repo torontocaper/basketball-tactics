@@ -1,22 +1,31 @@
 #@tool
 #@icon
-#class_name
+class_name ProtoPlayer2D
 extends AnimatedSprite2D
 ## Documentation comments
 
 ## Signals
 ## Enums
+enum State {IDLE, RUN}
 ## Constants
 ## @export variables
 @export var current_cell: Vector2i
 ## Regular variables
+var current_state: State = State.IDLE
 ## @onready variables
+@onready var player_debug: DebugUI = $PlayerDebug
 
 ## Overridden built-in virtual methods
 #func _init() -> void:
 #func _enter_tree() -> void:
-#func _ready() -> void:
-#func _process(delta: float) -> void:
+func _ready() -> void:
+	print_debug("Player starting on cell %s" % current_cell)
+	await get_tree().create_timer(1.0).timeout
+	print_debug("Player now on cell %s" % current_cell)
+	
+
+func _process(_delta: float) -> void:
+	player_debug.update_ui([current_cell, State.keys()[current_state]])
 #func _physics_process(delta: float) -> void:
 ## Remaining virtual methods
 ## Overridden custom methods

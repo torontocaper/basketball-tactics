@@ -22,11 +22,11 @@ unique_name_in_owner = true
 
 [node name="NavigationGraphics" type="Node2D" parent="."]
 
+[node name="HoveredPolyline" parent="NavigationGraphics" instance=ExtResource("7_34psn")]
+unique_name_in_owner = true
+
 [node name="AstarPath" parent="NavigationGraphics" instance=ExtResource("5_ydekj")]
 unique_name_in_owner = true
 
 [node name="ClickedPolygon" parent="NavigationGraphics" instance=ExtResource("6_4xam1")]
-unique_name_in_owner = true
-
-[node name="HoveredPolyline" parent="NavigationGraphics" instance=ExtResource("7_34psn")]
 unique_name_in_owner = true

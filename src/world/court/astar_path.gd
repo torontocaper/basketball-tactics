@@ -8,7 +8,7 @@ extends Line2D
 ## Enums
 ## Constants
 ## @export variables
-@export var line_speed := 0.5
+#@export var line_speed := 0.5
 ## Regular variables
 ## @onready variables
 
@@ -21,6 +21,6 @@ extends Line2D
 ## Remaining virtual methods
 ## Overridden custom methods
 ## Remaining methods
-func draw_astar_path(astar_path_points: PackedVector2Array) -> void:
-	points = astar_path_points
+#func draw_astar_path(astar_path_points: PackedVector2Array) -> void:
+	#points = astar_path_points
 ## Subclasses

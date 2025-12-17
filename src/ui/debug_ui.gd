@@ -1,6 +1,6 @@
 #@tool
 #@icon
-#class_name
+class_name DebugUI
 extends CanvasLayer
 ## Temporary(?) CanvasLayer-derived display for showing info during play
 
