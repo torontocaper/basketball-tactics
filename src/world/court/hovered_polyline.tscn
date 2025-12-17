@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://1brml26tcq5b"]
+
+[ext_resource type="Script" uid="uid://b0pe347o0sxmp" path="res://src/world/court/hovered_polyline.gd" id="1_k30dr"]
+
+[node name="HoveredPolyline" type="Line2D"]
+z_index = 100
+closed = true
+default_color = Color(1, 1, 1, 0.39215687)
+script = ExtResource("1_k30dr")

@@ -1,0 +1,100 @@
+[gd_scene load_steps=2 format=3 uid="uid://dplxhaqv0un03"]
+
+[ext_resource type="Script" uid="uid://dsgmj3p7j8jsk" path="res://src/ui/debug_ui.gd" id="1_6my02"]
+
+[node name="DebugUI" type="CanvasLayer" node_paths=PackedStringArray("debug_labels")]
+script = ExtResource("1_6my02")
+debug_labels = [NodePath("ClickHoverLabels/HBoxContainer/HoveredCoords"), NodePath("ClickHoverLabels/HBoxContainer2/ClickedCoords"), NodePath("AstarLabels/HBoxContainer/StartCellCoords"), NodePath("AstarLabels/HBoxContainer2/TargetCellCoords"), NodePath("AstarLabels/HBoxContainer3/PathPoints"), NodePath("AstarLabels/HBoxContainer4/PathIDs")]
+
+[node name="ClickHoverLabels" type="VBoxContainer" parent="."]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -50.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="Title" type="Label" parent="ClickHoverLabels"]
+layout_mode = 2
+text = "HOVER/CLICK INFO"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ClickHoverLabels"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="ClickHoverLabels/HBoxContainer"]
+layout_mode = 2
+text = "Hovered Coords: "
+
+[node name="HoveredCoords" type="Label" parent="ClickHoverLabels/HBoxContainer"]
+layout_mode = 2
+text = "(0, 0)"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="ClickHoverLabels"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="ClickHoverLabels/HBoxContainer2"]
+layout_mode = 2
+text = "Clicked Coords: "
+
+[node name="ClickedCoords" type="Label" parent="ClickHoverLabels/HBoxContainer2"]
+layout_mode = 2
+text = "(0, 0)"
+
+[node name="AstarLabels" type="VBoxContainer" parent="."]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -77.0
+offset_right = 92.0
+grow_vertical = 0
+
+[node name="Title" type="Label" parent="AstarLabels"]
+layout_mode = 2
+text = "ASTAR INFO"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="AstarLabels"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="AstarLabels/HBoxContainer"]
+layout_mode = 2
+text = "Starting Cell: "
+
+[node name="StartCellCoords" type="Label" parent="AstarLabels/HBoxContainer"]
+layout_mode = 2
+text = "(0, 0)"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="AstarLabels"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="AstarLabels/HBoxContainer2"]
+layout_mode = 2
+text = "Target Cell: "
+
+[node name="TargetCellCoords" type="Label" parent="AstarLabels/HBoxContainer2"]
+layout_mode = 2
+text = "(0, 0)"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="AstarLabels"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="AstarLabels/HBoxContainer3"]
+layout_mode = 2
+text = "Path Points: "
+
+[node name="PathPoints" type="Label" parent="AstarLabels/HBoxContainer3"]
+layout_mode = 2
+text = "[(0, 0)]"
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="AstarLabels"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="AstarLabels/HBoxContainer4"]
+layout_mode = 2
+text = "Path IDs: "
+
+[node name="PathIDs" type="Label" parent="AstarLabels/HBoxContainer4"]
+layout_mode = 2
+text = "[(0, 0)]"

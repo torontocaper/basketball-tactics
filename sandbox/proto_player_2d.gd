@@ -8,6 +8,7 @@ extends AnimatedSprite2D
 ## Enums
 ## Constants
 ## @export variables
+@export var current_cell: Vector2i
 ## Regular variables
 ## @onready variables
 
@@ -19,10 +20,15 @@ extends AnimatedSprite2D
 #func _physics_process(delta: float) -> void:
 ## Remaining virtual methods
 ## Overridden custom methods
-func move_along_path(path_points:PackedVector2Array) -> void:
+func move_along_path(path_points: PackedVector2Array) -> void:
+	path_points.remove_at(0) # remove the first element
 	for point in path_points:
 		await get_tree().create_timer(0.5).timeout
-		print_debug("Translating player by %s pixels" % point)
+		print_debug("Moving the player to position %s" % point)
 		position = point
+
+
+#func update_current_cell() -> Vector2i:
+	
 ## Remaining methods
 ## Subclasses

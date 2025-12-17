@@ -1,14 +1,15 @@
 #@tool
 #@icon
-class_name AstarPath
-extends Line2D
-## Documentation comments
+#class_name
+extends CanvasLayer
+## Temporary(?) CanvasLayer-derived display for showing info during play
+
 
 ## Signals
 ## Enums
 ## Constants
 ## @export variables
-@export var line_speed := 0.5
+@export var debug_labels: Array[Label]
 ## Regular variables
 ## @onready variables
 
@@ -21,6 +22,7 @@ extends Line2D
 ## Remaining virtual methods
 ## Overridden custom methods
 ## Remaining methods
-func draw_astar_path(astar_path_points: PackedVector2Array) -> void:
-	points = astar_path_points
+func update_ui(debug_info: Array) -> void:
+	for item_index in debug_info.size():
+		debug_labels[item_index].text = str(debug_info[item_index])
 ## Subclasses
