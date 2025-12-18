@@ -4,7 +4,7 @@
 
 [node name="DebugUI" type="CanvasLayer" node_paths=PackedStringArray("debug_labels")]
 script = ExtResource("1_6my02")
-debug_labels = [NodePath("HoverClickLabels/HBoxContainer/HoveredCoords"), NodePath("HoverClickLabels/HBoxContainer2/ClickedCoords"), NodePath("AStarLabels/HBoxContainer/StartCellCoords"), NodePath("AStarLabels/HBoxContainer2/TargetCellCoords"), NodePath("AStarLabels/HBoxContainer3/PathPoints"), NodePath("AStarLabels/HBoxContainer4/PathIDs")]
+debug_labels = [NodePath("HoverClickLabels/HBoxContainer3/MouseCoords"), NodePath("HoverClickLabels/HBoxContainer/HoveredCoords"), NodePath("HoverClickLabels/HBoxContainer2/ClickedCoords"), NodePath("AStarLabels/HBoxContainer/StartCellCoords"), NodePath("AStarLabels/HBoxContainer2/TargetCellCoords"), NodePath("AStarLabels/HBoxContainer3/PathPoints"), NodePath("AStarLabels/HBoxContainer4/PathIDs")]
 
 [node name="HoverClickLabels" type="VBoxContainer" parent="."]
 anchors_preset = 3
@@ -20,6 +20,17 @@ grow_vertical = 0
 [node name="Title" type="Label" parent="HoverClickLabels"]
 layout_mode = 2
 text = "HOVER/CLICK INFO"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="HoverClickLabels"]
+layout_mode = 2
+
+[node name="MouseCoordsTitle" type="Label" parent="HoverClickLabels/HBoxContainer3"]
+layout_mode = 2
+text = "Mouse Coords: "
+
+[node name="MouseCoords" type="Label" parent="HoverClickLabels/HBoxContainer3"]
+layout_mode = 2
+text = "(0, 0)"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HoverClickLabels"]
 layout_mode = 2

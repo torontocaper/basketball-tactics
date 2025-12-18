@@ -34,7 +34,10 @@ var hovered_cell_polygon_points: PackedVector2Array ## The points in the polygon
 func _ready() -> void:
 	astar_cell_size = court_floor_isometric.tile_set.tile_size
 	astar_grid = _draw_astar_grid()
-	proto_player_2d.set("current_cell", court_floor_isometric.local_to_map(proto_player_2d.global_position))
+	print_debug("Moving player to proper starting position")
+	proto_player_2d.position = court_floor_isometric.map_to_local(Vector2i.ZERO)
+	print_debug("setting player cell position")
+	proto_player_2d.set("current_cell", court_floor_isometric.local_to_map(proto_player_2d.position))
 
 
 func _process(_delta: float) -> void:
@@ -44,10 +47,9 @@ func _process(_delta: float) -> void:
 	astar_path_points = _get_astar_path_points(astar_start_cell, astar_end_cell)
 	astar_path_ids = _get_astar_path_ids(astar_start_cell, astar_end_cell)
 	astar_path.set("points", astar_path_points)
-	## TODO: improve this section
 	hovered_cell_polygon_points = _make_polygon(hovered_cell)
 	hovered_polyline.set("points", hovered_cell_polygon_points)
-	debug_ui.update_ui([hovered_cell, clicked_cell, astar_start_cell, astar_end_cell, astar_path_points, astar_path_ids])
+	debug_ui.update_ui([get_local_mouse_position(), clicked_cell, astar_start_cell, astar_end_cell, astar_path_points, astar_path_ids])
 
 
 func _unhandled_input(event: InputEvent) -> void:

@@ -16,6 +16,9 @@ unique_name_in_owner = true
 
 [node name="ProtoPlayer2d" parent="." instance=ExtResource("2_0cwsy")]
 unique_name_in_owner = true
+position = Vector2(16, 8)
+offset = Vector2(0, -8)
+speed = 5.0
 
 [node name="DebugUI" parent="." instance=ExtResource("4_mo71o")]
 unique_name_in_owner = true
