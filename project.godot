@@ -12,6 +12,7 @@ config_version=5
 
 config/name="Chessketball"
 config/tags=PackedStringArray("2d", "sports", "strategy")
+run/main_scene="uid://dj6xicxtbnqmg"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
