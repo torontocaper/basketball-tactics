@@ -32,7 +32,6 @@ func _process(_delta: float) -> void:
 ## Remaining virtual methods
 ## Overridden custom methods
 func move_along_path(path_array: Array[Dictionary]) -> void:
-	current_state = State.RUN
 	path_array.remove_at(0) # remove the first element
 	for element in path_array:
 		print_debug("Moving the player to cell %s (position %s)" % [element.id, element.point])
@@ -55,6 +54,7 @@ func move_along_path(path_array: Array[Dictionary]) -> void:
 				current_direction = Direction.SE
 			GlobalDirections.Southwest:
 				current_direction = Direction.SW
+		current_state = State.RUN ## TODO: Not sure this belongs here; create separate 'setter' for direction, and run set_state within that?
 		var new_tween = create_tween()
 		new_tween.tween_property(self, "position", element.point, 1.0 / speed)
 		print_debug("Moving in the %s direction" % Direction.keys()[current_direction])
