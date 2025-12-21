@@ -31,13 +31,14 @@ func _process(_delta: float) -> void:
 #func _physics_process(delta: float) -> void:
 ## Remaining virtual methods
 ## Overridden custom methods
-func move_along_path(path_points: PackedVector2Array) -> void:
+func move_along_path(path_array: Array[Dictionary]) -> void:
 	current_state = State.RUN
-	path_points.remove_at(0) # remove the first element
-	for point in path_points:
-		print_debug("Moving the player to position %s" % point)
+	path_array.remove_at(0) # remove the first element
+	for element in path_array:
+		print_debug("Moving the player to cell %s; position %s" % [element.id, element.point])
 		var new_tween = create_tween()
-		new_tween.tween_property(self, "position", point, 1.0 / speed)
+		new_tween.tween_property(self, "position", element.point, 1.0 / speed)
+		current_cell = element.id
 		await new_tween.finished
 	current_state = State.IDLE
 

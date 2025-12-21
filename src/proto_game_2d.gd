@@ -12,6 +12,7 @@ extends Node2D
 # Navigation
 var astar_grid: AStarGrid2D ## The AStar grid used for navigation
 var astar_cell_size: Vector2
+var astar_path_array: Array[Dictionary]
 var astar_path_points: PackedVector2Array ## The points along the AStar path
 var astar_path_ids: Array[Vector2i] ## The cells along the AStar path
 var astar_start_cell:= Vector2i.ZERO ## The starting cell used for getting the AStar path
@@ -46,6 +47,8 @@ func _process(_delta: float) -> void:
 		astar_end_cell = hovered_cell
 	astar_path_points = _get_astar_path_points(astar_start_cell, astar_end_cell)
 	astar_path_ids = _get_astar_path_ids(astar_start_cell, astar_end_cell)
+
+
 	astar_path.set("points", astar_path_points)
 	hovered_cell_polygon_points = _make_polygon(hovered_cell)
 	hovered_polyline.set("points", hovered_cell_polygon_points)
@@ -58,7 +61,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		if astar_grid.is_in_boundsv(clicked_cell):
 			var clicked_cell_polygon_points = _make_polygon(clicked_cell)
 			clicked_polygon.set("polygon", clicked_cell_polygon_points)
-			proto_player_2d.move_along_path(astar_path_points)
+			astar_path_array = _get_astar_path_array(astar_path_points, astar_path_ids)
+			proto_player_2d.move_along_path(astar_path_array)
 			astar_start_cell = clicked_cell
 
 ## Remaining virtual methods
@@ -70,6 +74,19 @@ func _draw_astar_grid() -> AStarGrid2D:
 	new_astar_grid.update()
 	return new_astar_grid
 
+func _get_astar_path_array(points: PackedVector2Array, ids: Array[Vector2i]) -> Array[Dictionary]:
+	var new_astar_path_array : Array[Dictionary]
+	astar_path_array.clear()
+	#astar_path_points = astar_grid.get_point_path(start, end)
+	#astar_path_ids = astar_grid.get_id_path(start, end)
+	for x in points.size():
+		new_astar_path_array.append(
+			{
+				"point": points[x],
+				"id": ids[x]
+			}
+		)
+	return new_astar_path_array
 
 func _get_astar_path_points(start: Vector2i, end: Vector2i) -> PackedVector2Array:
 	var point_path = astar_grid.get_point_path(start, end)

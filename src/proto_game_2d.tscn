@@ -18,7 +18,6 @@ unique_name_in_owner = true
 unique_name_in_owner = true
 position = Vector2(16, 8)
 offset = Vector2(0, -8)
-speed = 5.0
 
 [node name="DebugUI" parent="." instance=ExtResource("4_mo71o")]
 unique_name_in_owner = true
