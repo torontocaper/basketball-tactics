@@ -35,9 +35,29 @@ func move_along_path(path_array: Array[Dictionary]) -> void:
 	current_state = State.RUN
 	path_array.remove_at(0) # remove the first element
 	for element in path_array:
-		print_debug("Moving the player to cell %s; position %s" % [element.id, element.point])
+		print_debug("Moving the player to cell %s (position %s)" % [element.id, element.point])
+		var direction_vector = Vector2(element.id - current_cell)
+		print_debug("Difference between new cell and old is %s" % direction_vector)
+		match direction_vector:
+			GlobalDirections.East:
+				current_direction = Direction.E
+			GlobalDirections.North:
+				current_direction = Direction.N
+			GlobalDirections.South:
+				current_direction = Direction.S
+			GlobalDirections.West:
+				current_direction = Direction.W
+			GlobalDirections.Northeast:
+				current_direction = Direction.NE
+			GlobalDirections.Northwest:
+				current_direction = Direction.NW
+			GlobalDirections.Southeast:
+				current_direction = Direction.SE
+			GlobalDirections.Southwest:
+				current_direction = Direction.SW
 		var new_tween = create_tween()
 		new_tween.tween_property(self, "position", element.point, 1.0 / speed)
+		print_debug("Moving in the %s direction" % Direction.keys()[current_direction])
 		current_cell = element.id
 		await new_tween.finished
 	current_state = State.IDLE
@@ -49,7 +69,15 @@ func set_state(new_state: State) -> void:
 	current_state = new_state
 	print_debug("Moving from State %s to State %s" % [State.keys()[old_state], State.keys()[current_state]])
 	if current_state == State.IDLE:
-		play("idle_SE")
+		match current_direction:
+			Direction.E:
+				play("idle_E")
+			_:
+				play("idle_SE")
 	elif current_state == State.RUN:
-		play("run_SE")
+		match current_direction:
+			Direction.E:
+				play("run_E")
+			_:
+				play("run_SE")
 ## Subclasses
