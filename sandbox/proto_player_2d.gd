@@ -70,14 +70,42 @@ func set_state(new_state: State) -> void:
 	print_debug("Moving from State %s to State %s" % [State.keys()[old_state], State.keys()[current_state]])
 	if current_state == State.IDLE:
 		match current_direction:
+			Direction.N:
+				play("idle_N")
+			Direction.NE:
+				play("idle_NE")
 			Direction.E:
 				play("idle_E")
+			Direction.SE:
+				play("idle_SE")
+			Direction.S:
+				play("idle_S")
+			Direction.SW:
+				play("idle_SW")
+			Direction.W:
+				play("idle_W")
+			Direction.NW:
+				play("idle_NW")
 			_:
 				play("idle_SE")
 	elif current_state == State.RUN:
 		match current_direction:
+			Direction.N:
+				play("run_N")
+			Direction.NE:
+				play("run_NE")
 			Direction.E:
 				play("run_E")
+			Direction.SE:
+				play("run_SE")
+			Direction.S:
+				play("run_S")
+			Direction.SW:
+				play("run_SW")
+			Direction.W:
+				play("run_W")
+			Direction.NW:
+				play("run_NW")
 			_:
 				play("run_SE")
 ## Subclasses
