@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://brs7dk5e7jtfj" path="res://src/world/court/court_floor_isometric.tscn" id="1_4fwyr"]
 [ext_resource type="Script" uid="uid://dwk6g3ghr5sbm" path="res://src/proto_game_2d.gd" id="1_n6y7u"]
-[ext_resource type="PackedScene" uid="uid://dxdel3465w1qe" path="res://sandbox/proto_player_2D.tscn" id="2_0cwsy"]
+[ext_resource type="PackedScene" uid="uid://dxdel3465w1qe" path="res://src/actors/proto_player_2D.tscn" id="2_0cwsy"]
 [ext_resource type="PackedScene" uid="uid://dplxhaqv0un03" path="res://src/ui/debug_ui.tscn" id="4_mo71o"]
 [ext_resource type="PackedScene" uid="uid://d1533t65iejbi" path="res://src/world/court/astar_path.tscn" id="5_ydekj"]
 [ext_resource type="PackedScene" uid="uid://ripy1740sh2e" path="res://src/world/court/clicked_polygon.tscn" id="6_4xam1"]

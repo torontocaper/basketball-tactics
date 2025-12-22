@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bht835jeenty3"]
 
-[ext_resource type="Script" uid="uid://dybh7q78e6o02" path="res://sandbox/working/court_grid.gd" id="1_vlwfk"]
+[ext_resource type="Script" uid="uid://dybh7q78e6o02" path="res://sandbox/working (old)/court_grid.gd" id="1_vlwfk"]
 
 [node name="CourtGrid" type="GridContainer"]
 anchors_preset = 8

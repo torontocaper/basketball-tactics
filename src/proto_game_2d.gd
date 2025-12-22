@@ -38,7 +38,6 @@ func _ready() -> void:
 	print_debug("Moving player to proper starting position")
 	proto_player_2d.position = court_floor_isometric.map_to_local(Vector2i.ZERO)
 	print_debug("setting player cell position")
-	proto_player_2d.set("current_cell", court_floor_isometric.local_to_map(proto_player_2d.position))
 
 
 func _process(_delta: float) -> void:

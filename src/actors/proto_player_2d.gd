@@ -5,32 +5,39 @@ extends AnimatedSprite2D
 ## Documentation comments
 
 ## Signals
+
 ## Enums
 enum Direction {N, E, S, W, NE, NW, SE, SW}
 enum State {IDLE, RUN}
+
 ## Constants
+const PLAYER_SHADER = preload("uid://ooftxwqn2drf")
+
 ## @export variables
-@export var current_cell: Vector2i
 @export_range(1.0, 5.0, 0.5) var speed: float = 2.5
+@export_color_no_alpha var player_color = Color.SADDLE_BROWN
 
 ## Regular variables
+var current_cell: Vector2i
 var current_direction: Direction = Direction.SE
 var current_state: State = State.IDLE: set = set_state
 ## @onready variables
 @onready var player_debug: DebugUI = $PlayerDebug
+@onready var player_material: Shader
 
 ## Overridden built-in virtual methods
 #func _init() -> void:
 #func _enter_tree() -> void:
-#func _ready() -> void:
-
+func _ready() -> void:
+	material.shader = PLAYER_SHADER
+	#material.set_shader_parameter("player_color", player_color)
+	
 func _process(_delta: float) -> void:
 	player_debug.update_ui([current_cell, State.keys()[current_state], Direction.keys()[current_direction]])
 
 
 #func _physics_process(delta: float) -> void:
-## Remaining virtual methods
-## Overridden custom methods
+
 func move_along_path(path_array: Array[Dictionary]) -> void:
 	path_array.remove_at(0) # remove the first element
 	for element in path_array:
@@ -38,22 +45,22 @@ func move_along_path(path_array: Array[Dictionary]) -> void:
 		var direction_vector = Vector2(element.id - current_cell)
 		print_debug("Difference between new cell and old is %s" % direction_vector)
 		match direction_vector:
-			GlobalDirections.East:
-				current_direction = Direction.E
 			GlobalDirections.North:
 				current_direction = Direction.N
-			GlobalDirections.South:
-				current_direction = Direction.S
-			GlobalDirections.West:
-				current_direction = Direction.W
 			GlobalDirections.Northeast:
 				current_direction = Direction.NE
-			GlobalDirections.Northwest:
-				current_direction = Direction.NW
 			GlobalDirections.Southeast:
 				current_direction = Direction.SE
+			GlobalDirections.East:
+				current_direction = Direction.E
+			GlobalDirections.South:
+				current_direction = Direction.S
 			GlobalDirections.Southwest:
 				current_direction = Direction.SW
+			GlobalDirections.West:
+				current_direction = Direction.W
+			GlobalDirections.Northwest:
+				current_direction = Direction.NW
 		current_state = State.RUN ## TODO: Not sure this belongs here; create separate 'setter' for direction, and run set_state within that?
 		var new_tween = create_tween()
 		new_tween.tween_property(self, "position", element.point, 1.0 / speed)
@@ -63,7 +70,6 @@ func move_along_path(path_array: Array[Dictionary]) -> void:
 	current_state = State.IDLE
 
 
-## Remaining methods
 func set_state(new_state: State) -> void:
 	var old_state = current_state
 	current_state = new_state

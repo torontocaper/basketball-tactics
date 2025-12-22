@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://b60awjdyd2k5r"]
 
-[ext_resource type="Script" uid="uid://b6djhn1s3wqn2" path="res://sandbox/working/court_cell.gd" id="1_mkiru"]
+[ext_resource type="Script" uid="uid://b6djhn1s3wqn2" path="res://sandbox/working (old)/court_cell.gd" id="1_mkiru"]
 
 [node name="CourtCell" type="ColorRect"]
 z_index = -10

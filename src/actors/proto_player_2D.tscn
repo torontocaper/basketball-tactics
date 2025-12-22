@@ -1,0 +1,66 @@
+[gd_scene load_steps=6 format=3 uid="uid://dxdel3465w1qe"]
+
+[ext_resource type="Shader" uid="uid://ooftxwqn2drf" path="res://resources/proto_player_2D.gdshader" id="1_4jsdl"]
+[ext_resource type="SpriteFrames" uid="uid://tcuosace2do8" path="res://resources/sprite_frames_proto_player_2D.tres" id="1_vgpjs"]
+[ext_resource type="Script" uid="uid://of6rettoqamd" path="res://src/actors/proto_player_2d.gd" id="2_r1425"]
+[ext_resource type="Script" uid="uid://dsgmj3p7j8jsk" path="res://src/ui/debug_ui.gd" id="3_mhdko"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_eu1j6"]
+shader = ExtResource("1_4jsdl")
+
+[node name="ProtoPlayer2d" type="AnimatedSprite2D"]
+z_index = 10
+y_sort_enabled = true
+material = SubResource("ShaderMaterial_eu1j6")
+sprite_frames = ExtResource("1_vgpjs")
+animation = &"idle_SE"
+autoplay = "idle_SE"
+script = ExtResource("2_r1425")
+
+[node name="PlayerCamera" type="Camera2D" parent="."]
+zoom = Vector2(4, 4)
+
+[node name="PlayerDebug" type="CanvasLayer" parent="." node_paths=PackedStringArray("debug_labels")]
+script = ExtResource("3_mhdko")
+debug_labels = [NodePath("VBoxContainer/HBoxContainer/Cell"), NodePath("VBoxContainer/HBoxContainer2/State"), NodePath("VBoxContainer/HBoxContainer3/Direction")]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PlayerDebug"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PlayerInfoTitle" type="Label" parent="PlayerDebug/VBoxContainer"]
+layout_mode = 2
+text = "PLAYER INFO"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PlayerDebug/VBoxContainer"]
+layout_mode = 2
+
+[node name="CurrentCellTitle" type="Label" parent="PlayerDebug/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Current Cell: "
+
+[node name="Cell" type="Label" parent="PlayerDebug/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "(0, 0)"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="PlayerDebug/VBoxContainer"]
+layout_mode = 2
+
+[node name="CurrentStateTitle" type="Label" parent="PlayerDebug/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Current State: "
+
+[node name="State" type="Label" parent="PlayerDebug/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "IDLE"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="PlayerDebug/VBoxContainer"]
+layout_mode = 2
+
+[node name="DirectionTitle" type="Label" parent="PlayerDebug/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+text = "Current Direction: "
+
+[node name="Direction" type="Label" parent="PlayerDebug/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+text = "SE"
