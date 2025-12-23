@@ -11,11 +11,11 @@ enum Direction {N, E, S, W, NE, NW, SE, SW}
 enum State {IDLE, RUN}
 
 ## Constants
-const PLAYER_SHADER = preload("uid://ooftxwqn2drf")
+#const PLAYER_SHADER = preload("uid://ooftxwqn2drf")
 
 ## @export variables
 @export_range(1.0, 5.0, 0.5) var speed: float = 2.5
-@export_color_no_alpha var player_color = Color.SADDLE_BROWN
+#@export_color_no_alpha var player_color = Color.SADDLE_BROWN
 
 ## Regular variables
 var current_cell: Vector2i
@@ -23,14 +23,15 @@ var current_direction: Direction = Direction.SE
 var current_state: State = State.IDLE: set = set_state
 ## @onready variables
 @onready var player_debug: DebugUI = $PlayerDebug
-@onready var player_material: Shader
+#@onready var player_material: Shader
 
 ## Overridden built-in virtual methods
 #func _init() -> void:
 #func _enter_tree() -> void:
 func _ready() -> void:
-	material.shader = PLAYER_SHADER
+	#material.shader = PLAYER_SHADER
 	#material.set_shader_parameter("player_color", player_color)
+	pass
 	
 func _process(_delta: float) -> void:
 	player_debug.update_ui([current_cell, State.keys()[current_state], Direction.keys()[current_direction]])
@@ -49,10 +50,10 @@ func move_along_path(path_array: Array[Dictionary]) -> void:
 				current_direction = Direction.N
 			GlobalDirections.Northeast:
 				current_direction = Direction.NE
-			GlobalDirections.Southeast:
-				current_direction = Direction.SE
 			GlobalDirections.East:
 				current_direction = Direction.E
+			GlobalDirections.Southeast:
+				current_direction = Direction.SE
 			GlobalDirections.South:
 				current_direction = Direction.S
 			GlobalDirections.Southwest:

@@ -16,6 +16,7 @@ unique_name_in_owner = true
 
 [node name="ProtoPlayer2d" parent="." instance=ExtResource("2_0cwsy")]
 unique_name_in_owner = true
+z_index = 1000
 position = Vector2(16, 8)
 offset = Vector2(0, -8)
 
