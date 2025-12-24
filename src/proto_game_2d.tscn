@@ -18,6 +18,8 @@ unique_name_in_owner = true
 unique_name_in_owner = true
 z_index = 1000
 position = Vector2(16, 8)
+animation = &"run_W"
+autoplay = "idle_E"
 offset = Vector2(0, -8)
 
 [node name="DebugUI" parent="." instance=ExtResource("4_mo71o")]

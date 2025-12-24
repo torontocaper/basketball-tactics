@@ -1,10 +1,10 @@
 extends Node
 
-var North := Vector2(1.0, -1.0)
-var Northeast := Vector2(1.0, 0.0)
-var East := Vector2(1.0, 1.0)
-var Southeast := Vector2(0.0, 1.0)
-var South := Vector2(-1.0, 1.0)
-var Southwest := Vector2(-1.0, 0.0)
-var West := Vector2(-1.0, -1.0)
-var Northwest := Vector2(0.0, -1.0)
+var NE := Vector2(1.0, -1.0)
+var E := Vector2(1.0, 0.0)
+var SE := Vector2(1.0, 1.0)
+var S := Vector2(0.0, 1.0)
+var SW := Vector2(-1.0, 1.0)
+var W := Vector2(-1.0, 0.0)
+var NW := Vector2(-1.0, -1.0)
+var N := Vector2(0.0, -1.0)
