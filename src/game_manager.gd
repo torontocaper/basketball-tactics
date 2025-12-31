@@ -9,27 +9,10 @@ extends Node2D
 ## Constants
 ## @export variables
 ## Regular variables
-# Navigation
-#var astar_grid: AStarGrid2D ## The AStar grid used for navigation
-#var astar_cell_size: Vector2
-#var astar_path_array: Array[Dictionary]
-#var astar_path_points: PackedVector2Array ## The points along the AStar path
-#var astar_path_ids: Array[Vector2i] ## The cells along the AStar path
-#var astar_path_movement_cost: float ## The cost in movement points for moving along a path
-#var astar_start_cell:= Vector2i.ZERO ## The starting cell used for getting the AStar path
-#var astar_end_cell: Vector2i ## The end/target/destination cell used for getting the AStar path
-# Input
-#var clicked_cell: Vector2 ## The cell clicked by the player
-#var hovered_cell: Vector2 ## The cell hovered over by the player
-#var hovered_cell_polygon_points: PackedVector2Array ## The points in the polygon used to draw the 'hovered' graphic
-
 ## @onready variables
 # Child Nodes
-@onready var proto_player_2d: ProtoPlayer2D = %ProtoPlayer2d
+@onready var player: Player = %Player1
 @onready var court_floor_isometric: TileMapLayer = %CourtFloorIsometric
-#@onready var astar_path: Line2D = %AstarPath
-#@onready var clicked_polygon: Polygon2D = %ClickedPolygon
-#@onready var hovered_polyline: Line2D = %HoveredPolyline
 @onready var debug_ui: DebugUI = %DebugUI
 @onready var navigation_manager: NavigationManager = %NavigationManager
 
@@ -41,9 +24,9 @@ func _ready() -> void:
 	var map_rect:= court_floor_isometric.get_used_rect()
 	navigation_manager.draw_astar_grid(map_tile_size, map_rect)
 	# Move the player to cell with ID (0, 0)
-	proto_player_2d.position = court_floor_isometric.map_to_local(Vector2i.ZERO)
+	player.position = court_floor_isometric.map_to_local(Vector2i.ZERO)
 	# Connect signals
-	navigation_manager.connect("path_found", proto_player_2d.move_along_path)
+	navigation_manager.connect("path_found", player.move_along_path)
 
 
 #func _process(_delta: float) -> void:
@@ -62,7 +45,6 @@ func _unhandled_input(event: InputEvent) -> void:
 	if navigation_manager.astar_grid:
 		navigation_manager.hovered_cell = court_floor_isometric.local_to_map(get_local_mouse_position())
 
-	
 		if event is InputEventMouseButton and event.is_pressed() and event.button_index == 1:
 			# Get the mouse position and, using the TileMapLayer for convenience, set the hovered_cell navigation variable
 			navigation_manager.clicked_cell = court_floor_isometric.local_to_map(get_local_mouse_position())

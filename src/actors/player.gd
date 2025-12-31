@@ -1,6 +1,6 @@
 #@tool
 #@icon
-class_name ProtoPlayer2D
+class_name Player
 extends AnimatedSprite2D
 ## Documentation comments
 
@@ -26,8 +26,8 @@ var current_state: State = State.IDLE: set = set_state
 
 ## Overridden built-in virtual methods
 
-#func _ready() -> void:
-
+func _ready() -> void:
+	print_debug("Player %s ready" % self.name)
 
 func _process(_delta: float) -> void:
 	player_debug.update_ui([current_cell, State.keys()[current_state], Direction.keys()[current_direction]])

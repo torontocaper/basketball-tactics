@@ -10,9 +10,6 @@ signal path_found(path: Array[Dictionary])
 ## Constants
 ## @export variables
 ## Regular variables
-# -- Map Properties -- 
-#var map_tile_size: Vector2: set = set_map_tile_size
-#var map_rect: Rect2i: set = set_map_rect
 # -- Input --
 var hovered_cell: Vector2: set = set_hovered_cell ## set from GameManager
 var clicked_cell: Vector2: set = set_clicked_cell
@@ -37,34 +34,31 @@ var clicked_cell_polygon_points: PackedVector2Array ## Ditto the 'clicked' graph
 @onready var astar_grid: AStarGrid2D
 
 ## Overridden built-in virtual methods
-#func _init() -> void:
-#func _enter_tree() -> void:
+
 func _ready() -> void:
 	print_debug("Navigation Manager ready")
 
+#func _process(_delta: float) -> void:
 
-func _process(_delta: float) -> void:
-	#hovered_cell = astar_grid.get_id
-	pass
 
 func set_hovered_cell(cell: Vector2i) -> void:
 	if astar_grid.is_in_boundsv(cell):
 		astar_end_cell = cell
-	astar_path_points = _get_astar_path_points(astar_start_cell, astar_end_cell)
-	astar_path_ids = _get_astar_path_ids(astar_start_cell, astar_end_cell)
-	astar_path.set("points", astar_path_points)
-	hovered_cell_polygon_points = _make_polygon(cell)
-	hovered_polyline.set("points", hovered_cell_polygon_points)
+		astar_path_points = _get_astar_path_points(astar_start_cell, astar_end_cell)
+		astar_path_ids = _get_astar_path_ids(astar_start_cell, astar_end_cell)
+		astar_path.points = astar_path_points
+		hovered_cell_polygon_points = _make_polygon(cell)
+		hovered_polyline.set("points", hovered_cell_polygon_points)
 
 func set_clicked_cell(cell: Vector2i) -> void:
 	if astar_grid.is_in_boundsv(cell):
 		clicked_cell_polygon_points = _make_polygon(clicked_cell)
-		clicked_polygon.set("polygon", clicked_cell_polygon_points)
+		clicked_polygon.polygon = clicked_cell_polygon_points
 		astar_path_array = _get_astar_path_array(astar_path_points, astar_path_ids)
-		path_found.emit(astar_path_array)
 		astar_path_movement_cost = _get_astar_path_movement_cost(astar_path_ids)
 		print_debug("This move costs %s points" % astar_path_movement_cost)
 		astar_start_cell = clicked_cell
+		path_found.emit(astar_path_array)
 
 ## Remaining virtual methods
 func _get_astar_path_points(start: Vector2i, end: Vector2i) -> PackedVector2Array:
