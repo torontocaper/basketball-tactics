@@ -14,7 +14,6 @@ enum State {IDLE, RUN}
 
 ## @export variables
 @export_range(1.0, 5.0, 0.5) var speed: float = 2.5
-#@export_color_no_alpha var player_color = Color.SADDLE_BROWN
 
 ## Regular variables
 var current_cell: Vector2i
@@ -32,12 +31,10 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	player_debug.update_ui([current_cell, State.keys()[current_state], Direction.keys()[current_direction]])
 
-#func _physics_process(delta: float) -> void:
 
 func move_along_path(path_array: Array[Dictionary]) -> void:
 	path_array.remove_at(0) # remove the first element
 	for element in path_array:
-		#print_debug("Moving the player to cell %s (position %s)" % [element.id, element.point])
 		var direction_vector = Vector2(element.id - current_cell)
 		match direction_vector:
 			GlobalDirections.N:

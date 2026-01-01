@@ -33,12 +33,9 @@ var clicked_cell_polygon_points: PackedVector2Array ## Ditto the 'clicked' graph
 # -- Other --
 @onready var astar_grid: AStarGrid2D
 
-## Overridden built-in virtual methods
 
 func _ready() -> void:
 	print_debug("Navigation Manager ready")
-
-#func _process(_delta: float) -> void:
 
 
 func set_hovered_cell(cell: Vector2i) -> void:
@@ -48,29 +45,29 @@ func set_hovered_cell(cell: Vector2i) -> void:
 		astar_path_ids = _get_astar_path_ids(astar_start_cell, astar_end_cell)
 		astar_path.points = astar_path_points
 		hovered_cell_polygon_points = _make_polygon(cell)
-		hovered_polyline.set("points", hovered_cell_polygon_points)
+		hovered_polyline.points = hovered_cell_polygon_points
 
 func set_clicked_cell(cell: Vector2i) -> void:
+	print_debug("Making a clicked polygon in cell %s" % cell)
 	if astar_grid.is_in_boundsv(cell):
-		clicked_cell_polygon_points = _make_polygon(clicked_cell)
+		clicked_cell_polygon_points = _make_polygon(cell)
 		clicked_polygon.polygon = clicked_cell_polygon_points
 		astar_path_array = _get_astar_path_array(astar_path_points, astar_path_ids)
 		astar_path_movement_cost = _get_astar_path_movement_cost(astar_path_ids)
-		print_debug("This move costs %s points" % astar_path_movement_cost)
-		astar_start_cell = clicked_cell
 		path_found.emit(astar_path_array)
+		astar_start_cell = cell
 
 ## Remaining virtual methods
-func _get_astar_path_points(start: Vector2i, end: Vector2i) -> PackedVector2Array:
+func _get_astar_path_points(start: Vector2i, end: Vector2i) -> PackedVector2Array: ## get the points in the AStar path
 	var point_path = astar_grid.get_point_path(start, end)
 	return point_path
 
 
-func _get_astar_path_ids(start: Vector2i, end: Vector2i) -> Array[Vector2i]:
+func _get_astar_path_ids(start: Vector2i, end: Vector2i) -> Array[Vector2i]: ## get the ids of the cells in the AStar path
 	var id_path = astar_grid.get_id_path(start, end)
 	return id_path
 
-func _get_astar_path_array(points: PackedVector2Array, ids: Array[Vector2i]) -> Array[Dictionary]:
+func _get_astar_path_array(points: PackedVector2Array, ids: Array[Vector2i]) -> Array[Dictionary]: ## make an array of Dictionaries for the AStar path
 	var new_astar_path_array : Array[Dictionary]
 	astar_path_array.clear()
 	for x in points.size():
@@ -82,7 +79,7 @@ func _get_astar_path_array(points: PackedVector2Array, ids: Array[Vector2i]) -> 
 		)
 	return new_astar_path_array
 
-func _get_astar_path_movement_cost(ids: Array[Vector2i]) -> float:
+func _get_astar_path_movement_cost(ids: Array[Vector2i]) -> float: ## get the movement cost in points for the AStar path
 	var movement_cost: float = 0.0
 	var iterator = 0
 	for id_index in ids.size() - 1:
@@ -93,7 +90,6 @@ func _get_astar_path_movement_cost(ids: Array[Vector2i]) -> float:
 	return movement_cost
 
 
-## Overridden custom methods
 ## Remaining methods
 func draw_astar_grid(map_tile_size: Vector2, map_rect: Rect2i) -> void:
 	# Called from the GameManager using info from the map/court
@@ -104,9 +100,8 @@ func draw_astar_grid(map_tile_size: Vector2, map_rect: Rect2i) -> void:
 	astar_grid.region = map_rect
 	astar_grid.update()
 
-func _make_polygon(cell_id: Vector2) -> PackedVector2Array:
+func _make_polygon(cell_id: Vector2) -> PackedVector2Array: ## Makes a polygon
 	var polygon_points: PackedVector2Array
-	#if astar_grid.is_in_boundsv(cell_id):
 	polygon_points = PackedVector2Array([
 			Vector2(
 				astar_grid.get_point_position(cell_id).x + (astar_grid.cell_size.x / 2), 
@@ -121,14 +116,4 @@ func _make_polygon(cell_id: Vector2) -> PackedVector2Array:
 				astar_grid.get_point_position(cell_id).x, 
 				astar_grid.get_point_position(cell_id).y - (astar_grid.cell_size.y / 2))
 			])
-	#else:
-		#polygon_points.fill(Vector2.ZERO)
 	return polygon_points
-
-# --- Setters ---
-#func set_map_tile_size(tile_size: Vector2) -> void:
-	#print_debug("Setting navigation grid cell size to %s" % tile_size)
-#
-#func set_map_rect(rect: Rect2i) -> void:
-	#print_debug("Setting rect for defining navigation grid to %s" % rect)
-## Subclasses
