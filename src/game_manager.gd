@@ -11,22 +11,26 @@ extends Node2D
 ## Regular variables
 ## @onready variables
 # Child Nodes
-@onready var player: Player = %Player1
+#@onready var player: Player = %Player1
 @onready var navigation_manager: NavigationManager = %NavigationManager
 @onready var court: TileMapLayer = %Court
 @onready var debug_ui: DebugUI = %DebugUI
-
+@onready var players: Node = %Players
 
 func _ready() -> void:
 	print_debug("Game Manager ready")
+	# Get the players as variables
+	for player_number in players.get_child_count():
+		var player = players.get_child(player_number)
+		player.position = court.map_to_local(Vector2i.ZERO + Vector2i.ONE * player_number)
+		navigation_manager.connect("path_found", player.move_along_path) #TODO: hook this up by turn
 	# Get the tile size and used rect from the TilemapLayer and send the info to NavigationManager
 	var map_tile_size:= court.tile_set.tile_size
 	var map_rect:= court.get_used_rect()
 	navigation_manager.draw_astar_grid(map_tile_size, map_rect)
 	# Move the player to cell with ID (0, 0)
-	player.position = court.map_to_local(Vector2i.ZERO)
+	#player.position = court.map_to_local(Vector2i.ZERO)
 	# Connect signals
-	navigation_manager.connect("path_found", player.move_along_path)
 
 
 func _unhandled_input(event: InputEvent) -> void:

@@ -15,8 +15,15 @@ script = ExtResource("1_n6y7u")
 [node name="Court" parent="." instance=ExtResource("1_4fwyr")]
 unique_name_in_owner = true
 
-[node name="Player1" parent="." instance=ExtResource("2_0cwsy")]
+[node name="Players" type="Node" parent="."]
 unique_name_in_owner = true
+
+[node name="Player0" parent="Players" instance=ExtResource("2_0cwsy")]
+animation = &"run_W"
+
+[node name="Player1" parent="Players" instance=ExtResource("2_0cwsy")]
+unique_name_in_owner = true
+modulate = Color(1, 0, 1, 1)
 z_index = 1000
 position = Vector2(16, 8)
 animation = &"run_W"
