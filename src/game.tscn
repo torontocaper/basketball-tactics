@@ -1,13 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://dj6xicxtbnqmg"]
+[gd_scene load_steps=7 format=3 uid="uid://dj6xicxtbnqmg"]
 
 [ext_resource type="PackedScene" uid="uid://brs7dk5e7jtfj" path="res://src/world/court/court.tscn" id="1_4fwyr"]
 [ext_resource type="Script" uid="uid://dwk6g3ghr5sbm" path="res://src/game_manager.gd" id="1_n6y7u"]
 [ext_resource type="PackedScene" uid="uid://dxdel3465w1qe" path="res://src/actors/player.tscn" id="2_0cwsy"]
 [ext_resource type="PackedScene" uid="uid://dplxhaqv0un03" path="res://src/ui/debug_ui.tscn" id="4_mo71o"]
-[ext_resource type="Script" uid="uid://bl46ty1lb3n82" path="res://src/navigation_manager.gd" id="5_4xam1"]
-[ext_resource type="PackedScene" uid="uid://d1533t65iejbi" path="res://src/world/court/astar_path.tscn" id="5_ydekj"]
-[ext_resource type="PackedScene" uid="uid://ripy1740sh2e" path="res://src/world/court/clicked_polygon.tscn" id="6_4xam1"]
-[ext_resource type="PackedScene" uid="uid://1brml26tcq5b" path="res://src/world/court/hovered_polyline.tscn" id="7_34psn"]
+[ext_resource type="PackedScene" uid="uid://cedavnum61h7x" path="res://src/world/navigation_manager.tscn" id="5_bs6l1"]
+[ext_resource type="Script" uid="uid://c5jujpgaev4yq" path="res://src/turn_manager.gd" id="6_pk08u"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_n6y7u")
@@ -15,34 +13,34 @@ script = ExtResource("1_n6y7u")
 [node name="Court" parent="." instance=ExtResource("1_4fwyr")]
 unique_name_in_owner = true
 
-[node name="Players" type="Node" parent="."]
+[node name="Player0" parent="." instance=ExtResource("2_0cwsy")]
 unique_name_in_owner = true
-
-[node name="Player0" parent="Players" instance=ExtResource("2_0cwsy")]
-animation = &"run_W"
-
-[node name="Player1" parent="Players" instance=ExtResource("2_0cwsy")]
-unique_name_in_owner = true
-modulate = Color(1, 0, 1, 1)
-z_index = 1000
 position = Vector2(16, 8)
 animation = &"run_W"
-autoplay = "idle_E"
 offset = Vector2(0, -8)
+
+[node name="Teams" type="Node" parent="."]
+
+[node name="HomeTeam" type="Node" parent="Teams"]
+
+[node name="HomePlayer1" parent="Teams/HomeTeam" instance=ExtResource("2_0cwsy")]
+visible = false
+modulate = Color(1, 0, 1, 1)
+z_index = 1000
+animation = &"run_W"
+autoplay = "idle_E"
+
+[node name="AwayTeam" type="Node" parent="Teams"]
+
+[node name="AwayPlayer1" parent="Teams/AwayTeam" instance=ExtResource("2_0cwsy")]
 
 [node name="DebugUI" parent="." instance=ExtResource("4_mo71o")]
 unique_name_in_owner = true
 visible = false
 
-[node name="NavigationManager" type="Node2D" parent="."]
-unique_name_in_owner = true
-script = ExtResource("5_4xam1")
-
-[node name="HoveredPolyline" parent="NavigationManager" instance=ExtResource("7_34psn")]
+[node name="NavigationManager" parent="." instance=ExtResource("5_bs6l1")]
 unique_name_in_owner = true
 
-[node name="AstarPath" parent="NavigationManager" instance=ExtResource("5_ydekj")]
+[node name="TurnManager" type="Node" parent="."]
 unique_name_in_owner = true
-
-[node name="ClickedPolygon" parent="NavigationManager" instance=ExtResource("6_4xam1")]
-unique_name_in_owner = true
+script = ExtResource("6_pk08u")

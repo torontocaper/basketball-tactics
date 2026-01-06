@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://cedavnum61h7x"]
+
+[ext_resource type="Script" uid="uid://bl46ty1lb3n82" path="res://src/world/navigation_manager.gd" id="1_ak1oj"]
+
+[node name="NavigationManager" type="Node"]
+script = ExtResource("1_ak1oj")
+
+[node name="HoveredPolyline" type="Line2D" parent="."]
+unique_name_in_owner = true
+closed = true
+width = 1.0
+default_color = Color(1, 1, 1, 0.5686275)
+
+[node name="AstarPath" type="Line2D" parent="."]
+unique_name_in_owner = true
+width = 1.0
+
+[node name="ClickedPolygon" type="Polygon2D" parent="."]
+unique_name_in_owner = true
+color = Color(1, 1, 1, 0.5686275)

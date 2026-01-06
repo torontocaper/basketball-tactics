@@ -1,7 +1,7 @@
 #@tool
 #@icon
 class_name NavigationManager
-extends Node2D
+extends Node
 ## Manages navigation
 
 ## Signals
