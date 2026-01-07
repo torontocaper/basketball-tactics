@@ -2,7 +2,7 @@
 #@icon
 class_name Player
 extends AnimatedSprite2D
-## Documentation comments
+## Base class for all players
 
 ## Signals
 
@@ -14,6 +14,7 @@ enum State {IDLE, RUN}
 
 ## @export variables
 @export_range(1.0, 5.0, 0.5) var speed: float = 2.5
+@export var attributes: PlayerAttributes
 
 ## Regular variables
 var current_cell: Vector2i
@@ -21,12 +22,14 @@ var current_direction: Direction = Direction.E: set = set_direction
 var current_state: State = State.IDLE: set = set_state
 
 ## @onready variables
+@onready var name_label: Label = %NameLabel
 @onready var player_debug: DebugUI = $PlayerDebug
 
-## Overridden built-in virtual methods
 
 func _ready() -> void:
+	name_label.text = self.name
 	print_debug("Player %s ready" % self.name)
+
 
 func _process(_delta: float) -> void:
 	player_debug.update_ui([current_cell, State.keys()[current_state], Direction.keys()[current_direction]])

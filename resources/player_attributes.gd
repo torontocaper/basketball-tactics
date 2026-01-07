@@ -1,15 +1,14 @@
 #@tool
 #@icon
-class_name DebugUI
-extends CanvasLayer
-## Temporary(?) CanvasLayer-derived display for showing info during play
-
+class_name PlayerAttributes
+extends Resource
+## Resource for assigning attributes (skills, physical features, etc.) to players
 
 ## Signals
 ## Enums
 ## Constants
 ## @export variables
-@export var debug_labels: Array[Label]
+@export_custom(PROPERTY_HINT_RANGE, "0, 10") var reflexes: int ## Used to modify dice rolls in turn order setting
 ## Regular variables
 ## @onready variables
 
@@ -22,7 +21,4 @@ extends CanvasLayer
 ## Remaining virtual methods
 ## Overridden custom methods
 ## Remaining methods
-func update_ui(debug_info: Array) -> void: ## Call from parent in _process
-	for item_index in debug_info.size():
-		debug_labels[item_index].text = str(debug_info[item_index])
 ## Subclasses

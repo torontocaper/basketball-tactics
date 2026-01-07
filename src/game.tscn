@@ -1,14 +1,31 @@
-[gd_scene load_steps=7 format=3 uid="uid://dj6xicxtbnqmg"]
+[gd_scene load_steps=11 format=3 uid="uid://dj6xicxtbnqmg"]
 
 [ext_resource type="PackedScene" uid="uid://brs7dk5e7jtfj" path="res://src/world/court/court.tscn" id="1_4fwyr"]
 [ext_resource type="Script" uid="uid://dwk6g3ghr5sbm" path="res://src/game_manager.gd" id="1_n6y7u"]
 [ext_resource type="PackedScene" uid="uid://dxdel3465w1qe" path="res://src/actors/player.tscn" id="2_0cwsy"]
 [ext_resource type="PackedScene" uid="uid://dplxhaqv0un03" path="res://src/ui/debug_ui.tscn" id="4_mo71o"]
+[ext_resource type="Script" uid="uid://d1p65m3fcbqxp" path="res://resources/player_attributes.gd" id="4_wqvko"]
 [ext_resource type="PackedScene" uid="uid://cedavnum61h7x" path="res://src/world/navigation_manager.tscn" id="5_bs6l1"]
-[ext_resource type="Script" uid="uid://c5jujpgaev4yq" path="res://src/turn_manager.gd" id="6_pk08u"]
+[ext_resource type="PackedScene" uid="uid://bq2y881unx68a" path="res://src/turn_manager.tscn" id="5_pk08u"]
 
-[node name="Game" type="Node2D"]
+[sub_resource type="Resource" id="Resource_wqvko"]
+script = ExtResource("4_wqvko")
+reflexes = 4
+metadata/_custom_type_script = "uid://d1p65m3fcbqxp"
+
+[sub_resource type="Resource" id="Resource_cdx1q"]
+script = ExtResource("4_wqvko")
+reflexes = 7
+metadata/_custom_type_script = "uid://d1p65m3fcbqxp"
+
+[sub_resource type="Resource" id="Resource_4bcji"]
+script = ExtResource("4_wqvko")
+reflexes = 3
+metadata/_custom_type_script = "uid://d1p65m3fcbqxp"
+
+[node name="Game" type="Node2D" node_paths=PackedStringArray("players")]
 script = ExtResource("1_n6y7u")
+players = [NodePath("Teams/HomeTeam/HomePlayer1"), NodePath("Teams/AwayTeam/AwayPlayer1"), NodePath("Player0")]
 
 [node name="Court" parent="." instance=ExtResource("1_4fwyr")]
 unique_name_in_owner = true
@@ -18,6 +35,7 @@ unique_name_in_owner = true
 position = Vector2(16, 8)
 animation = &"run_W"
 offset = Vector2(0, -8)
+attributes = SubResource("Resource_wqvko")
 
 [node name="Teams" type="Node" parent="."]
 
@@ -29,18 +47,19 @@ modulate = Color(1, 0, 1, 1)
 z_index = 1000
 animation = &"run_W"
 autoplay = "idle_E"
+attributes = SubResource("Resource_cdx1q")
 
 [node name="AwayTeam" type="Node" parent="Teams"]
 
 [node name="AwayPlayer1" parent="Teams/AwayTeam" instance=ExtResource("2_0cwsy")]
-
-[node name="DebugUI" parent="." instance=ExtResource("4_mo71o")]
-unique_name_in_owner = true
-visible = false
+attributes = SubResource("Resource_4bcji")
 
 [node name="NavigationManager" parent="." instance=ExtResource("5_bs6l1")]
 unique_name_in_owner = true
 
-[node name="TurnManager" type="Node" parent="."]
+[node name="TurnManager" parent="." instance=ExtResource("5_pk08u")]
 unique_name_in_owner = true
-script = ExtResource("6_pk08u")
+
+[node name="DebugUI" parent="." instance=ExtResource("4_mo71o")]
+unique_name_in_owner = true
+visible = false

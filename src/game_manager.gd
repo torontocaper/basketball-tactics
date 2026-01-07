@@ -8,6 +8,7 @@ extends Node2D
 ## Enums
 ## Constants
 ## @export variables
+@export var players: Array[Player] = []
 ## Regular variables
 ## @onready variables
 # Child Nodes
@@ -19,6 +20,8 @@ extends Node2D
 
 func _ready() -> void:
 	print_debug("Game Manager ready")
+	# Set the turn order using the turn manager
+	turn_manager.set_turn_order(players)
 	# Get the players as variables
 	player.position = court.map_to_local(Vector2i.ZERO)
 	navigation_manager.connect("path_found", player.move_along_path) #TODO: hook this up by turn

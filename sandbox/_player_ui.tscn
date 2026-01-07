@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://b04lohcga4vrc"]
 
 [ext_resource type="PackedScene" uid="uid://dus1uicsiiy5" path="res://sandbox/player_sprite.tscn" id="1_lwly5"]
-[ext_resource type="Script" uid="uid://dps6gwewnvkoe" path="res://sandbox/player_ui.gd" id="1_wky54"]
+[ext_resource type="Script" uid="uid://dps6gwewnvkoe" path="res://sandbox/_player_ui.gd" id="1_wky54"]
 [ext_resource type="Texture2D" uid="uid://dx8m8qlohgjgb" path="res://assets/textures/characters/blue-face-bart.png" id="2_cwfts"]
 [ext_resource type="Texture2D" uid="uid://cp53qlb84picn" path="res://assets/textures/characters/earthy-green-horn.png" id="3_7mgj5"]
 [ext_resource type="Texture2D" uid="uid://c3332obmrak88" path="res://assets/textures/characters/ghostly-pink-pants.png" id="4_hbbui"]
