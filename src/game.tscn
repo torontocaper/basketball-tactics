@@ -1,12 +1,25 @@
-[gd_scene load_steps=11 format=3 uid="uid://dj6xicxtbnqmg"]
+[gd_scene load_steps=15 format=3 uid="uid://dj6xicxtbnqmg"]
 
 [ext_resource type="PackedScene" uid="uid://brs7dk5e7jtfj" path="res://src/world/court/court.tscn" id="1_4fwyr"]
 [ext_resource type="Script" uid="uid://dwk6g3ghr5sbm" path="res://src/game_manager.gd" id="1_n6y7u"]
 [ext_resource type="PackedScene" uid="uid://dxdel3465w1qe" path="res://src/actors/player.tscn" id="2_0cwsy"]
+[ext_resource type="Shader" uid="uid://ooftxwqn2drf" path="res://resources/proto_player_2D.gdshader" id="4_cdx1q"]
 [ext_resource type="PackedScene" uid="uid://dplxhaqv0un03" path="res://src/ui/debug_ui.tscn" id="4_mo71o"]
 [ext_resource type="Script" uid="uid://d1p65m3fcbqxp" path="res://resources/player_attributes.gd" id="4_wqvko"]
 [ext_resource type="PackedScene" uid="uid://cedavnum61h7x" path="res://src/world/navigation_manager.tscn" id="5_bs6l1"]
 [ext_resource type="PackedScene" uid="uid://bq2y881unx68a" path="res://src/turn_manager.tscn" id="5_pk08u"]
+
+[sub_resource type="Gradient" id="Gradient_4bcji"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0.13405797, 0.26449275, 0.48913044, 0.64855075)
+colors = PackedColorArray(0.21639585, 0.0021897808, 0.31505993, 1, 0.56144327, 0.021819595, 0.78508836, 1, 7.123351e-06, 0.7506175, 0.60060143, 1, 1, 0, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_uktfx"]
+gradient = SubResource("Gradient_4bcji")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_y2hwx"]
+shader = ExtResource("4_cdx1q")
+shader_parameter/player_gradient = SubResource("GradientTexture2D_uktfx")
 
 [sub_resource type="Resource" id="Resource_wqvko"]
 script = ExtResource("4_wqvko")
@@ -32,6 +45,7 @@ unique_name_in_owner = true
 
 [node name="Player0" parent="." instance=ExtResource("2_0cwsy")]
 unique_name_in_owner = true
+material = SubResource("ShaderMaterial_y2hwx")
 position = Vector2(16, 8)
 animation = &"run_W"
 offset = Vector2(0, -8)
@@ -52,6 +66,7 @@ attributes = SubResource("Resource_cdx1q")
 [node name="AwayTeam" type="Node" parent="Teams"]
 
 [node name="AwayPlayer1" parent="Teams/AwayTeam" instance=ExtResource("2_0cwsy")]
+visible = false
 attributes = SubResource("Resource_4bcji")
 
 [node name="NavigationManager" parent="." instance=ExtResource("5_bs6l1")]

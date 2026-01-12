@@ -10,11 +10,11 @@ void vertex() {
 
 void fragment() {
 	// Called for every pixel the material is visible on.
-	vec4 region = REGION_RECT;
-	vec4 gradient_color = texture(player_gradient, region.ba);
-	vec4 texture_color = texture(TEXTURE, UV);
-	float grayscale_value = (texture_color.r + texture_color.g + texture_color.b) / 3.0;
-	vec3 grayscale_color_no_alpha = vec3(grayscale_value);
+	//vec4 region = REGION_RECT;
+	vec4 original_color = texture(TEXTURE, UV);
+	float grayscale_value = (original_color.r + original_color.g + original_color.b) / 3.0;
+	vec2 sample_coords = vec2(grayscale_value);
+	vec4 gradient_color = texture(player_gradient, sample_coords);
 	COLOR.rgb = gradient_color.rgb;
 	//COLOR.rgb = grayscale_color_no_alpha;
 	//COLOR.a = texture(TEXTURE, UV).a;
