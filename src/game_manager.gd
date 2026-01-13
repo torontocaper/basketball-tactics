@@ -16,7 +16,7 @@ extends Node2D
 @onready var turn_manager: TurnManager = %TurnManager
 @onready var court: TileMapLayer = %Court
 @onready var debug_ui: DebugUI = %DebugUI
-@onready var player: Player = %Player0
+@onready var player: Player = %Player0 ## TODO: get rid of this
 
 func _ready() -> void:
 	print_debug("Game Manager ready")
@@ -24,7 +24,7 @@ func _ready() -> void:
 	turn_manager.set_turn_order(players)
 	# Get the players as variables
 	player.position = court.map_to_local(Vector2i.ZERO)
-	navigation_manager.connect("path_found", player.move_along_path) #TODO: hook this up by turn
+	navigation_manager.connect("path_found", player.move_along_path) # TODO: hook this up by turn/player
 	
 	# Get the tile size and used rect from the TilemapLayer and send the info to NavigationManager
 	var map_tile_size:= court.tile_set.tile_size

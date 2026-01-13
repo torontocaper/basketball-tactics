@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 GlobalDirections="*res://src/data/global_directions.gd"
+Dice="*res://src/data/dice.gd"
 
 [rendering]
 
