@@ -1,0 +1,52 @@
+[gd_scene format=3 uid="uid://biyp5n4l30oiy"]
+
+[ext_resource type="Texture2D" uid="uid://5dlahhh62may" path="res://assets/textures/court/3d/diagonal_parquet_diff_4k.jpg" id="1_k8abt"]
+
+[node name="2DNonIso" type="Node2D" unique_id=217428403]
+
+[node name="CourtSprite" type="Sprite2D" parent="." unique_id=298603358]
+texture_filter = 2
+texture_repeat = 2
+scale = Vector2(0.125, 0.125)
+texture = ExtResource("1_k8abt")
+centered = false
+
+[node name="CourtSprite2" type="Sprite2D" parent="." unique_id=1069033112]
+texture_filter = 2
+texture_repeat = 2
+position = Vector2(512, 0)
+scale = Vector2(0.125, 0.125)
+texture = ExtResource("1_k8abt")
+centered = false
+
+[node name="CourtSprite3" type="Sprite2D" parent="." unique_id=923337575]
+texture_filter = 2
+texture_repeat = 2
+position = Vector2(1024, 0)
+scale = Vector2(0.125, 0.125)
+texture = ExtResource("1_k8abt")
+centered = false
+
+[node name="CourtSprite4" type="Sprite2D" parent="." unique_id=422574796]
+texture_filter = 2
+texture_repeat = 2
+position = Vector2(0, 512)
+scale = Vector2(0.125, 0.125)
+texture = ExtResource("1_k8abt")
+centered = false
+
+[node name="CourtSprite5" type="Sprite2D" parent="." unique_id=1710667359]
+texture_filter = 2
+texture_repeat = 2
+position = Vector2(512, 512)
+scale = Vector2(0.125, 0.125)
+texture = ExtResource("1_k8abt")
+centered = false
+
+[node name="CourtSprite6" type="Sprite2D" parent="." unique_id=2102419206]
+texture_filter = 2
+texture_repeat = 2
+position = Vector2(1024, 512)
+scale = Vector2(0.125, 0.125)
+texture = ExtResource("1_k8abt")
+centered = false

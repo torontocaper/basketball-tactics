@@ -1,0 +1,17 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://da6vf0sixnkn7"]
+
+[ext_resource type="Texture2D" uid="uid://6l67yjpiy4xv" path="res://assets/textures/court/3d/wood_peeling_paint_weathered_diff_4k.png" id="1_0e7b3"]
+[ext_resource type="Texture2D" uid="uid://b1ylgt8wjgws" path="res://assets/textures/court/3d/wood_peeling_paint_weathered_arm_4k.png" id="2_0qnhh"]
+[ext_resource type="Texture2D" uid="uid://oanolqq01y38" path="res://assets/textures/court/3d/wood_peeling_paint_weathered_nor_gl_4k.png" id="3_brnfi"]
+
+[resource]
+albedo_texture = ExtResource("1_0e7b3")
+metallic = 1.0
+metallic_texture = ExtResource("2_0qnhh")
+metallic_texture_channel = 2
+roughness_texture = ExtResource("2_0qnhh")
+roughness_texture_channel = 1
+normal_enabled = true
+normal_texture = ExtResource("3_brnfi")
+ao_enabled = true
+ao_texture = ExtResource("2_0qnhh")
