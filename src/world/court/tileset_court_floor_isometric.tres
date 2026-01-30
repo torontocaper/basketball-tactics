@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=19 format=3 uid="uid://1pg00ognuafd"]
+[gd_resource type="TileSet" format=3 uid="uid://1pg00ognuafd"]
 
 [ext_resource type="Texture2D" uid="uid://h1v6gm781pg0" path="res://assets/textures/court/parquet-iso-1.png" id="1_5s8bd"]
 [ext_resource type="Texture2D" uid="uid://c2apn41vwi5xx" path="res://assets/textures/court/parquet-new-2a.png" id="2_60n3l"]

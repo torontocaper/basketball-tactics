@@ -38,22 +38,22 @@ metadata/_custom_type_script = "uid://d1p65m3fcbqxp"
 
 [node name="Game" type="Node2D" node_paths=PackedStringArray("players")]
 script = ExtResource("1_n6y7u")
-players = [NodePath("Teams/HomeTeam/HomePlayer1"), NodePath("Teams/AwayTeam/AwayPlayer1"), NodePath("Player0")]
+players = [NodePath("Teams/HomeTeam/HomePlayer1"), NodePath("Teams/AwayTeam/AwayPlayer1"), NodePath("Teams/HomeTeam/Player0")]
 
 [node name="Court" parent="." instance=ExtResource("1_4fwyr")]
 unique_name_in_owner = true
 
-[node name="Player0" parent="." instance=ExtResource("2_0cwsy")]
+[node name="Teams" type="Node" parent="."]
+
+[node name="HomeTeam" type="Node" parent="Teams"]
+
+[node name="Player0" parent="Teams/HomeTeam" instance=ExtResource("2_0cwsy")]
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_y2hwx")
 position = Vector2(16, 8)
 animation = &"run_W"
 offset = Vector2(0, -8)
 attributes = SubResource("Resource_wqvko")
-
-[node name="Teams" type="Node" parent="."]
-
-[node name="HomeTeam" type="Node" parent="Teams"]
 
 [node name="HomePlayer1" parent="Teams/HomeTeam" instance=ExtResource("2_0cwsy")]
 visible = false
