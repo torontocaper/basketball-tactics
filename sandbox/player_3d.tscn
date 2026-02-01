@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://qrqfm5sgh0gd"]
 
-[ext_resource type="Script" uid="uid://dw1yehsm8wml6" path="res://sandbox/3d_player.gd" id="1_wnxhv"]
+[ext_resource type="Script" uid="uid://dw1yehsm8wml6" path="res://sandbox/player_3d.gd" id="1_wnxhv"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s2r0h"]
 albedo_color = Color(0, 0.24705882, 0, 1)
@@ -11,7 +11,8 @@ material = SubResource("StandardMaterial3D_s2r0h")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_s2r0h"]
 
-[node name="3DPlayer" type="CharacterBody3D" unique_id=74101545]
+[node name="Player3D" type="CharacterBody3D" unique_id=74101545]
+collision_mask = 3
 script = ExtResource("1_wnxhv")
 
 [node name="PlayerMesh" type="MeshInstance3D" parent="." unique_id=1678306392]
@@ -22,6 +23,8 @@ shape = SubResource("CapsuleShape3D_s2r0h")
 
 [node name="PlayerNavAgent" type="NavigationAgent3D" parent="." unique_id=1727149454]
 avoidance_enabled = true
+height = 2.0
+radius = 0.75
 debug_enabled = true
 
 [node name="PlayerLabel" type="Label3D" parent="." unique_id=708500666]
