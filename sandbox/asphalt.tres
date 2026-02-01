@@ -19,7 +19,7 @@ texture_type = 1
 [sub_resource type="VisualShaderNodeUVFunc" id="VisualShaderNodeUVFunc_f680i"]
 
 [sub_resource type="VisualShaderNodeVec2Constant" id="VisualShaderNodeVec2Constant_6bghi"]
-constant = Vector2(7, 3.75)
+constant = Vector2(3.5, 1.875)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_thxon"]
 
@@ -69,7 +69,7 @@ texture = ExtResource("1_wjghk")
 texture_type = 2
 
 [sub_resource type="VisualShaderNodeVec2Constant" id="VisualShaderNodeVec2Constant_1vfbk"]
-constant = Vector2(0.2, 0.75)
+constant = Vector2(0.483, -0.134)
 
 [resource]
 nodes/vertex/0/position = Vector2(820, 120)
