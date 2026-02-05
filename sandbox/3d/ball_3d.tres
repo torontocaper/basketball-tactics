@@ -1,0 +1,48 @@
+[gd_resource type="VisualShader" format=3 uid="uid://7wwsh1das7jw"]
+
+[sub_resource type="VisualShaderNodeColorConstant" id="VisualShaderNodeColorConstant_ti1bu"]
+constant = Color(0, 0, 1, 1)
+
+[sub_resource type="VisualShaderNodeCompare" id="VisualShaderNodeCompare_ti1bu"]
+default_input_values = [0, 0.0, 1, 0.0, 2, 0.01]
+
+[sub_resource type="VisualShaderNodeCompare" id="VisualShaderNodeCompare_2pck2"]
+default_input_values = [0, 0.0, 1, 0.167, 2, 1e-05]
+function = 4
+
+[sub_resource type="VisualShaderNodeCompare" id="VisualShaderNodeCompare_kmk8y"]
+default_input_values = [0, 0.0, 1, 0.5, 2, 1e-05]
+function = 4
+
+[sub_resource type="VisualShaderNodeCompare" id="VisualShaderNodeCompare_rxbgl"]
+default_input_values = [0, 0.0, 1, 0.333, 2, 1e-05]
+function = 4
+
+[sub_resource type="VisualShaderNodeColorConstant" id="VisualShaderNodeColorConstant_2pck2"]
+constant = Color(0, 0, 0, 1)
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_rxbgl"]
+expanded_output_ports = [0]
+input_name = "uv"
+
+[sub_resource type="VisualShaderNodeColorConstant" id="VisualShaderNodeColorConstant_mico4"]
+
+[resource]
+nodes/fragment/0/position = Vector2(1420, 100)
+nodes/fragment/2/node = SubResource("VisualShaderNodeColorConstant_2pck2")
+nodes/fragment/2/position = Vector2(560, 440)
+nodes/fragment/4/node = SubResource("VisualShaderNodeInput_rxbgl")
+nodes/fragment/4/position = Vector2(-80, -40)
+nodes/fragment/9/node = SubResource("VisualShaderNodeColorConstant_mico4")
+nodes/fragment/9/position = Vector2(540, 760)
+nodes/fragment/10/node = SubResource("VisualShaderNodeColorConstant_ti1bu")
+nodes/fragment/10/position = Vector2(560, 560)
+nodes/fragment/14/node = SubResource("VisualShaderNodeCompare_ti1bu")
+nodes/fragment/14/position = Vector2(160, 500)
+nodes/fragment/15/node = SubResource("VisualShaderNodeCompare_2pck2")
+nodes/fragment/15/position = Vector2(300, -80)
+nodes/fragment/16/node = SubResource("VisualShaderNodeCompare_kmk8y")
+nodes/fragment/16/position = Vector2(300, 140)
+nodes/fragment/17/node = SubResource("VisualShaderNodeCompare_rxbgl")
+nodes/fragment/17/position = Vector2(300, -280)
+nodes/fragment/connections = PackedInt32Array(4, 1, 15, 0, 4, 1, 17, 0, 4, 1, 16, 0)

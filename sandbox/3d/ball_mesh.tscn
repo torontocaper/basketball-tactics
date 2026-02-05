@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://6rkunx0ot741"]
+
+[ext_resource type="Shader" uid="uid://co5ih7r7o3jsk" path="res://sandbox/3d/ball_3d_code.gdshader" id="1_e8323"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_devt0"]
+render_priority = 0
+shader = ExtResource("1_e8323")
+shader_parameter/segments = 6
+
+[sub_resource type="SphereMesh" id="SphereMesh_n5tjo"]
+material = SubResource("ShaderMaterial_devt0")
+radius = 0.12
+height = 0.239
+
+[node name="BallMesh" type="MeshInstance3D" unique_id=2124208131]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("SphereMesh_n5tjo")

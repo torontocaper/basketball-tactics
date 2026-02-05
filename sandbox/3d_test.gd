@@ -20,7 +20,7 @@ func _ready() -> void:
 func _on_court_floor_input_event(_camera: Node, event: InputEvent, event_position: Vector3, _normal: Vector3, _shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.is_pressed():
 		print_debug("There's been an input event on the court at position %s" % event_position)
-		active_player.destination = event_position
+		active_player.destination = Vector3(event_position.x, 1.0, event_position.z)
 
 func on_player_turn_finished(player: Player3D) -> void:
 	print_debug("Turn over for %s" % player.player_name)

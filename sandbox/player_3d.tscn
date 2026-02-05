@@ -22,13 +22,23 @@ mesh = SubResource("CapsuleMesh_s2r0h")
 shape = SubResource("CapsuleShape3D_s2r0h")
 
 [node name="PlayerNavAgent" type="NavigationAgent3D" parent="." unique_id=1727149454]
+target_desired_distance = 0.5
 avoidance_enabled = true
 height = 2.0
 radius = 0.75
 debug_enabled = true
 
 [node name="PlayerLabel" type="Label3D" parent="." unique_id=708500666]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 1, 0)
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 1.25, 0)
+billboard = 1
 text = "PlayerName"
+font_size = 48
+
+[node name="ForwardRay" type="RayCast3D" parent="." unique_id=1377417399]
+target_position = Vector3(0, 0, -1)
+debug_shape_thickness = 5
+
+[node name="Hands" type="Marker3D" parent="." unique_id=179522592]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -0.7)
 
 [connection signal="velocity_computed" from="PlayerNavAgent" to="." method="_on_player_nav_agent_velocity_computed"]

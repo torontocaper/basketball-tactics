@@ -4,6 +4,8 @@
 [ext_resource type="PackedScene" uid="uid://qrqfm5sgh0gd" path="res://sandbox/player_3d.tscn" id="3_ghsjx"]
 [ext_resource type="Shader" uid="uid://cpyljydfnj4ug" path="res://sandbox/asphalt.tres" id="3_qxmrs"]
 [ext_resource type="Texture2D" uid="uid://gosw77tlyk0s" path="res://icon.svg" id="4_ghsjx"]
+[ext_resource type="PackedScene" uid="uid://dbtsdrruobqof" path="res://sandbox/3d/ball_3d.tscn" id="5_ddvuc"]
+[ext_resource type="PackedScene" uid="uid://d04p5dc2jaujf" path="res://sandbox/3d/hoop_3d.tscn" id="6_ruxy6"]
 
 [sub_resource type="Gradient" id="Gradient_qxmrs"]
 interpolation_mode = 1
@@ -61,20 +63,54 @@ script = ExtResource("1_ghsjx")
 environment = SubResource("Environment_ddvuc")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1283979636]
-transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 0, 6, 6)
+transform = Transform3D(0.9659258, -0.12940952, 0.22414386, 0, 0.8660254, 0.5, -0.25881904, -0.4829629, 0.83651626, 3, 5, 8)
 
-[node name="Lights" type="Node" parent="." unique_id=1189427998]
+[node name="SpotLights" type="Node3D" parent="." unique_id=1549924039]
+visible = false
 
-[node name="SpotLight3D" type="SpotLight3D" parent="Lights" unique_id=426949253]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 5, 0)
+[node name="SpotLight3D" type="SpotLight3D" parent="SpotLights" unique_id=426949253]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 6, 0)
 light_energy = 10.0
 shadow_enabled = true
 spot_range = 8.0
-spot_angle = 48.56
-spot_angle_attenuation = 0.8122515
+spot_angle = 85.04
+spot_angle_attenuation = 0.9330372
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="SpotLights" unique_id=492445117]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -4, 6, -4)
+light_energy = 10.0
+shadow_enabled = true
+spot_range = 8.0
+spot_angle = 85.04
+spot_angle_attenuation = 0.9330372
+
+[node name="SpotLight3D3" type="SpotLight3D" parent="SpotLights" unique_id=1743194697]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 4, 6, -4)
+light_energy = 10.0
+shadow_enabled = true
+spot_range = 8.0
+spot_angle = 85.04
+spot_angle_attenuation = 0.9330372
+
+[node name="SpotLight3D4" type="SpotLight3D" parent="SpotLights" unique_id=1531286136]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 4, 6, 4)
+light_energy = 10.0
+shadow_enabled = true
+spot_range = 8.0
+spot_angle = 85.04
+spot_angle_attenuation = 0.9330372
+
+[node name="SpotLight3D5" type="SpotLight3D" parent="SpotLights" unique_id=813579704]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -4, 6, 4)
+light_energy = 10.0
+shadow_enabled = true
+spot_range = 8.0
+spot_angle = 85.04
+spot_angle_attenuation = 0.9330372
 
 [node name="CourtFloor" type="StaticBody3D" parent="." unique_id=176516575]
 collision_layer = 2
+collision_mask = 5
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="CourtFloor" unique_id=1312972967]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
@@ -92,20 +128,61 @@ texture_albedo = ExtResource("4_ghsjx")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 shape = SubResource("BoxShape3D_qxmrs")
 
-[node name="Kirt" parent="." unique_id=74101545 groups=["players"] instance=ExtResource("3_ghsjx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 1, 0)
+[node name="Players" type="Node" parent="." unique_id=894706224]
+
+[node name="Kirt" parent="Players" unique_id=74101545 node_paths=PackedStringArray("target_hoop") groups=["players"] instance=ExtResource("3_ghsjx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.873401, 1, -4.1204686)
 player_name = "Kirt"
+target_hoop = NodePath("../../Hoop3D")
 
-[node name="Greg" parent="." unique_id=1125666517 groups=["players"] instance=ExtResource("3_ghsjx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 1, 0)
+[node name="Greg" parent="Players" unique_id=1125666517 node_paths=PackedStringArray("target_hoop") groups=["players"] instance=ExtResource("3_ghsjx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5648746, 1, 4.1166353)
 player_name = "Greg"
+speed = 4.0
+target_hoop = NodePath("../../Hoop3D")
 
-[node name="Stevie" parent="." unique_id=1267782655 groups=["players"] instance=ExtResource("3_ghsjx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 3)
+[node name="Stevie" parent="Players" unique_id=1267782655 node_paths=PackedStringArray("target_hoop") groups=["players"] instance=ExtResource("3_ghsjx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.8906403, 1, 3.053052)
 player_name = "Stevie"
+speed = 10.0
+target_hoop = NodePath("../../Hoop3D")
 
-[node name="Cheryl" parent="." unique_id=853092095 groups=["players"] instance=ExtResource("3_ghsjx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -3)
+[node name="Cheryl" parent="Players" unique_id=853092095 node_paths=PackedStringArray("target_hoop") groups=["players"] instance=ExtResource("3_ghsjx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.6574874, 1, -3)
 player_name = "Cheryl"
+speed = 7.0
+target_hoop = NodePath("../../Hoop3D")
+
+[node name="Ball3D" parent="." unique_id=1804621623 instance=ExtResource("5_ddvuc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2238794, 1.7481232, -1.921671)
+
+[node name="Hoop3D" parent="." unique_id=715531421 instance=ExtResource("6_ruxy6")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 3.0468822, -6)
+
+[node name="OmniLights" type="Node3D" parent="." unique_id=429076332]
+
+[node name="OmniLight3D" type="OmniLight3D" parent="OmniLights" unique_id=516782224]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 5, 5)
+light_color = Color(1, 1, 0.87058824, 1)
+light_energy = 8.0
+omni_range = 10.0
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="OmniLights" unique_id=1445468412]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 5, -5)
+light_color = Color(1, 1, 0.87058824, 1)
+light_energy = 8.0
+omni_range = 10.0
+
+[node name="OmniLight3D3" type="OmniLight3D" parent="OmniLights" unique_id=1794633855]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -5, 5, 5)
+light_color = Color(1, 1, 0.87058824, 1)
+light_energy = 8.0
+omni_range = 10.0
+
+[node name="OmniLight3D4" type="OmniLight3D" parent="OmniLights" unique_id=2119667587]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 5, 5, -5)
+light_color = Color(1, 1, 0.87058824, 1)
+light_energy = 8.0
+omni_range = 10.0
 
 [connection signal="input_event" from="CourtFloor" to="." method="_on_court_floor_input_event"]
