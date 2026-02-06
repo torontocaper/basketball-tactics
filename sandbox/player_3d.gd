@@ -6,22 +6,36 @@ signal turn_finished(player: Player3D)
 const BALL_3D = preload("uid://dbtsdrruobqof")
 
 @export var player_name: String
+@export_range(0.0, 99.0, 1.0, "prefer_slider") var player_number: int
 @export var speed: float = 5.0
 @export var shot_boost: float = 1.0
 @export var target_hoop: Hoop3D
 @export var shot_angle: float = 70.0
 
+var hoop_direction: Vector3
+var hoop_distance: float
+var hoop_coords: Vector3
+var hoop_position: Vector3
 var is_active_player: bool: set = set_active
 var min_max_range: float = 5.0
 var destination: Vector3: set = set_destination
 
 @onready var hands: Marker3D = $Hands
+@onready var number_label: Label3D = $NumberLabel
 @onready var player_label: Label3D = $PlayerLabel
 @onready var player_nav_agent: NavigationAgent3D = $PlayerNavAgent
 
 func _ready() -> void:
+	hoop_position = target_hoop.global_position
+	print_debug("hoop positioned at %s" % hoop_position)
+	hoop_coords = Vector3(hoop_position.x, 1.0, hoop_position.z)
+	print_debug("so its floor coords are %s" % hoop_coords)
+	hoop_direction = position.direction_to(hoop_position)
+	print_debug("and the direction from %s to the hoop is %s" % [player_name, hoop_direction])
+
 	is_active_player = false
 	player_label.text = player_name
+	number_label.text = str(player_number)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_accept"):
@@ -32,6 +46,10 @@ func _unhandled_input(event: InputEvent) -> void:
 		shoot()
 
 func _physics_process(_delta: float) -> void:
+	look_at(hoop_coords)
+	hoop_direction = position.direction_to(hoop_position)
+	hoop_distance = position.distance_to(hoop_coords)
+	#hoop_ray.target_position = hoop_direction
 	var intended_velocity = position.direction_to(player_nav_agent.get_next_path_position()) * speed
 	player_nav_agent.set_velocity(intended_velocity)
 
@@ -59,13 +77,17 @@ func set_destination(new_destination: Vector3) -> void:
 	player_nav_agent.target_position = destination
 
 func shoot() -> void:
-	var hoop_position = target_hoop.position
-	var hoop_direction = position.direction_to(hoop_position)
-	var shot_direction = hoop_direction.rotated(Vector3.RIGHT, deg_to_rad(shot_angle))
-	look_at(Vector3(hoop_position.x, 1.0, hoop_position.z))
-	print_debug("%s will attempt a shot in the following direction: %s" % [player_name, hoop_direction])
+	var shot_direction = Vector3.FORWARD.rotated(Vector3.RIGHT, deg_to_rad(shot_angle))
+	#look_at(Vector3(hoop_position.x, 1.0, hoop_position.z))
+	print_debug("%s will attempt a shot in the following direction: %s" % [player_name, shot_direction])
 	var ball:= BALL_3D.instantiate()
 	ball.position = hands.global_position
 	get_tree().current_scene.add_child(ball)
-	ball.apply_torque_impulse(Vector3.BACK)
-	ball.apply_central_impulse(shot_direction * position.distance_to(hoop_position))
+	#ball.apply_torque_impulse(Vector3.BACK)
+	ball.apply_central_impulse(shot_direction * randf_range(1.5, 1.8) * position.distance_to(hoop_position))
+
+
+func _on_player_nav_agent_target_reached() -> void:
+	print_debug("made it to the target!\ndestination: %s\nglobal position = %s\nposition = %s" % [destination, global_position, position])
+	print_debug("the direction from %s to the hoop is now %s and the distance is %s" % [player_name, hoop_direction, hoop_distance])
+	

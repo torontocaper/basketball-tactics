@@ -1,0 +1,11 @@
+[gd_resource type="VisualShader" format=3 uid="uid://bwfuvijvycm21"]
+
+[ext_resource type="Texture2D" uid="uid://dapwoxr04ivox" path="res://assets/textures/court/3d/red brick/red_brick_diff_4k.png" id="1_kgv41"]
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_wmnv5"]
+texture = ExtResource("1_kgv41")
+
+[resource]
+nodes/fragment/2/node = SubResource("VisualShaderNodeTexture_wmnv5")
+nodes/fragment/2/position = Vector2(0, 160)
+nodes/fragment/connections = PackedInt32Array(2, 0, 0, 0)

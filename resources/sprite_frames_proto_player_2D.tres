@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=163 format=3 uid="uid://tcuosace2do8"]
+[gd_resource type="SpriteFrames" format=3 uid="uid://tcuosace2do8"]
 
 [ext_resource type="Texture2D" uid="uid://cyl0mctxlougq" path="res://assets/textures/characters/template/idle full sprite sheet (transparent BG)-teal-purple.png" id="1_umkdu"]
 [ext_resource type="Texture2D" uid="uid://befwbbg0h02e7" path="res://assets/textures/characters/template/run complete sprite sheet (transparent BG)-teal-purple.png" id="2_umkdu"]
