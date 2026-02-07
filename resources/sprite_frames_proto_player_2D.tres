@@ -1,7 +1,7 @@
 [gd_resource type="SpriteFrames" format=3 uid="uid://tcuosace2do8"]
 
-[ext_resource type="Texture2D" uid="uid://cyl0mctxlougq" path="res://assets/textures/characters/template/idle full sprite sheet (transparent BG)-teal-purple.png" id="1_umkdu"]
-[ext_resource type="Texture2D" uid="uid://befwbbg0h02e7" path="res://assets/textures/characters/template/run complete sprite sheet (transparent BG)-teal-purple.png" id="2_umkdu"]
+[ext_resource type="Texture2D" uid="uid://cyl0mctxlougq" path="res://assets/textures/characters/2d/template/idle full sprite sheet (transparent BG)-teal-purple.png" id="1_umkdu"]
+[ext_resource type="Texture2D" uid="uid://befwbbg0h02e7" path="res://assets/textures/characters/2d/template/run complete sprite sheet (transparent BG)-teal-purple.png" id="2_umkdu"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_odxwe"]
 atlas = ExtResource("1_umkdu")

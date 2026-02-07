@@ -1,14 +1,14 @@
 [gd_resource type="TileSet" format=3 uid="uid://1pg00ognuafd"]
 
-[ext_resource type="Texture2D" uid="uid://h1v6gm781pg0" path="res://assets/textures/court/parquet-iso-1.png" id="1_5s8bd"]
-[ext_resource type="Texture2D" uid="uid://c2apn41vwi5xx" path="res://assets/textures/court/parquet-new-2a.png" id="2_60n3l"]
-[ext_resource type="Texture2D" uid="uid://cuga5hpnq8r3c" path="res://assets/textures/court/parquet-new-2b.png" id="3_jq12f"]
-[ext_resource type="Texture2D" uid="uid://dnjraiwunnrd6" path="res://assets/textures/court/parquet-new-3.png" id="4_jq12f"]
-[ext_resource type="Texture2D" uid="uid://ccdfyjljhm5o4" path="res://assets/textures/court/parquet-new-1.png" id="5_b010i"]
-[ext_resource type="Texture2D" uid="uid://dcty4wyq3merg" path="res://assets/textures/court/parquet-new-3a.png" id="5_oy55w"]
-[ext_resource type="Texture2D" uid="uid://c5ufq2xwr4gxo" path="res://assets/textures/court/parquet-iso-7.png" id="7_60n3l"]
-[ext_resource type="Texture2D" uid="uid://ci0tjgs6osl50" path="res://assets/textures/court/parquet-iso-7-1.png" id="8_jq12f"]
-[ext_resource type="Texture2D" uid="uid://c06lv1mui8xi0" path="res://assets/textures/court/parquet-iso-7-2.png" id="9_oy55w"]
+[ext_resource type="Texture2D" uid="uid://h1v6gm781pg0" path="res://assets/textures/court/2d/parquet-iso-1.png" id="1_5s8bd"]
+[ext_resource type="Texture2D" uid="uid://c2apn41vwi5xx" path="res://assets/textures/court/2d/parquet-new-2a.png" id="2_60n3l"]
+[ext_resource type="Texture2D" uid="uid://cuga5hpnq8r3c" path="res://assets/textures/court/2d/parquet-new-2b.png" id="3_jq12f"]
+[ext_resource type="Texture2D" uid="uid://dnjraiwunnrd6" path="res://assets/textures/court/2d/parquet-new-3.png" id="4_jq12f"]
+[ext_resource type="Texture2D" uid="uid://ccdfyjljhm5o4" path="res://assets/textures/court/2d/parquet-new-1.png" id="5_b010i"]
+[ext_resource type="Texture2D" uid="uid://dcty4wyq3merg" path="res://assets/textures/court/2d/parquet-new-3a.png" id="5_oy55w"]
+[ext_resource type="Texture2D" uid="uid://c5ufq2xwr4gxo" path="res://assets/textures/court/2d/parquet-iso-7.png" id="7_60n3l"]
+[ext_resource type="Texture2D" uid="uid://ci0tjgs6osl50" path="res://assets/textures/court/2d/parquet-iso-7-1.png" id="8_jq12f"]
+[ext_resource type="Texture2D" uid="uid://c06lv1mui8xi0" path="res://assets/textures/court/2d/parquet-iso-7-2.png" id="9_oy55w"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yacg5"]
 texture = ExtResource("1_5s8bd")

@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://djpuhks8uxo7j"]
+
+[ext_resource type="Script" uid="uid://ukkptieccr6e" path="res://sandbox/ui/debug_field.gd" id="1_dgsm7"]
+
+[node name="DebugField" type="HBoxContainer" unique_id=1733839310]
+script = ExtResource("1_dgsm7")
+
+[node name="VariableLabel" type="Label" parent="." unique_id=2055001550]
+layout_mode = 2
+text = "VariableName: "
+
+[node name="ValueLabel" type="Label" parent="." unique_id=30579724]
+layout_mode = 2
+text = "VariableValue"

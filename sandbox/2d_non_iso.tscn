@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://biyp5n4l30oiy"]
 
-[ext_resource type="Texture2D" uid="uid://5dlahhh62may" path="res://assets/textures/court/3d/diagonal_parquet_diff_4k.jpg" id="1_k8abt"]
+[ext_resource type="Texture2D" uid="uid://5dlahhh62may" path="res://assets/textures/court/3d/diagonal_parquet/diagonal_parquet_diff_4k.jpg" id="1_k8abt"]
 
 [node name="2DNonIso" type="Node2D" unique_id=217428403]
 
