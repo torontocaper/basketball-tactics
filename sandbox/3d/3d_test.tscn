@@ -10,6 +10,8 @@
 [ext_resource type="PackedScene" uid="uid://d04p5dc2jaujf" path="res://sandbox/3d/hoop_3d.tscn" id="6_ruxy6"]
 [ext_resource type="Texture2D" uid="uid://c3i5iutfrxwd5" path="res://assets/textures/court/3d/red brick/red_brick_arm_4k.png" id="6_sn5qn"]
 [ext_resource type="Script" uid="uid://by7p25jwtgmcb" path="res://sandbox/projector.gd" id="10_sn5qn"]
+[ext_resource type="PackedScene" uid="uid://c32u3rvpsra5t" path="res://sandbox/ui/debug_container.tscn" id="12_an86x"]
+[ext_resource type="PackedScene" uid="uid://cr2ly0br15iad" path="res://sandbox/ui/debug_object.tscn" id="13_nqkdu"]
 
 [sub_resource type="Gradient" id="Gradient_qxmrs"]
 interpolation_mode = 1
@@ -83,7 +85,7 @@ size = Vector3(15, 4, 1)
 
 [node name="3DTest" type="Node3D" unique_id=944697696 node_paths=PackedStringArray("game_ball", "main_hoop")]
 script = ExtResource("1_ghsjx")
-game_ball = NodePath("Court/GameBall")
+game_ball = NodePath("GameBall")
 main_hoop = NodePath("Court/MainHoop")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1740805499]
@@ -114,15 +116,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 mesh = SubResource("BoxMesh_ddvuc")
 skeleton = NodePath("../../..")
 
-[node name="Decal" type="Decal" parent="Court/CourtFloor/AsphaltCourtMesh" unique_id=1676700976]
-visible = false
-texture_albedo = ExtResource("4_ghsjx")
-
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Court/CourtFloor" unique_id=390082587]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 shape = SubResource("BoxShape3D_qxmrs")
 
 [node name="Walls" type="Node3D" parent="Court" unique_id=1538033207]
+metadata/_edit_group_ = true
 
 [node name="Wall" type="StaticBody3D" parent="Court/Walls" unique_id=362417465]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -8, 2, -3.496911e-07)
@@ -202,6 +201,7 @@ mesh = SubResource("BoxMesh_ruxy6")
 shape = SubResource("BoxShape3D_ruxy6")
 
 [node name="Lights" type="Node3D" parent="Court" unique_id=429076332]
+metadata/_edit_group_ = true
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Court/Lights" unique_id=516782224]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 5, 5)
@@ -239,7 +239,16 @@ script = ExtResource("10_sn5qn")
 [node name="MainHoop" parent="Court" unique_id=715531421 instance=ExtResource("6_ruxy6")]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 3.0468822, -6)
 
-[node name="GameBall" parent="Court" unique_id=1804621623 instance=ExtResource("5_ddvuc")]
+[node name="GameBall" parent="." unique_id=1804621623 instance=ExtResource("5_ddvuc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.120000005, 0)
+
+[node name="DebugLayer" type="CanvasLayer" parent="." unique_id=586779870]
+
+[node name="DebugContainer" parent="DebugLayer" unique_id=1198205366 instance=ExtResource("12_an86x")]
+
+[node name="DebugObject" parent="DebugLayer/DebugContainer" unique_id=572981370 node_paths=PackedStringArray("target_object") instance=ExtResource("13_nqkdu")]
+layout_mode = 2
+target_object = NodePath("../../../GameBall")
+target_variables = Array[StringName]([&"position", &"global_position"])
 
 [connection signal="input_event" from="Court/CourtFloor" to="." method="_on_court_floor_input_event"]

@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://dw1yehsm8wml6" path="res://sandbox/player_3d.gd" id="1_wnxhv"]
 [ext_resource type="Texture2D" uid="uid://gosw77tlyk0s" path="res://icon.svg" id="2_jmdsf"]
-[ext_resource type="PackedScene" uid="uid://bnsdlwqyimg4l" path="res://sandbox/ui/debug_layer.tscn" id="3_jvxmu"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_s2r0h"]
 radius = 0.25
@@ -35,9 +34,6 @@ avoidance_enabled = true
 height = 2.0
 radius = 0.75
 debug_enabled = true
-
-[node name="Hands" type="Marker3D" parent="." unique_id=179522592]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -0.7)
 
 [node name="PlayerMesh" type="MeshInstance3D" parent="." unique_id=2104086879]
 transform = Transform3D(1.286329, 0, 0, 0, 1.087256, 0, 0, 0, 1.1028918, -0.007880688, -0.18800414, 0)
@@ -74,9 +70,8 @@ collision_mask = 13
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerReach" unique_id=947956972]
 shape = SubResource("CylinderShape3D_jmdsf")
 
-[node name="PlayerDebug" parent="." unique_id=966208014 node_paths=PackedStringArray("target") instance=ExtResource("3_jvxmu")]
-target = NodePath("..")
-variables_to_track = Array[String](["player_name", "player_number", "can_grab_ball", "has_ball", "hoop_direction", "ball_direction", "basis"])
+[node name="PlayerHands" type="RemoteTransform3D" parent="." unique_id=1490925190]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -1)
 
 [connection signal="target_reached" from="PlayerNavAgent" to="." method="_on_player_nav_agent_target_reached"]
 [connection signal="velocity_computed" from="PlayerNavAgent" to="." method="_on_player_nav_agent_velocity_computed"]

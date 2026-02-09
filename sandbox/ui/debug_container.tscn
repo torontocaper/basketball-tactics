@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://c32u3rvpsra5t"]
+
+[node name="DebugContainer" type="VBoxContainer" unique_id=1198205366]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="." unique_id=610209430]
+layout_mode = 2
+text = "DEBUG INFO"

@@ -2,7 +2,7 @@ class_name DebugField
 extends HBoxContainer
 
 var target_node: Node
-var variable_name: String
+var variable_name: StringName
 
 @onready var variable_label: Label = $VariableLabel
 @onready var value_label: Label = $ValueLabel
