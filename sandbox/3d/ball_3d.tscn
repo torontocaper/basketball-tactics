@@ -7,6 +7,7 @@
 bounce = 0.79
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_7aswn"]
+margin = 0.302
 radius = 0.12
 
 [node name="Ball3D" type="RigidBody3D" unique_id=1804621623]
@@ -14,6 +15,7 @@ collision_layer = 4
 collision_mask = 15
 mass = 0.6
 physics_material_override = SubResource("PhysicsMaterial_devt0")
+continuous_cd = true
 script = ExtResource("1_devt0")
 
 [node name="BallMesh" parent="." unique_id=2124208131 instance=ExtResource("1_7aswn")]
@@ -21,3 +23,8 @@ script = ExtResource("1_devt0")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1209431501]
 transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0, 0)
 shape = SubResource("SphereShape3D_7aswn")
+
+[node name="RayCast3D" type="RayCast3D" parent="." unique_id=1888591075]
+target_position = Vector3(0, 0, -0.5)
+collision_mask = 0
+collide_with_bodies = false

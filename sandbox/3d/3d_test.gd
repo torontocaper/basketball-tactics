@@ -16,11 +16,6 @@ func _ready() -> void:
 	active_player = players[0]
 	print_debug("Making %s active" % active_player.player_name)
 	active_player.is_active_player = true
-		#if player != active_player:
-			#print_debug("Making %s inactive" % player.player_name)
-			#player.is_active_player = false
-		#else:
-			#player.is_active_player = true
 
 func _on_court_floor_input_event(_camera: Node, event: InputEvent, event_position: Vector3, _normal: Vector3, _shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.is_pressed():
