@@ -1,0 +1,463 @@
+[gd_scene format=3 uid="uid://b6am46kegw2x3"]
+
+[ext_resource type="Texture2D" uid="uid://651w441pfvby" path="res://assets/wood_floor_054_1k/WoodFloor054_1K-PNG_Color.png" id="1_34bgr"]
+[ext_resource type="Texture2D" uid="uid://ceikwnbuyl20y" path="res://assets/wood_floor_054_1k/WoodFloor054_1K-PNG_Roughness.png" id="2_esun2"]
+[ext_resource type="Texture2D" uid="uid://cwj6ul5bcr5v0" path="res://assets/wood_floor_054_1k/WoodFloor054_1K-PNG_AmbientOcclusion.png" id="2_gm3gy"]
+[ext_resource type="Texture2D" uid="uid://c7ge0j7koqm4" path="res://assets/wood_floor_054_1k/WoodFloor054_1K-PNG_Displacement.png" id="3_ajfhb"]
+[ext_resource type="Texture2D" uid="uid://bjamjei5d6hep" path="res://assets/wood_floor_054_1k/WoodFloor054_1K-PNG_NormalGL.png" id="4_awctn"]
+[ext_resource type="PackedScene" uid="uid://d04p5dc2jaujf" path="res://props/hoop_3d.tscn" id="6_ajfhb"]
+[ext_resource type="Texture2D" uid="uid://dijki3fgkldjg" path="res://assets/icons/godot_icon_blue.png" id="7_kek77"]
+[ext_resource type="Texture2D" uid="uid://cbov7ehm1nda7" path="res://assets/icons/godot_icon_red.png" id="8_4c57u"]
+[ext_resource type="Texture2D" uid="uid://cqiyjwtonr210" path="res://assets/icons/generic_button.svg" id="8_dp8c5"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yo73x"]
+albedo_texture = ExtResource("1_34bgr")
+roughness_texture = ExtResource("2_esun2")
+normal_enabled = true
+normal_texture = ExtResource("4_awctn")
+ao_enabled = true
+ao_texture = ExtResource("2_gm3gy")
+heightmap_enabled = true
+heightmap_scale = 1.0
+heightmap_texture = ExtResource("3_ajfhb")
+uv1_scale = Vector3(10, 10, 10)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_gm3gy"]
+material = SubResource("StandardMaterial3D_yo73x")
+size = Vector2(15, 14)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_awctn"]
+albedo_color = Color(0.5294118, 0.80784315, 0.92156863, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_awctn"]
+material = SubResource("StandardMaterial3D_awctn")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ajfhb"]
+albedo_color = Color(0.54509807, 0, 0, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_ajfhb"]
+material = SubResource("StandardMaterial3D_ajfhb")
+
+[sub_resource type="Gradient" id="Gradient_ajfhb"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0.16458334, 0.70625, 0.95208335)
+colors = PackedColorArray(1, 1, 1, 0, 0.54509807, 0, 0, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_awctn"]
+gradient = SubResource("Gradient_ajfhb")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.83760685, 0.17094018)
+
+[node name="Main" type="Node3D" unique_id=1895450294]
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1838876297]
+transform = Transform3D(-0.7071068, 0.35355338, -0.61237246, 0, 0.8660254, 0.50000006, 0.7071068, 0.35355338, -0.61237246, -9.732203, 8.716542, -10.150972)
+projection = 1
+current = true
+fov = 37.849285
+size = 15.0
+near = 5.0
+far = 35.0
+
+[node name="Environment" type="Node3D" parent="." unique_id=1596413638]
+
+[node name="FloorMesh" type="MeshInstance3D" parent="Environment" unique_id=1461156370]
+mesh = SubResource("PlaneMesh_gm3gy")
+
+[node name="Hoop3D" parent="Environment" unique_id=715531421 instance=ExtResource("6_ajfhb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 5)
+
+[node name="PoleMesh" type="CSGCombiner3D" parent="." unique_id=1340203982]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 6)
+
+[node name="PoleMeshY" type="CSGCylinder3D" parent="PoleMesh" unique_id=763674034]
+radius = 0.1
+height = 3.5
+
+[node name="PoleMeshZ" type="CSGCylinder3D" parent="PoleMesh" unique_id=1653163016]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 1.5842357, -0.27583933)
+radius = 0.1
+height = 0.64501953
+
+[node name="BlueTeam" type="Node" parent="." unique_id=117197952]
+
+[node name="PlayerBlue" type="CharacterBody3D" parent="BlueTeam" unique_id=1655715580]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.4131851, 1, 1.2943554)
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="BlueTeam/PlayerBlue" unique_id=2122282676]
+mesh = SubResource("CapsuleMesh_awctn")
+
+[node name="PlayerBlue2" type="CharacterBody3D" parent="BlueTeam" unique_id=684557659]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="BlueTeam/PlayerBlue2" unique_id=780626129]
+mesh = SubResource("CapsuleMesh_awctn")
+
+[node name="PlayerBlue3" type="CharacterBody3D" parent="BlueTeam" unique_id=160436777]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.2704864, 1, 2.9144611)
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="BlueTeam/PlayerBlue3" unique_id=53977671]
+mesh = SubResource("CapsuleMesh_awctn")
+
+[node name="RedTeam" type="Node" parent="." unique_id=2064199212]
+
+[node name="PlayerRed" type="CharacterBody3D" parent="RedTeam" unique_id=284324423]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.2937536, 1, -1.738388)
+metadata/_edit_group_ = true
+
+[node name="NameLabel" type="Label3D" parent="RedTeam/PlayerRed" unique_id=1213463578]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+billboard = 1
+text = "Red 1"
+font_size = 64
+
+[node name="PlayerMesh" type="MeshInstance3D" parent="RedTeam/PlayerRed" unique_id=924111893]
+mesh = SubResource("CapsuleMesh_ajfhb")
+
+[node name="ActiveDecal" type="Decal" parent="RedTeam/PlayerRed" unique_id=767603412]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+size = Vector3(2, 0.1, 2)
+texture_albedo = SubResource("GradientTexture2D_awctn")
+
+[node name="PlayerRed2" type="CharacterBody3D" parent="RedTeam" unique_id=632664336]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.17807293, 1, -2.7750006)
+metadata/_edit_group_ = true
+
+[node name="PlayerMesh" type="MeshInstance3D" parent="RedTeam/PlayerRed2" unique_id=419118815]
+mesh = SubResource("CapsuleMesh_ajfhb")
+
+[node name="NameLabel2" type="Label3D" parent="RedTeam/PlayerRed2" unique_id=1994503762]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+transparency = 0.5
+billboard = 1
+text = "Red 2"
+font_size = 64
+
+[node name="PlayerRed3" type="CharacterBody3D" parent="RedTeam" unique_id=762520351]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1, 0)
+metadata/_edit_group_ = true
+
+[node name="PlayerMesh" type="MeshInstance3D" parent="RedTeam/PlayerRed3" unique_id=1135443659]
+mesh = SubResource("CapsuleMesh_ajfhb")
+
+[node name="NameLabel3" type="Label3D" parent="RedTeam/PlayerRed3" unique_id=1136007983]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+transparency = 0.5
+billboard = 1
+text = "Red 3"
+font_size = 64
+
+[node name="Lights" type="Node" parent="." unique_id=603459971]
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Lights" unique_id=61285682]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 6.507513, 0)
+light_energy = 10.0
+shadow_enabled = true
+spot_range = 10.0
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="Lights" unique_id=1407821253]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 6.507513, -5)
+light_energy = 10.0
+shadow_enabled = true
+spot_range = 10.0
+
+[node name="SpotLight3D3" type="SpotLight3D" parent="Lights" unique_id=1792290905]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -5, 6.507513, -5)
+light_energy = 10.0
+shadow_enabled = true
+spot_range = 10.0
+
+[node name="SpotLight3D4" type="SpotLight3D" parent="Lights" unique_id=1854838436]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -5, 6.507513, 0)
+light_energy = 10.0
+shadow_enabled = true
+spot_range = 10.0
+
+[node name="SpotLight3D5" type="SpotLight3D" parent="Lights" unique_id=1927744036]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -5, 6.507513, 5)
+light_energy = 10.0
+shadow_enabled = true
+spot_range = 10.0
+
+[node name="SpotLight3D6" type="SpotLight3D" parent="Lights" unique_id=1600823184]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 6.507513, 5)
+light_energy = 10.0
+shadow_enabled = true
+spot_range = 10.0
+
+[node name="SpotLight3D7" type="SpotLight3D" parent="Lights" unique_id=1818789897]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 5, 6.507513, 5)
+light_energy = 10.0
+shadow_enabled = true
+spot_range = 10.0
+
+[node name="SpotLight3D8" type="SpotLight3D" parent="Lights" unique_id=154258935]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 5, 6.507513, 0)
+light_energy = 10.0
+shadow_enabled = true
+spot_range = 10.0
+
+[node name="SpotLight3D9" type="SpotLight3D" parent="Lights" unique_id=118021410]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 5, 6.507513, -5)
+light_energy = 10.0
+shadow_enabled = true
+spot_range = 10.0
+
+[node name="UILayer" type="CanvasLayer" parent="." unique_id=2097805439]
+
+[node name="TeamLabel1" type="Label" parent="UILayer" unique_id=453171174]
+offset_left = 1699.0
+offset_top = 16.0
+offset_right = 1758.0
+offset_bottom = 61.0
+theme_override_font_sizes/font_size = 32
+text = "Red"
+
+[node name="TeamLabel2" type="Label" parent="UILayer" unique_id=892923294]
+offset_left = 1694.0
+offset_top = 68.0
+offset_right = 1763.0
+offset_bottom = 113.0
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 32
+text = "Blue"
+
+[node name="TeamScore1" type="Label" parent="UILayer" unique_id=551576547]
+offset_left = 1775.0
+offset_top = 19.0
+offset_right = 1812.0
+offset_bottom = 64.0
+theme_override_font_sizes/font_size = 32
+text = "07"
+
+[node name="TeamScore2" type="Label" parent="UILayer" unique_id=683549508]
+offset_left = 1774.0
+offset_top = 69.0
+offset_right = 1811.0
+offset_bottom = 114.0
+theme_override_font_sizes/font_size = 32
+text = "10"
+
+[node name="ActivePlayer" type="Control" parent="UILayer" unique_id=579450738]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ActivePlayerTitle" type="Label" parent="UILayer/ActivePlayer" unique_id=636858216]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 857.0
+offset_right = 140.0
+offset_bottom = 880.0
+text = "Active Player"
+
+[node name="ActivePlayerName" type="Label" parent="UILayer/ActivePlayer" unique_id=908872694]
+layout_mode = 0
+offset_left = 46.0
+offset_top = 1007.0
+offset_right = 132.0
+offset_bottom = 1052.0
+theme_override_font_sizes/font_size = 32
+text = "Red 1"
+
+[node name="ActivePlayerRangeLabel" type="Label" parent="UILayer/ActivePlayer" unique_id=585894433]
+layout_mode = 0
+offset_left = 185.0
+offset_top = 914.0
+offset_right = 368.0
+offset_bottom = 937.0
+text = "Movement range: 3.0 m"
+
+[node name="ActivePlayerEnergyLabel" type="Label" parent="UILayer/ActivePlayer" unique_id=1250186127]
+layout_mode = 0
+offset_left = 208.0
+offset_top = 943.0
+offset_right = 349.0
+offset_bottom = 966.0
+text = "Energy level: Tired"
+
+[node name="ActivePlayerAvatar" type="TextureRect" parent="UILayer/ActivePlayer" unique_id=725692738]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 878.0
+offset_right = 152.0
+offset_bottom = 1006.0
+texture = ExtResource("8_4c57u")
+
+[node name="ActivePlayerStats" type="GridContainer" parent="UILayer/ActivePlayer" unique_id=1504126426]
+layout_mode = 0
+offset_left = 180.0
+offset_top = 968.0
+offset_right = 374.0
+offset_bottom = 1022.0
+theme_override_constants/h_separation = 8
+theme_override_constants/v_separation = 8
+columns = 3
+
+[node name="ActivePlayerStatLabel" type="Label" parent="UILayer/ActivePlayer/ActivePlayerStats" unique_id=230025779]
+layout_mode = 2
+text = "CHA: 00"
+
+[node name="ActivePlayerStatLabel2" type="Label" parent="UILayer/ActivePlayer/ActivePlayerStats" unique_id=1585315111]
+layout_mode = 2
+text = "STR: 00"
+
+[node name="ActivePlayerStatLabel3" type="Label" parent="UILayer/ActivePlayer/ActivePlayerStats" unique_id=1465819984]
+layout_mode = 2
+text = "WIS: 00"
+
+[node name="ActivePlayerStatLabel4" type="Label" parent="UILayer/ActivePlayer/ActivePlayerStats" unique_id=400415507]
+layout_mode = 2
+text = "DEX: 00"
+
+[node name="ActivePlayerStatLabel5" type="Label" parent="UILayer/ActivePlayer/ActivePlayerStats" unique_id=1537470790]
+layout_mode = 2
+text = "INT: 00"
+
+[node name="ActivePlayerStatLabel6" type="Label" parent="UILayer/ActivePlayer/ActivePlayerStats" unique_id=1217162340]
+layout_mode = 2
+text = "CON: 00"
+
+[node name="ContextLabel" type="Label" parent="UILayer" unique_id=1045939920]
+offset_left = 167.0
+offset_top = 888.0
+offset_right = 402.0
+offset_bottom = 911.0
+text = "Offense | On-Ball | No Dribble"
+
+[node name="TurnLabel" type="Label" parent="UILayer" unique_id=394054184]
+offset_left = 1692.0
+offset_top = 114.0
+offset_right = 1810.0
+offset_bottom = 159.0
+theme_override_font_sizes/font_size = 32
+text = "Turn 15"
+
+[node name="TurnOrder" type="Control" parent="UILayer" unique_id=1802428414]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TurnOrderTitle" type="Label" parent="UILayer/TurnOrder" unique_id=291672845]
+layout_mode = 0
+offset_left = 871.0
+offset_top = 33.0
+offset_right = 1022.0
+offset_bottom = 56.0
+text = "Current Turn Order"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UILayer/TurnOrder" unique_id=1275052798]
+layout_mode = 0
+offset_left = 734.0
+offset_top = 64.0
+offset_right = 1554.0
+offset_bottom = 224.0
+scale = Vector2(0.5, 0.5)
+
+[node name="PlayerAvatar" type="TextureRect" parent="UILayer/TurnOrder/HBoxContainer" unique_id=33319150]
+modulate = Color(0.27058825, 0.27058825, 0.27058825, 1)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("7_kek77")
+
+[node name="PlayerAvatar2" type="TextureRect" parent="UILayer/TurnOrder/HBoxContainer" unique_id=266415128]
+modulate = Color(0.27022192, 0.27022192, 0.2702219, 1)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("8_4c57u")
+
+[node name="PlayerAvatar3" type="TextureRect" parent="UILayer/TurnOrder/HBoxContainer" unique_id=1457351444]
+custom_minimum_size = Vector2(160, 160)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("8_4c57u")
+
+[node name="PlayerAvatar4" type="TextureRect" parent="UILayer/TurnOrder/HBoxContainer" unique_id=598137715]
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("8_4c57u")
+
+[node name="PlayerAvatar5" type="TextureRect" parent="UILayer/TurnOrder/HBoxContainer" unique_id=1680949700]
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("7_kek77")
+
+[node name="PlayerAvatar6" type="TextureRect" parent="UILayer/TurnOrder/HBoxContainer" unique_id=272314460]
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("7_kek77")
+
+[node name="ActionContainer" type="HBoxContainer" parent="UILayer" unique_id=1988357726]
+offset_left = 566.0
+offset_top = 935.0
+offset_right = 1776.0
+offset_bottom = 1037.0
+theme_override_constants/separation = 64
+
+[node name="ShootContainer" type="HBoxContainer" parent="UILayer/ActionContainer" unique_id=1734348071]
+layout_mode = 2
+
+[node name="ShootButton" type="Button" parent="UILayer/ActionContainer/ShootContainer" unique_id=1927342479]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "SHOOT"
+icon = ExtResource("8_dp8c5")
+
+[node name="ShootInfo" type="Label" parent="UILayer/ActionContainer/ShootContainer" unique_id=463945022]
+layout_mode = 2
+text = "DC: 15
+Distance 3.5m | well-guarded"
+
+[node name="PassContainer" type="HBoxContainer" parent="UILayer/ActionContainer" unique_id=1282348881]
+layout_mode = 2
+
+[node name="PassButton" type="Button" parent="UILayer/ActionContainer/PassContainer" unique_id=1535290571]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "PASS"
+icon = ExtResource("8_dp8c5")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UILayer/ActionContainer/PassContainer" unique_id=1671610223]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UILayer/ActionContainer/PassContainer/VBoxContainer" unique_id=1095070644]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="UILayer/ActionContainer/PassContainer/VBoxContainer/HBoxContainer" unique_id=1553394475]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "RED 2"
+
+[node name="Label" type="Label" parent="UILayer/ActionContainer/PassContainer/VBoxContainer/HBoxContainer" unique_id=171655149]
+layout_mode = 2
+text = "DC: 10
+distance: 3.0 m | well-guarded"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="UILayer/ActionContainer/PassContainer/VBoxContainer" unique_id=1024146188]
+layout_mode = 2
+
+[node name="Button2" type="Button" parent="UILayer/ActionContainer/PassContainer/VBoxContainer/HBoxContainer2" unique_id=1660819045]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "RED 3"
+
+[node name="Label" type="Label" parent="UILayer/ActionContainer/PassContainer/VBoxContainer/HBoxContainer2" unique_id=477461679]
+layout_mode = 2
+text = "DC: 5
+distance: 2.0m | open"
+
+[node name="DribbleContainer" type="HBoxContainer" parent="UILayer/ActionContainer" unique_id=31165091]
+layout_mode = 2
+
+[node name="DribbleButton" type="Button" parent="UILayer/ActionContainer/DribbleContainer" unique_id=974297647]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+disabled = true
+text = "DRIBBLE"
+icon = ExtResource("8_dp8c5")
