@@ -31,3 +31,5 @@ A playground for new ideas. Messy, disorganized, prone to breakage.
 Where the main, stable game project lives. Other developers might call this `src`.
 
 Scenes and scripts that 'work' will be migrated here from `experiments`.
+
+(I'm not 100 per cent confident this is the right approach.)
