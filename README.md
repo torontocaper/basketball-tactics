@@ -16,20 +16,12 @@ Each full round of turns takes a second of real-life time.
 
 Alongside this document is `AGENTS.md`, which provides instructions for AI coding assistants. 
 
-There are three main sub-folders within the project:
+There are two main sub-folders within the project:
 
 ### Docs
 
 Contains the Game Design Document, screenshots, concept and reference art. 
 
-### Experiments
+### Godot
 
-A playground for new ideas. Messy, disorganized, prone to breakage. 
-
-### Main
-
-Where the main, stable game project lives. Other developers might call this `src`.
-
-Scenes and scripts that 'work' will be migrated here from `experiments`.
-
-(I'm not 100 per cent confident this is the right approach.)
+Where the game project lives.
