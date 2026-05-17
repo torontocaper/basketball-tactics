@@ -42,7 +42,7 @@ material = SubResource("StandardMaterial3D_ajfhb")
 [sub_resource type="Gradient" id="Gradient_ajfhb"]
 interpolation_mode = 1
 offsets = PackedFloat32Array(0.16458334, 0.70625, 0.95208335)
-colors = PackedColorArray(1, 1, 1, 0, 0.54509807, 0, 0, 1, 1, 1, 1, 0)
+colors = PackedColorArray(1, 1, 1, 0, 1, 0.84313726, 0, 1, 1, 1, 1, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_awctn"]
 gradient = SubResource("Gradient_ajfhb")
@@ -56,6 +56,7 @@ border_width_left = 4
 border_width_top = 4
 border_width_right = 4
 border_width_bottom = 4
+border_color = Color(1, 0.84313726, 0, 1)
 
 [node name="Main" type="Node3D" unique_id=1895450294]
 
@@ -153,6 +154,11 @@ metadata/_edit_group_ = true
 [node name="PlayerMesh" type="MeshInstance3D" parent="BlueTeam/Blue1" unique_id=2122282676]
 mesh = SubResource("CapsuleMesh_awctn")
 
+[node name="NameLabel" type="Label3D" parent="BlueTeam/Blue1" unique_id=460960553]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+billboard = 1
+text = "Blue 1"
+
 [node name="Blue2" type="CharacterBody3D" parent="BlueTeam" unique_id=684557659]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 metadata/_edit_group_ = true
@@ -200,7 +206,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 transparency = 0.5
 billboard = 1
 text = "Red 2"
-font_size = 64
 
 [node name="Red3" type="CharacterBody3D" parent="RedTeam" unique_id=762520351]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1, 0)
@@ -214,7 +219,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 transparency = 0.5
 billboard = 1
 text = "Red 3"
-font_size = 64
 
 [node name="UILayer" type="CanvasLayer" parent="." unique_id=2097805439]
 
@@ -243,7 +247,7 @@ size_flags_vertical = 0
 layout_mode = 2
 theme_override_fonts/font = ExtResource("9_efxa6")
 theme_override_font_sizes/font_size = 24
-text = "Turn Order"
+text = "Turn 15"
 horizontal_alignment = 1
 uppercase = true
 
@@ -300,63 +304,45 @@ layout_mode = 2
 texture = ExtResource("7_kek77")
 expand_mode = 1
 
-[node name="GameInfoPanel" type="PanelContainer" parent="UILayer/MarginContainer" unique_id=1076000873]
+[node name="ScoreboardPanelPanel" type="PanelContainer" parent="UILayer/MarginContainer" unique_id=1076000873]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UILayer/MarginContainer/GameInfoPanel" unique_id=741213612]
+[node name="HBoxContainer" type="HBoxContainer" parent="UILayer/MarginContainer/ScoreboardPanelPanel" unique_id=741213612]
 layout_mode = 2
 theme_override_constants/separation = 20
 alignment = 1
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="UILayer/MarginContainer/GameInfoPanel/HBoxContainer" unique_id=1663701960]
-layout_mode = 2
-alignment = 1
-
-[node name="TurnLabel" type="Label" parent="UILayer/MarginContainer/GameInfoPanel/HBoxContainer/VBoxContainer2" unique_id=394054184]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("7_4c57u")
-theme_override_font_sizes/font_size = 24
-text = "TURN"
-horizontal_alignment = 1
-
-[node name="TurnValue" type="Label" parent="UILayer/MarginContainer/GameInfoPanel/HBoxContainer/VBoxContainer2" unique_id=103685000]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("7_4c57u")
-theme_override_font_sizes/font_size = 24
-text = "15"
-horizontal_alignment = 1
-
-[node name="VBoxContainer" type="VBoxContainer" parent="UILayer/MarginContainer/GameInfoPanel/HBoxContainer" unique_id=471823219]
+[node name="VBoxContainer" type="VBoxContainer" parent="UILayer/MarginContainer/ScoreboardPanelPanel/HBoxContainer" unique_id=471823219]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UILayer/MarginContainer/GameInfoPanel/HBoxContainer/VBoxContainer" unique_id=1035185838]
+[node name="HBoxContainer" type="HBoxContainer" parent="UILayer/MarginContainer/ScoreboardPanelPanel/HBoxContainer/VBoxContainer" unique_id=1035185838]
 layout_mode = 2
 
-[node name="TeamLabel1" type="Label" parent="UILayer/MarginContainer/GameInfoPanel/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=453171174]
+[node name="TeamLabel1" type="Label" parent="UILayer/MarginContainer/ScoreboardPanelPanel/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=453171174]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("7_4c57u")
 theme_override_font_sizes/font_size = 32
 text = "RED"
 
-[node name="TeamScore1" type="Label" parent="UILayer/MarginContainer/GameInfoPanel/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=551576547]
+[node name="TeamScore1" type="Label" parent="UILayer/MarginContainer/ScoreboardPanelPanel/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=551576547]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("7_4c57u")
 theme_override_font_sizes/font_size = 32
 text = "07"
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="UILayer/MarginContainer/GameInfoPanel/HBoxContainer/VBoxContainer" unique_id=1455554098]
+[node name="HBoxContainer2" type="HBoxContainer" parent="UILayer/MarginContainer/ScoreboardPanelPanel/HBoxContainer/VBoxContainer" unique_id=1455554098]
 layout_mode = 2
 
-[node name="TeamLabel2" type="Label" parent="UILayer/MarginContainer/GameInfoPanel/HBoxContainer/VBoxContainer/HBoxContainer2" unique_id=892923294]
+[node name="TeamLabel2" type="Label" parent="UILayer/MarginContainer/ScoreboardPanelPanel/HBoxContainer/VBoxContainer/HBoxContainer2" unique_id=892923294]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("7_4c57u")
 theme_override_font_sizes/font_size = 32
 text = "BLU"
 
-[node name="TeamScore2" type="Label" parent="UILayer/MarginContainer/GameInfoPanel/HBoxContainer/VBoxContainer/HBoxContainer2" unique_id=683549508]
+[node name="TeamScore2" type="Label" parent="UILayer/MarginContainer/ScoreboardPanelPanel/HBoxContainer/VBoxContainer/HBoxContainer2" unique_id=683549508]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("7_4c57u")
 theme_override_font_sizes/font_size = 32
@@ -373,73 +359,60 @@ layout_mode = 2
 [node name="ActivePlayerTitle" type="Label" parent="UILayer/MarginContainer/ActivePlayerPanel/VBoxContainer" unique_id=636858216]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
-text = "Active Player"
+text = "Red 1"
 horizontal_alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UILayer/MarginContainer/ActivePlayerPanel/VBoxContainer" unique_id=642972113]
 layout_mode = 2
 
-[node name="ActivePlayerContainer" type="VBoxContainer" parent="UILayer/MarginContainer/ActivePlayerPanel/VBoxContainer/HBoxContainer" unique_id=717327830]
-layout_mode = 2
-alignment = 1
-
-[node name="ActivePlayerProfile" type="VBoxContainer" parent="UILayer/MarginContainer/ActivePlayerPanel/VBoxContainer/HBoxContainer/ActivePlayerContainer" unique_id=966914211]
-layout_mode = 2
-
-[node name="ActivePlayerAvatar" type="TextureRect" parent="UILayer/MarginContainer/ActivePlayerPanel/VBoxContainer/HBoxContainer/ActivePlayerContainer/ActivePlayerProfile" unique_id=725692738]
+[node name="ActivePlayerAvatar" type="TextureRect" parent="UILayer/MarginContainer/ActivePlayerPanel/VBoxContainer/HBoxContainer" unique_id=725692738]
 layout_mode = 2
 texture = ExtResource("8_4c57u")
 stretch_mode = 3
 
-[node name="ActivePlayerName" type="Label" parent="UILayer/MarginContainer/ActivePlayerPanel/VBoxContainer/HBoxContainer/ActivePlayerContainer/ActivePlayerProfile" unique_id=908872694]
-layout_mode = 2
-theme_override_font_sizes/font_size = 32
-text = "Red 1"
-horizontal_alignment = 1
-
-[node name="VBoxContainer" type="VBoxContainer" parent="UILayer/MarginContainer/ActivePlayerPanel/VBoxContainer/HBoxContainer" unique_id=1665673845]
+[node name="ActivePlayerInfo" type="VBoxContainer" parent="UILayer/MarginContainer/ActivePlayerPanel/VBoxContainer/HBoxContainer" unique_id=1665673845]
 layout_mode = 2
 alignment = 1
 
-[node name="ContextLabels" type="Label" parent="UILayer/MarginContainer/ActivePlayerPanel/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1045939920]
+[node name="ContextLabels" type="Label" parent="UILayer/MarginContainer/ActivePlayerPanel/VBoxContainer/HBoxContainer/ActivePlayerInfo" unique_id=1045939920]
 layout_mode = 2
 text = "Offense | On-Ball | No Dribble"
 
-[node name="RangeLabel" type="Label" parent="UILayer/MarginContainer/ActivePlayerPanel/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=585894433]
+[node name="RangeLabel" type="Label" parent="UILayer/MarginContainer/ActivePlayerPanel/VBoxContainer/HBoxContainer/ActivePlayerInfo" unique_id=585894433]
 layout_mode = 2
 text = "Movement range: 3.0 m"
 
-[node name="EnergyLabel" type="Label" parent="UILayer/MarginContainer/ActivePlayerPanel/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1250186127]
+[node name="EnergyLabel" type="Label" parent="UILayer/MarginContainer/ActivePlayerPanel/VBoxContainer/HBoxContainer/ActivePlayerInfo" unique_id=1250186127]
 layout_mode = 2
 text = "Energy level: Tired"
 
-[node name="ActivePlayerStats" type="GridContainer" parent="UILayer/MarginContainer/ActivePlayerPanel/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1504126426]
+[node name="ActivePlayerStats" type="GridContainer" parent="UILayer/MarginContainer/ActivePlayerPanel/VBoxContainer/HBoxContainer/ActivePlayerInfo" unique_id=1504126426]
 layout_mode = 2
 theme_override_constants/h_separation = 8
 theme_override_constants/v_separation = 8
 columns = 3
 
-[node name="ActivePlayerStatLabel" type="Label" parent="UILayer/MarginContainer/ActivePlayerPanel/VBoxContainer/HBoxContainer/VBoxContainer/ActivePlayerStats" unique_id=230025779]
+[node name="ActivePlayerStatLabel" type="Label" parent="UILayer/MarginContainer/ActivePlayerPanel/VBoxContainer/HBoxContainer/ActivePlayerInfo/ActivePlayerStats" unique_id=230025779]
 layout_mode = 2
 text = "CHA: 00"
 
-[node name="ActivePlayerStatLabel2" type="Label" parent="UILayer/MarginContainer/ActivePlayerPanel/VBoxContainer/HBoxContainer/VBoxContainer/ActivePlayerStats" unique_id=1585315111]
+[node name="ActivePlayerStatLabel2" type="Label" parent="UILayer/MarginContainer/ActivePlayerPanel/VBoxContainer/HBoxContainer/ActivePlayerInfo/ActivePlayerStats" unique_id=1585315111]
 layout_mode = 2
 text = "STR: 00"
 
-[node name="ActivePlayerStatLabel3" type="Label" parent="UILayer/MarginContainer/ActivePlayerPanel/VBoxContainer/HBoxContainer/VBoxContainer/ActivePlayerStats" unique_id=1465819984]
+[node name="ActivePlayerStatLabel3" type="Label" parent="UILayer/MarginContainer/ActivePlayerPanel/VBoxContainer/HBoxContainer/ActivePlayerInfo/ActivePlayerStats" unique_id=1465819984]
 layout_mode = 2
 text = "WIS: 00"
 
-[node name="ActivePlayerStatLabel4" type="Label" parent="UILayer/MarginContainer/ActivePlayerPanel/VBoxContainer/HBoxContainer/VBoxContainer/ActivePlayerStats" unique_id=400415507]
+[node name="ActivePlayerStatLabel4" type="Label" parent="UILayer/MarginContainer/ActivePlayerPanel/VBoxContainer/HBoxContainer/ActivePlayerInfo/ActivePlayerStats" unique_id=400415507]
 layout_mode = 2
 text = "DEX: 00"
 
-[node name="ActivePlayerStatLabel5" type="Label" parent="UILayer/MarginContainer/ActivePlayerPanel/VBoxContainer/HBoxContainer/VBoxContainer/ActivePlayerStats" unique_id=1537470790]
+[node name="ActivePlayerStatLabel5" type="Label" parent="UILayer/MarginContainer/ActivePlayerPanel/VBoxContainer/HBoxContainer/ActivePlayerInfo/ActivePlayerStats" unique_id=1537470790]
 layout_mode = 2
 text = "INT: 00"
 
-[node name="ActivePlayerStatLabel6" type="Label" parent="UILayer/MarginContainer/ActivePlayerPanel/VBoxContainer/HBoxContainer/VBoxContainer/ActivePlayerStats" unique_id=1217162340]
+[node name="ActivePlayerStatLabel6" type="Label" parent="UILayer/MarginContainer/ActivePlayerPanel/VBoxContainer/HBoxContainer/ActivePlayerInfo/ActivePlayerStats" unique_id=1217162340]
 layout_mode = 2
 text = "CON: 00"
 
