@@ -10,7 +10,9 @@ config_version=5
 
 [application]
 
-config/name="basketball-tactics-main"
+config/name="basketball-tactics"
+config/description="As of 2026-05-16, current development version of Basketball Tactics"
+run/main_scene="uid://b6am46kegw2x3"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -27,5 +29,3 @@ window/stretch/mode="canvas_items"
 [rendering]
 
 rendering_device/driver.windows="d3d12"
-renderer/rendering_method="gl_compatibility"
-renderer/rendering_method.mobile="gl_compatibility"
