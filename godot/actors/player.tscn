@@ -45,9 +45,10 @@ metadata/_edit_group_ = true
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 billboard = 1
-text = "Red 1"
+text = "PlayerName"
 
 [node name="PlayerMesh" type="MeshInstance3D" parent="." unique_id=2048571091]
+unique_name_in_owner = true
 mesh = SubResource("CapsuleMesh_ajfhb")
 
 [node name="ActiveDecal" type="Decal" parent="." unique_id=789151661]

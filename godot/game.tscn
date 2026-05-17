@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://b6am46kegw2x3"]
 
 [ext_resource type="Texture2D" uid="uid://651w441pfvby" path="res://assets/textures/wood_floor_054_1k/WoodFloor054_1K-PNG_Color.png" id="1_34bgr"]
+[ext_resource type="Script" uid="uid://81hx1qtg1wpn" path="res://game.gd" id="1_iotsf"]
 [ext_resource type="Texture2D" uid="uid://ceikwnbuyl20y" path="res://assets/textures/wood_floor_054_1k/WoodFloor054_1K-PNG_Roughness.png" id="2_esun2"]
 [ext_resource type="Texture2D" uid="uid://cwj6ul5bcr5v0" path="res://assets/textures/wood_floor_054_1k/WoodFloor054_1K-PNG_AmbientOcclusion.png" id="2_gm3gy"]
 [ext_resource type="Texture2D" uid="uid://c7ge0j7koqm4" path="res://assets/textures/wood_floor_054_1k/WoodFloor054_1K-PNG_Displacement.png" id="3_ajfhb"]
@@ -28,18 +29,6 @@ uv1_scale = Vector3(10, 10, 10)
 material = SubResource("StandardMaterial3D_yo73x")
 size = Vector2(15, 14)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_awctn"]
-albedo_color = Color(0.5294118, 0.80784315, 0.92156863, 1)
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_awctn"]
-material = SubResource("StandardMaterial3D_awctn")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ajfhb"]
-albedo_color = Color(0.54509807, 0, 0, 1)
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_ajfhb"]
-material = SubResource("StandardMaterial3D_ajfhb")
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4c57u"]
 draw_center = false
 border_width_left = 4
@@ -48,7 +37,30 @@ border_width_right = 4
 border_width_bottom = 4
 border_color = Color(1, 0.84313726, 0, 1)
 
-[node name="Main" type="Node3D" unique_id=1895450294]
+[node name="Game" type="Node3D" unique_id=1895450294]
+script = ExtResource("1_iotsf")
+home_team_color = Color(0.5294118, 0.80784315, 0.92156863, 1)
+away_team_color = Color(0.5019608, 0.5019608, 0, 1)
+
+[node name="Players" type="Node" parent="." unique_id=270399416]
+
+[node name="Michael" parent="Players" unique_id=1662278205 groups=["home_team"] instance=ExtResource("7_efxa6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.2937536, 1, -1.738388)
+
+[node name="Scottie" parent="Players" unique_id=1439541576 groups=["home_team"] instance=ExtResource("7_efxa6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5777588, 1, -3.468628)
+
+[node name="Dennis" parent="Players" unique_id=1579266654 groups=["home_team"] instance=ExtResource("7_efxa6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1, -3)
+
+[node name="Larry" parent="Players" unique_id=2001116984 groups=["away_team"] instance=ExtResource("7_efxa6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 1, 3)
+
+[node name="Magic" parent="Players" unique_id=781295495 groups=["away_team"] instance=ExtResource("7_efxa6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 1, 2)
+
+[node name="Charles" parent="Players" unique_id=2114162129 groups=["away_team"] instance=ExtResource("7_efxa6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1)
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1838876297]
 transform = Transform3D(-0.7071068, 0.35355338, -0.61237246, 0, 0.8660254, 0.50000006, 0.7071068, 0.35355338, -0.61237246, -9.732203, 9.120412, -10.150972)
@@ -134,71 +146,6 @@ height = 3.5
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 1.5842357, -0.27583933)
 radius = 0.1
 height = 0.64501953
-
-[node name="BlueTeam" type="Node" parent="." unique_id=117197952]
-
-[node name="Blue1" type="CharacterBody3D" parent="BlueTeam" unique_id=1655715580]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.4131851, 1, 1.2943554)
-metadata/_edit_group_ = true
-
-[node name="PlayerMesh" type="MeshInstance3D" parent="BlueTeam/Blue1" unique_id=2122282676]
-mesh = SubResource("CapsuleMesh_awctn")
-
-[node name="NameLabel" type="Label3D" parent="BlueTeam/Blue1" unique_id=460960553]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
-billboard = 1
-text = "Blue 1"
-
-[node name="Blue2" type="CharacterBody3D" parent="BlueTeam" unique_id=684557659]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-metadata/_edit_group_ = true
-
-[node name="PlayerMesh" type="MeshInstance3D" parent="BlueTeam/Blue2" unique_id=780626129]
-mesh = SubResource("CapsuleMesh_awctn")
-
-[node name="NameLabel" type="Label3D" parent="BlueTeam/Blue2" unique_id=1204401661]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
-billboard = 1
-text = "Blue 2"
-
-[node name="Blue3" type="CharacterBody3D" parent="BlueTeam" unique_id=160436777]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.2704864, 1, 2.9144611)
-metadata/_edit_group_ = true
-
-[node name="PlayerMesh" type="MeshInstance3D" parent="BlueTeam/Blue3" unique_id=53977671]
-mesh = SubResource("CapsuleMesh_awctn")
-
-[node name="RedTeam" type="Node" parent="." unique_id=2064199212]
-
-[node name="Red1" parent="RedTeam" unique_id=2001116984 instance=ExtResource("7_efxa6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.2937536, 1, -1.738388)
-player_name = "Scottie"
-
-[node name="Red2" type="CharacterBody3D" parent="RedTeam" unique_id=632664336]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.17807293, 1, -2.7750006)
-metadata/_edit_group_ = true
-
-[node name="PlayerMesh" type="MeshInstance3D" parent="RedTeam/Red2" unique_id=419118815]
-mesh = SubResource("CapsuleMesh_ajfhb")
-
-[node name="NameLabel" type="Label3D" parent="RedTeam/Red2" unique_id=1994503762]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
-transparency = 0.5
-billboard = 1
-text = "Red 2"
-
-[node name="Red3" type="CharacterBody3D" parent="RedTeam" unique_id=762520351]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1, 0)
-metadata/_edit_group_ = true
-
-[node name="PlayerMesh" type="MeshInstance3D" parent="RedTeam/Red3" unique_id=1135443659]
-mesh = SubResource("CapsuleMesh_ajfhb")
-
-[node name="NameLabel" type="Label3D" parent="RedTeam/Red3" unique_id=1136007983]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
-transparency = 0.5
-billboard = 1
-text = "Red 3"
 
 [node name="UILayer" type="CanvasLayer" parent="." unique_id=2097805439]
 
