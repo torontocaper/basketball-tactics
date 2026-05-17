@@ -37,6 +37,8 @@ albedo_color = Color(0.54509807, 0.27058825, 0.07450981, 1)
 [sub_resource type="PlaneMesh" id="PlaneMesh_niuxy"]
 material = SubResource("StandardMaterial3D_niuxy")
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_niuxy"]
+
 [node name="Player" type="CharacterBody3D" unique_id=2001116984]
 script = ExtResource("1_niuxy")
 metadata/_edit_group_ = true
@@ -69,3 +71,6 @@ texture_albedo = SubResource("GradientTexture2D_mvpqy")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 visible = false
 mesh = SubResource("PlaneMesh_niuxy")
+
+[node name="PlayerCollider" type="CollisionShape3D" parent="." unique_id=2095731527]
+shape = SubResource("CapsuleShape3D_niuxy")
