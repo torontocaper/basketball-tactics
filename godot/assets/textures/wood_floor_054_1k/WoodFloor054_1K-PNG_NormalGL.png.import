@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bjamjei5d6hep"
-path.s3tc="res://.godot/imported/WoodFloor054_1K-PNG_NormalGL.png-85aa30089b129f0f91aadf9248bc5ce0.s3tc.ctex"
+path.s3tc="res://.godot/imported/WoodFloor054_1K-PNG_NormalGL.png-89db07c99a418a46432a2ea0dddc5037.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/wood_floor_054_1k/WoodFloor054_1K-PNG_NormalGL.png"
-dest_files=["res://.godot/imported/WoodFloor054_1K-PNG_NormalGL.png-85aa30089b129f0f91aadf9248bc5ce0.s3tc.ctex"]
+source_file="res://assets/textures/wood_floor_054_1k/WoodFloor054_1K-PNG_NormalGL.png"
+dest_files=["res://.godot/imported/WoodFloor054_1K-PNG_NormalGL.png-89db07c99a418a46432a2ea0dddc5037.s3tc.ctex"]
 
 [params]
 

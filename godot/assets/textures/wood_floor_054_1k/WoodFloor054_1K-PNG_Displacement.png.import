@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c7ge0j7koqm4"
-path.s3tc="res://.godot/imported/WoodFloor054_1K-PNG_Displacement.png-e636d86a7dfbd7ec295cbd044496d887.s3tc.ctex"
+path.s3tc="res://.godot/imported/WoodFloor054_1K-PNG_Displacement.png-0863d190a200389a07d0a7441ea4ebc2.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/wood_floor_054_1k/WoodFloor054_1K-PNG_Displacement.png"
-dest_files=["res://.godot/imported/WoodFloor054_1K-PNG_Displacement.png-e636d86a7dfbd7ec295cbd044496d887.s3tc.ctex"]
+source_file="res://assets/textures/wood_floor_054_1k/WoodFloor054_1K-PNG_Displacement.png"
+dest_files=["res://.godot/imported/WoodFloor054_1K-PNG_Displacement.png-0863d190a200389a07d0a7441ea4ebc2.s3tc.ctex"]
 
 [params]
 

@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cwj6ul5bcr5v0"
-path.s3tc="res://.godot/imported/WoodFloor054_1K-PNG_AmbientOcclusion.png-a8f81f48075a439f9d2ba654d87ad10c.s3tc.ctex"
+path.s3tc="res://.godot/imported/WoodFloor054_1K-PNG_AmbientOcclusion.png-422eb242554c7378b82636fa9f3ebf6b.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/wood_floor_054_1k/WoodFloor054_1K-PNG_AmbientOcclusion.png"
-dest_files=["res://.godot/imported/WoodFloor054_1K-PNG_AmbientOcclusion.png-a8f81f48075a439f9d2ba654d87ad10c.s3tc.ctex"]
+source_file="res://assets/textures/wood_floor_054_1k/WoodFloor054_1K-PNG_AmbientOcclusion.png"
+dest_files=["res://.godot/imported/WoodFloor054_1K-PNG_AmbientOcclusion.png-422eb242554c7378b82636fa9f3ebf6b.s3tc.ctex"]
 
 [params]
 
