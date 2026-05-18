@@ -49,11 +49,14 @@ vertical = true
 script = ExtResource("1_iotsf")
 home_team_color = Color(0.5294118, 0.80784315, 0.92156863, 1)
 away_team_color = Color(0.5019608, 0.5019608, 0, 1)
+home_team_score = 5
+away_team_score = 6
 
 [node name="Players" type="Node" parent="." unique_id=270399416]
 
 [node name="Michael" parent="Players" unique_id=1662278205 groups=["home_team"] instance=ExtResource("7_efxa6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.2937536, 1, -1.738388)
+is_active = true
 
 [node name="Scottie" parent="Players" unique_id=1439541576 groups=["home_team"] instance=ExtResource("7_efxa6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.441162, 1, -2.4573975)

@@ -19,9 +19,13 @@ extends Node3D
 @export_subgroup("Score")
 @export var home_team_score: int = 0:
 	set(h_t_s):
+		if not is_node_ready():
+			await ready
 		home_team_score_label.text = "%02d" % h_t_s
 @export var away_team_score: int = 0:
 	set(a_t_s):
+		if not is_node_ready():
+			await ready
 		away_team_score_label.text = "%02d" % a_t_s
 
 var home_team_players: Array[Node]

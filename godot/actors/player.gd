@@ -10,12 +10,16 @@ extends CharacterBody3D
 
 @export var has_ball: bool = false:
 	set(h_b):
+		if not is_node_ready():
+			await ready
 		has_ball_decal.visible = h_b
-
+		
 @export var is_active: bool = false: 
 	set(i_a):
+		if not is_node_ready():
+			await ready
 		active_decal.visible = i_a
-
+		
 @export var team_color: Color = Color.DARK_RED:
 	set(t_c):
 		var team_color_material:= StandardMaterial3D.new()
