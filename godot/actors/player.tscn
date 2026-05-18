@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cqphbwl7lmt3t"]
 
 [ext_resource type="Script" uid="uid://bio37tx2vw1ou" path="res://actors/player.gd" id="1_niuxy"]
+[ext_resource type="Texture2D" uid="uid://bt2ioehlblun0" path="res://assets/textures/basketball_vector_512.png" id="2_mvpqy"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ajfhb"]
 albedo_color = Color(0.54509807, 0, 0, 1)
@@ -10,22 +11,11 @@ material = SubResource("StandardMaterial3D_ajfhb")
 
 [sub_resource type="Gradient" id="Gradient_ajfhb"]
 interpolation_mode = 1
-offsets = PackedFloat32Array(0, 0.55, 0.7)
+offsets = PackedFloat32Array(0, 0.55, 0.65)
 colors = PackedColorArray(1, 1, 1, 0, 1, 0.84313726, 0, 1, 1, 1, 1, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_awctn"]
 gradient = SubResource("Gradient_ajfhb")
-width = 512
-height = 512
-fill = 1
-fill_from = Vector2(0.5, 0.5)
-
-[sub_resource type="Gradient" id="Gradient_niuxy"]
-offsets = PackedFloat32Array(0.5362694, 0.5880829, 0.6450777, 0.6917098)
-colors = PackedColorArray(1, 1, 1, 0, 0.2509804, 0.8784314, 0.8156863, 1, 0, 1, 1, 1, 1, 1, 1, 0)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_mvpqy"]
-gradient = SubResource("Gradient_niuxy")
 width = 512
 height = 512
 fill = 1
@@ -65,7 +55,7 @@ unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 visible = false
 size = Vector3(1.5, 0.1, 1.5)
-texture_albedo = SubResource("GradientTexture2D_mvpqy")
+texture_albedo = ExtResource("2_mvpqy")
 
 [node name="TestFloor" type="MeshInstance3D" parent="." unique_id=1278947590]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)

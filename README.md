@@ -25,3 +25,10 @@ Contains the Game Design Document, screenshots, concept and reference art.
 ### Godot
 
 Where the game project lives.
+
+## Attributions
+
+### Icons
+
+- pass by Eklip Studio from <a href="https://thenounproject.com/browse/icons/term/pass/" target="_blank" title="pass Icons">Noun Project</a> (CC BY 3.0)
+- Basketball Shot by Billy Sweetman from <a href="https://thenounproject.com/browse/icons/term/basketball-shot/" target="_blank" title="Basketball Shot Icons">Noun Project</a> (CC BY 3.0)
