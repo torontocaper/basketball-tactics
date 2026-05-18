@@ -1,4 +1,4 @@
-#@tool
+@tool
 #@icon(icon_path: String)
 class_name Game
 extends Node3D
@@ -27,6 +27,7 @@ extends Node3D
 		if not is_node_ready():
 			await ready
 		away_team_score_label.text = "%02d" % a_t_s
+
 @export_group("Turn Order")
 @export var active_player: Player:
 	set(a_p):
@@ -36,10 +37,12 @@ extends Node3D
 		a_p.is_active = true
 		active_player_name_label.text = a_p.name
 
+
 var home_team_players: Array[Node]
 var away_team_players: Array[Node]
+var players_on_court: Array[Player]
 
-#@onready var
+
 @onready var active_player_name_label: Label = %ActivePlayerNameLabel
 @onready var away_team_name_label: Label = %AwayTeamNameLabel
 @onready var away_team_score_label: Label = %AwayTeamScoreLabel
@@ -53,9 +56,18 @@ func _ready() -> void:
 	for player in home_team_players:
 		print(player.name + " is on the home team")
 		player.team_color = home_team_color
+		players_on_court.append(player)
+		print(player.name + " is on the court")
+
 	for player in away_team_players:
 		print(player.name + " is on the away team")
 		player.team_color = away_team_color
+		players_on_court.append(player)
+		print(player.name + " is on the court")
+
+	print("There are %s players on the court" % [players_on_court.size()])
+
+	active_player = players_on_court.pick_random() #TODO replace with turn logic
 
 func _process(_delta: float) -> void:
 	pass

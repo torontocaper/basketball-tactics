@@ -45,13 +45,10 @@ grow_end = 4.0
 thickness = 8
 vertical = true
 
-[node name="Game" type="Node3D" unique_id=1895450294 node_paths=PackedStringArray("active_player")]
+[node name="Game" type="Node3D" unique_id=1895450294]
 script = ExtResource("1_iotsf")
 home_team_color = Color(0.5294118, 0.80784315, 0.92156863, 1)
 away_team_color = Color(0.5019608, 0.5019608, 0, 1)
-home_team_score = 3
-away_team_score = 7
-active_player = NodePath("Players/Magic")
 
 [node name="Players" type="Node" parent="." unique_id=270399416]
 
@@ -274,7 +271,7 @@ layout_mode = 2
 size_flags_horizontal = 10
 theme_override_fonts/font = ExtResource("7_4c57u")
 theme_override_font_sizes/font_size = 64
-text = "00"
+text = "07"
 
 [node name="VSeparator" type="VSeparator" parent="UI/UIMargin/ScoreboardPanel/ScoreboardMargin/ScoreboardContainer" unique_id=1356967096]
 layout_mode = 2
@@ -299,7 +296,7 @@ layout_mode = 2
 size_flags_horizontal = 10
 theme_override_fonts/font = ExtResource("7_4c57u")
 theme_override_font_sizes/font_size = 64
-text = "00"
+text = "03"
 
 [node name="ActivePlayerPanel" type="PanelContainer" parent="UI/UIMargin" unique_id=1579239758]
 layout_mode = 2
@@ -313,7 +310,7 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
-text = "Red 1"
+text = "Michael"
 horizontal_alignment = 1
 
 [node name="ActivePlayerInfoContainer" type="HBoxContainer" parent="UI/UIMargin/ActivePlayerPanel/ActivePlayerContainer" unique_id=642972113]
