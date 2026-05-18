@@ -310,7 +310,7 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
-text = "Michael"
+text = "Larry"
 horizontal_alignment = 1
 
 [node name="ActivePlayerInfoContainer" type="HBoxContainer" parent="UI/UIMargin/ActivePlayerPanel/ActivePlayerContainer" unique_id=642972113]
@@ -392,10 +392,7 @@ size_flags_vertical = 8
 [node name="ActionContainer" type="VBoxContainer" parent="UI/UIMargin/ActionPanel" unique_id=1118463693]
 layout_mode = 2
 
-[node name="ShootContainer" type="HBoxContainer" parent="UI/UIMargin/ActionPanel/ActionContainer" unique_id=1734348071]
-layout_mode = 2
-
-[node name="ShootButton" type="Button" parent="UI/UIMargin/ActionPanel/ActionContainer/ShootContainer" unique_id=1927342479]
+[node name="ShootButton" type="Button" parent="UI/UIMargin/ActionPanel/ActionContainer" unique_id=1927342479]
 layout_mode = 2
 size_flags_horizontal = 3
 tooltip_text = "Take a shot at the net"
@@ -403,16 +400,7 @@ theme_override_font_sizes/font_size = 32
 text = "SHOOT"
 icon = ExtResource("13_215e1")
 
-[node name="ShootInfo" type="Label" parent="UI/UIMargin/ActionPanel/ActionContainer/ShootContainer" unique_id=463945022]
-visible = false
-layout_mode = 2
-text = "DC: 15
-Distance 3.5m | well-guarded"
-
-[node name="PassContainer" type="HBoxContainer" parent="UI/UIMargin/ActionPanel/ActionContainer" unique_id=1282348881]
-layout_mode = 2
-
-[node name="PassButton" type="Button" parent="UI/UIMargin/ActionPanel/ActionContainer/PassContainer" unique_id=1535290571]
+[node name="PassButton" type="Button" parent="UI/UIMargin/ActionPanel/ActionContainer" unique_id=1535290571]
 texture_filter = 1
 layout_mode = 2
 size_flags_horizontal = 3
@@ -421,40 +409,7 @@ theme_override_font_sizes/font_size = 32
 text = "PASS"
 icon = ExtResource("14_7sc4i")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/UIMargin/ActionPanel/ActionContainer/PassContainer" unique_id=1671610223]
-visible = false
-layout_mode = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/UIMargin/ActionPanel/ActionContainer/PassContainer/VBoxContainer" unique_id=1095070644]
-layout_mode = 2
-
-[node name="Button" type="Button" parent="UI/UIMargin/ActionPanel/ActionContainer/PassContainer/VBoxContainer/HBoxContainer" unique_id=1553394475]
-layout_mode = 2
-theme_override_font_sizes/font_size = 20
-text = "RED 2"
-
-[node name="Label" type="Label" parent="UI/UIMargin/ActionPanel/ActionContainer/PassContainer/VBoxContainer/HBoxContainer" unique_id=171655149]
-layout_mode = 2
-text = "DC: 10
-distance: 3.0 m | well-guarded"
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="UI/UIMargin/ActionPanel/ActionContainer/PassContainer/VBoxContainer" unique_id=1024146188]
-layout_mode = 2
-
-[node name="Button2" type="Button" parent="UI/UIMargin/ActionPanel/ActionContainer/PassContainer/VBoxContainer/HBoxContainer2" unique_id=1660819045]
-layout_mode = 2
-theme_override_font_sizes/font_size = 20
-text = "RED 3"
-
-[node name="Label" type="Label" parent="UI/UIMargin/ActionPanel/ActionContainer/PassContainer/VBoxContainer/HBoxContainer2" unique_id=477461679]
-layout_mode = 2
-text = "DC: 5
-distance: 2.0m | open"
-
-[node name="DribbleContainer" type="HBoxContainer" parent="UI/UIMargin/ActionPanel/ActionContainer" unique_id=31165091]
-layout_mode = 2
-
-[node name="DribbleButton" type="Button" parent="UI/UIMargin/ActionPanel/ActionContainer/DribbleContainer" unique_id=974297647]
+[node name="DribbleButton" type="Button" parent="UI/UIMargin/ActionPanel/ActionContainer" unique_id=974297647]
 layout_mode = 2
 size_flags_horizontal = 3
 tooltip_text = "Make a dribble move
@@ -462,3 +417,9 @@ Unavailable (Player has picked up their dribble)"
 theme_override_font_sizes/font_size = 32
 disabled = true
 text = "DRIBBLE"
+
+[node name="EndTurnButton" type="Button" parent="UI/UIMargin/ActionPanel/ActionContainer" unique_id=1167913322]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "END TURN"

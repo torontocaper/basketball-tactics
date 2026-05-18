@@ -48,9 +48,11 @@ var players_on_court: Array[Player]
 @onready var away_team_score_label: Label = %AwayTeamScoreLabel
 @onready var home_team_name_label: Label = %HomeTeamNameLabel
 @onready var home_team_score_label: Label = %HomeTeamScoreLabel
+@onready var end_turn_button: Button = %EndTurnButton
 
 
 func _ready() -> void:
+	_connect_signals()
 	home_team_players = get_tree().get_nodes_in_group("home_team")
 	away_team_players = get_tree().get_nodes_in_group("away_team")
 	for player in home_team_players:
@@ -78,7 +80,9 @@ func _physics_process(_delta: float) -> void:
 # CORE
 
 # PRIVATE/HELPER
-
+func _connect_signals() -> void:
+	end_turn_button.connect("pressed", on_end_turn_button_pressed)
 # RECEIVERS
-
+func on_end_turn_button_pressed() -> void:
+	print("Ending turn")
 # SETTERS/GETTERS
