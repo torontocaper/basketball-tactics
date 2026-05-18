@@ -14,6 +14,7 @@
 [ext_resource type="FontFile" uid="uid://buemt0c417y0l" path="res://assets/fonts/Roboto-Medium.ttf" id="9_efxa6"]
 [ext_resource type="Texture2D" uid="uid://c2tndwgkigkdc" path="res://assets/icons/shot_icon_white_24.png" id="13_215e1"]
 [ext_resource type="Texture2D" uid="uid://b48ecg2w32y68" path="res://assets/icons/pass_icon_white_24.png" id="14_7sc4i"]
+[ext_resource type="Texture2D" uid="uid://b14ho3ltl7ivs" path="res://assets/icons/dribble_icon_white_24.png" id="15_7sc4i"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yo73x"]
 albedo_texture = ExtResource("1_34bgr")
@@ -417,6 +418,7 @@ Unavailable (Player has picked up their dribble)"
 theme_override_font_sizes/font_size = 32
 disabled = true
 text = "DRIBBLE"
+icon = ExtResource("15_7sc4i")
 
 [node name="EndTurnButton" type="Button" parent="UI/UIMargin/ActionPanel/ActionContainer" unique_id=1167913322]
 unique_name_in_owner = true
