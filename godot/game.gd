@@ -1,4 +1,4 @@
-@tool
+#@tool
 #@icon(icon_path: String)
 class_name Game
 extends Node3D
@@ -34,8 +34,9 @@ extends Node3D
 		if not is_node_ready():
 			await ready
 		print("Making %s active" % a_p.name)
-		a_p.is_active = true
-		active_player_name_label.text = a_p.name
+		active_player = a_p
+		active_player.is_active = true
+		active_player_name_label.text = active_player.name
 
 
 var home_team_players: Array[Node]
@@ -82,7 +83,9 @@ func _physics_process(_delta: float) -> void:
 # PRIVATE/HELPER
 func _connect_signals() -> void:
 	end_turn_button.connect("pressed", on_end_turn_button_pressed)
+
+
 # RECEIVERS
 func on_end_turn_button_pressed() -> void:
-	print("Ending turn")
-# SETTERS/GETTERS
+	#print("Ending turn")
+	print("Ending turn for %s" % active_player.name)

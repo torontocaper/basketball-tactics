@@ -1,4 +1,4 @@
-@tool
+#@tool
 #@icon(icon_path: String)
 class_name Player
 extends CharacterBody3D
@@ -18,8 +18,9 @@ extends CharacterBody3D
 	set(i_a):
 		if not is_node_ready():
 			await ready
+		is_active = i_a
 		print(name + " is active")
-		active_decal.visible = i_a
+		active_decal.visible = is_active
 		
 @export var team_color: Color = Color.DARK_RED:
 	set(t_c):
