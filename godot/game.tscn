@@ -45,18 +45,18 @@ grow_end = 4.0
 thickness = 8
 vertical = true
 
-[node name="Game" type="Node3D" unique_id=1895450294]
+[node name="Game" type="Node3D" unique_id=1895450294 node_paths=PackedStringArray("active_player")]
 script = ExtResource("1_iotsf")
 home_team_color = Color(0.5294118, 0.80784315, 0.92156863, 1)
 away_team_color = Color(0.5019608, 0.5019608, 0, 1)
 home_team_score = 5
 away_team_score = 6
+active_player = NodePath("Players/Charles")
 
 [node name="Players" type="Node" parent="." unique_id=270399416]
 
 [node name="Michael" parent="Players" unique_id=1662278205 groups=["home_team"] instance=ExtResource("7_efxa6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.2937536, 1, -1.738388)
-is_active = true
 
 [node name="Scottie" parent="Players" unique_id=1439541576 groups=["home_team"] instance=ExtResource("7_efxa6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.441162, 1, -2.4573975)
@@ -158,9 +158,9 @@ transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 1
 radius = 0.1
 height = 0.64501953
 
-[node name="UILayer" type="CanvasLayer" parent="." unique_id=2097805439]
+[node name="UI" type="CanvasLayer" parent="." unique_id=2097805439]
 
-[node name="MarginContainer" type="MarginContainer" parent="UILayer" unique_id=313750831]
+[node name="UIMargin" type="MarginContainer" parent="UI" unique_id=313750831]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -171,17 +171,17 @@ theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 
-[node name="TurnOrderPanel" type="PanelContainer" parent="UILayer/MarginContainer" unique_id=1598190513]
+[node name="TurnOrderPanel" type="PanelContainer" parent="UI/UIMargin" unique_id=1598190513]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 
-[node name="TurnOrder" type="VBoxContainer" parent="UILayer/MarginContainer/TurnOrderPanel" unique_id=1441191516]
+[node name="TurnOrderContainer" type="VBoxContainer" parent="UI/UIMargin/TurnOrderPanel" unique_id=1441191516]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 
-[node name="TurnOrderTitle" type="Label" parent="UILayer/MarginContainer/TurnOrderPanel/TurnOrder" unique_id=291672845]
+[node name="TurnOrderTitle" type="Label" parent="UI/UIMargin/TurnOrderPanel/TurnOrderContainer" unique_id=291672845]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("9_efxa6")
 theme_override_font_sizes/font_size = 24
@@ -189,30 +189,30 @@ text = "Turn 15"
 horizontal_alignment = 1
 uppercase = true
 
-[node name="TurnOrderAvatars" type="HBoxContainer" parent="UILayer/MarginContainer/TurnOrderPanel/TurnOrder" unique_id=1275052798]
+[node name="TurnOrderAvatars" type="HBoxContainer" parent="UI/UIMargin/TurnOrderPanel/TurnOrderContainer" unique_id=1275052798]
 layout_mode = 2
 
-[node name="PlayerAvatar" type="TextureRect" parent="UILayer/MarginContainer/TurnOrderPanel/TurnOrder/TurnOrderAvatars" unique_id=33319150]
+[node name="TurnOrderAvatar" type="TextureRect" parent="UI/UIMargin/TurnOrderPanel/TurnOrderContainer/TurnOrderAvatars" unique_id=33319150]
 modulate = Color(0.27058825, 0.27058825, 0.27058825, 1)
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 texture = ExtResource("7_kek77")
 expand_mode = 1
 
-[node name="PlayerAvatar2" type="TextureRect" parent="UILayer/MarginContainer/TurnOrderPanel/TurnOrder/TurnOrderAvatars" unique_id=266415128]
+[node name="TurnOrderAvatar2" type="TextureRect" parent="UI/UIMargin/TurnOrderPanel/TurnOrderContainer/TurnOrderAvatars" unique_id=266415128]
 modulate = Color(0.27022192, 0.27022192, 0.2702219, 1)
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 texture = ExtResource("8_4c57u")
 expand_mode = 1
 
-[node name="PlayerAvatar3" type="TextureRect" parent="UILayer/MarginContainer/TurnOrderPanel/TurnOrder/TurnOrderAvatars" unique_id=1457351444]
+[node name="TurnOrderAvatar3" type="TextureRect" parent="UI/UIMargin/TurnOrderPanel/TurnOrderContainer/TurnOrderAvatars" unique_id=1457351444]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 texture = ExtResource("8_4c57u")
 expand_mode = 1
 
-[node name="ActivePlayerAvatarBorder" type="PanelContainer" parent="UILayer/MarginContainer/TurnOrderPanel/TurnOrder/TurnOrderAvatars/PlayerAvatar3" unique_id=415151144]
+[node name="ActivePlayerAvatarBorder" type="PanelContainer" parent="UI/UIMargin/TurnOrderPanel/TurnOrderContainer/TurnOrderAvatars/TurnOrderAvatar3" unique_id=415151144]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -221,54 +221,54 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_4c57u")
 
-[node name="PlayerAvatar4" type="TextureRect" parent="UILayer/MarginContainer/TurnOrderPanel/TurnOrder/TurnOrderAvatars" unique_id=598137715]
+[node name="TurnOrderAvatar4" type="TextureRect" parent="UI/UIMargin/TurnOrderPanel/TurnOrderContainer/TurnOrderAvatars" unique_id=598137715]
 modulate = Color(1, 1, 1, 0.7529412)
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 texture = ExtResource("8_4c57u")
 expand_mode = 1
 
-[node name="PlayerAvatar5" type="TextureRect" parent="UILayer/MarginContainer/TurnOrderPanel/TurnOrder/TurnOrderAvatars" unique_id=1680949700]
+[node name="TurnOrderAvatar5" type="TextureRect" parent="UI/UIMargin/TurnOrderPanel/TurnOrderContainer/TurnOrderAvatars" unique_id=1680949700]
 modulate = Color(1, 1, 1, 0.7529412)
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 texture = ExtResource("7_kek77")
 expand_mode = 1
 
-[node name="PlayerAvatar6" type="TextureRect" parent="UILayer/MarginContainer/TurnOrderPanel/TurnOrder/TurnOrderAvatars" unique_id=272314460]
+[node name="TurnOrderAvatar6" type="TextureRect" parent="UI/UIMargin/TurnOrderPanel/TurnOrderContainer/TurnOrderAvatars" unique_id=272314460]
 modulate = Color(1, 1, 1, 0.7529412)
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 texture = ExtResource("7_kek77")
 expand_mode = 1
 
-[node name="ScoreboardPanel" type="PanelContainer" parent="UILayer/MarginContainer" unique_id=1076000873]
+[node name="ScoreboardPanel" type="PanelContainer" parent="UI/UIMargin" unique_id=1076000873]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 
-[node name="MarginContainer" type="MarginContainer" parent="UILayer/MarginContainer/ScoreboardPanel" unique_id=1898826075]
+[node name="ScoreboardMargin" type="MarginContainer" parent="UI/UIMargin/ScoreboardPanel" unique_id=1898826075]
 layout_mode = 2
 theme_override_constants/margin_left = 8
 theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 0
 
-[node name="VBoxContainer" type="HBoxContainer" parent="UILayer/MarginContainer/ScoreboardPanel/MarginContainer" unique_id=1247751209]
+[node name="ScoreboardContainer" type="HBoxContainer" parent="UI/UIMargin/ScoreboardPanel/ScoreboardMargin" unique_id=1247751209]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UILayer/MarginContainer/ScoreboardPanel/MarginContainer/VBoxContainer" unique_id=1035185838]
+[node name="AwayTeamContainer" type="HBoxContainer" parent="UI/UIMargin/ScoreboardPanel/ScoreboardMargin/ScoreboardContainer" unique_id=1035185838]
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="AwayTeamNameLabel" type="Label" parent="UILayer/MarginContainer/ScoreboardPanel/MarginContainer/VBoxContainer/HBoxContainer" unique_id=453171174]
+[node name="AwayTeamNameLabel" type="Label" parent="UI/UIMargin/ScoreboardPanel/ScoreboardMargin/ScoreboardContainer/AwayTeamContainer" unique_id=453171174]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_fonts/font = ExtResource("7_4c57u")
 theme_override_font_sizes/font_size = 64
 text = "AWAYERS"
 
-[node name="AwayTeamScoreLabel" type="Label" parent="UILayer/MarginContainer/ScoreboardPanel/MarginContainer/VBoxContainer/HBoxContainer" unique_id=551576547]
+[node name="AwayTeamScoreLabel" type="Label" parent="UI/UIMargin/ScoreboardPanel/ScoreboardMargin/ScoreboardContainer/AwayTeamContainer" unique_id=551576547]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 10
@@ -276,16 +276,16 @@ theme_override_fonts/font = ExtResource("7_4c57u")
 theme_override_font_sizes/font_size = 64
 text = "00"
 
-[node name="VSeparator" type="VSeparator" parent="UILayer/MarginContainer/ScoreboardPanel/MarginContainer/VBoxContainer" unique_id=1356967096]
+[node name="VSeparator" type="VSeparator" parent="UI/UIMargin/ScoreboardPanel/ScoreboardMargin/ScoreboardContainer" unique_id=1356967096]
 layout_mode = 2
 theme_override_constants/separation = 24
 theme_override_styles/separator = SubResource("StyleBoxLine_lc2xo")
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="UILayer/MarginContainer/ScoreboardPanel/MarginContainer/VBoxContainer" unique_id=1455554098]
+[node name="HomeTeamContainer" type="HBoxContainer" parent="UI/UIMargin/ScoreboardPanel/ScoreboardMargin/ScoreboardContainer" unique_id=1455554098]
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="HomeTeamNameLabel" type="Label" parent="UILayer/MarginContainer/ScoreboardPanel/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=892923294]
+[node name="HomeTeamNameLabel" type="Label" parent="UI/UIMargin/ScoreboardPanel/ScoreboardMargin/ScoreboardContainer/HomeTeamContainer" unique_id=892923294]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
@@ -293,7 +293,7 @@ theme_override_fonts/font = ExtResource("7_4c57u")
 theme_override_font_sizes/font_size = 64
 text = "HOMERS"
 
-[node name="HomeTeamScoreLabel" type="Label" parent="UILayer/MarginContainer/ScoreboardPanel/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=683549508]
+[node name="HomeTeamScoreLabel" type="Label" parent="UI/UIMargin/ScoreboardPanel/ScoreboardMargin/ScoreboardContainer/HomeTeamContainer" unique_id=683549508]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 10
@@ -301,103 +301,104 @@ theme_override_fonts/font = ExtResource("7_4c57u")
 theme_override_font_sizes/font_size = 64
 text = "00"
 
-[node name="ActivePlayerPanel" type="PanelContainer" parent="UILayer/MarginContainer" unique_id=1579239758]
+[node name="ActivePlayerPanel" type="PanelContainer" parent="UI/UIMargin" unique_id=1579239758]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UILayer/MarginContainer/ActivePlayerPanel" unique_id=752820652]
+[node name="ActivePlayerContainer" type="VBoxContainer" parent="UI/UIMargin/ActivePlayerPanel" unique_id=752820652]
 layout_mode = 2
 
-[node name="ActivePlayerTitle" type="Label" parent="UILayer/MarginContainer/ActivePlayerPanel/VBoxContainer" unique_id=636858216]
+[node name="ActivePlayerNameLabel" type="Label" parent="UI/UIMargin/ActivePlayerPanel/ActivePlayerContainer" unique_id=636858216]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Red 1"
 horizontal_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UILayer/MarginContainer/ActivePlayerPanel/VBoxContainer" unique_id=642972113]
+[node name="ActivePlayerInfoContainer" type="HBoxContainer" parent="UI/UIMargin/ActivePlayerPanel/ActivePlayerContainer" unique_id=642972113]
 layout_mode = 2
 
-[node name="ActivePlayerAvatar" type="TextureRect" parent="UILayer/MarginContainer/ActivePlayerPanel/VBoxContainer/HBoxContainer" unique_id=725692738]
+[node name="ActivePlayerAvatar" type="TextureRect" parent="UI/UIMargin/ActivePlayerPanel/ActivePlayerContainer/ActivePlayerInfoContainer" unique_id=725692738]
 layout_mode = 2
 texture = ExtResource("8_4c57u")
 stretch_mode = 3
 
-[node name="ActivePlayerInfo" type="VBoxContainer" parent="UILayer/MarginContainer/ActivePlayerPanel/VBoxContainer/HBoxContainer" unique_id=1665673845]
+[node name="ActivePlayerInfo" type="VBoxContainer" parent="UI/UIMargin/ActivePlayerPanel/ActivePlayerContainer/ActivePlayerInfoContainer" unique_id=1665673845]
 layout_mode = 2
 alignment = 1
 
-[node name="ContextLabels" type="HBoxContainer" parent="UILayer/MarginContainer/ActivePlayerPanel/VBoxContainer/HBoxContainer/ActivePlayerInfo" unique_id=1112654454]
+[node name="ContextLabels" type="HBoxContainer" parent="UI/UIMargin/ActivePlayerPanel/ActivePlayerContainer/ActivePlayerInfoContainer/ActivePlayerInfo" unique_id=1112654454]
 layout_mode = 2
 
-[node name="ContextLabel" type="Label" parent="UILayer/MarginContainer/ActivePlayerPanel/VBoxContainer/HBoxContainer/ActivePlayerInfo/ContextLabels" unique_id=1045939920]
+[node name="ContextLabel" type="Label" parent="UI/UIMargin/ActivePlayerPanel/ActivePlayerContainer/ActivePlayerInfoContainer/ActivePlayerInfo/ContextLabels" unique_id=1045939920]
 layout_mode = 2
 tooltip_text = "Player's team has possession of the ball"
 mouse_filter = 0
 text = "Offense"
 
-[node name="ContextLabel2" type="Label" parent="UILayer/MarginContainer/ActivePlayerPanel/VBoxContainer/HBoxContainer/ActivePlayerInfo/ContextLabels" unique_id=1420340418]
+[node name="ContextLabel2" type="Label" parent="UI/UIMargin/ActivePlayerPanel/ActivePlayerContainer/ActivePlayerInfoContainer/ActivePlayerInfo/ContextLabels" unique_id=1420340418]
 layout_mode = 2
 tooltip_text = "Player has possession of the ball"
 mouse_filter = 0
 text = "On-Ball"
 
-[node name="ContextLabel3" type="Label" parent="UILayer/MarginContainer/ActivePlayerPanel/VBoxContainer/HBoxContainer/ActivePlayerInfo/ContextLabels" unique_id=357772965]
+[node name="ContextLabel3" type="Label" parent="UI/UIMargin/ActivePlayerPanel/ActivePlayerContainer/ActivePlayerInfoContainer/ActivePlayerInfo/ContextLabels" unique_id=357772965]
 layout_mode = 2
 tooltip_text = "Player has picked up their dribble"
 mouse_filter = 0
 text = "No Dribble"
 
-[node name="RangeLabel" type="Label" parent="UILayer/MarginContainer/ActivePlayerPanel/VBoxContainer/HBoxContainer/ActivePlayerInfo" unique_id=585894433]
+[node name="RangeLabel" type="Label" parent="UI/UIMargin/ActivePlayerPanel/ActivePlayerContainer/ActivePlayerInfoContainer/ActivePlayerInfo" unique_id=585894433]
 layout_mode = 2
 text = "Movement range: 3.0 m"
 
-[node name="EnergyLabel" type="Label" parent="UILayer/MarginContainer/ActivePlayerPanel/VBoxContainer/HBoxContainer/ActivePlayerInfo" unique_id=1250186127]
+[node name="EnergyLabel" type="Label" parent="UI/UIMargin/ActivePlayerPanel/ActivePlayerContainer/ActivePlayerInfoContainer/ActivePlayerInfo" unique_id=1250186127]
 layout_mode = 2
 text = "Energy level: Tired"
 
-[node name="ActivePlayerStats" type="GridContainer" parent="UILayer/MarginContainer/ActivePlayerPanel/VBoxContainer/HBoxContainer/ActivePlayerInfo" unique_id=1504126426]
+[node name="ActivePlayerStats" type="GridContainer" parent="UI/UIMargin/ActivePlayerPanel/ActivePlayerContainer/ActivePlayerInfoContainer/ActivePlayerInfo" unique_id=1504126426]
 layout_mode = 2
 theme_override_constants/h_separation = 8
 theme_override_constants/v_separation = 8
 columns = 3
 
-[node name="ActivePlayerStatLabel" type="Label" parent="UILayer/MarginContainer/ActivePlayerPanel/VBoxContainer/HBoxContainer/ActivePlayerInfo/ActivePlayerStats" unique_id=230025779]
+[node name="ActivePlayerStatLabel" type="Label" parent="UI/UIMargin/ActivePlayerPanel/ActivePlayerContainer/ActivePlayerInfoContainer/ActivePlayerInfo/ActivePlayerStats" unique_id=230025779]
 layout_mode = 2
 text = "CHA: 00"
 
-[node name="ActivePlayerStatLabel2" type="Label" parent="UILayer/MarginContainer/ActivePlayerPanel/VBoxContainer/HBoxContainer/ActivePlayerInfo/ActivePlayerStats" unique_id=1585315111]
+[node name="ActivePlayerStatLabel2" type="Label" parent="UI/UIMargin/ActivePlayerPanel/ActivePlayerContainer/ActivePlayerInfoContainer/ActivePlayerInfo/ActivePlayerStats" unique_id=1585315111]
 layout_mode = 2
 text = "STR: 00"
 
-[node name="ActivePlayerStatLabel3" type="Label" parent="UILayer/MarginContainer/ActivePlayerPanel/VBoxContainer/HBoxContainer/ActivePlayerInfo/ActivePlayerStats" unique_id=1465819984]
+[node name="ActivePlayerStatLabel3" type="Label" parent="UI/UIMargin/ActivePlayerPanel/ActivePlayerContainer/ActivePlayerInfoContainer/ActivePlayerInfo/ActivePlayerStats" unique_id=1465819984]
 layout_mode = 2
 text = "WIS: 00"
 
-[node name="ActivePlayerStatLabel4" type="Label" parent="UILayer/MarginContainer/ActivePlayerPanel/VBoxContainer/HBoxContainer/ActivePlayerInfo/ActivePlayerStats" unique_id=400415507]
+[node name="ActivePlayerStatLabel4" type="Label" parent="UI/UIMargin/ActivePlayerPanel/ActivePlayerContainer/ActivePlayerInfoContainer/ActivePlayerInfo/ActivePlayerStats" unique_id=400415507]
 layout_mode = 2
 text = "DEX: 00"
 
-[node name="ActivePlayerStatLabel5" type="Label" parent="UILayer/MarginContainer/ActivePlayerPanel/VBoxContainer/HBoxContainer/ActivePlayerInfo/ActivePlayerStats" unique_id=1537470790]
+[node name="ActivePlayerStatLabel5" type="Label" parent="UI/UIMargin/ActivePlayerPanel/ActivePlayerContainer/ActivePlayerInfoContainer/ActivePlayerInfo/ActivePlayerStats" unique_id=1537470790]
 layout_mode = 2
 text = "INT: 00"
 
-[node name="ActivePlayerStatLabel6" type="Label" parent="UILayer/MarginContainer/ActivePlayerPanel/VBoxContainer/HBoxContainer/ActivePlayerInfo/ActivePlayerStats" unique_id=1217162340]
+[node name="ActivePlayerStatLabel6" type="Label" parent="UI/UIMargin/ActivePlayerPanel/ActivePlayerContainer/ActivePlayerInfoContainer/ActivePlayerInfo/ActivePlayerStats" unique_id=1217162340]
 layout_mode = 2
 text = "CON: 00"
 
-[node name="ActionPanel" type="PanelContainer" parent="UILayer/MarginContainer" unique_id=1178690388]
+[node name="ActionPanel" type="PanelContainer" parent="UI/UIMargin" unique_id=1178690388]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
 
-[node name="ActionContainer" type="VBoxContainer" parent="UILayer/MarginContainer/ActionPanel" unique_id=1118463693]
+[node name="ActionContainer" type="VBoxContainer" parent="UI/UIMargin/ActionPanel" unique_id=1118463693]
 layout_mode = 2
 
-[node name="ShootContainer" type="HBoxContainer" parent="UILayer/MarginContainer/ActionPanel/ActionContainer" unique_id=1734348071]
+[node name="ShootContainer" type="HBoxContainer" parent="UI/UIMargin/ActionPanel/ActionContainer" unique_id=1734348071]
 layout_mode = 2
 
-[node name="ShootButton" type="Button" parent="UILayer/MarginContainer/ActionPanel/ActionContainer/ShootContainer" unique_id=1927342479]
+[node name="ShootButton" type="Button" parent="UI/UIMargin/ActionPanel/ActionContainer/ShootContainer" unique_id=1927342479]
 layout_mode = 2
 size_flags_horizontal = 3
 tooltip_text = "Take a shot at the net"
@@ -405,16 +406,16 @@ theme_override_font_sizes/font_size = 32
 text = "SHOOT"
 icon = ExtResource("13_215e1")
 
-[node name="ShootInfo" type="Label" parent="UILayer/MarginContainer/ActionPanel/ActionContainer/ShootContainer" unique_id=463945022]
+[node name="ShootInfo" type="Label" parent="UI/UIMargin/ActionPanel/ActionContainer/ShootContainer" unique_id=463945022]
 visible = false
 layout_mode = 2
 text = "DC: 15
 Distance 3.5m | well-guarded"
 
-[node name="PassContainer" type="HBoxContainer" parent="UILayer/MarginContainer/ActionPanel/ActionContainer" unique_id=1282348881]
+[node name="PassContainer" type="HBoxContainer" parent="UI/UIMargin/ActionPanel/ActionContainer" unique_id=1282348881]
 layout_mode = 2
 
-[node name="PassButton" type="Button" parent="UILayer/MarginContainer/ActionPanel/ActionContainer/PassContainer" unique_id=1535290571]
+[node name="PassButton" type="Button" parent="UI/UIMargin/ActionPanel/ActionContainer/PassContainer" unique_id=1535290571]
 texture_filter = 1
 layout_mode = 2
 size_flags_horizontal = 3
@@ -423,40 +424,40 @@ theme_override_font_sizes/font_size = 32
 text = "PASS"
 icon = ExtResource("14_7sc4i")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UILayer/MarginContainer/ActionPanel/ActionContainer/PassContainer" unique_id=1671610223]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/UIMargin/ActionPanel/ActionContainer/PassContainer" unique_id=1671610223]
 visible = false
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UILayer/MarginContainer/ActionPanel/ActionContainer/PassContainer/VBoxContainer" unique_id=1095070644]
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/UIMargin/ActionPanel/ActionContainer/PassContainer/VBoxContainer" unique_id=1095070644]
 layout_mode = 2
 
-[node name="Button" type="Button" parent="UILayer/MarginContainer/ActionPanel/ActionContainer/PassContainer/VBoxContainer/HBoxContainer" unique_id=1553394475]
+[node name="Button" type="Button" parent="UI/UIMargin/ActionPanel/ActionContainer/PassContainer/VBoxContainer/HBoxContainer" unique_id=1553394475]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "RED 2"
 
-[node name="Label" type="Label" parent="UILayer/MarginContainer/ActionPanel/ActionContainer/PassContainer/VBoxContainer/HBoxContainer" unique_id=171655149]
+[node name="Label" type="Label" parent="UI/UIMargin/ActionPanel/ActionContainer/PassContainer/VBoxContainer/HBoxContainer" unique_id=171655149]
 layout_mode = 2
 text = "DC: 10
 distance: 3.0 m | well-guarded"
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="UILayer/MarginContainer/ActionPanel/ActionContainer/PassContainer/VBoxContainer" unique_id=1024146188]
+[node name="HBoxContainer2" type="HBoxContainer" parent="UI/UIMargin/ActionPanel/ActionContainer/PassContainer/VBoxContainer" unique_id=1024146188]
 layout_mode = 2
 
-[node name="Button2" type="Button" parent="UILayer/MarginContainer/ActionPanel/ActionContainer/PassContainer/VBoxContainer/HBoxContainer2" unique_id=1660819045]
+[node name="Button2" type="Button" parent="UI/UIMargin/ActionPanel/ActionContainer/PassContainer/VBoxContainer/HBoxContainer2" unique_id=1660819045]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "RED 3"
 
-[node name="Label" type="Label" parent="UILayer/MarginContainer/ActionPanel/ActionContainer/PassContainer/VBoxContainer/HBoxContainer2" unique_id=477461679]
+[node name="Label" type="Label" parent="UI/UIMargin/ActionPanel/ActionContainer/PassContainer/VBoxContainer/HBoxContainer2" unique_id=477461679]
 layout_mode = 2
 text = "DC: 5
 distance: 2.0m | open"
 
-[node name="DribbleContainer" type="HBoxContainer" parent="UILayer/MarginContainer/ActionPanel/ActionContainer" unique_id=31165091]
+[node name="DribbleContainer" type="HBoxContainer" parent="UI/UIMargin/ActionPanel/ActionContainer" unique_id=31165091]
 layout_mode = 2
 
-[node name="DribbleButton" type="Button" parent="UILayer/MarginContainer/ActionPanel/ActionContainer/DribbleContainer" unique_id=974297647]
+[node name="DribbleButton" type="Button" parent="UI/UIMargin/ActionPanel/ActionContainer/DribbleContainer" unique_id=974297647]
 layout_mode = 2
 size_flags_horizontal = 3
 tooltip_text = "Make a dribble move
