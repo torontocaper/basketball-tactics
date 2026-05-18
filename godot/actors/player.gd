@@ -18,6 +18,7 @@ extends CharacterBody3D
 	set(i_a):
 		if not is_node_ready():
 			await ready
+		print(name + " is active")
 		active_decal.visible = i_a
 		
 @export var team_color: Color = Color.DARK_RED:

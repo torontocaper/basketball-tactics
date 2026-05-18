@@ -32,6 +32,7 @@ extends Node3D
 	set(a_p):
 		if not is_node_ready():
 			await ready
+		print("Making %s active" % a_p.name)
 		a_p.is_active = true
 		active_player_name_label.text = a_p.name
 
@@ -45,8 +46,6 @@ var away_team_players: Array[Node]
 @onready var home_team_name_label: Label = %HomeTeamNameLabel
 @onready var home_team_score_label: Label = %HomeTeamScoreLabel
 
-
-# OVERRIDES
 
 func _ready() -> void:
 	home_team_players = get_tree().get_nodes_in_group("home_team")

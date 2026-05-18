@@ -49,9 +49,9 @@ vertical = true
 script = ExtResource("1_iotsf")
 home_team_color = Color(0.5294118, 0.80784315, 0.92156863, 1)
 away_team_color = Color(0.5019608, 0.5019608, 0, 1)
-home_team_score = 5
-away_team_score = 6
-active_player = NodePath("Players/Charles")
+home_team_score = 3
+away_team_score = 7
+active_player = NodePath("Players/Magic")
 
 [node name="Players" type="Node" parent="." unique_id=270399416]
 
