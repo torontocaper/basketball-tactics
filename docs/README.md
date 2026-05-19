@@ -16,15 +16,7 @@ Each full round of turns takes a second of real-life time.
 
 Alongside this document is `AGENTS.md`, which provides instructions for AI coding assistants. 
 
-There are two main sub-folders within the project:
-
-### Docs
-
-Contains the Game Design Document, screenshots, concept and reference art. 
-
-### Godot
-
-Where the game project lives.
+The 'docs' folder also contains the Game Design Document, screenshots, concept and reference art. 
 
 ## Attributions
 
