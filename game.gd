@@ -50,6 +50,7 @@ var players_on_court: Array[Player]
 @onready var home_team_name_label: Label = %HomeTeamNameLabel
 @onready var home_team_score_label: Label = %HomeTeamScoreLabel
 @onready var end_turn_button: Button = %EndTurnButton
+@onready var turn_manager: TurnManager = %TurnManager
 
 
 func _ready() -> void:
@@ -70,7 +71,7 @@ func _ready() -> void:
 
 	print("There are %s players on the court" % [players_on_court.size()])
 
-	active_player = players_on_court.pick_random() #TODO replace with turn logic
+	active_player = turn_manager.shuffle_players(players_on_court)
 
 func _process(_delta: float) -> void:
 	pass

@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://651w441pfvby" path="res://assets/textures/wood_floor_054_1k/WoodFloor054_1K-PNG_Color.png" id="1_34bgr"]
 [ext_resource type="Script" uid="uid://81hx1qtg1wpn" path="res://game.gd" id="1_iotsf"]
+[ext_resource type="Script" uid="uid://dm8m7g1mcuf2a" path="res://turn_manager.gd" id="2_80cx4"]
 [ext_resource type="Texture2D" uid="uid://ceikwnbuyl20y" path="res://assets/textures/wood_floor_054_1k/WoodFloor054_1K-PNG_Roughness.png" id="2_esun2"]
 [ext_resource type="Texture2D" uid="uid://cwj6ul5bcr5v0" path="res://assets/textures/wood_floor_054_1k/WoodFloor054_1K-PNG_AmbientOcclusion.png" id="2_gm3gy"]
 [ext_resource type="Texture2D" uid="uid://c7ge0j7koqm4" path="res://assets/textures/wood_floor_054_1k/WoodFloor054_1K-PNG_Displacement.png" id="3_ajfhb"]
@@ -50,6 +51,10 @@ vertical = true
 script = ExtResource("1_iotsf")
 home_team_color = Color(0.5294118, 0.80784315, 0.92156863, 1)
 away_team_color = Color(0.5019608, 0.5019608, 0, 1)
+
+[node name="TurnManager" type="Node" parent="." unique_id=472738798]
+unique_name_in_owner = true
+script = ExtResource("2_80cx4")
 
 [node name="Players" type="Node" parent="." unique_id=270399416]
 
@@ -425,5 +430,3 @@ unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "END TURN"
-
-[node name="TurnManager" type="Node" parent="." unique_id=472738798]
