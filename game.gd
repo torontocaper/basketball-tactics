@@ -29,7 +29,7 @@ extends Node3D
 		away_team_score_label.text = "%02d" % a_t_s
 
 @export_group("Turn Order")
-@export var active_player: Player:
+@export var active_player: Player: #TODO: does this logic belong here or in TurnManager?
 	set(a_p):
 		if not is_node_ready():
 			await ready
@@ -41,7 +41,7 @@ extends Node3D
 
 var home_team_players: Array[Node]
 var away_team_players: Array[Node]
-var players_on_court: Array[Player]
+var players_on_court: Array[Player] #TODO: similarly, does this belong in TurnManager?
 
 
 @onready var active_player_name_label: Label = %ActivePlayerNameLabel

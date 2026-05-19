@@ -7,12 +7,7 @@ extends Node
 #signal
 #enum
 #const
-#@export var players_on_court: Array[Player]:
-	#set(p_o_c):
-		#print("Turn Manager knows who's on the court:")
-		#players_on_court = p_o_c
-		#for player in players_on_court:
-			#print(player.name)
+#@export var 
 #var
 #@onready var
 
@@ -31,7 +26,7 @@ func _physics_process(_delta: float) -> void:
 func shuffle_players(players: Array[Player]) -> Player:
 	print("Turn Manager shuffling players")
 	players.shuffle()
-	var active_player = players.pop_front()
+	var active_player = players.pop_front() #TODO: add same player to back of array (push_back?)
 	return active_player
 
 # PRIVATE/HELPER
