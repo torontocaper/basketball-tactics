@@ -4,13 +4,7 @@ A turn-based, tactical sports simulation with RPG and management elements.
 
 ## Core Concept
 
-*Basketball Tactics/BT* (working title) applies the tactical, turn-based combat of games like *Final Fantasy Tactics*, *Into the Breach* and *Baldur's Gate 3* to the basketball court.
-
-## Main Mechanics
-
-Players take turns executing context-dependent moves like shooting, passing and attempting steals. 
-
-Each full round of turns takes a second of real-life time. 
+*Basketball Tactics/BT* (working title) applies the tactical, turn-based action of games like *Final Fantasy Tactics*, *Into the Breach* and *Baldur's Gate 3* to the basketball court, with players taking turns executing context-dependent moves like shooting, passing and attempting steals. 
 
 ## Project Organization
 
