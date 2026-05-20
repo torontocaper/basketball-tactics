@@ -28,12 +28,11 @@ extends Node3D
 			await ready
 		away_team_score_label.text = "%02d" % a_t_s
 
-@export_group("Turn Order")
-@export var active_player: Player: #TODO: does this logic belong here or in TurnManager?
+var active_player: Player:
 	set(a_p):
 		if not is_node_ready():
 			await ready
-		print("Making %s active" % a_p.name)
+		print("Game making %s active" % a_p.name)
 		active_player = a_p
 		active_player.is_active = true
 		active_player_name_label.text = active_player.name
@@ -69,9 +68,11 @@ func _ready() -> void:
 		players_on_court.append(player)
 		print(player.name + " is on the court")
 
-	print("There are %s players on the court" % [players_on_court.size()])
+	print("Game knows there are %s players on the court" % [players_on_court.size()])
 
-	active_player = turn_manager.shuffle_players(players_on_court)
+	turn_manager.players_in_game = players_on_court
+	turn_manager.shuffle_players()
+	active_player = turn_manager.get_active_player()
 
 func _process(_delta: float) -> void:
 	pass
@@ -89,4 +90,11 @@ func _connect_signals() -> void:
 # RECEIVERS
 func on_end_turn_button_pressed() -> void:
 	#print("Ending turn")
-	print("Ending turn for %s" % active_player.name)
+	print("Game ending turn for %s" % active_player.name)
+	active_player.is_active = false
+	if turn_manager.current_index < players_on_court.size() - 1:
+		turn_manager.current_index += 1 
+	else:
+		turn_manager.current_index = 0
+		turn_manager.current_turn += 1
+	active_player = turn_manager.get_active_player()

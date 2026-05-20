@@ -14,7 +14,7 @@ extends Node
 # OVERRIDES
 
 func _ready() -> void:
-	pass
+	_connect_signals()
 
 func _process(_delta: float) -> void:
 	pass
@@ -25,8 +25,7 @@ func _physics_process(_delta: float) -> void:
 # CORE
 
 # PRIVATE/HELPER
+func _connect_signals() -> void:
+	pass
 
 # RECEIVERS
-
-# SETTERS/GETTERS
-
