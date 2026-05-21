@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://cqphbwl7lmt3t" path="res://actors/player.tscn" id="7_efxa6"]
 [ext_resource type="Texture2D" uid="uid://cbov7ehm1nda7" path="res://assets/icons/godot_icon_red.png" id="8_4c57u"]
 [ext_resource type="FontFile" uid="uid://buemt0c417y0l" path="res://assets/fonts/Roboto-Medium.ttf" id="9_efxa6"]
+[ext_resource type="StyleBox" uid="uid://dm1d38j24xjio" path="res://resources/active_label_style_box.tres" id="11_80cx4"]
 [ext_resource type="Texture2D" uid="uid://c2tndwgkigkdc" path="res://assets/icons/shot_icon_white_24.png" id="13_215e1"]
 [ext_resource type="Texture2D" uid="uid://b48ecg2w32y68" path="res://assets/icons/pass_icon_white_24.png" id="14_7sc4i"]
 [ext_resource type="Texture2D" uid="uid://b14ho3ltl7ivs" path="res://assets/icons/dribble_icon_white_24.png" id="15_7sc4i"]
@@ -194,6 +195,7 @@ layout_mode = 2
 
 [node name="TurnOrderLabel1" type="Label" parent="UI/UIMargin/TurnOrderPanel/TurnOrderContainer/TurnOrderLabels" unique_id=976470947]
 layout_mode = 2
+theme_override_styles/normal = ExtResource("11_80cx4")
 text = "PlayerName"
 
 [node name="TurnOrderLabel2" type="Label" parent="UI/UIMargin/TurnOrderPanel/TurnOrderContainer/TurnOrderLabels" unique_id=1785243904]

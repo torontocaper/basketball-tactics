@@ -6,7 +6,8 @@ extends Node3D
 
 #signal
 #enum
-#const
+const ACTIVE_LABEL_STYLE_BOX = preload("uid://dm1d38j24xjio")
+
 @export_group("Team Info")
 @export_subgroup("Home Team")
 @export var home_team_name: String = "Homers"
@@ -36,6 +37,7 @@ var active_player: Player:
 		active_player = a_p
 		active_player.is_active = true
 		active_player_name_label.text = active_player.name
+		_update_active_player_label()
 
 var current_turn_order: Array[Player]:
 	set(c_t_o):
@@ -95,6 +97,13 @@ func _set_initial_turn_order() -> void:
 	current_turn_order = turn_manager.shuffle_players()
 	print("Initial turn order set: %s" % str(current_turn_order))
 	active_player = turn_manager.get_active_player()
+
+
+func _update_active_player_label() -> void:
+	for label in turn_order_labels.get_children():
+		label.remove_theme_stylebox_override("normal")
+	var target_label = turn_order_labels.get_child(turn_manager.current_index) as Label
+	target_label.add_theme_stylebox_override("normal", ACTIVE_LABEL_STYLE_BOX)
 
 
 # RECEIVERS
