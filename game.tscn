@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://b6am46kegw2x3"]
 
 [ext_resource type="Texture2D" uid="uid://651w441pfvby" path="res://assets/textures/wood_floor_054_1k/WoodFloor054_1K-PNG_Color.png" id="1_34bgr"]
-[ext_resource type="Script" uid="uid://81hx1qtg1wpn" path="res://game.gd" id="1_iotsf"]
+[ext_resource type="Script" uid="uid://81hx1qtg1wpn" path="res://game_manager.gd" id="1_iotsf"]
 [ext_resource type="Script" uid="uid://dm8m7g1mcuf2a" path="res://turn_manager.gd" id="2_80cx4"]
 [ext_resource type="Texture2D" uid="uid://ceikwnbuyl20y" path="res://assets/textures/wood_floor_054_1k/WoodFloor054_1K-PNG_Roughness.png" id="2_esun2"]
 [ext_resource type="Texture2D" uid="uid://cwj6ul5bcr5v0" path="res://assets/textures/wood_floor_054_1k/WoodFloor054_1K-PNG_AmbientOcclusion.png" id="2_gm3gy"]
@@ -185,10 +185,11 @@ size_flags_horizontal = 4
 size_flags_vertical = 0
 
 [node name="TurnOrderTitle" type="Label" parent="UI/UIMargin/TurnOrderPanel/TurnOrderContainer" unique_id=291672845]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_fonts/font = ExtResource("9_efxa6")
 theme_override_font_sizes/font_size = 24
-text = "Turn Order"
+text = "Turn order for round 1"
 horizontal_alignment = 1
 uppercase = true
 
@@ -277,7 +278,7 @@ layout_mode = 2
 size_flags_horizontal = 10
 theme_override_fonts/font = ExtResource("7_4c57u")
 theme_override_font_sizes/font_size = 64
-text = "07"
+text = "00"
 
 [node name="VSeparator" type="VSeparator" parent="UI/UIMargin/ScoreboardPanel/ScoreboardMargin/ScoreboardContainer" unique_id=1356967096]
 layout_mode = 2
@@ -302,7 +303,7 @@ layout_mode = 2
 size_flags_horizontal = 10
 theme_override_fonts/font = ExtResource("7_4c57u")
 theme_override_font_sizes/font_size = 64
-text = "03"
+text = "00"
 
 [node name="ActivePlayerPanel" type="PanelContainer" parent="UI/UIMargin" unique_id=1579239758]
 layout_mode = 2

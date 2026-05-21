@@ -1,6 +1,6 @@
 #@tool
 #@icon(icon_path: String)
-class_name Game
+class_name GameManager
 extends Node3D
 ## Documentation comments
 
@@ -32,7 +32,7 @@ var active_player: Player:
 	set(a_p):
 		if not is_node_ready():
 			await ready
-		print("Game making %s active" % a_p.name)
+		print("GM making %s active" % a_p.name)
 		active_player = a_p
 		active_player.is_active = true
 		active_player_name_label.text = active_player.name
@@ -50,6 +50,7 @@ var players_on_court: Array[Player] #TODO: similarly, does this belong in TurnMa
 @onready var home_team_score_label: Label = %HomeTeamScoreLabel
 @onready var end_turn_button: Button = %EndTurnButton
 @onready var turn_manager: TurnManager = %TurnManager
+@onready var turn_order_title: Label = %TurnOrderTitle
 
 
 func _ready() -> void:
@@ -68,7 +69,7 @@ func _ready() -> void:
 		players_on_court.append(player)
 		print(player.name + " is on the court")
 
-	print("Game knows there are %s players on the court" % [players_on_court.size()])
+	print("GM knows there are %s players on the court" % [players_on_court.size()])
 
 	turn_manager.players_in_game = players_on_court
 	turn_manager.shuffle_players()
@@ -85,16 +86,19 @@ func _physics_process(_delta: float) -> void:
 # PRIVATE/HELPER
 func _connect_signals() -> void:
 	end_turn_button.connect("pressed", on_end_turn_button_pressed)
-
+	turn_manager.connect("round_completed", on_round_completed)
 
 # RECEIVERS
 func on_end_turn_button_pressed() -> void:
-	#print("Ending turn")
-	print("Game ending turn for %s" % active_player.name)
+	print("GM ending turn for %s" % active_player.name)
 	active_player.is_active = false
 	if turn_manager.current_index < players_on_court.size() - 1:
 		turn_manager.current_index += 1 
 	else:
 		turn_manager.current_index = 0
-		turn_manager.current_turn += 1
+		turn_manager.current_round += 1
 	active_player = turn_manager.get_active_player()
+
+
+func on_round_completed() -> void:
+	turn_order_title.text = "Turn order for round %s" % str(turn_manager.current_round)
