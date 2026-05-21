@@ -37,10 +37,13 @@ var active_player: Player:
 		active_player.is_active = true
 		active_player_name_label.text = active_player.name
 
-
+var current_turn_order: Array[Player]:
+	set(c_t_o):
+		current_turn_order = c_t_o
+		_assign_turn_order_labels()
 var home_team_players: Array[Node]
 var away_team_players: Array[Node]
-var players_on_court: Array[Player] #TODO: similarly, does this belong in TurnManager?
+var players_on_court: Array[Player] 
 
 
 @onready var active_player_name_label: Label = %ActivePlayerNameLabel
@@ -50,46 +53,52 @@ var players_on_court: Array[Player] #TODO: similarly, does this belong in TurnMa
 @onready var home_team_score_label: Label = %HomeTeamScoreLabel
 @onready var end_turn_button: Button = %EndTurnButton
 @onready var turn_manager: TurnManager = %TurnManager
-@onready var turn_order_title: Label = %TurnOrderTitle
+@onready var round_number_label: Label = %RoundNumberLabel
+@onready var turn_order_labels: VBoxContainer = %TurnOrderLabels
 
-
+# OVERRIDES
 func _ready() -> void:
 	_connect_signals()
+	_assign_players_to_teams()
+	_set_initial_turn_order()
+
+
+# PRIVATE/HELPER
+func _assign_players_to_teams() -> void:
 	home_team_players = get_tree().get_nodes_in_group("home_team")
-	away_team_players = get_tree().get_nodes_in_group("away_team")
 	for player in home_team_players:
 		print(player.name + " is on the home team")
 		player.team_color = home_team_color
 		players_on_court.append(player)
 		print(player.name + " is on the court")
 
+	away_team_players = get_tree().get_nodes_in_group("away_team")
 	for player in away_team_players:
 		print(player.name + " is on the away team")
 		player.team_color = away_team_color
 		players_on_court.append(player)
 		print(player.name + " is on the court")
 
-	print("GM knows there are %s players on the court" % [players_on_court.size()])
+func _assign_turn_order_labels() -> void:
+	for player in current_turn_order:
+		var current_label = turn_order_labels.get_child(current_turn_order.find(player))
+		current_label.text = player.name
 
+
+func _connect_signals() -> void:
+	end_turn_button.connect("pressed", _on_end_turn_button_pressed)
+	turn_manager.connect("round_completed", _on_round_completed)
+
+
+func _set_initial_turn_order() -> void:
 	turn_manager.players_in_game = players_on_court
-	turn_manager.shuffle_players()
+	current_turn_order = turn_manager.shuffle_players()
+	print("Initial turn order set: %s" % str(current_turn_order))
 	active_player = turn_manager.get_active_player()
 
-func _process(_delta: float) -> void:
-	pass
-
-func _physics_process(_delta: float) -> void:
-	pass
-
-# CORE
-
-# PRIVATE/HELPER
-func _connect_signals() -> void:
-	end_turn_button.connect("pressed", on_end_turn_button_pressed)
-	turn_manager.connect("round_completed", on_round_completed)
 
 # RECEIVERS
-func on_end_turn_button_pressed() -> void:
+func _on_end_turn_button_pressed() -> void:
 	print("GM ending turn for %s" % active_player.name)
 	active_player.is_active = false
 	if turn_manager.current_index < players_on_court.size() - 1:
@@ -100,5 +109,5 @@ func on_end_turn_button_pressed() -> void:
 	active_player = turn_manager.get_active_player()
 
 
-func on_round_completed() -> void:
-	turn_order_title.text = "Turn order for round %s" % str(turn_manager.current_round)
+func _on_round_completed() -> void:
+	round_number_label.text = "Round %s" % str(turn_manager.current_round)

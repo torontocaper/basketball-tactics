@@ -30,9 +30,10 @@ func get_active_player() -> Player:
 	return active_player
 
 
-func shuffle_players() -> void:
+func shuffle_players() -> Array[Player]:
 	print("TM shuffling players")
 	players_in_game.shuffle()
+	return players_in_game
 
 # PRIVATE/HELPER
 

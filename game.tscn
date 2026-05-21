@@ -10,7 +10,6 @@
 [ext_resource type="PackedScene" uid="uid://d04p5dc2jaujf" path="res://props/hoop_3d.tscn" id="6_ajfhb"]
 [ext_resource type="FontFile" uid="uid://bitgv7nf07au6" path="res://assets/fonts/RobotoMono-Medium.ttf" id="7_4c57u"]
 [ext_resource type="PackedScene" uid="uid://cqphbwl7lmt3t" path="res://actors/player.tscn" id="7_efxa6"]
-[ext_resource type="Texture2D" uid="uid://dijki3fgkldjg" path="res://assets/icons/godot_icon_blue.png" id="7_kek77"]
 [ext_resource type="Texture2D" uid="uid://cbov7ehm1nda7" path="res://assets/icons/godot_icon_red.png" id="8_4c57u"]
 [ext_resource type="FontFile" uid="uid://buemt0c417y0l" path="res://assets/fonts/Roboto-Medium.ttf" id="9_efxa6"]
 [ext_resource type="Texture2D" uid="uid://c2tndwgkigkdc" path="res://assets/icons/shot_icon_white_24.png" id="13_215e1"]
@@ -32,14 +31,6 @@ uv1_scale = Vector3(10, 10, 10)
 [sub_resource type="PlaneMesh" id="PlaneMesh_gm3gy"]
 material = SubResource("StandardMaterial3D_yo73x")
 size = Vector2(15, 14)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4c57u"]
-draw_center = false
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
-border_color = Color(1, 0.84313726, 0, 1)
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_lc2xo"]
 grow_begin = 4.0
@@ -185,66 +176,45 @@ size_flags_horizontal = 4
 size_flags_vertical = 0
 
 [node name="TurnOrderTitle" type="Label" parent="UI/UIMargin/TurnOrderPanel/TurnOrderContainer" unique_id=291672845]
-unique_name_in_owner = true
 layout_mode = 2
 theme_override_fonts/font = ExtResource("9_efxa6")
 theme_override_font_sizes/font_size = 24
-text = "Turn order for round 1"
+text = "Turn Order"
 horizontal_alignment = 1
-uppercase = true
 
-[node name="TurnOrderAvatars" type="HBoxContainer" parent="UI/UIMargin/TurnOrderPanel/TurnOrderContainer" unique_id=1275052798]
+[node name="RoundNumberLabel" type="Label" parent="UI/UIMargin/TurnOrderPanel/TurnOrderContainer" unique_id=535769216]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Round 1"
+horizontal_alignment = 1
+
+[node name="TurnOrderLabels" type="VBoxContainer" parent="UI/UIMargin/TurnOrderPanel/TurnOrderContainer" unique_id=1175394697]
+unique_name_in_owner = true
 layout_mode = 2
 
-[node name="TurnOrderAvatar" type="TextureRect" parent="UI/UIMargin/TurnOrderPanel/TurnOrderContainer/TurnOrderAvatars" unique_id=33319150]
-modulate = Color(0.27058825, 0.27058825, 0.27058825, 1)
-custom_minimum_size = Vector2(64, 64)
+[node name="TurnOrderLabel1" type="Label" parent="UI/UIMargin/TurnOrderPanel/TurnOrderContainer/TurnOrderLabels" unique_id=976470947]
 layout_mode = 2
-texture = ExtResource("7_kek77")
-expand_mode = 1
+text = "PlayerName"
 
-[node name="TurnOrderAvatar2" type="TextureRect" parent="UI/UIMargin/TurnOrderPanel/TurnOrderContainer/TurnOrderAvatars" unique_id=266415128]
-modulate = Color(0.27022192, 0.27022192, 0.2702219, 1)
-custom_minimum_size = Vector2(64, 64)
+[node name="TurnOrderLabel2" type="Label" parent="UI/UIMargin/TurnOrderPanel/TurnOrderContainer/TurnOrderLabels" unique_id=1785243904]
 layout_mode = 2
-texture = ExtResource("8_4c57u")
-expand_mode = 1
+text = "PlayerName"
 
-[node name="TurnOrderAvatar3" type="TextureRect" parent="UI/UIMargin/TurnOrderPanel/TurnOrderContainer/TurnOrderAvatars" unique_id=1457351444]
-custom_minimum_size = Vector2(64, 64)
+[node name="TurnOrderLabel3" type="Label" parent="UI/UIMargin/TurnOrderPanel/TurnOrderContainer/TurnOrderLabels" unique_id=299681585]
 layout_mode = 2
-texture = ExtResource("8_4c57u")
-expand_mode = 1
+text = "PlayerName"
 
-[node name="ActivePlayerAvatarBorder" type="PanelContainer" parent="UI/UIMargin/TurnOrderPanel/TurnOrderContainer/TurnOrderAvatars/TurnOrderAvatar3" unique_id=415151144]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_4c57u")
-
-[node name="TurnOrderAvatar4" type="TextureRect" parent="UI/UIMargin/TurnOrderPanel/TurnOrderContainer/TurnOrderAvatars" unique_id=598137715]
-modulate = Color(1, 1, 1, 0.7529412)
-custom_minimum_size = Vector2(64, 64)
+[node name="TurnOrderLabel4" type="Label" parent="UI/UIMargin/TurnOrderPanel/TurnOrderContainer/TurnOrderLabels" unique_id=662033105]
 layout_mode = 2
-texture = ExtResource("8_4c57u")
-expand_mode = 1
+text = "PlayerName"
 
-[node name="TurnOrderAvatar5" type="TextureRect" parent="UI/UIMargin/TurnOrderPanel/TurnOrderContainer/TurnOrderAvatars" unique_id=1680949700]
-modulate = Color(1, 1, 1, 0.7529412)
-custom_minimum_size = Vector2(64, 64)
+[node name="TurnOrderLabel5" type="Label" parent="UI/UIMargin/TurnOrderPanel/TurnOrderContainer/TurnOrderLabels" unique_id=1375083477]
 layout_mode = 2
-texture = ExtResource("7_kek77")
-expand_mode = 1
+text = "PlayerName"
 
-[node name="TurnOrderAvatar6" type="TextureRect" parent="UI/UIMargin/TurnOrderPanel/TurnOrderContainer/TurnOrderAvatars" unique_id=272314460]
-modulate = Color(1, 1, 1, 0.7529412)
-custom_minimum_size = Vector2(64, 64)
+[node name="TurnOrderLabel6" type="Label" parent="UI/UIMargin/TurnOrderPanel/TurnOrderContainer/TurnOrderLabels" unique_id=1946755937]
 layout_mode = 2
-texture = ExtResource("7_kek77")
-expand_mode = 1
+text = "PlayerName"
 
 [node name="ScoreboardPanel" type="PanelContainer" parent="UI/UIMargin" unique_id=1076000873]
 layout_mode = 2
