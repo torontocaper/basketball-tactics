@@ -2,10 +2,11 @@
 #@icon(icon_path: String)
 class_name GameManager
 extends Node3D
-## Documentation comments
+## Game controller. Manages state, score and other game/match-level info.
 
 #signal
 #enum
+
 const ACTIVE_LABEL_STYLE_BOX = preload("uid://dm1d38j24xjio")
 
 @export_group("Team Info")

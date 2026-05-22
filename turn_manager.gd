@@ -2,15 +2,15 @@
 #@icon(icon_path: String)
 class_name TurnManager
 extends Node
-## Documentation comments
+## Turn controller. Sets initiative/turn order and accesses active player.
 
 signal round_completed
-#enum
-#const
+
 @export var current_index: int = 0:
 	set(c_i):
 		current_index = c_i
 		print("TM setting current index to %s" % str(current_index))
+
 @export var current_round: int = 1:
 	set(c_r):
 		current_round = c_r
@@ -22,14 +22,16 @@ signal round_completed
 		players_in_game = p_i_g
 		print("TM knows there are %s players in the game" % str(players_in_game.size()))
 
-# CORE
+# Core functionality
+
+## Get the [Player] at the current (turn) index
 func get_active_player() -> Player:
 	print("TM returning player at index %s" % str(current_index))
 	var active_player = players_in_game[current_index]
 	print("TM says active player is %s" % active_player.name)
 	return active_player
 
-
+## Shuffle [Player]s randomly #TODO implement initiative order based on reaction speed PlayerAttribute
 func shuffle_players() -> Array[Player]:
 	print("TM shuffling players")
 	players_in_game.shuffle()
