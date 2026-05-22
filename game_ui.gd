@@ -6,7 +6,8 @@ extends Control
 
 #signal
 #enum
-#const
+const ACTIVE_LABEL_STYLE_BOX: StyleBox = preload("uid://dm1d38j24xjio")
+
 #@export var
 #var
 ## Label that specifies which [Player] is currently active
@@ -27,18 +28,18 @@ extends Control
 @onready var turn_order_labels: VBoxContainer = %TurnOrderLabels
 
 
-# OVERRIDES
+## Assign Player names to the [member Label.text] property of each child of [member turn_order_labels]
+func assign_turn_order_labels(current_turn_order: Array[Player]) -> void:
+	for player in current_turn_order:
+		var current_label = turn_order_labels.get_child(current_turn_order.find(player))
+		current_label.text = player.name
 
-func _ready() -> void:
-	pass
-
-func _process(_delta: float) -> void:
-	pass
-
-func _physics_process(_delta: float) -> void:
-	pass
-
-# CORE
+## Highlight the [Label] representing the currently active [Player]
+func update_active_player_label(current_turn_index: int) -> void:
+	for label in turn_order_labels.get_children():
+		label.remove_theme_stylebox_override("normal")
+	var target_label = turn_order_labels.get_child(current_turn_index) as Label
+	target_label.add_theme_stylebox_override("normal", ACTIVE_LABEL_STYLE_BOX)
 
 # PRIVATE/HELPER
 

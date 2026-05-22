@@ -4,10 +4,6 @@ class_name Game
 extends Node3D
 ## Game controller. Manages state, score and other game/match-level info.
 
-#signal
-#enum
-
-const ACTIVE_LABEL_STYLE_BOX = preload("uid://dm1d38j24xjio")
 
 @export_group("Team Info")
 @export_subgroup("Home Team")
@@ -38,12 +34,12 @@ var active_player: Player:
 		active_player = a_p
 		active_player.is_active = true
 		game_ui.active_player_name_label.text = active_player.name
-		_update_active_player_label()
+		game_ui.update_active_player_label(turn_manager.current_index)
 
 var current_turn_order: Array[Player]:
 	set(c_t_o):
 		current_turn_order = c_t_o
-		_assign_turn_order_labels()
+		game_ui.assign_turn_order_labels(current_turn_order)
 var home_team_players: Array[Node]
 var away_team_players: Array[Node]
 var players_on_court: Array[Player] 
@@ -51,14 +47,7 @@ var players_on_court: Array[Player]
 ## Parent [Control] for all UI elements
 @onready var game_ui: GameUI = %GameUI
 
-#@onready var active_player_name_label: Label = %ActivePlayerNameLabel
 @onready var end_turn_button: Button = %EndTurnButton
-#@onready var away_team_name_label: Label = %AwayTeamNameLabel
-#@onready var away_team_score_label: Label = %AwayTeamScoreLabel
-#@onready var home_team_name_label: Label = %HomeTeamNameLabel
-#@onready var home_team_score_label: Label = %HomeTeamScoreLabel
-#@onready var round_number_label: Label = %RoundNumberLabel
-@onready var turn_order_labels: VBoxContainer = %TurnOrderLabels
 
 ## [Node] that manages Turn order and Round number (each Round is a sequence of Turns) #TODO: Make these classes
 @onready var turn_manager: TurnManager = %TurnManager
@@ -86,11 +75,6 @@ func _assign_players_to_teams() -> void:
 		players_on_court.append(player)
 		print(player.name + " is on the court")
 
-func _assign_turn_order_labels() -> void:
-	for player in current_turn_order:
-		var current_label = turn_order_labels.get_child(current_turn_order.find(player))
-		current_label.text = player.name
-
 
 func _connect_signals() -> void:
 	end_turn_button.connect("pressed", _on_end_turn_button_pressed)
@@ -102,13 +86,6 @@ func _set_initial_turn_order() -> void:
 	current_turn_order = turn_manager.shuffle_players()
 	print("Initial turn order set: %s" % str(current_turn_order))
 	active_player = turn_manager.get_active_player()
-
-
-func _update_active_player_label() -> void:
-	for label in turn_order_labels.get_children():
-		label.remove_theme_stylebox_override("normal")
-	var target_label = turn_order_labels.get_child(turn_manager.current_index) as Label
-	target_label.add_theme_stylebox_override("normal", ACTIVE_LABEL_STYLE_BOX)
 
 
 # RECEIVERS

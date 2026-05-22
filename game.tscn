@@ -44,6 +44,8 @@ vertical = true
 script = ExtResource("1_iotsf")
 home_team_color = Color(0.5294118, 0.80784315, 0.92156863, 1)
 away_team_color = Color(0.5019608, 0.5019608, 0, 1)
+home_team_score = 3
+away_team_score = 3
 
 [node name="TurnManager" type="Node" parent="." unique_id=472738798]
 unique_name_in_owner = true
