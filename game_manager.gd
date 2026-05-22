@@ -1,6 +1,6 @@
 #@tool
 #@icon(icon_path: String)
-class_name GameManager
+class_name Game
 extends Node3D
 ## Game controller. Manages state, score and other game/match-level info.
 
@@ -23,12 +23,12 @@ const ACTIVE_LABEL_STYLE_BOX = preload("uid://dm1d38j24xjio")
 	set(h_t_s):
 		if not is_node_ready():
 			await ready
-		home_team_score_label.text = "%02d" % h_t_s
+		game_ui.home_team_score_label.text = "%02d" % h_t_s
 @export var away_team_score: int = 0:
 	set(a_t_s):
 		if not is_node_ready():
 			await ready
-		away_team_score_label.text = "%02d" % a_t_s
+		game_ui.away_team_score_label.text = "%02d" % a_t_s
 
 var active_player: Player:
 	set(a_p):
@@ -37,7 +37,7 @@ var active_player: Player:
 		print("GM making %s active" % a_p.name)
 		active_player = a_p
 		active_player.is_active = true
-		active_player_name_label.text = active_player.name
+		game_ui.active_player_name_label.text = active_player.name
 		_update_active_player_label()
 
 var current_turn_order: Array[Player]:
@@ -48,18 +48,22 @@ var home_team_players: Array[Node]
 var away_team_players: Array[Node]
 var players_on_court: Array[Player] 
 
+## Parent [Control] for all UI elements
+@onready var game_ui: GameUI = %GameUI
 
-@onready var active_player_name_label: Label = %ActivePlayerNameLabel
-@onready var away_team_name_label: Label = %AwayTeamNameLabel
-@onready var away_team_score_label: Label = %AwayTeamScoreLabel
-@onready var home_team_name_label: Label = %HomeTeamNameLabel
-@onready var home_team_score_label: Label = %HomeTeamScoreLabel
+#@onready var active_player_name_label: Label = %ActivePlayerNameLabel
 @onready var end_turn_button: Button = %EndTurnButton
-@onready var turn_manager: TurnManager = %TurnManager
-@onready var round_number_label: Label = %RoundNumberLabel
+#@onready var away_team_name_label: Label = %AwayTeamNameLabel
+#@onready var away_team_score_label: Label = %AwayTeamScoreLabel
+#@onready var home_team_name_label: Label = %HomeTeamNameLabel
+#@onready var home_team_score_label: Label = %HomeTeamScoreLabel
+#@onready var round_number_label: Label = %RoundNumberLabel
 @onready var turn_order_labels: VBoxContainer = %TurnOrderLabels
 
-# OVERRIDES
+## [Node] that manages Turn order and Round number (each Round is a sequence of Turns) #TODO: Make these classes
+@onready var turn_manager: TurnManager = %TurnManager
+
+
 func _ready() -> void:
 	_connect_signals()
 	_assign_players_to_teams()
@@ -120,4 +124,4 @@ func _on_end_turn_button_pressed() -> void:
 
 
 func _on_round_completed() -> void:
-	round_number_label.text = "Round %s" % str(turn_manager.current_round)
+	game_ui.round_number_label.text = "Round %s" % str(turn_manager.current_round)
