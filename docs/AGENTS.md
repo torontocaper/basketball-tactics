@@ -13,3 +13,5 @@ Stick to GDScript conventions.
 Use descriptive variable names. 
 
 Use comments to explain intent. 
+
+Whenever possible, prefer Godot-native solutions (Scenes, Nodes, Resources, Groups, Signals) to over-coded solutions.
