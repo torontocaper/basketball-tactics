@@ -34,6 +34,26 @@ uv1_scale = Vector3(10, 10, 10)
 material = SubResource("StandardMaterial3D_yo73x")
 size = Vector2(15, 14)
 
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_e8heu"]
+sky_top_color = Color(0.11764706, 0.5647059, 1, 1)
+sky_horizon_color = Color(0.8455196, 0.88865685, 0.9484608, 1)
+ground_bottom_color = Color(0.54509807, 0.27058825, 0.07450981, 1)
+ground_horizon_color = Color(0.8455196, 0.88865685, 0.9484608, 1)
+energy_multiplier = 0.5
+
+[sub_resource type="Sky" id="Sky_rvswv"]
+sky_material = SubResource("ProceduralSkyMaterial_e8heu")
+
+[sub_resource type="Environment" id="Environment_boyg6"]
+background_mode = 2
+sky = SubResource("Sky_rvswv")
+ambient_light_source = 2
+ambient_light_color = Color(0.93333334, 0.9098039, 0.6666667, 1)
+ambient_light_energy = 0.5
+tonemap_mode = 2
+fog_enabled = true
+fog_light_energy = 0.1
+
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_lc2xo"]
 grow_begin = 4.0
 grow_end = 4.0
@@ -88,57 +108,58 @@ mesh = SubResource("PlaneMesh_gm3gy")
 [node name="Hoop3D" parent="Environment" unique_id=715531421 instance=ExtResource("6_ajfhb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 5)
 
-[node name="Lights" type="Node" parent="Environment" unique_id=603459971]
+[node name="SpotLights" type="Node3D" parent="Environment" unique_id=2047260982]
+visible = false
 
-[node name="SpotLight3D" type="SpotLight3D" parent="Environment/Lights" unique_id=61285682]
+[node name="SpotLight3D" type="SpotLight3D" parent="Environment/SpotLights" unique_id=61285682]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 6.507513, 0)
 light_energy = 10.0
 shadow_enabled = true
 spot_range = 10.0
 
-[node name="SpotLight3D2" type="SpotLight3D" parent="Environment/Lights" unique_id=1407821253]
+[node name="SpotLight3D2" type="SpotLight3D" parent="Environment/SpotLights" unique_id=1407821253]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 6.507513, -5)
 light_energy = 10.0
 shadow_enabled = true
 spot_range = 10.0
 
-[node name="SpotLight3D3" type="SpotLight3D" parent="Environment/Lights" unique_id=1792290905]
+[node name="SpotLight3D3" type="SpotLight3D" parent="Environment/SpotLights" unique_id=1792290905]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -5, 6.507513, -5)
 light_energy = 10.0
 shadow_enabled = true
 spot_range = 10.0
 
-[node name="SpotLight3D4" type="SpotLight3D" parent="Environment/Lights" unique_id=1854838436]
+[node name="SpotLight3D4" type="SpotLight3D" parent="Environment/SpotLights" unique_id=1854838436]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -5, 6.507513, 0)
 light_energy = 10.0
 shadow_enabled = true
 spot_range = 10.0
 
-[node name="SpotLight3D5" type="SpotLight3D" parent="Environment/Lights" unique_id=1927744036]
+[node name="SpotLight3D5" type="SpotLight3D" parent="Environment/SpotLights" unique_id=1927744036]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -5, 6.507513, 5)
 light_energy = 10.0
 shadow_enabled = true
 spot_range = 10.0
 
-[node name="SpotLight3D6" type="SpotLight3D" parent="Environment/Lights" unique_id=1600823184]
+[node name="SpotLight3D6" type="SpotLight3D" parent="Environment/SpotLights" unique_id=1600823184]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 6.507513, 5)
 light_energy = 10.0
 shadow_enabled = true
 spot_range = 10.0
 
-[node name="SpotLight3D7" type="SpotLight3D" parent="Environment/Lights" unique_id=1818789897]
+[node name="SpotLight3D7" type="SpotLight3D" parent="Environment/SpotLights" unique_id=1818789897]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 5, 6.507513, 5)
 light_energy = 10.0
 shadow_enabled = true
 spot_range = 10.0
 
-[node name="SpotLight3D8" type="SpotLight3D" parent="Environment/Lights" unique_id=154258935]
+[node name="SpotLight3D8" type="SpotLight3D" parent="Environment/SpotLights" unique_id=154258935]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 5, 6.507513, 0)
 light_energy = 10.0
 shadow_enabled = true
 spot_range = 10.0
 
-[node name="SpotLight3D9" type="SpotLight3D" parent="Environment/Lights" unique_id=118021410]
+[node name="SpotLight3D9" type="SpotLight3D" parent="Environment/SpotLights" unique_id=118021410]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 5, 6.507513, -5)
 light_energy = 10.0
 shadow_enabled = true
@@ -155,6 +176,16 @@ height = 3.5
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 1.5842357, -0.27583933)
 radius = 0.1
 height = 0.64501953
+
+[node name="Sun" type="DirectionalLight3D" parent="Environment" unique_id=234003728]
+transform = Transform3D(0.9659258, 0.25, -0.066987306, 0, 0.25881907, 0.9659258, 0.25881904, -0.93301266, 0.25000003, 0, 0, 0)
+light_color = Color(0.93333334, 0.9098039, 0.6666667, 1)
+light_energy = 0.5
+shadow_enabled = true
+shadow_opacity = 0.0
+
+[node name="Environment" type="WorldEnvironment" parent="Environment" unique_id=643151823]
+environment = SubResource("Environment_boyg6")
 
 [node name="UILayer" type="CanvasLayer" parent="." unique_id=2097805439]
 
