@@ -1,4 +1,4 @@
-#@tool
+@tool
 #@icon(icon_path: String)
 class_name GameUI
 extends Control

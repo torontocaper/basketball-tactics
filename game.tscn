@@ -35,7 +35,7 @@ away_team_color = Color(1, 0, 1, 1)
 [node name="TurnManager" type="Node" parent="." unique_id=472738798 node_paths=PackedStringArray("players_in_game")]
 unique_name_in_owner = true
 script = ExtResource("2_80cx4")
-players_in_game = [NodePath("../Players/Michael"), NodePath("../Players/Scottie"), NodePath("../Players/Dennis"), NodePath("../Players/Larry"), NodePath("../Players/Magic"), NodePath("../Players/Charles")]
+players_in_game = [NodePath("../Players/Magic"), NodePath("../Players/Charles"), NodePath("../Players/Michael"), NodePath("../Players/Larry"), NodePath("../Players/Scottie"), NodePath("../Players/Dennis")]
 
 [node name="Players" type="Node" parent="." unique_id=270399416]
 
@@ -53,6 +53,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0178223, 1, 2.7265625)
 
 [node name="Magic" parent="Players" unique_id=781295495 groups=["away_team"] instance=ExtResource("7_efxa6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.7176514, 1, 0.016845703)
+is_active = true
 
 [node name="Charles" parent="Players" unique_id=2114162129 groups=["away_team"] instance=ExtResource("7_efxa6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.1083984, 1, -1.0404053)
