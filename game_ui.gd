@@ -4,7 +4,7 @@ class_name GameUI
 extends Control
 ## User Interface for main [Game] scene. Displays score, turn order and other game-level information.
 
-#signal
+signal turn_ended
 #enum
 const ACTIVE_LABEL_STYLE_BOX: StyleBox = preload("uid://dm1d38j24xjio")
 
@@ -27,6 +27,8 @@ const ACTIVE_LABEL_STYLE_BOX: StyleBox = preload("uid://dm1d38j24xjio")
 ## [VBoxContainer] containing [Label]s representing each [Player] in the [Turn] sequence
 @onready var turn_order_labels: VBoxContainer = %TurnOrderLabels
 
+func _ready() -> void:
+	_connect_signals()
 
 ## Assign Player names to the [member Label.text] property of each child of [member turn_order_labels]
 func assign_turn_order_labels(current_turn_order: Array[Player]) -> void:
@@ -42,7 +44,11 @@ func update_active_player_label(current_turn_index: int) -> void:
 	target_label.add_theme_stylebox_override("normal", ACTIVE_LABEL_STYLE_BOX)
 
 # PRIVATE/HELPER
+func _connect_signals() -> void:
+	end_turn_button.connect("pressed", _on_end_turn_button_pressed)
+
 
 # RECEIVERS
-
+func _on_end_turn_button_pressed() -> void:
+	turn_ended.emit()
 # SETTERS/GETTERS

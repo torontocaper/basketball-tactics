@@ -47,8 +47,6 @@ var players_on_court: Array[Player]
 ## Parent [Control] for all UI elements
 @onready var game_ui: GameUI = %GameUI
 
-@onready var end_turn_button: Button = %EndTurnButton
-
 ## [Node] that manages Turn order and Round number (each Round is a sequence of Turns) #TODO: Make these classes
 @onready var turn_manager: TurnManager = %TurnManager
 
@@ -77,7 +75,7 @@ func _assign_players_to_teams() -> void:
 
 
 func _connect_signals() -> void:
-	end_turn_button.connect("pressed", _on_end_turn_button_pressed)
+	game_ui.connect("turn_ended", _on_turn_ended)
 	turn_manager.connect("round_completed", _on_round_completed)
 
 
@@ -89,7 +87,7 @@ func _set_initial_turn_order() -> void:
 
 
 # RECEIVERS
-func _on_end_turn_button_pressed() -> void:
+func _on_turn_ended() -> void:
 	print("GM ending turn for %s" % active_player.name)
 	active_player.is_active = false
 	if turn_manager.current_index < players_on_court.size() - 1:
