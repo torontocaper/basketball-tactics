@@ -1,12 +1,7 @@
 [gd_scene format=3 uid="uid://b6am46kegw2x3"]
 
-[ext_resource type="Texture2D" uid="uid://651w441pfvby" path="res://assets/textures/wood_floor_054_1k/WoodFloor054_1K-PNG_Color.png" id="1_34bgr"]
 [ext_resource type="Script" uid="uid://81hx1qtg1wpn" path="res://game_manager.gd" id="1_iotsf"]
 [ext_resource type="Script" uid="uid://dm8m7g1mcuf2a" path="res://turn_manager.gd" id="2_80cx4"]
-[ext_resource type="Texture2D" uid="uid://ceikwnbuyl20y" path="res://assets/textures/wood_floor_054_1k/WoodFloor054_1K-PNG_Roughness.png" id="2_esun2"]
-[ext_resource type="Texture2D" uid="uid://cwj6ul5bcr5v0" path="res://assets/textures/wood_floor_054_1k/WoodFloor054_1K-PNG_AmbientOcclusion.png" id="2_gm3gy"]
-[ext_resource type="Texture2D" uid="uid://c7ge0j7koqm4" path="res://assets/textures/wood_floor_054_1k/WoodFloor054_1K-PNG_Displacement.png" id="3_ajfhb"]
-[ext_resource type="Texture2D" uid="uid://bjamjei5d6hep" path="res://assets/textures/wood_floor_054_1k/WoodFloor054_1K-PNG_NormalGL.png" id="4_awctn"]
 [ext_resource type="PackedScene" uid="uid://d04p5dc2jaujf" path="res://assets/props/hoop_3d.tscn" id="6_ajfhb"]
 [ext_resource type="FontFile" uid="uid://bitgv7nf07au6" path="res://assets/fonts/RobotoMono-Medium.ttf" id="7_4c57u"]
 [ext_resource type="PackedScene" uid="uid://cqphbwl7lmt3t" path="res://actors/player.tscn" id="7_efxa6"]
@@ -18,41 +13,26 @@
 [ext_resource type="Texture2D" uid="uid://b48ecg2w32y68" path="res://assets/icons/pass_icon_white_24.png" id="14_7sc4i"]
 [ext_resource type="Texture2D" uid="uid://b14ho3ltl7ivs" path="res://assets/icons/dribble_icon_white_24.png" id="15_7sc4i"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yo73x"]
-albedo_texture = ExtResource("1_34bgr")
-roughness_texture = ExtResource("2_esun2")
-normal_enabled = true
-normal_texture = ExtResource("4_awctn")
-ao_enabled = true
-ao_texture = ExtResource("2_gm3gy")
-heightmap_enabled = true
-heightmap_scale = 1.0
-heightmap_texture = ExtResource("3_ajfhb")
-uv1_scale = Vector3(10, 10, 10)
+[sub_resource type="Gradient" id="Gradient_iotsf"]
+offsets = PackedFloat32Array(0.11470588, 0.66764706)
+colors = PackedColorArray(0.26657507, 0.26657525, 0.2665752, 1, 0.23031479, 0.23031497, 0.23031494, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_lc2xo"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_215e1"]
+noise = SubResource("FastNoiseLite_lc2xo")
+color_ramp = SubResource("Gradient_iotsf")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iotsf"]
+albedo_texture = SubResource("NoiseTexture2D_215e1")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_gm3gy"]
-material = SubResource("StandardMaterial3D_yo73x")
+material = SubResource("StandardMaterial3D_iotsf")
 size = Vector2(15, 14)
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_e8heu"]
-sky_top_color = Color(0.11764706, 0.5647059, 1, 1)
-sky_horizon_color = Color(0.8455196, 0.88865685, 0.9484608, 1)
-ground_bottom_color = Color(0.54509807, 0.27058825, 0.07450981, 1)
-ground_horizon_color = Color(0.8455196, 0.88865685, 0.9484608, 1)
-energy_multiplier = 0.5
-
-[sub_resource type="Sky" id="Sky_rvswv"]
-sky_material = SubResource("ProceduralSkyMaterial_e8heu")
-
-[sub_resource type="Environment" id="Environment_boyg6"]
-background_mode = 2
-sky = SubResource("Sky_rvswv")
-ambient_light_source = 2
-ambient_light_color = Color(0.93333334, 0.9098039, 0.6666667, 1)
-ambient_light_energy = 0.5
-tonemap_mode = 2
-fog_enabled = true
-fog_light_energy = 0.1
+[sub_resource type="Environment" id="Environment_iotsf"]
+background_color = Color(0.9867516, 0.9867516, 0.9867516, 1)
+ambient_light_source = 1
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_lc2xo"]
 grow_begin = 4.0
@@ -62,14 +42,13 @@ vertical = true
 
 [node name="Game" type="Node3D" unique_id=1895450294]
 script = ExtResource("1_iotsf")
-home_team_color = Color(0.5294118, 0.80784315, 0.92156863, 1)
-away_team_color = Color(0.5019608, 0.5019608, 0, 1)
-home_team_score = 3
-away_team_score = 3
+home_team_color = Color(1, 0.84313726, 0, 1)
+away_team_color = Color(1, 0, 1, 1)
 
-[node name="TurnManager" type="Node" parent="." unique_id=472738798]
+[node name="TurnManager" type="Node" parent="." unique_id=472738798 node_paths=PackedStringArray("players_in_game")]
 unique_name_in_owner = true
 script = ExtResource("2_80cx4")
+players_in_game = [NodePath("../Players/Michael"), NodePath("../Players/Scottie"), NodePath("../Players/Dennis"), NodePath("../Players/Larry"), NodePath("../Players/Magic"), NodePath("../Players/Charles")]
 
 [node name="Players" type="Node" parent="." unique_id=270399416]
 
@@ -108,63 +87,6 @@ mesh = SubResource("PlaneMesh_gm3gy")
 [node name="Hoop3D" parent="Environment" unique_id=715531421 instance=ExtResource("6_ajfhb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 5)
 
-[node name="SpotLights" type="Node3D" parent="Environment" unique_id=2047260982]
-visible = false
-
-[node name="SpotLight3D" type="SpotLight3D" parent="Environment/SpotLights" unique_id=61285682]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 6.507513, 0)
-light_energy = 10.0
-shadow_enabled = true
-spot_range = 10.0
-
-[node name="SpotLight3D2" type="SpotLight3D" parent="Environment/SpotLights" unique_id=1407821253]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 6.507513, -5)
-light_energy = 10.0
-shadow_enabled = true
-spot_range = 10.0
-
-[node name="SpotLight3D3" type="SpotLight3D" parent="Environment/SpotLights" unique_id=1792290905]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -5, 6.507513, -5)
-light_energy = 10.0
-shadow_enabled = true
-spot_range = 10.0
-
-[node name="SpotLight3D4" type="SpotLight3D" parent="Environment/SpotLights" unique_id=1854838436]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -5, 6.507513, 0)
-light_energy = 10.0
-shadow_enabled = true
-spot_range = 10.0
-
-[node name="SpotLight3D5" type="SpotLight3D" parent="Environment/SpotLights" unique_id=1927744036]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -5, 6.507513, 5)
-light_energy = 10.0
-shadow_enabled = true
-spot_range = 10.0
-
-[node name="SpotLight3D6" type="SpotLight3D" parent="Environment/SpotLights" unique_id=1600823184]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 6.507513, 5)
-light_energy = 10.0
-shadow_enabled = true
-spot_range = 10.0
-
-[node name="SpotLight3D7" type="SpotLight3D" parent="Environment/SpotLights" unique_id=1818789897]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 5, 6.507513, 5)
-light_energy = 10.0
-shadow_enabled = true
-spot_range = 10.0
-
-[node name="SpotLight3D8" type="SpotLight3D" parent="Environment/SpotLights" unique_id=154258935]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 5, 6.507513, 0)
-light_energy = 10.0
-shadow_enabled = true
-spot_range = 10.0
-
-[node name="SpotLight3D9" type="SpotLight3D" parent="Environment/SpotLights" unique_id=118021410]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 5, 6.507513, -5)
-light_energy = 10.0
-shadow_enabled = true
-spot_range = 10.0
-
 [node name="PoleMesh" type="CSGCombiner3D" parent="Environment" unique_id=1340203982]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 6)
 
@@ -177,15 +99,12 @@ transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 1
 radius = 0.1
 height = 0.64501953
 
-[node name="Sun" type="DirectionalLight3D" parent="Environment" unique_id=234003728]
-transform = Transform3D(0.9659258, 0.25, -0.066987306, 0, 0.25881907, 0.9659258, 0.25881904, -0.93301266, 0.25000003, 0, 0, 0)
-light_color = Color(0.93333334, 0.9098039, 0.6666667, 1)
-light_energy = 0.5
+[node name="Sunlight" type="DirectionalLight3D" parent="Environment" unique_id=1021686861]
+transform = Transform3D(-0.4005368, -0.79638034, -0.45315385, -0.40957597, -0.28678817, 0.8660254, -0.8196449, 0.5324759, -0.21130906, 0, 0, 0)
 shadow_enabled = true
-shadow_opacity = 0.0
 
-[node name="Environment" type="WorldEnvironment" parent="Environment" unique_id=643151823]
-environment = SubResource("Environment_boyg6")
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Environment" unique_id=1740672877]
+environment = SubResource("Environment_iotsf")
 
 [node name="UILayer" type="CanvasLayer" parent="." unique_id=2097805439]
 
