@@ -54,6 +54,7 @@ var players_on_court: Array[Player]
 func _ready() -> void:
 	_connect_signals()
 	_assign_players_to_teams()
+	_reset_active_player()
 	_set_initial_turn_order()
 
 
@@ -100,3 +101,7 @@ func _on_turn_ended() -> void:
 
 func _on_round_completed() -> void:
 	game_ui.round_number_label.text = "Round %s" % str(turn_manager.current_round)
+
+func _reset_active_player() -> void:
+	for player in players_on_court:
+		player.is_active = false

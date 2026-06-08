@@ -18,6 +18,19 @@ material = SubResource("StandardMaterial3D_niuxy")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_niuxy"]
 
+[sub_resource type="Gradient" id="Gradient_1yqc4"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0.6839827, 0.93722945)
+colors = PackedColorArray(0, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_esgq3"]
+gradient = SubResource("Gradient_1yqc4")
+width = 128
+height = 128
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.85, 0.15)
+
 [node name="Player" type="CharacterBody3D" unique_id=2001116984]
 script = ExtResource("1_niuxy")
 metadata/_edit_group_ = true
@@ -63,3 +76,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 target_position = Vector3(0, 0, -1)
 debug_shape_custom_color = Color(1, 1, 1, 1)
 debug_shape_thickness = 5
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=2097915977]
+
+[node name="MovementTargetSprite" type="Sprite3D" parent="." unique_id=1598587306]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.9, 0)
+axis = 1
+texture = SubResource("GradientTexture2D_esgq3")
