@@ -22,6 +22,12 @@ window/size/viewport_width=1920
 window/size/viewport_height=1080
 window/stretch/mode="canvas_items"
 
+[layer_names]
+
+3d_physics/layer_1="player"
+3d_physics/layer_2="floor"
+3d_physics/layer_3="obstacles"
+
 [physics]
 
 3d/physics_engine="Jolt Physics"

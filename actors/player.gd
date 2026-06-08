@@ -35,6 +35,9 @@ extends CharacterBody3D
 		team_color_material.albedo_color = t_c
 		player_mesh.set_surface_override_material(0, team_color_material)
 
+## The camera capturing the scene.
+var scene_camera: Camera3D
+
 ## The sprite that indicates whether it's this player's turn.
 @onready var active_sprite: Sprite3D = %ActiveSprite
 
@@ -56,7 +59,12 @@ func _ready() -> void:
 	name_label.text = name
 
 func _process(_delta: float) -> void:
-	pass
+	if is_active:
+		scene_camera = get_viewport().get_camera_3d()
+		var mouse_position: Vector2 = get_viewport().get_mouse_position()
+		var ray_magnitude: float = scene_camera.project_ray_origin(mouse_position).length()
+		#print("Mouse position is %s;\nproject_ray_origin return is %s\nray_magnitude is %s" % [mouse_position, project_ray_origin_return, project_ray_origin_return.length()])
+		movement_target_sprite.global_position = scene_camera.project_position(get_viewport().get_mouse_position(), ray_magnitude)
 
 func _physics_process(_delta: float) -> void:
 	pass
