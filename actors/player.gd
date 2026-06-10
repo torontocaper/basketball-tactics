@@ -7,6 +7,9 @@ extends CharacterBody3D
 #signal
 #enum
 #const
+@export var ray_normal: Vector3
+@export var ray_origin: Vector3
+@export var ray_magnitude: float
 
 ## Whether the player is currently in possession of the ball.
 @export var has_ball: bool = false:
@@ -45,7 +48,7 @@ var scene_camera: Camera3D
 @onready var has_ball_sprite: Sprite3D = %HasBallSprite
 
 ## The sprite that indicates where the mouse is pointing when the player is active and in the 'move-choosing' state.
-@onready var movement_target_sprite: Sprite3D = %MovementTargetSprite
+@onready var movement_target_sprite: MeshInstance3D = %MovementTargetSprite
 
 ## The label indicating the player's name.
 @onready var name_label: Label3D = %NameLabel
@@ -59,15 +62,19 @@ func _ready() -> void:
 	name_label.text = name
 
 func _process(_delta: float) -> void:
-	if is_active:
-		scene_camera = get_viewport().get_camera_3d()
-		var mouse_position: Vector2 = get_viewport().get_mouse_position()
-		var ray_magnitude: float = scene_camera.project_ray_origin(mouse_position).length()
-		#print("Mouse position is %s;\nproject_ray_origin return is %s\nray_magnitude is %s" % [mouse_position, project_ray_origin_return, project_ray_origin_return.length()])
-		movement_target_sprite.global_position = scene_camera.project_position(get_viewport().get_mouse_position(), ray_magnitude)
+	pass
 
 func _physics_process(_delta: float) -> void:
-	pass
+	if is_active:
+		scene_camera = get_viewport().get_camera_3d()
+		#TODO: figure this out
+		var mouse_position: Vector2 = get_viewport().get_mouse_position()
+		ray_normal = scene_camera.project_ray_normal(mouse_position)
+		ray_origin = scene_camera.project_ray_origin(mouse_position)
+		ray_magnitude = scene_camera.project_ray_origin(mouse_position).length()
+		#print("Ray origin: %s" % ray_normal)
+		#print("Ray normal: %s" % ray_normal)
+		movement_target_sprite.global_position = scene_camera.project_position(get_viewport().get_mouse_position(), ray_magnitude)
 
 # CORE
 
