@@ -16,29 +16,28 @@ extends Node3D
 @export_group("Game Info")
 @export_subgroup("Score")
 @export var home_team_score: int = 0:
-	set(h_t_s):
+	set(value):
 		if not is_node_ready():
 			await ready
-		game_ui.home_team_score_label.text = "%02d" % h_t_s
+		game_ui.home_team_score_label.text = "%02d" % value
 @export var away_team_score: int = 0:
-	set(a_t_s):
+	set(value):
 		if not is_node_ready():
 			await ready
-		game_ui.away_team_score_label.text = "%02d" % a_t_s
+		game_ui.away_team_score_label.text = "%02d" % value
 
 var active_player: Player:
-	set(a_p):
+	set(value):
 		if not is_node_ready():
 			await ready
-		print("GM making %s active" % a_p.name)
-		active_player = a_p
+		active_player = value
 		active_player.is_active = true
 		game_ui.active_player_name_label.text = active_player.name
 		game_ui.update_active_player_label(turn_manager.current_index)
 
 var current_turn_order: Array[Player]:
-	set(c_t_o):
-		current_turn_order = c_t_o
+	set(value):
+		current_turn_order = value
 		game_ui.assign_turn_order_labels(current_turn_order)
 var home_team_players: Array[Node]
 var away_team_players: Array[Node]

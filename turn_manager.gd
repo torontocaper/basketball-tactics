@@ -7,21 +7,21 @@ extends Node
 signal round_completed
 
 @export var current_index: int = 0:
-	set(c_i):
-		current_index = c_i
+	set(value):
+		current_index = value
 		print("TM setting current index to %s" % str(current_index))
 
 ## The number representing the current round (a round is when each player has a turn).
 @export var current_round: int = 1:
-	set(c_r):
-		current_round = c_r
+	set(value):
+		current_round = value
 		print("TM setting current round number to %s" % str(current_round))
 		round_completed.emit()
 
 ## The number of players on the court in the current game.
 @export var players_in_game: Array[Player]:
-	set(p_i_g):
-		players_in_game = p_i_g
+	set(value):
+		players_in_game = value
 		print("TM knows there are %s players in the game" % str(players_in_game.size()))
 
 # Core functionality

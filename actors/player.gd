@@ -13,19 +13,19 @@ extends CharacterBody3D
 
 ## Whether the player is currently in possession of the ball.
 @export var has_ball: bool = false:
-	set(h_b):
+	set(value):
 		if not is_node_ready():
 			await ready
-		has_ball_sprite.visible = h_b
+		has_ball_sprite.visible = value
 
 ## Whether it's this player's turn.
 @export var is_active: bool = false: 
-	set(i_a):
+	set(value):
 		if not is_node_ready():
 			await ready
-		is_active = i_a
+		is_active = value
 		active_sprite.visible = is_active
-		movement_target_sprite.visible = is_active
+		movement_target_sprite.visit_cble = is_active
 		if is_active:
 			print(name + " is active")
 		else:
@@ -33,9 +33,9 @@ extends CharacterBody3D
 
 ## The player's 'jersey' color. #TODO move this to a Team class or team_attributes resource
 @export var team_color: Color = Color.DARK_RED:
-	set(t_c):
+	set(value):
 		var team_color_material:= StandardMaterial3D.new()
-		team_color_material.albedo_color = t_c
+		team_color_material.albedo_color = value
 		player_mesh.set_surface_override_material(0, team_color_material)
 
 ## The camera capturing the scene.
