@@ -1,0 +1,66 @@
+@tool
+#@icon(icon_path: String)
+class_name Player
+extends CharacterBody3D
+## Base class for on-court actors
+
+#signal
+#enum
+#const
+@export var ray_normal: Vector3
+@export var ray_origin: Vector3
+@export var ray_magnitude: float
+
+## Whether the player is currently in possession of the ball.
+@export var has_ball: bool = false:
+	set(value):
+		if not is_node_ready():
+			await ready
+		has_ball_sprite.visible = value
+
+## Whether it's this player's turn.
+@export var is_active: bool = false: 
+	set(value):
+		if not is_node_ready():
+			await ready
+		is_active = value
+		active_sprite.visible = is_active
+		if is_active:
+			print(name + " is active")
+		else:
+			print(name + " is inactive")
+
+## The player's 'jersey' color. #TODO move this to a Team class or team_attributes resource
+@export var team_color: Color = Color.DARK_RED:
+	set(value):
+		var team_color_material:= StandardMaterial3D.new()
+		team_color_material.albedo_color = value
+		player_mesh.set_surface_override_material(0, team_color_material)
+
+## The camera capturing the scene.
+var scene_camera: Camera3D
+
+## The sprite that indicates whether it's this player's turn.
+@onready var active_sprite: Sprite3D = %ActiveSprite
+
+## The sprite that indicates whether the player has the ball.
+@onready var has_ball_sprite: Sprite3D = %HasBallSprite
+
+## The label indicating the player's name.
+@onready var name_label: Label3D = %NameLabel
+
+## The mesh representing the player in 3D space.
+@onready var player_mesh: MeshInstance3D = %PlayerMesh
+
+# OVERRIDES
+
+func _ready() -> void:
+	name_label.text = name
+
+# CORE
+
+# RECEIVERS
+
+# SETTERS/GETTERS (argument abbreviations allowed)
+
+# PRIVATE/HELPER

@@ -1,0 +1,68 @@
+[gd_scene format=3 uid="uid://cqphbwl7lmt3t"]
+
+[ext_resource type="Script" uid="uid://bio37tx2vw1ou" path="res://src/actors/player.gd" id="1_niuxy"]
+[ext_resource type="Texture2D" uid="uid://bm2ktkrlnpek" path="res://assets/sprites/active_sprite.tres" id="2_1yqc4"]
+[ext_resource type="Texture2D" uid="uid://bt2ioehlblun0" path="res://assets/sprites/basketball_vector_512.png" id="2_mvpqy"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ajfhb"]
+albedo_color = Color(0.54509807, 0, 0, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_ajfhb"]
+material = SubResource("StandardMaterial3D_ajfhb")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_niuxy"]
+albedo_color = Color(0.54509807, 0.27058825, 0.07450981, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_niuxy"]
+material = SubResource("StandardMaterial3D_niuxy")
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_niuxy"]
+
+[node name="Player" type="CharacterBody3D" unique_id=2001116984]
+collision_mask = 7
+script = ExtResource("1_niuxy")
+metadata/_edit_group_ = true
+
+[node name="NameLabel" type="Label3D" parent="." unique_id=1184925417]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+billboard = 1
+no_depth_test = true
+render_priority = 10
+outline_render_priority = 5
+text = "Player"
+font_size = 64
+
+[node name="PlayerMesh" type="MeshInstance3D" parent="." unique_id=2048571091]
+unique_name_in_owner = true
+mesh = SubResource("CapsuleMesh_ajfhb")
+
+[node name="TestFloor" type="MeshInstance3D" parent="." unique_id=1278947590]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+visible = false
+mesh = SubResource("PlaneMesh_niuxy")
+
+[node name="PlayerCollider" type="CollisionShape3D" parent="." unique_id=2095731527]
+shape = SubResource("CapsuleShape3D_niuxy")
+
+[node name="HasBallSprite" type="Sprite3D" parent="." unique_id=2016744726]
+unique_name_in_owner = true
+transform = Transform3D(0.235, 0, 0, 0, 0.235, 0, 0, 0, 0.235, 0, -0.9, 0)
+visible = false
+axis = 1
+texture = ExtResource("2_mvpqy")
+
+[node name="ActiveSprite" type="Sprite3D" parent="." unique_id=1441802527]
+unique_name_in_owner = true
+transform = Transform3D(0.305, 0, 0, 0, 0.305, 0, 0, 0, 0.305, 0, -0.9, 0)
+visible = false
+axis = 1
+texture = ExtResource("2_1yqc4")
+
+[node name="ForwardRay" type="RayCast3D" parent="." unique_id=1639538794]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+target_position = Vector3(0, 0, -1)
+debug_shape_custom_color = Color(1, 1, 1, 1)
+debug_shape_thickness = 5
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=2097915977]

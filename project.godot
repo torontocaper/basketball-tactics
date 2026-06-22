@@ -12,10 +12,10 @@ config_version=5
 
 config/name="Basketball Tactics"
 config/description="As of 2026-05-16, current development version of Basketball Tactics"
+config/tags=PackedStringArray("3d", "sports")
 run/main_scene="uid://b6am46kegw2x3"
 config/features=PackedStringArray("4.7", "GL Compatibility")
-config/icon="res://icon.svg"
-config/tags=PackedStringArray("3d", "sports")
+config/icon="uid://bt2ioehlblun0"
 
 [display]
 
