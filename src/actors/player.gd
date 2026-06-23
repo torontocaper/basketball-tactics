@@ -7,9 +7,6 @@ extends CharacterBody3D
 #signal
 #enum
 #const
-@export var ray_normal: Vector3
-@export var ray_origin: Vector3
-@export var ray_magnitude: float
 
 ## Whether the player is currently in possession of the ball.
 @export var has_ball: bool = false:
@@ -35,7 +32,7 @@ extends CharacterBody3D
 	set(value):
 		var team_color_material:= StandardMaterial3D.new()
 		team_color_material.albedo_color = value
-		player_mesh.set_surface_override_material(0, team_color_material)
+		player_mesh.material_overlay = team_color_material
 
 ## The camera capturing the scene.
 var scene_camera: Camera3D
@@ -50,7 +47,7 @@ var scene_camera: Camera3D
 @onready var name_label: Label3D = %NameLabel
 
 ## The mesh representing the player in 3D space.
-@onready var player_mesh: MeshInstance3D = %PlayerMesh
+@onready var player_mesh: CSGCombiner3D = %PlayerMesh
 
 # OVERRIDES
 
@@ -61,6 +58,6 @@ func _ready() -> void:
 
 # RECEIVERS
 
-# SETTERS/GETTERS (argument abbreviations allowed)
+# SETTERS/GETTERS
 
 # PRIVATE/HELPER
