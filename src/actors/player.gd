@@ -22,6 +22,7 @@ extends CharacterBody3D
 			await ready
 		is_active = value
 		active_sprite.visible = is_active
+		#ghost_mesh.visible = is_active
 		if is_active:
 			print(name + " is active")
 		else:
@@ -49,14 +50,28 @@ var scene_camera: Camera3D
 ## The mesh representing the player in 3D space.
 @onready var player_mesh: CSGCombiner3D = %PlayerMesh
 
+## The Player's [NavigationAgent3D], used for pathfinding
+@onready var player_nav: NavigationAgent3D = %PlayerNav
+
+## The Player's 'ghost', used for indicating potential movement
+@onready var ghost_mesh: MeshInstance3D = %GhostMesh
+
 # OVERRIDES
 
 func _ready() -> void:
 	name_label.text = name
+	player_nav.connect("path_changed", _on_path_changed)
 
 # CORE
 
 # RECEIVERS
+## Receive the signal from the [Court]
+func on_movement_target_moved(target_position: Vector3):
+	player_nav.target_position = target_position
+	print_debug(player_nav.distance_to_target())
+
+func _on_path_changed() -> void:
+	print_debug("PlayerNav path has changed")
 
 # SETTERS/GETTERS
 

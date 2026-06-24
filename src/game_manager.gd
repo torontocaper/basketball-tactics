@@ -15,32 +15,41 @@ extends Node3D
 
 @export_group("Game Info")
 @export_subgroup("Score")
+## The current score for the home team
 @export var home_team_score: int = 0:
 	set(value):
 		if not is_node_ready():
 			await ready
 		game_ui.home_team_score_label.text = "%02d" % value
+## The current score for the away team
 @export var away_team_score: int = 0:
 	set(value):
 		if not is_node_ready():
 			await ready
 		game_ui.away_team_score_label.text = "%02d" % value
 
+## The [Player] whose turn it currently is
 var active_player: Player:
 	set(value):
 		if not is_node_ready():
 			await ready
 		active_player = value
 		active_player.is_active = true
+		court.connect("movement_target_moved", active_player.on_movement_target_moved)
 		game_ui.active_player_name_label.text = active_player.name
 		game_ui.update_active_player_label(turn_manager.current_index)
 
+## The [Player]s in their current turn order
 var current_turn_order: Array[Player]:
 	set(value):
 		current_turn_order = value
 		game_ui.assign_turn_order_labels(current_turn_order)
+
+## The Players on the home team
 var home_team_players: Array[Node]
+## The Players on the away team
 var away_team_players: Array[Node]
+## The Players on the court
 var players_on_court: Array[Player] 
 
 ## Parent [Control] for all UI elements
@@ -49,7 +58,7 @@ var players_on_court: Array[Player]
 ## [Node] that manages Turn order and Round number (each Round is a sequence of Turns) #TODO: Make these classes
 @onready var turn_manager: TurnManager = %TurnManager
 
-## Floor node
+## The Court node
 @onready var court: StaticBody3D = %Court
 
 func _ready() -> void:
@@ -89,6 +98,7 @@ func _set_initial_turn_order() -> void:
 
 func _on_turn_ended() -> void:
 	print("GM ending turn for %s" % active_player.name)
+	court.disconnect("movement_target_moved", active_player.on_movement_target_moved)
 	active_player.is_active = false
 	if turn_manager.current_index < players_on_court.size() - 1:
 		turn_manager.current_index += 1 
