@@ -77,9 +77,9 @@ func _physics_process(_delta: float) -> void:
 		if player_nav.target_position:
 			player_nav.get_next_path_position()
 	if current_state == State.MOVING:
-		var next_movement_position = player_nav.get_next_path_position()
-		velocity = next_movement_position
-		move_and_slide()
+		var next_movement_position: Vector3 = player_nav.get_next_path_position()
+		var desired_velocity: Vector3 = global_position.direction_to(next_movement_position) * player_speed
+		player_nav.velocity = desired_velocity
 		#var current_path := player_nav.get_current_navigation_path()
 		#movement_line.build_path_mesh(current_path)
 
@@ -95,7 +95,9 @@ func on_movement_target_set(target_position: Vector3):
 	current_state = State.MOVING
 	player_nav.target_position = target_position
 
-#func on_velocity_computed(safe_velocity: Vector3):
+func on_velocity_computed(safe_velocity: Vector3):
+	velocity = safe_velocity
+	move_and_slide()
 	#print_debug("Safe velocity computed: %s" % safe_velocity)
 
 #func _on_path_changed() -> void:
@@ -105,5 +107,4 @@ func on_movement_target_set(target_position: Vector3):
 
 # PRIVATE/HELPER
 func _connect_signals() -> void:
-	pass
-	#player_nav.connect("velocity_computed", on_velocity_computed)
+	player_nav.connect("velocity_computed", on_velocity_computed)

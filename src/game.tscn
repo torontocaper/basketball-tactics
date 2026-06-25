@@ -43,7 +43,7 @@ away_team_color = Color(1, 0.84313726, 0, 1)
 [node name="TurnManager" type="Node" parent="." unique_id=472738798 node_paths=PackedStringArray("players_in_game")]
 unique_name_in_owner = true
 script = ExtResource("2_80cx4")
-players_in_game = [NodePath("../Players/Magic"), NodePath("../Players/Charles"), NodePath("../Players/Dennis"), NodePath("../Players/Scottie"), NodePath("../Players/Michael"), NodePath("../Players/Larry")]
+players_in_game = [NodePath("../Players/Magic"), NodePath("../Players/Dennis"), NodePath("../Players/Larry"), NodePath("../Players/Scottie"), NodePath("../Players/Charles"), NodePath("../Players/Michael")]
 
 [node name="Players" type="Node" parent="." unique_id=270399416]
 
