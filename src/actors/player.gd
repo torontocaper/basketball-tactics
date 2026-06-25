@@ -5,8 +5,10 @@ extends CharacterBody3D
 ## Base class for on-court actors
 
 #signal
-#enum
+enum State {PLANNING, MOVING}
 #const
+
+@export var player_speed: float = 10.0
 
 ## Whether the player is currently in possession of the ball.
 @export var has_ball: bool = false:
@@ -22,6 +24,8 @@ extends CharacterBody3D
 			await ready
 		is_active = value
 		active_sprite.visible = is_active
+		current_state = State.PLANNING
+		#movement_line.visible = is_active
 		#ghost_mesh.visible = is_active
 		if is_active:
 			print(name + " is active")
@@ -35,8 +39,11 @@ extends CharacterBody3D
 		team_color_material.albedo_color = value
 		player_mesh.material_overlay = team_color_material
 
-## The camera capturing the scene.
-var scene_camera: Camera3D
+var current_state : State = State.PLANNING
+	#set(value):
+		#current_state = value
+		#if current_state == State.MOVING:
+			#
 
 ## The sprite that indicates whether it's this player's turn.
 @onready var active_sprite: Sprite3D = %ActiveSprite
@@ -56,23 +63,47 @@ var scene_camera: Camera3D
 ## The Player's 'ghost', used for indicating potential movement
 @onready var ghost_mesh: MeshInstance3D = %GhostMesh
 
-# OVERRIDES
+## The line to preview the movement path
+#@onready var movement_line: MovementLine = %MovementLine
 
+# OVERRIDES
 func _ready() -> void:
+	_connect_signals()
 	name_label.text = name
-	player_nav.connect("path_changed", _on_path_changed)
+	#player_nav.connect("path_changed", _on_path_changed)
+
+func _physics_process(_delta: float) -> void:
+	if current_state == State.PLANNING:
+		if player_nav.target_position:
+			player_nav.get_next_path_position()
+	if current_state == State.MOVING:
+		var next_movement_position = player_nav.get_next_path_position()
+		velocity = next_movement_position
+		move_and_slide()
+		#var current_path := player_nav.get_current_navigation_path()
+		#movement_line.build_path_mesh(current_path)
 
 # CORE
 
 # RECEIVERS
 ## Receive the signal from the [Court]
 func on_movement_target_moved(target_position: Vector3):
-	player_nav.target_position = target_position
-	print_debug(player_nav.distance_to_target())
+	if current_state == State.PLANNING:
+		player_nav.target_position = target_position
 
-func _on_path_changed() -> void:
-	print_debug("PlayerNav path has changed")
+func on_movement_target_set(target_position: Vector3):
+	current_state = State.MOVING
+	player_nav.target_position = target_position
+
+#func on_velocity_computed(safe_velocity: Vector3):
+	#print_debug("Safe velocity computed: %s" % safe_velocity)
+
+#func _on_path_changed() -> void:
+	#print_debug("PlayerNav path has changed")
 
 # SETTERS/GETTERS
 
 # PRIVATE/HELPER
+func _connect_signals() -> void:
+	pass
+	#player_nav.connect("velocity_computed", on_velocity_computed)

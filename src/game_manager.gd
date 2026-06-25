@@ -36,6 +36,7 @@ var active_player: Player:
 		active_player = value
 		active_player.is_active = true
 		court.connect("movement_target_moved", active_player.on_movement_target_moved)
+		court.connect("movement_target_set", active_player.on_movement_target_set)
 		game_ui.active_player_name_label.text = active_player.name
 		game_ui.update_active_player_label(turn_manager.current_index)
 
