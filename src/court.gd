@@ -2,14 +2,11 @@
 #@icon(icon_path: String)
 class_name Court
 extends StaticBody3D
-## The court! The surface the game is played on
+## The surface the game is played on
 
 signal movement_target_moved
 signal movement_target_set
-#enum
-#const
-#@export var
-#var
+
 @onready var movement_target: Decal = %MovementTarget
 
 # OVERRIDES

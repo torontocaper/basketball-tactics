@@ -1,36 +1,37 @@
-@tool
+#@tool
 #@icon(icon_path: String)
 class_name Player
 extends CharacterBody3D
 ## Base class for on-court actors
 
 #signal
-enum State {PLANNING, MOVING}
+enum State {
+	INACTIVE,
+	ACTIVE,
+	MOVING
+	}
 #const
 
+@export var current_state : State = State.INACTIVE:
+	set(value):
+		if not is_node_ready():
+			await ready
+		current_state = value
+		match current_state:
+			State.INACTIVE:
+				active_sprite.visible = false
+				player_nav.debug_enabled = false
+				if _are_signals_connected:
+					_disconnect_signals()
+			State.ACTIVE:
+				active_sprite.visible = true
+				player_nav.debug_enabled = true
+				if not _are_signals_connected:
+					_connect_signals()
+			State.MOVING:
+				pass
+
 @export var player_speed: float = 10.0
-
-## Whether the player is currently in possession of the ball.
-@export var has_ball: bool = false:
-	set(value):
-		if not is_node_ready():
-			await ready
-		has_ball_sprite.visible = value
-
-## Whether it's this player's turn.
-@export var is_active: bool = false: 
-	set(value):
-		if not is_node_ready():
-			await ready
-		is_active = value
-		active_sprite.visible = is_active
-		current_state = State.PLANNING
-		#movement_line.visible = is_active
-		#ghost_mesh.visible = is_active
-		if is_active:
-			print(name + " is active")
-		else:
-			print(name + " is inactive")
 
 ## The player's 'jersey' color. #TODO move this to a Team class or team_attributes resource
 @export var team_color: Color = Color.DARK_RED:
@@ -39,17 +40,10 @@ enum State {PLANNING, MOVING}
 		team_color_material.albedo_color = value
 		player_mesh.material_overlay = team_color_material
 
-var current_state : State = State.PLANNING
-	#set(value):
-		#current_state = value
-		#if current_state == State.MOVING:
-			#
+var _are_signals_connected: bool = false
 
 ## The sprite that indicates whether it's this player's turn.
 @onready var active_sprite: Sprite3D = %ActiveSprite
-
-## The sprite that indicates whether the player has the ball.
-@onready var has_ball_sprite: Sprite3D = %HasBallSprite
 
 ## The label indicating the player's name.
 @onready var name_label: Label3D = %NameLabel
@@ -60,51 +54,49 @@ var current_state : State = State.PLANNING
 ## The Player's [NavigationAgent3D], used for pathfinding
 @onready var player_nav: NavigationAgent3D = %PlayerNav
 
-## The Player's 'ghost', used for indicating potential movement
-@onready var ghost_mesh: MeshInstance3D = %GhostMesh
-
-## The line to preview the movement path
-#@onready var movement_line: MovementLine = %MovementLine
-
 # OVERRIDES
 func _ready() -> void:
-	_connect_signals()
 	name_label.text = name
-	#player_nav.connect("path_changed", _on_path_changed)
 
 func _physics_process(_delta: float) -> void:
-	if current_state == State.PLANNING:
+	if current_state == State.ACTIVE:
 		if player_nav.target_position:
 			player_nav.get_next_path_position()
 	if current_state == State.MOVING:
 		var next_movement_position: Vector3 = player_nav.get_next_path_position()
 		var desired_velocity: Vector3 = global_position.direction_to(next_movement_position) * player_speed
 		player_nav.velocity = desired_velocity
-		#var current_path := player_nav.get_current_navigation_path()
-		#movement_line.build_path_mesh(current_path)
+
 
 # CORE
+func update_movement_target(target: Vector3) -> void:
+	if current_state == State.ACTIVE:
+		player_nav.target_position = target
+
+func move_toward_target(target: Vector3) -> void:
+	print_debug("%s headed for target of %s" % [name, player_nav.target_position])
+	current_state = State.MOVING
+	player_nav.target_position = target
 
 # RECEIVERS
-## Receive the signal from the [Court]
-func on_movement_target_moved(target_position: Vector3):
-	if current_state == State.PLANNING:
-		player_nav.target_position = target_position
 
-func on_movement_target_set(target_position: Vector3):
-	current_state = State.MOVING
-	player_nav.target_position = target_position
+func _on_target_reached() -> void:
+	print_debug("%s reached target of %s (actual position = %s)" % [name, player_nav.target_position, global_position])
+	current_state = State.ACTIVE
 
-func on_velocity_computed(safe_velocity: Vector3):
+func _on_velocity_computed(safe_velocity: Vector3) -> void:
 	velocity = safe_velocity
 	move_and_slide()
 	#print_debug("Safe velocity computed: %s" % safe_velocity)
 
-#func _on_path_changed() -> void:
-	#print_debug("PlayerNav path has changed")
-
-# SETTERS/GETTERS
 
 # PRIVATE/HELPER
 func _connect_signals() -> void:
-	player_nav.connect("velocity_computed", on_velocity_computed)
+	player_nav.connect("target_reached", _on_target_reached)
+	player_nav.connect("velocity_computed", _on_velocity_computed)
+	_are_signals_connected = true
+#
+func _disconnect_signals() -> void:
+	player_nav.disconnect("velocity_computed", _on_velocity_computed)
+	player_nav.disconnect("target_reached", _on_target_reached)
+	_are_signals_connected = false

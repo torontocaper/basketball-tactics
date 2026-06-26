@@ -34,9 +34,7 @@ var active_player: Player:
 		if not is_node_ready():
 			await ready
 		active_player = value
-		active_player.is_active = true
-		court.connect("movement_target_moved", active_player.on_movement_target_moved)
-		court.connect("movement_target_set", active_player.on_movement_target_set)
+		active_player.current_state = Player.State.ACTIVE
 		game_ui.active_player_name_label.text = active_player.name
 		game_ui.update_active_player_label(turn_manager.current_index)
 
@@ -65,7 +63,7 @@ var players_on_court: Array[Player]
 func _ready() -> void:
 	_connect_signals()
 	_assign_players_to_teams()
-	_reset_active_player()
+	#_reset_active_player()
 	_set_initial_turn_order()
 
 
@@ -89,6 +87,8 @@ func _assign_players_to_teams() -> void:
 func _connect_signals() -> void:
 	game_ui.connect("turn_ended", _on_turn_ended)
 	turn_manager.connect("round_completed", _on_round_completed)
+	court.connect("movement_target_moved", _on_movement_target_moved)
+	court.connect("movement_target_set", _on_movement_target_set)
 
 func _set_initial_turn_order() -> void:
 	turn_manager.players_in_game = players_on_court
@@ -99,8 +99,7 @@ func _set_initial_turn_order() -> void:
 
 func _on_turn_ended() -> void:
 	print("GM ending turn for %s" % active_player.name)
-	court.disconnect("movement_target_moved", active_player.on_movement_target_moved)
-	active_player.is_active = false
+	active_player.current_state = Player.State.INACTIVE
 	if turn_manager.current_index < players_on_court.size() - 1:
 		turn_manager.current_index += 1 
 	else:
@@ -108,10 +107,15 @@ func _on_turn_ended() -> void:
 		turn_manager.current_round += 1
 	active_player = turn_manager.get_active_player()
 
+func _on_movement_target_moved(target_position: Vector3) -> void:
+	active_player.update_movement_target(target_position)
+
+func _on_movement_target_set(target_position: Vector3) -> void:
+	active_player.move_toward_target(target_position)
 
 func _on_round_completed() -> void:
 	game_ui.round_number_label.text = "Round %s" % str(turn_manager.current_round)
 
 func _reset_active_player() -> void:
 	for player in players_on_court:
-		player.is_active = false
+		player.current_state = Player.State.INACTIVE
