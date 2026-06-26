@@ -8,14 +8,15 @@ signal movement_target_moved
 signal movement_target_set
 
 @onready var movement_target: Decal = %MovementTarget
+@onready var target_label: Label3D = %TargetLabel
 
 # OVERRIDES
 
 func _ready() -> void:
 	_connect_signals()
 
-
-# CORE
+func _process(_delta: float) -> void:
+	target_label.text = str(target_label.global_position)
 
 # PRIVATE/HELPER
 func _connect_signals() -> void:

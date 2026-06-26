@@ -38,3 +38,9 @@ shape = SubResource("ConcavePolygonShape3D_ryrav")
 unique_name_in_owner = true
 size = Vector3(1, 0.1, 1)
 texture_albedo = SubResource("GradientTexture2D_dsc2w")
+
+[node name="TargetLabel" type="Label3D" parent="MovementTarget" unique_id=1977465220]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+billboard = 1
+text = "(0.0, 0.0, 0.0)"

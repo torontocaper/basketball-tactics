@@ -63,7 +63,6 @@ var players_on_court: Array[Player]
 func _ready() -> void:
 	_connect_signals()
 	_assign_players_to_teams()
-	#_reset_active_player()
 	_set_initial_turn_order()
 
 
@@ -96,7 +95,6 @@ func _set_initial_turn_order() -> void:
 	print("Initial turn order set: %s" % str(current_turn_order))
 	active_player = turn_manager.get_active_player()
 
-
 func _on_turn_ended() -> void:
 	print("GM ending turn for %s" % active_player.name)
 	active_player.current_state = Player.State.INACTIVE
@@ -115,7 +113,3 @@ func _on_movement_target_set(target_position: Vector3) -> void:
 
 func _on_round_completed() -> void:
 	game_ui.round_number_label.text = "Round %s" % str(turn_manager.current_round)
-
-func _reset_active_player() -> void:
-	for player in players_on_court:
-		player.current_state = Player.State.INACTIVE

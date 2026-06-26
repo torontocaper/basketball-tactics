@@ -19,16 +19,19 @@ enum State {
 		current_state = value
 		match current_state:
 			State.INACTIVE:
+				print_debug("%s is %s" % [name, State.keys()[current_state]])
 				active_sprite.visible = false
 				player_nav.debug_enabled = false
 				if _are_signals_connected:
 					_disconnect_signals()
 			State.ACTIVE:
+				print_debug("%s is %s" % [name, State.keys()[current_state]])
 				active_sprite.visible = true
 				player_nav.debug_enabled = true
 				if not _are_signals_connected:
 					_connect_signals()
 			State.MOVING:
+				print_debug("%s is %s" % [name, State.keys()[current_state]])
 				pass
 
 @export var player_speed: float = 10.0
@@ -53,12 +56,15 @@ var _are_signals_connected: bool = false
 
 ## The Player's [NavigationAgent3D], used for pathfinding
 @onready var player_nav: NavigationAgent3D = %PlayerNav
+@onready var target_label: Label3D = %TargetLabel
 
 # OVERRIDES
 func _ready() -> void:
 	name_label.text = name
 
 func _physics_process(_delta: float) -> void:
+	if player_nav.target_position:
+		target_label.text = str(player_nav.target_position)
 	if current_state == State.ACTIVE:
 		if player_nav.target_position:
 			player_nav.get_next_path_position()
@@ -67,36 +73,41 @@ func _physics_process(_delta: float) -> void:
 		var desired_velocity: Vector3 = global_position.direction_to(next_movement_position) * player_speed
 		player_nav.velocity = desired_velocity
 
-
 # CORE
 func update_movement_target(target: Vector3) -> void:
 	if current_state == State.ACTIVE:
 		player_nav.target_position = target
 
-func move_toward_target(target: Vector3) -> void:
+func move_toward_target(_target: Vector3) -> void:
 	print_debug("%s headed for target of %s" % [name, player_nav.target_position])
 	current_state = State.MOVING
-	player_nav.target_position = target
 
 # RECEIVERS
+func _on_navigation_finished() -> void:
+	print_debug("Navigation finished for %s" % name)
+	if current_state == State.MOVING:
+		current_state = State.ACTIVE
 
 func _on_target_reached() -> void:
-	print_debug("%s reached target of %s (actual position = %s)" % [name, player_nav.target_position, global_position])
-	current_state = State.ACTIVE
+	print_debug("%s reached target" % name)
+	if current_state == State.MOVING:
+		current_state = State.ACTIVE
 
 func _on_velocity_computed(safe_velocity: Vector3) -> void:
-	velocity = safe_velocity
-	move_and_slide()
-	#print_debug("Safe velocity computed: %s" % safe_velocity)
+	if current_state == State.MOVING:
+		velocity = safe_velocity
+		move_and_slide()
 
 
 # PRIVATE/HELPER
 func _connect_signals() -> void:
+	player_nav.connect("navigation_finished", _on_navigation_finished)
 	player_nav.connect("target_reached", _on_target_reached)
 	player_nav.connect("velocity_computed", _on_velocity_computed)
 	_are_signals_connected = true
 #
 func _disconnect_signals() -> void:
+	player_nav.disconnect("navigation_finished", _on_navigation_finished)
 	player_nav.disconnect("velocity_computed", _on_velocity_computed)
 	player_nav.disconnect("target_reached", _on_target_reached)
 	_are_signals_connected = false

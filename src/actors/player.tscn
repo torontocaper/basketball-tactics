@@ -71,6 +71,7 @@ sides = 24
 
 [node name="PlayerNav" type="NavigationAgent3D" parent="." unique_id=411002516]
 unique_name_in_owner = true
+path_height_offset = -0.9
 avoidance_enabled = true
 height = 1.9
 radius = 0.4
@@ -79,3 +80,9 @@ debug_enabled = true
 debug_use_custom = true
 debug_path_custom_color = Color(0, 0.1500001, 1, 1)
 debug_path_custom_point_size = 12.0
+
+[node name="TargetLabel" type="Label3D" parent="." unique_id=230306447]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+billboard = 1
+text = "(0.0, 0.0, 0.0)"
