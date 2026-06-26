@@ -13,15 +13,17 @@ config_version=5
 config/name="Basketball Tactics"
 config/description="As of 2026-05-16, current development version of Basketball Tactics"
 config/tags=PackedStringArray("3d", "sports")
-run/main_scene="uid://b6am46kegw2x3"
+run/main_scene="uid://dnivxgx1bk2pk"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="uid://bt2ioehlblun0"
 
 [display]
 
-window/size/viewport_width=1920
-window/size/viewport_height=1080
+window/size/viewport_width=720
+window/size/viewport_height=1280
 window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
+window/handheld/orientation=1
 
 [layer_names]
 

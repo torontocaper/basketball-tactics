@@ -5,15 +5,9 @@
 [ext_resource type="FontFile" uid="uid://buemt0c417y0l" path="res://assets/fonts/Roboto-Medium.ttf" id="3_5wnrh"]
 [ext_resource type="StyleBox" uid="uid://dm1d38j24xjio" path="res://src/resources/active_label_style_box.tres" id="4_uisgv"]
 [ext_resource type="Texture2D" uid="uid://cbov7ehm1nda7" path="res://assets/icons/godot_icon_red.png" id="5_vay52"]
-[ext_resource type="Texture2D" uid="uid://c2tndwgkigkdc" path="res://assets/icons/shot_icon_white_24.png" id="6_pmdkx"]
-[ext_resource type="Texture2D" uid="uid://b48ecg2w32y68" path="res://assets/icons/pass_icon_white_24.png" id="7_ci3e8"]
-[ext_resource type="Texture2D" uid="uid://b14ho3ltl7ivs" path="res://assets/icons/dribble_icon_white_24.png" id="8_e6w2c"]
-
-[sub_resource type="StyleBoxLine" id="StyleBoxLine_lc2xo"]
-grow_begin = 4.0
-grow_end = 4.0
-thickness = 8
-vertical = true
+[ext_resource type="Texture2D" uid="uid://dema47uy5f5eb" path="res://assets/icons/shot_icon_green_110.png" id="6_xhlgw"]
+[ext_resource type="Texture2D" uid="uid://b61r23i5yairn" path="res://assets/icons/pass_icon_yellow_110_vec.svg" id="7_xhlgw"]
+[ext_resource type="Texture2D" uid="uid://bc76h0kr1ft5q" path="res://assets/icons/next_icon_green_100.png" id="8_xhlgw"]
 
 [node name="GameUI" type="Control" unique_id=161166559]
 layout_mode = 3
@@ -49,7 +43,7 @@ theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 0
 
-[node name="ScoreboardContainer" type="HBoxContainer" parent="UIMargin/ScoreboardPanel/ScoreboardMargin" unique_id=432850694]
+[node name="ScoreboardContainer" type="VBoxContainer" parent="UIMargin/ScoreboardPanel/ScoreboardMargin" unique_id=1863140076]
 layout_mode = 2
 
 [node name="AwayTeamContainer" type="HBoxContainer" parent="UIMargin/ScoreboardPanel/ScoreboardMargin/ScoreboardContainer" unique_id=1620775306]
@@ -70,11 +64,6 @@ size_flags_horizontal = 10
 theme_override_fonts/font = ExtResource("2_d6n2q")
 theme_override_font_sizes/font_size = 64
 text = "00"
-
-[node name="VSeparator" type="VSeparator" parent="UIMargin/ScoreboardPanel/ScoreboardMargin/ScoreboardContainer" unique_id=218216572]
-layout_mode = 2
-theme_override_constants/separation = 24
-theme_override_styles/separator = SubResource("StyleBoxLine_lc2xo")
 
 [node name="HomeTeamContainer" type="HBoxContainer" parent="UIMargin/ScoreboardPanel/ScoreboardMargin/ScoreboardContainer" unique_id=64529809]
 layout_mode = 2
@@ -238,40 +227,33 @@ text = "CON: 00"
 [node name="ActionPanel" type="PanelContainer" parent="UIMargin" unique_id=1201686409]
 layout_mode = 2
 size_flags_horizontal = 8
-size_flags_vertical = 8
+size_flags_vertical = 0
 
-[node name="ActionContainer" type="VBoxContainer" parent="UIMargin/ActionPanel" unique_id=839050511]
+[node name="ActionContainer" type="GridContainer" parent="UIMargin/ActionPanel" unique_id=1034920145]
 layout_mode = 2
+columns = 2
 
 [node name="ShootButton" type="Button" parent="UIMargin/ActionPanel/ActionContainer" unique_id=1119247924]
 layout_mode = 2
 size_flags_horizontal = 3
-tooltip_text = "Take a shot at the net"
+tooltip_text = "Shoot"
 theme_override_font_sizes/font_size = 32
-text = "SHOOT"
-icon = ExtResource("6_pmdkx")
+icon = ExtResource("6_xhlgw")
+icon_alignment = 1
 
 [node name="PassButton" type="Button" parent="UIMargin/ActionPanel/ActionContainer" unique_id=160536949]
 texture_filter = 1
 layout_mode = 2
 size_flags_horizontal = 3
-tooltip_text = "Move the ball to a teammate"
+tooltip_text = "Pass"
 theme_override_font_sizes/font_size = 32
-text = "PASS"
-icon = ExtResource("7_ci3e8")
-
-[node name="DribbleButton" type="Button" parent="UIMargin/ActionPanel/ActionContainer" unique_id=1900127026]
-layout_mode = 2
-size_flags_horizontal = 3
-tooltip_text = "Make a dribble move
-Unavailable (Player has picked up their dribble)"
-theme_override_font_sizes/font_size = 32
-disabled = true
-text = "DRIBBLE"
-icon = ExtResource("8_e6w2c")
+icon = ExtResource("7_xhlgw")
+icon_alignment = 1
 
 [node name="EndTurnButton" type="Button" parent="UIMargin/ActionPanel/ActionContainer" unique_id=590212128]
 unique_name_in_owner = true
 layout_mode = 2
+tooltip_text = "End turn"
 theme_override_font_sizes/font_size = 32
-text = "END TURN"
+icon = ExtResource("8_xhlgw")
+icon_alignment = 1
