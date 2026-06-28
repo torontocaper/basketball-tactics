@@ -143,3 +143,10 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Larry"
 horizontal_alignment = 1
+
+[node name="StartButton" type="Button" parent="UIMargin" unique_id=1229595349]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 32
+text = "START"

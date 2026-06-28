@@ -8,6 +8,7 @@
 script = ExtResource("1_ig7tw")
 
 [node name="UILayer" type="CanvasLayer" parent="." unique_id=274550258]
+layer = 10
 
 [node name="GameUI" parent="UILayer" unique_id=161166559 instance=ExtResource("2_0xm2m")]
 

@@ -26,6 +26,7 @@ signal turn_ended
 ## [Label] that displays the Round number (a Round is a full sequence of Turns) #TODO: Make these classes
 #@onready var round_number_label: Label = %RoundNumberLabel
 
+@onready var start_button: Button = $UIMargin/StartButton
 
 func _ready() -> void:
 	_connect_signals()
@@ -33,7 +34,11 @@ func _ready() -> void:
 # PRIVATE/HELPER
 func _connect_signals() -> void:
 	end_turn_button.connect("pressed", _on_end_turn_button_pressed)
+	start_button.connect("pressed", _on_start_button_pressed)
 
 # RECEIVERS
 func _on_end_turn_button_pressed() -> void:
 	turn_ended.emit()
+
+func _on_start_button_pressed() -> void:
+	start_button.queue_free()
