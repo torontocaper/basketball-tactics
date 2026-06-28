@@ -1,12 +1,6 @@
 [gd_scene format=4 uid="uid://hc6o2fyi8gqj"]
 
-[ext_resource type="Texture2D" uid="uid://dg440v4fuueqp" path="res://src/resources/square_0.tres" id="1_dh5b2"]
 [ext_resource type="Texture2D" uid="uid://cwtp85sau827" path="res://src/resources/square_1.tres" id="2_bt4jk"]
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bt4jk"]
-texture = ExtResource("1_dh5b2")
-texture_region_size = Vector2i(48, 48)
-0:0/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mkh3p"]
 texture = ExtResource("2_bt4jk")
@@ -15,7 +9,6 @@ texture_region_size = Vector2i(48, 48)
 
 [sub_resource type="TileSet" id="TileSet_0xm2m"]
 tile_size = Vector2i(48, 48)
-sources/0 = SubResource("TileSetAtlasSource_bt4jk")
 sources/1 = SubResource("TileSetAtlasSource_mkh3p")
 
 [node name="CourtMap" type="TileMapLayer" unique_id=2127892155]

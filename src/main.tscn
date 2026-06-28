@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://cs7tndhgfcpfq" path="res://src/main.gd" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://cksfawym11llb" path="res://src/ui/game_ui.tscn" id="2_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://hc6o2fyi8gqj" path="res://src/court_map.tscn" id="3_h2yge"]
+[ext_resource type="PackedScene" uid="uid://bv21vx6lvidbx" path="res://src/actors/player.tscn" id="4_3cfgd"]
+[ext_resource type="Texture2D" uid="uid://bp37hvbuhinux" path="res://assets/sprites/hoop-54-41.png" id="5_fyndt"]
 
 [node name="Main" type="Node2D" unique_id=41571890]
 script = ExtResource("1_ig7tw")
@@ -18,3 +20,12 @@ layer = 10
 position = Vector2(0, 288)
 
 [node name="CourtMap" parent="GameLayer/CourtArea" unique_id=2127892155 instance=ExtResource("3_h2yge")]
+
+[node name="Player" parent="GameLayer/CourtArea" unique_id=860716830 instance=ExtResource("4_3cfgd")]
+position = Vector2(361, 589)
+
+[node name="Hoop" type="Node2D" parent="GameLayer/CourtArea" unique_id=1174876137]
+position = Vector2(360, 24)
+
+[node name="HoopSprite" type="Sprite2D" parent="GameLayer/CourtArea/Hoop" unique_id=2108716328]
+texture = ExtResource("5_fyndt")

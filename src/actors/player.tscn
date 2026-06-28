@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://bv21vx6lvidbx"]
+
+[ext_resource type="Texture2D" uid="uid://dpdpan3jqk0qp" path="res://assets/sprites/orange-green-24-48-wing.png" id="1_iairh"]
+
+[node name="Player" type="CharacterBody2D" unique_id=860716830]
+motion_mode = 1
+
+[node name="PlayerSprite" type="Sprite2D" parent="." unique_id=751967755]
+texture = ExtResource("1_iairh")

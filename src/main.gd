@@ -2,7 +2,7 @@
 #@icon(icon_path: String)
 class_name Main
 extends Node2D
-## Documentation comments
+## Parent object for the (video) game. Not to be confused with the [Game] class, which represents a [i]basketball[/i] game.
 
 #signal
 #enum

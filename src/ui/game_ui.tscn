@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://dy5t4hw3ifwj3" path="res://src/ui/game_ui.gd" id="1_ltg2s"]
 [ext_resource type="FontFile" uid="uid://bitgv7nf07au6" path="res://assets/fonts/RobotoMono-Medium.ttf" id="2_d6n2q"]
-[ext_resource type="Texture2D" uid="uid://dununduikae5n" path="res://assets/icons/x-blue-128.png" id="2_xhlgw"]
-[ext_resource type="Texture2D" uid="uid://xrnecqphg57m" path="res://assets/icons/o-orange-128.png" id="4_n7cae"]
+[ext_resource type="Texture2D" uid="uid://ccqye8annk4e5" path="res://assets/icons/ceres-icon-80.png" id="2_xhlgw"]
+[ext_resource type="Texture2D" uid="uid://byyfl3g3lo77o" path="res://assets/icons/pluto-icon-80.png" id="4_xhlgw"]
 [ext_resource type="Texture2D" uid="uid://cbov7ehm1nda7" path="res://assets/icons/godot_icon_red.png" id="5_vay52"]
 [ext_resource type="Texture2D" uid="uid://dema47uy5f5eb" path="res://assets/icons/shot_icon_green_110.png" id="6_xhlgw"]
 [ext_resource type="Texture2D" uid="uid://ce08cc61ec6n0" path="res://assets/icons/pass-icon-green-110.png" id="8_n7cae"]
@@ -33,60 +33,73 @@ theme_override_constants/margin_bottom = 16
 
 [node name="ScoreboardPanel" type="PanelContainer" parent="UIMargin" unique_id=1084827369]
 layout_mode = 2
-size_flags_horizontal = 4
+size_flags_horizontal = 8
 size_flags_vertical = 8
 
-[node name="ScoreboardContainer" type="VBoxContainer" parent="UIMargin/ScoreboardPanel" unique_id=1863140076]
+[node name="ScoreboardMargin" type="MarginContainer" parent="UIMargin/ScoreboardPanel" unique_id=656245155]
 layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 2
 
-[node name="AwayTeamContainer" type="HBoxContainer" parent="UIMargin/ScoreboardPanel/ScoreboardContainer" unique_id=1620775306]
+[node name="ScoreboardContainer" type="VBoxContainer" parent="UIMargin/ScoreboardPanel/ScoreboardMargin" unique_id=85927479]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+
+[node name="AwayTeamContainer" type="HBoxContainer" parent="UIMargin/ScoreboardPanel/ScoreboardMargin/ScoreboardContainer" unique_id=1620775306]
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="AwayTeamLogo" type="TextureRect" parent="UIMargin/ScoreboardPanel/ScoreboardContainer/AwayTeamContainer" unique_id=121890911]
+[node name="AwayTeamLogo" type="TextureRect" parent="UIMargin/ScoreboardPanel/ScoreboardMargin/ScoreboardContainer/AwayTeamContainer" unique_id=121890911]
 layout_mode = 2
 texture = ExtResource("2_xhlgw")
 expand_mode = 3
 
-[node name="AwayTeamName" type="Label" parent="UIMargin/ScoreboardPanel/ScoreboardContainer/AwayTeamContainer" unique_id=1743269006]
+[node name="AwayTeamName" type="Label" parent="UIMargin/ScoreboardPanel/ScoreboardMargin/ScoreboardContainer/AwayTeamContainer" unique_id=1743269006]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_d6n2q")
 theme_override_font_sizes/font_size = 64
-text = "X's"
+text = "Ceres"
 horizontal_alignment = 1
+uppercase = true
 
-[node name="AwayTeamScore" type="Label" parent="UIMargin/ScoreboardPanel/ScoreboardContainer/AwayTeamContainer" unique_id=548345464]
+[node name="AwayTeamScore" type="Label" parent="UIMargin/ScoreboardPanel/ScoreboardMargin/ScoreboardContainer/AwayTeamContainer" unique_id=548345464]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 10
 theme_override_fonts/font = ExtResource("2_d6n2q")
-theme_override_font_sizes/font_size = 64
+theme_override_font_sizes/font_size = 48
 text = "00"
 
-[node name="HomeTeamContainer" type="HBoxContainer" parent="UIMargin/ScoreboardPanel/ScoreboardContainer" unique_id=64529809]
+[node name="HomeTeamContainer" type="HBoxContainer" parent="UIMargin/ScoreboardPanel/ScoreboardMargin/ScoreboardContainer" unique_id=64529809]
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="HomeTeamLogo" type="TextureRect" parent="UIMargin/ScoreboardPanel/ScoreboardContainer/HomeTeamContainer" unique_id=2022818092]
+[node name="HomeTeamLogo" type="TextureRect" parent="UIMargin/ScoreboardPanel/ScoreboardMargin/ScoreboardContainer/HomeTeamContainer" unique_id=2022818092]
 layout_mode = 2
-texture = ExtResource("4_n7cae")
+texture = ExtResource("4_xhlgw")
 expand_mode = 3
 
-[node name="HomeTeamName" type="Label" parent="UIMargin/ScoreboardPanel/ScoreboardContainer/HomeTeamContainer" unique_id=1495195636]
+[node name="HomeTeamName" type="Label" parent="UIMargin/ScoreboardPanel/ScoreboardMargin/ScoreboardContainer/HomeTeamContainer" unique_id=1495195636]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_d6n2q")
 theme_override_font_sizes/font_size = 64
-text = "O's"
+text = "Pluto"
 horizontal_alignment = 1
+uppercase = true
 
-[node name="HomeTeamScore" type="Label" parent="UIMargin/ScoreboardPanel/ScoreboardContainer/HomeTeamContainer" unique_id=2047253025]
+[node name="HomeTeamScore" type="Label" parent="UIMargin/ScoreboardPanel/ScoreboardMargin/ScoreboardContainer/HomeTeamContainer" unique_id=2047253025]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 10
 theme_override_fonts/font = ExtResource("2_d6n2q")
-theme_override_font_sizes/font_size = 64
+theme_override_font_sizes/font_size = 48
 text = "00"
 
 [node name="ActionPanel" type="PanelContainer" parent="UIMargin" unique_id=1201686409]
