@@ -1,0 +1,10 @@
+[gd_resource type="GradientTexture2D" format=3 uid="uid://dg440v4fuueqp"]
+
+[sub_resource type="Gradient" id="Gradient_yamud"]
+colors = PackedColorArray(0.8235294, 0.7058824, 0.54901963, 1, 0.9607843, 0.87058824, 0.7019608, 1)
+
+[resource]
+gradient = SubResource("Gradient_yamud")
+width = 48
+height = 48
+fill_to = Vector2(1, 1)

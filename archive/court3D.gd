@@ -1,6 +1,6 @@
 #@tool
 #@icon(icon_path: String)
-class_name Court
+class_name Court3D
 extends StaticBody3D
 ## The surface the game is played on
 

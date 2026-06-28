@@ -2,13 +2,12 @@
 
 [ext_resource type="Script" uid="uid://dy5t4hw3ifwj3" path="res://src/ui/game_ui.gd" id="1_ltg2s"]
 [ext_resource type="FontFile" uid="uid://bitgv7nf07au6" path="res://assets/fonts/RobotoMono-Medium.ttf" id="2_d6n2q"]
-[ext_resource type="FontFile" uid="uid://buemt0c417y0l" path="res://assets/fonts/Roboto-Medium.ttf" id="3_5wnrh"]
-[ext_resource type="Texture2D" uid="uid://dijki3fgkldjg" path="res://assets/icons/godot_icon_blue.png" id="4_n7cae"]
-[ext_resource type="StyleBox" uid="uid://dm1d38j24xjio" path="res://src/resources/active_label_style_box.tres" id="4_uisgv"]
+[ext_resource type="Texture2D" uid="uid://dununduikae5n" path="res://assets/icons/x-blue-128.png" id="2_xhlgw"]
+[ext_resource type="Texture2D" uid="uid://xrnecqphg57m" path="res://assets/icons/o-orange-128.png" id="4_n7cae"]
 [ext_resource type="Texture2D" uid="uid://cbov7ehm1nda7" path="res://assets/icons/godot_icon_red.png" id="5_vay52"]
 [ext_resource type="Texture2D" uid="uid://dema47uy5f5eb" path="res://assets/icons/shot_icon_green_110.png" id="6_xhlgw"]
-[ext_resource type="Texture2D" uid="uid://br8ad6oheuqrf" path="res://assets/icons/pass_icon_green_110.svg" id="7_xhlgw"]
-[ext_resource type="Texture2D" uid="uid://bc76h0kr1ft5q" path="res://assets/icons/next_icon_green_100.png" id="8_xhlgw"]
+[ext_resource type="Texture2D" uid="uid://ce08cc61ec6n0" path="res://assets/icons/pass-icon-green-110.png" id="8_n7cae"]
+[ext_resource type="Texture2D" uid="uid://q3q3duwisfju" path="res://assets/icons/next_icon_green_66.png" id="9_rf5aj"]
 
 [node name="GameUI" type="Control" unique_id=161166559]
 layout_mode = 3
@@ -37,33 +36,27 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 
-[node name="ScoreboardMargin" type="MarginContainer" parent="UIMargin/ScoreboardPanel" unique_id=1358002057]
-layout_mode = 2
-theme_override_constants/margin_left = 8
-theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 8
-theme_override_constants/margin_bottom = 0
-
-[node name="ScoreboardContainer" type="VBoxContainer" parent="UIMargin/ScoreboardPanel/ScoreboardMargin" unique_id=1863140076]
+[node name="ScoreboardContainer" type="VBoxContainer" parent="UIMargin/ScoreboardPanel" unique_id=1863140076]
 layout_mode = 2
 
-[node name="AwayTeamContainer" type="HBoxContainer" parent="UIMargin/ScoreboardPanel/ScoreboardMargin/ScoreboardContainer" unique_id=1620775306]
+[node name="AwayTeamContainer" type="HBoxContainer" parent="UIMargin/ScoreboardPanel/ScoreboardContainer" unique_id=1620775306]
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="AwayTeamLogo" type="TextureRect" parent="UIMargin/ScoreboardPanel/ScoreboardMargin/ScoreboardContainer/AwayTeamContainer" unique_id=121890911]
+[node name="AwayTeamLogo" type="TextureRect" parent="UIMargin/ScoreboardPanel/ScoreboardContainer/AwayTeamContainer" unique_id=121890911]
 layout_mode = 2
-texture = ExtResource("5_vay52")
+texture = ExtResource("2_xhlgw")
+expand_mode = 3
 
-[node name="AwayTeamNameLabel" type="Label" parent="UIMargin/ScoreboardPanel/ScoreboardMargin/ScoreboardContainer/AwayTeamContainer" unique_id=1743269006]
+[node name="AwayTeamName" type="Label" parent="UIMargin/ScoreboardPanel/ScoreboardContainer/AwayTeamContainer" unique_id=1743269006]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_d6n2q")
 theme_override_font_sizes/font_size = 64
-text = "AWAYERS"
+text = "X's"
 horizontal_alignment = 1
 
-[node name="AwayTeamScoreLabel" type="Label" parent="UIMargin/ScoreboardPanel/ScoreboardMargin/ScoreboardContainer/AwayTeamContainer" unique_id=548345464]
+[node name="AwayTeamScore" type="Label" parent="UIMargin/ScoreboardPanel/ScoreboardContainer/AwayTeamContainer" unique_id=548345464]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 10
@@ -71,171 +64,30 @@ theme_override_fonts/font = ExtResource("2_d6n2q")
 theme_override_font_sizes/font_size = 64
 text = "00"
 
-[node name="HomeTeamContainer" type="HBoxContainer" parent="UIMargin/ScoreboardPanel/ScoreboardMargin/ScoreboardContainer" unique_id=64529809]
+[node name="HomeTeamContainer" type="HBoxContainer" parent="UIMargin/ScoreboardPanel/ScoreboardContainer" unique_id=64529809]
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="HomeTeamLogo" type="TextureRect" parent="UIMargin/ScoreboardPanel/ScoreboardMargin/ScoreboardContainer/HomeTeamContainer" unique_id=2022818092]
+[node name="HomeTeamLogo" type="TextureRect" parent="UIMargin/ScoreboardPanel/ScoreboardContainer/HomeTeamContainer" unique_id=2022818092]
 layout_mode = 2
 texture = ExtResource("4_n7cae")
+expand_mode = 3
 
-[node name="HomeTeamNameLabel" type="Label" parent="UIMargin/ScoreboardPanel/ScoreboardMargin/ScoreboardContainer/HomeTeamContainer" unique_id=1495195636]
+[node name="HomeTeamName" type="Label" parent="UIMargin/ScoreboardPanel/ScoreboardContainer/HomeTeamContainer" unique_id=1495195636]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_d6n2q")
 theme_override_font_sizes/font_size = 64
-text = "HOMERS"
+text = "O's"
 horizontal_alignment = 1
 
-[node name="HomeTeamScoreLabel" type="Label" parent="UIMargin/ScoreboardPanel/ScoreboardMargin/ScoreboardContainer/HomeTeamContainer" unique_id=2047253025]
+[node name="HomeTeamScore" type="Label" parent="UIMargin/ScoreboardPanel/ScoreboardContainer/HomeTeamContainer" unique_id=2047253025]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 10
 theme_override_fonts/font = ExtResource("2_d6n2q")
 theme_override_font_sizes/font_size = 64
 text = "00"
-
-[node name="TurnInfoContainer" type="HBoxContainer" parent="UIMargin" unique_id=78871145]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-
-[node name="TurnOrderPanel" type="PanelContainer" parent="UIMargin/TurnInfoContainer" unique_id=1503512490]
-layout_mode = 2
-
-[node name="TurnOrderContainer" type="VBoxContainer" parent="UIMargin/TurnInfoContainer/TurnOrderPanel" unique_id=370188495]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 0
-
-[node name="TurnOrderTitle" type="Label" parent="UIMargin/TurnInfoContainer/TurnOrderPanel/TurnOrderContainer" unique_id=62316157]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("3_5wnrh")
-theme_override_font_sizes/font_size = 24
-text = "Turn Order"
-horizontal_alignment = 1
-
-[node name="RoundNumberLabel" type="Label" parent="UIMargin/TurnInfoContainer/TurnOrderPanel/TurnOrderContainer" unique_id=1231229265]
-unique_name_in_owner = true
-layout_mode = 2
-text = "Round 1"
-horizontal_alignment = 1
-
-[node name="TurnOrderLabels" type="VBoxContainer" parent="UIMargin/TurnInfoContainer/TurnOrderPanel/TurnOrderContainer" unique_id=1094287582]
-unique_name_in_owner = true
-layout_mode = 2
-
-[node name="TurnOrderLabel1" type="Label" parent="UIMargin/TurnInfoContainer/TurnOrderPanel/TurnOrderContainer/TurnOrderLabels" unique_id=1376314316]
-layout_mode = 2
-theme_override_styles/normal = ExtResource("4_uisgv")
-text = "PlayerName"
-
-[node name="TurnOrderLabel2" type="Label" parent="UIMargin/TurnInfoContainer/TurnOrderPanel/TurnOrderContainer/TurnOrderLabels" unique_id=2030562631]
-layout_mode = 2
-text = "PlayerName"
-
-[node name="TurnOrderLabel3" type="Label" parent="UIMargin/TurnInfoContainer/TurnOrderPanel/TurnOrderContainer/TurnOrderLabels" unique_id=811213619]
-layout_mode = 2
-text = "PlayerName"
-
-[node name="TurnOrderLabel4" type="Label" parent="UIMargin/TurnInfoContainer/TurnOrderPanel/TurnOrderContainer/TurnOrderLabels" unique_id=654058594]
-layout_mode = 2
-text = "PlayerName"
-
-[node name="TurnOrderLabel5" type="Label" parent="UIMargin/TurnInfoContainer/TurnOrderPanel/TurnOrderContainer/TurnOrderLabels" unique_id=2055356704]
-layout_mode = 2
-text = "PlayerName"
-
-[node name="TurnOrderLabel6" type="Label" parent="UIMargin/TurnInfoContainer/TurnOrderPanel/TurnOrderContainer/TurnOrderLabels" unique_id=800202958]
-layout_mode = 2
-text = "PlayerName"
-
-[node name="ActivePlayerPanel" type="PanelContainer" parent="UIMargin/TurnInfoContainer" unique_id=196102814]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="ActivePlayerContainer" type="VBoxContainer" parent="UIMargin/TurnInfoContainer/ActivePlayerPanel" unique_id=1403580097]
-layout_mode = 2
-
-[node name="ActivePlayerInfoContainer" type="HBoxContainer" parent="UIMargin/TurnInfoContainer/ActivePlayerPanel/ActivePlayerContainer" unique_id=1079570775]
-layout_mode = 2
-
-[node name="ActivePlayerAvatar" type="TextureRect" parent="UIMargin/TurnInfoContainer/ActivePlayerPanel/ActivePlayerContainer/ActivePlayerInfoContainer" unique_id=532287424]
-layout_mode = 2
-texture = ExtResource("5_vay52")
-stretch_mode = 3
-
-[node name="ActivePlayerInfo" type="VBoxContainer" parent="UIMargin/TurnInfoContainer/ActivePlayerPanel/ActivePlayerContainer/ActivePlayerInfoContainer" unique_id=1395178715]
-visible = false
-layout_mode = 2
-alignment = 1
-
-[node name="ContextLabels" type="HBoxContainer" parent="UIMargin/TurnInfoContainer/ActivePlayerPanel/ActivePlayerContainer/ActivePlayerInfoContainer/ActivePlayerInfo" unique_id=2083312177]
-layout_mode = 2
-
-[node name="ContextLabel" type="Label" parent="UIMargin/TurnInfoContainer/ActivePlayerPanel/ActivePlayerContainer/ActivePlayerInfoContainer/ActivePlayerInfo/ContextLabels" unique_id=663430670]
-layout_mode = 2
-tooltip_text = "Player's team has possession of the ball"
-mouse_filter = 0
-text = "Offense"
-
-[node name="ContextLabel2" type="Label" parent="UIMargin/TurnInfoContainer/ActivePlayerPanel/ActivePlayerContainer/ActivePlayerInfoContainer/ActivePlayerInfo/ContextLabels" unique_id=925783022]
-layout_mode = 2
-tooltip_text = "Player has possession of the ball"
-mouse_filter = 0
-text = "On-Ball"
-
-[node name="ContextLabel3" type="Label" parent="UIMargin/TurnInfoContainer/ActivePlayerPanel/ActivePlayerContainer/ActivePlayerInfoContainer/ActivePlayerInfo/ContextLabels" unique_id=727385642]
-layout_mode = 2
-tooltip_text = "Player has picked up their dribble"
-mouse_filter = 0
-text = "No Dribble"
-
-[node name="RangeLabel" type="Label" parent="UIMargin/TurnInfoContainer/ActivePlayerPanel/ActivePlayerContainer/ActivePlayerInfoContainer/ActivePlayerInfo" unique_id=1531215925]
-layout_mode = 2
-text = "Movement range: 3.0 m"
-
-[node name="EnergyLabel" type="Label" parent="UIMargin/TurnInfoContainer/ActivePlayerPanel/ActivePlayerContainer/ActivePlayerInfoContainer/ActivePlayerInfo" unique_id=100507140]
-layout_mode = 2
-text = "Energy level: Tired"
-
-[node name="ActivePlayerStats" type="GridContainer" parent="UIMargin/TurnInfoContainer/ActivePlayerPanel/ActivePlayerContainer/ActivePlayerInfoContainer/ActivePlayerInfo" unique_id=1648150378]
-layout_mode = 2
-theme_override_constants/h_separation = 8
-theme_override_constants/v_separation = 8
-columns = 3
-
-[node name="ActivePlayerStatLabel" type="Label" parent="UIMargin/TurnInfoContainer/ActivePlayerPanel/ActivePlayerContainer/ActivePlayerInfoContainer/ActivePlayerInfo/ActivePlayerStats" unique_id=1321018022]
-layout_mode = 2
-text = "CHA: 00"
-
-[node name="ActivePlayerStatLabel2" type="Label" parent="UIMargin/TurnInfoContainer/ActivePlayerPanel/ActivePlayerContainer/ActivePlayerInfoContainer/ActivePlayerInfo/ActivePlayerStats" unique_id=1393546693]
-layout_mode = 2
-text = "STR: 00"
-
-[node name="ActivePlayerStatLabel3" type="Label" parent="UIMargin/TurnInfoContainer/ActivePlayerPanel/ActivePlayerContainer/ActivePlayerInfoContainer/ActivePlayerInfo/ActivePlayerStats" unique_id=402145991]
-layout_mode = 2
-text = "WIS: 00"
-
-[node name="ActivePlayerStatLabel4" type="Label" parent="UIMargin/TurnInfoContainer/ActivePlayerPanel/ActivePlayerContainer/ActivePlayerInfoContainer/ActivePlayerInfo/ActivePlayerStats" unique_id=1954304706]
-layout_mode = 2
-text = "DEX: 00"
-
-[node name="ActivePlayerStatLabel5" type="Label" parent="UIMargin/TurnInfoContainer/ActivePlayerPanel/ActivePlayerContainer/ActivePlayerInfoContainer/ActivePlayerInfo/ActivePlayerStats" unique_id=1860814848]
-layout_mode = 2
-text = "INT: 00"
-
-[node name="ActivePlayerStatLabel6" type="Label" parent="UIMargin/TurnInfoContainer/ActivePlayerPanel/ActivePlayerContainer/ActivePlayerInfoContainer/ActivePlayerInfo/ActivePlayerStats" unique_id=1604198913]
-layout_mode = 2
-text = "CON: 00"
-
-[node name="ActivePlayerNameLabel" type="Label" parent="UIMargin/TurnInfoContainer/ActivePlayerPanel/ActivePlayerContainer" unique_id=1849701778]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_font_sizes/font_size = 24
-text = "Larry"
-horizontal_alignment = 1
 
 [node name="ActionPanel" type="PanelContainer" parent="UIMargin" unique_id=1201686409]
 layout_mode = 2
@@ -247,6 +99,7 @@ layout_mode = 2
 columns = 2
 
 [node name="ShootButton" type="Button" parent="UIMargin/ActionPanel/ActionContainer" unique_id=1119247924]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 tooltip_text = "Shoot"
@@ -255,12 +108,12 @@ icon = ExtResource("6_xhlgw")
 icon_alignment = 1
 
 [node name="PassButton" type="Button" parent="UIMargin/ActionPanel/ActionContainer" unique_id=160536949]
-texture_filter = 1
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 tooltip_text = "Pass"
 theme_override_font_sizes/font_size = 32
-icon = ExtResource("7_xhlgw")
+icon = ExtResource("8_n7cae")
 icon_alignment = 1
 
 [node name="EndTurnButton" type="Button" parent="UIMargin/ActionPanel/ActionContainer" unique_id=590212128]
@@ -268,5 +121,25 @@ unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "End turn"
 theme_override_font_sizes/font_size = 32
-icon = ExtResource("8_xhlgw")
+icon = ExtResource("9_rf5aj")
 icon_alignment = 1
+
+[node name="ActivePlayerPanel" type="PanelContainer" parent="UIMargin" unique_id=196102814]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="ActivePlayerContainer" type="VBoxContainer" parent="UIMargin/ActivePlayerPanel" unique_id=1403580097]
+layout_mode = 2
+
+[node name="ActivePlayerAvatar" type="TextureRect" parent="UIMargin/ActivePlayerPanel/ActivePlayerContainer" unique_id=532287424]
+unique_name_in_owner = true
+layout_mode = 2
+texture = ExtResource("5_vay52")
+
+[node name="ActivePlayerName" type="Label" parent="UIMargin/ActivePlayerPanel/ActivePlayerContainer" unique_id=1849701778]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Larry"
+horizontal_alignment = 1

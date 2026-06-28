@@ -30,7 +30,7 @@ radius = 0.225
 height = 0.01
 radius = 0.225
 
-[node name="Hoop" type="Node3D" unique_id=715531421]
+[node name="Hoop3D" type="Node3D" unique_id=715531421]
 
 [node name="Backboard" type="StaticBody3D" parent="." unique_id=2071361218]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.375, 0.395)

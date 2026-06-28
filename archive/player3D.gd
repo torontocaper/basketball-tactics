@@ -1,6 +1,6 @@
 #@tool
 #@icon(icon_path: String)
-class_name Player
+class_name Player3D
 extends CharacterBody3D
 ## Base class for on-court actors
 

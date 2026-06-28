@@ -1,7 +1,7 @@
 #@tool
 #@icon(icon_path: String)
 #class_name _CLASS_
-extends _BASE_
+#extends _BASE_
 ## Documentation comments
 
 #signal

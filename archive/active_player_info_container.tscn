@@ -1,0 +1,68 @@
+[gd_scene format=3 uid="uid://f3xxdo6amhki"]
+
+[node name="ActivePlayerInfoContainer" type="HBoxContainer" unique_id=603670034]
+visible = false
+
+[node name="ActivePlayerInfo" type="VBoxContainer" parent="." unique_id=852731216]
+visible = false
+layout_mode = 2
+alignment = 1
+
+[node name="ContextLabels" type="HBoxContainer" parent="ActivePlayerInfo" unique_id=227374280]
+layout_mode = 2
+
+[node name="ContextLabel" type="Label" parent="ActivePlayerInfo/ContextLabels" unique_id=1027890036]
+layout_mode = 2
+tooltip_text = "Player's team has possession of the ball"
+mouse_filter = 0
+text = "Offense"
+
+[node name="ContextLabel2" type="Label" parent="ActivePlayerInfo/ContextLabels" unique_id=405418241]
+layout_mode = 2
+tooltip_text = "Player has possession of the ball"
+mouse_filter = 0
+text = "On-Ball"
+
+[node name="ContextLabel3" type="Label" parent="ActivePlayerInfo/ContextLabels" unique_id=1869990481]
+layout_mode = 2
+tooltip_text = "Player has picked up their dribble"
+mouse_filter = 0
+text = "No Dribble"
+
+[node name="RangeLabel" type="Label" parent="ActivePlayerInfo" unique_id=1879872672]
+layout_mode = 2
+text = "Movement range: 3.0 m"
+
+[node name="EnergyLabel" type="Label" parent="ActivePlayerInfo" unique_id=1472988442]
+layout_mode = 2
+text = "Energy level: Tired"
+
+[node name="ActivePlayerStats" type="GridContainer" parent="ActivePlayerInfo" unique_id=267895636]
+layout_mode = 2
+theme_override_constants/h_separation = 8
+theme_override_constants/v_separation = 8
+columns = 3
+
+[node name="ActivePlayerStatLabel" type="Label" parent="ActivePlayerInfo/ActivePlayerStats" unique_id=1091911377]
+layout_mode = 2
+text = "CHA: 00"
+
+[node name="ActivePlayerStatLabel2" type="Label" parent="ActivePlayerInfo/ActivePlayerStats" unique_id=2013084738]
+layout_mode = 2
+text = "STR: 00"
+
+[node name="ActivePlayerStatLabel3" type="Label" parent="ActivePlayerInfo/ActivePlayerStats" unique_id=625529580]
+layout_mode = 2
+text = "WIS: 00"
+
+[node name="ActivePlayerStatLabel4" type="Label" parent="ActivePlayerInfo/ActivePlayerStats" unique_id=46657756]
+layout_mode = 2
+text = "DEX: 00"
+
+[node name="ActivePlayerStatLabel5" type="Label" parent="ActivePlayerInfo/ActivePlayerStats" unique_id=2011772579]
+layout_mode = 2
+text = "INT: 00"
+
+[node name="ActivePlayerStatLabel6" type="Label" parent="ActivePlayerInfo/ActivePlayerStats" unique_id=1849022991]
+layout_mode = 2
+text = "CON: 00"

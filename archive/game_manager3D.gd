@@ -1,6 +1,6 @@
-@tool
+#@tool
 #@icon(icon_path: String)
-class_name Game
+class_name Game3D
 extends Node3D
 ## Game controller. Manages state, score and other game/match-level info.
 
