@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dununduikae5n"
-path="res://.godot/imported/x-blue-128.png-a1163fedde1b0f81fed6e5347447d330.ctex"
+uid="uid://b6h3hpklksw7i"
+path="res://.godot/imported/jersey-icon-yellow-24.png-10d42e36acab3e0dcb9cf3a60d573759.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/icons/x-blue-128.png"
-dest_files=["res://.godot/imported/x-blue-128.png-a1163fedde1b0f81fed6e5347447d330.ctex"]
+source_file="res://assets/icons/class_icons/jersey-icon-yellow-24.png"
+dest_files=["res://.godot/imported/jersey-icon-yellow-24.png-10d42e36acab3e0dcb9cf3a60d573759.ctex"]
 
 [params]
 

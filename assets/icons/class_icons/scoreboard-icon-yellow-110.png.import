@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://xrnecqphg57m"
-path="res://.godot/imported/o-orange-128.png-04b31593a224458cdce06d26e43e9bf7.ctex"
+uid="uid://dnwrol7m3pe41"
+path="res://.godot/imported/scoreboard-icon-yellow-110.png-242d7a0495d389b563d88230c3192c18.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/icons/o-orange-128.png"
-dest_files=["res://.godot/imported/o-orange-128.png-04b31593a224458cdce06d26e43e9bf7.ctex"]
+source_file="res://assets/icons/class_icons/scoreboard-icon-yellow-110.png"
+dest_files=["res://.godot/imported/scoreboard-icon-yellow-110.png-242d7a0495d389b563d88230c3192c18.ctex"]
 
 [params]
 

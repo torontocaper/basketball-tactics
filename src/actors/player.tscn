@@ -1,9 +1,20 @@
 [gd_scene format=3 uid="uid://bv21vx6lvidbx"]
 
-[ext_resource type="Texture2D" uid="uid://dpdpan3jqk0qp" path="res://assets/sprites/orange-green-24-48-wing.png" id="1_iairh"]
+[ext_resource type="Script" uid="uid://b2a3vwihky1wh" path="res://src/actors/player.gd" id="1_gdh0h"]
+[ext_resource type="Texture2D" uid="uid://btmnhm3jpcwb2" path="res://assets/sprites/placeholder-player.png" id="2_gdh0h"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gdh0h"]
+height = 32.0
 
 [node name="Player" type="CharacterBody2D" unique_id=860716830]
+input_pickable = true
 motion_mode = 1
+script = ExtResource("1_gdh0h")
 
 [node name="PlayerSprite" type="Sprite2D" parent="." unique_id=751967755]
-texture = ExtResource("1_iairh")
+unique_name_in_owner = true
+texture = ExtResource("2_gdh0h")
+
+[node name="PlayerCollider" type="CollisionShape2D" parent="." unique_id=311264642]
+position = Vector2(0, 8)
+shape = SubResource("CapsuleShape2D_gdh0h")

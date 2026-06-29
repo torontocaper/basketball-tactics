@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Team" format=3 uid="uid://bu08np83opwwo"]
+
+[ext_resource type="Script" uid="uid://doqdy20j2vj1q" path="res://resources/custom_resources/team.gd" id="1_c34kw"]
+[ext_resource type="Texture2D" uid="uid://byyfl3g3lo77o" path="res://assets/icons/pluto-icon-80.png" id="2_ai7n7"]
+
+[resource]
+script = ExtResource("1_c34kw")
+team_logo = ExtResource("2_ai7n7")
+team_name = "Pluto"
+team_name_short = "PLT"
+metadata/_custom_type_script = "uid://doqdy20j2vj1q"
