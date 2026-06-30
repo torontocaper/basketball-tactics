@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ccqye8annk4e5"
-path="res://.godot/imported/ceres-icon-80.png-fd26f29c62b577a218218d9f72f5129e.ctex"
+uid="uid://dpnmv8cuwomrr"
+path="res://.godot/imported/pass-icon-green-110.svg-fac5c8b1d8ca75224286bb6313abc4ae.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/icons/ceres-icon-80.png"
-dest_files=["res://.godot/imported/ceres-icon-80.png-fd26f29c62b577a218218d9f72f5129e.ctex"]
+source_file="res://assets/icons/button_icons/pass-icon-green-110.svg"
+dest_files=["res://.godot/imported/pass-icon-green-110.svg-fac5c8b1d8ca75224286bb6313abc4ae.ctex"]
 
 [params]
 
@@ -38,3 +38,6 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
+svg/scale=1.0
+editor/scale_with_editor_scale=false
+editor/convert_colors_with_editor_theme=false

@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://bx082j1lp20ab"]
 
-[ext_resource type="Texture2D" uid="uid://dema47uy5f5eb" path="res://assets/icons/shot_icon_green_110.png" id="1_mrb63"]
-[ext_resource type="Texture2D" uid="uid://ce08cc61ec6n0" path="res://assets/icons/pass-icon-green-110.png" id="2_y6hfe"]
-[ext_resource type="Texture2D" uid="uid://q3q3duwisfju" path="res://assets/icons/next_icon_green_66.png" id="3_41anw"]
+[ext_resource type="Texture2D" uid="uid://dema47uy5f5eb" path="res://assets/icons/button_icons/shot_icon_green_110.png" id="1_mrb63"]
+[ext_resource type="Texture2D" uid="uid://ce08cc61ec6n0" path="res://assets/icons/button_icons/pass-icon-green-110.png" id="2_y6hfe"]
+[ext_resource type="Texture2D" uid="uid://q3q3duwisfju" path="res://assets/icons/button_icons/next_icon_green_66.png" id="3_41anw"]
 
 [node name="ActionPanel" type="PanelContainer" unique_id=709721102]
 size_flags_horizontal = 8

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://q3q3duwisfju"
-path="res://.godot/imported/next_icon_green_66.png-ef2dc452d5a9a3736b511b2016c98b33.ctex"
+uid="uid://b14ho3ltl7ivs"
+path="res://.godot/imported/dribble_icon_white_24.png-ec52936e236a6a7e0c2690a0d02fd428.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/icons/next_icon_green_66.png"
-dest_files=["res://.godot/imported/next_icon_green_66.png-ef2dc452d5a9a3736b511b2016c98b33.ctex"]
+source_file="res://assets/icons/button_icons/dribble_icon_white_24.png"
+dest_files=["res://.godot/imported/dribble_icon_white_24.png-ec52936e236a6a7e0c2690a0d02fd428.ctex"]
 
 [params]
 

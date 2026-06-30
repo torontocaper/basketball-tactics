@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://byyfl3g3lo77o"
-path="res://.godot/imported/pluto-icon-80.png-340696adbc3e994b1b5d1c7377ae57ec.ctex"
+uid="uid://bc76h0kr1ft5q"
+path="res://.godot/imported/next_icon_green_100.png-efd24a93b26d4ad913179b679b24f276.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/icons/pluto-icon-80.png"
-dest_files=["res://.godot/imported/pluto-icon-80.png-340696adbc3e994b1b5d1c7377ae57ec.ctex"]
+source_file="res://assets/icons/button_icons/next_icon_green_100.png"
+dest_files=["res://.godot/imported/next_icon_green_100.png-efd24a93b26d4ad913179b679b24f276.ctex"]
 
 [params]
 

@@ -8,11 +8,16 @@ signal player_clicked
 signal player_selected
 enum Selectability {SELECTABLE, SELECTED, UNSELECTABLE}
 #const
-@export var movement_target: Vector2:
+@export var player_texture: Texture2D
+@export var movement_speed: float = 10.0
+
+var movement_target: Vector2:
 	set(value):
 		movement_target = value
 		print("%s has a movement target: %s" % [name, str(movement_target)])
-@export var player_texture: Texture2D
+		player_nav.target_position = movement_target
+		print(player_nav.distance_to_target())
+
 var select_state: Selectability:
 	set(value):
 		select_state = value
@@ -23,10 +28,9 @@ var select_state: Selectability:
 				print("%s is selected" % name)
 			Selectability.UNSELECTABLE:
 				print("%s is unselectable" % name)
+
 @onready var player_sprite: Sprite2D = %PlayerSprite
 @onready var player_nav: NavigationAgent2D = %PlayerNav
-
-# OVERRIDES
 
 func _ready() -> void:
 	_connect_signals()
@@ -36,7 +40,12 @@ func _process(_delta: float) -> void:
 	pass
 
 func _physics_process(_delta: float) -> void:
-	pass
+	if player_nav.target_position:
+		var next_position = player_nav.get_next_path_position()
+		#print(next_position)
+		var movement_direction = global_position.direction_to(next_position)
+		velocity = movement_direction * movement_speed
+		move_and_slide()
 
 # CORE
 

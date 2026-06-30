@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bc76h0kr1ft5q"
-path="res://.godot/imported/next_icon_green_100.png-5f2b5a78cf37121b1cda79b749eb082d.ctex"
+uid="uid://b48ecg2w32y68"
+path="res://.godot/imported/pass_icon_white_24.png-8886c2ce0d27f544fc1cc9a52f8a1c40.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/icons/next_icon_green_100.png"
-dest_files=["res://.godot/imported/next_icon_green_100.png-5f2b5a78cf37121b1cda79b749eb082d.ctex"]
+source_file="res://assets/icons/button_icons/pass_icon_white_24.png"
+dest_files=["res://.godot/imported/pass_icon_white_24.png-8886c2ce0d27f544fc1cc9a52f8a1c40.ctex"]
 
 [params]
 

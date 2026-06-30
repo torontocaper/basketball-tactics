@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b48ecg2w32y68"
-path="res://.godot/imported/pass_icon_white_24.png-d0b62d8810054b259e042f42b394e398.ctex"
+uid="uid://b61r23i5yairn"
+path="res://.godot/imported/pass_icon_yellow_110_vec.svg-709227853ae07f635016a50125b0a0b5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/icons/pass_icon_white_24.png"
-dest_files=["res://.godot/imported/pass_icon_white_24.png-d0b62d8810054b259e042f42b394e398.ctex"]
+source_file="res://assets/icons/button_icons/pass_icon_yellow_110_vec.svg"
+dest_files=["res://.godot/imported/pass_icon_yellow_110_vec.svg-709227853ae07f635016a50125b0a0b5.ctex"]
 
 [params]
 
@@ -38,3 +38,6 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
+svg/scale=1.0
+editor/scale_with_editor_scale=false
+editor/convert_colors_with_editor_theme=false
