@@ -40,5 +40,6 @@ func _connect_signals() -> void:
 	court.connect("court_clicked", _on_court_clicked)
 
 # RECEIVERS
-func _on_court_clicked(click_position: Vector2) -> void:
-	selected_player.movement_target = click_position
+func _on_court_clicked(_click_position: Vector2) -> void:
+	pass
+	#TODO selected_player.movement_target = click_position
