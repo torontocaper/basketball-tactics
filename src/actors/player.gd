@@ -5,8 +5,13 @@ extends CharacterBody2D
 ## Class representing a player on the court (not the person playing the game).
 
 signal player_clicked
+signal player_selected
 enum Selectability {SELECTABLE, SELECTED, UNSELECTABLE}
 #const
+@export var movement_target: Vector2:
+	set(value):
+		movement_target = value
+		print("%s has a movement target: %s" % [name, str(movement_target)])
 @export var player_texture: Texture2D
 var select_state: Selectability:
 	set(value):
@@ -47,6 +52,7 @@ func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> voi
 		match select_state:
 			Selectability.SELECTABLE:
 				print("You selected %s" % name)
+				player_selected.emit()
 				select_state = Selectability.SELECTED
 			Selectability.SELECTED:
 				print("%s already selected" % name)

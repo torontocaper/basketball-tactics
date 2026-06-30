@@ -3,3 +3,9 @@
 class_name TurnManager
 extends Node
 ### Turn controller.
+
+enum TeamTurn {HOME, AWAY}
+
+var current_turn: TeamTurn:
+	set(value):
+		current_turn = value
