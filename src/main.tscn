@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://dnivxgx1bk2pk"]
 
 [ext_resource type="Script" uid="uid://cs7tndhgfcpfq" path="res://src/main.gd" id="1_ig7tw"]
-[ext_resource type="PackedScene" uid="uid://cksfawym11llb" path="res://src/ui/game_ui.tscn" id="2_0xm2m"]
 [ext_resource type="Script" uid="uid://bihlc2hktvfqj" path="res://src/match_manager.gd" id="2_5mrjc"]
 [ext_resource type="PackedScene" uid="uid://hc6o2fyi8gqj" path="res://src/court_map.tscn" id="3_h2yge"]
 [ext_resource type="Resource" uid="uid://c2makmrk3de71" path="res://resources/custom_resources/teams/team_ceres.tres" id="3_mgm53"]
@@ -9,7 +8,8 @@
 [ext_resource type="Resource" uid="uid://bu08np83opwwo" path="res://resources/custom_resources/teams/team_pluto.tres" id="4_uewes"]
 [ext_resource type="Texture2D" uid="uid://bp37hvbuhinux" path="res://assets/sprites/hoop-54-41.png" id="5_fyndt"]
 [ext_resource type="Texture2D" uid="uid://dpdpan3jqk0qp" path="res://assets/sprites/orange-green-24-48-wing.png" id="5_kmhfv"]
-[ext_resource type="Script" uid="uid://c583fgx1uwtsu" path="res://src/signal_bus.gd" id="7_rlaii"]
+[ext_resource type="PackedScene" uid="uid://ocnv6pom0ooy" path="res://src/ui/scoreboard.tscn" id="7_uewes"]
+[ext_resource type="PackedScene" uid="uid://bi0p44r0siu7w" path="res://src/turn_manager.tscn" id="11_uewes"]
 
 [node name="Main" type="Node2D" unique_id=41571890]
 script = ExtResource("1_ig7tw")
@@ -19,14 +19,25 @@ script = ExtResource("2_5mrjc")
 home_team = ExtResource("3_mgm53")
 away_team = ExtResource("4_uewes")
 
+[node name="TurnManager" parent="." unique_id=509745014 instance=ExtResource("11_uewes")]
+
 [node name="UILayer" type="CanvasLayer" parent="." unique_id=274550258]
 layer = 10
 
-[node name="GameUI" parent="UILayer" unique_id=161166559 instance=ExtResource("2_0xm2m")]
-unique_name_in_owner = true
+[node name="UIMargin" type="MarginContainer" parent="UILayer" unique_id=1129939368]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
 
-[node name="SignalBus" type="Node" parent="." unique_id=1625976726]
-script = ExtResource("7_rlaii")
+[node name="Scoreboard" parent="UILayer/UIMargin" unique_id=754260294 instance=ExtResource("7_uewes")]
+unique_name_in_owner = true
+layout_mode = 2
 
 [node name="GameArea" type="Node2D" parent="." unique_id=1729677731]
 position = Vector2(0, 288)

@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://cksfawym11llb"]
+
+[ext_resource type="Script" uid="uid://dy5t4hw3ifwj3" path="res://archive/match_ui.gd" id="1_ltg2s"]
+[ext_resource type="PackedScene" uid="uid://ocnv6pom0ooy" path="res://src/ui/scoreboard.tscn" id="2_mch0i"]
+[ext_resource type="Script" uid="uid://pj68vu3v0gqn" path="res://src/ui/scoreboard.gd" id="3_sswux"]
+
+[node name="MatchUI" type="Control" unique_id=161166559]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_ltg2s")
+
+[node name="UIMargin" type="MarginContainer" parent="." unique_id=70074865]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Scoreboard" parent="UIMargin" unique_id=754260294 instance=ExtResource("2_mch0i")]
+layout_mode = 2
+script = ExtResource("3_sswux")

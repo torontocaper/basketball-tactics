@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://ccggxa1ka8r5i"]
+
+[ext_resource type="Texture2D" uid="uid://btmnhm3jpcwb2" path="res://assets/sprites/placeholder-player.png" id="1_b3hx8"]
+
+[node name="ActivePlayerPanel" type="PanelContainer" unique_id=1332132735]
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="ActivePlayerMargin" type="MarginContainer" parent="." unique_id=1600822720]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="ActivePlayerContainer" type="VBoxContainer" parent="ActivePlayerMargin" unique_id=1446781228]
+layout_mode = 2
+
+[node name="ActivePlayerAvatar" type="TextureRect" parent="ActivePlayerMargin/ActivePlayerContainer" unique_id=485363262]
+unique_name_in_owner = true
+layout_mode = 2
+texture = ExtResource("1_b3hx8")
+stretch_mode = 5
+
+[node name="ActivePlayerName" type="Label" parent="ActivePlayerMargin/ActivePlayerContainer" unique_id=700012248]
+unique_name_in_owner = true
+layout_mode = 2
+text = "PlayerName"
+horizontal_alignment = 1

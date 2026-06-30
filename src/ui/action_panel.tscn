@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://bx082j1lp20ab"]
+
+[ext_resource type="Texture2D" uid="uid://dema47uy5f5eb" path="res://assets/icons/shot_icon_green_110.png" id="1_mrb63"]
+[ext_resource type="Texture2D" uid="uid://ce08cc61ec6n0" path="res://assets/icons/pass-icon-green-110.png" id="2_y6hfe"]
+[ext_resource type="Texture2D" uid="uid://q3q3duwisfju" path="res://assets/icons/next_icon_green_66.png" id="3_41anw"]
+
+[node name="ActionPanel" type="PanelContainer" unique_id=709721102]
+size_flags_horizontal = 8
+size_flags_vertical = 0
+
+[node name="ActionContainer" type="GridContainer" parent="." unique_id=520249582]
+layout_mode = 2
+columns = 2
+
+[node name="ShootButton" type="Button" parent="ActionContainer" unique_id=1431981068]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "Shoot"
+theme_override_font_sizes/font_size = 32
+icon = ExtResource("1_mrb63")
+icon_alignment = 1
+
+[node name="PassButton" type="Button" parent="ActionContainer" unique_id=679271640]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "Pass"
+theme_override_font_sizes/font_size = 32
+icon = ExtResource("2_y6hfe")
+icon_alignment = 1
+
+[node name="EndTurnButton" type="Button" parent="ActionContainer" unique_id=1939461025]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "End turn"
+theme_override_font_sizes/font_size = 32
+icon = ExtResource("3_41anw")
+icon_alignment = 1

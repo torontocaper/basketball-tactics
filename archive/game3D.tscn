@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://81hx1qtg1wpn" path="res://archive/game_manager3D.gd" id="1_iotsf"]
 [ext_resource type="Script" uid="uid://dm8m7g1mcuf2a" path="res://src/turn_manager.gd" id="2_80cx4"]
 [ext_resource type="PackedScene" uid="uid://c8u0phq6dos4w" path="res://archive/court3D.tscn" id="4_ryrav"]
-[ext_resource type="PackedScene" uid="uid://cksfawym11llb" path="res://src/ui/game_ui.tscn" id="5_7jktm"]
+[ext_resource type="PackedScene" uid="uid://cksfawym11llb" path="res://archive/match_ui.tscn" id="5_7jktm"]
 [ext_resource type="PackedScene" uid="uid://d04p5dc2jaujf" path="res://archive/hoop3D.tscn" id="6_ajfhb"]
 [ext_resource type="PackedScene" uid="uid://cqphbwl7lmt3t" path="res://archive/player3D.tscn" id="7_efxa6"]
 

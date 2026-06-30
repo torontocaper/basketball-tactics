@@ -4,12 +4,22 @@ class_name Player
 extends CharacterBody2D
 ## Class representing a player on the court (not the person playing the game).
 
-signal player_selected
-#enum
+signal player_clicked
+enum Selectability {SELECTABLE, SELECTED, UNSELECTABLE}
 #const
 @export var player_texture: Texture2D
-#var
+var select_state: Selectability:
+	set(value):
+		select_state = value
+		match select_state:
+			Selectability.SELECTABLE:
+				print("%s is selectable" % name)
+			Selectability.SELECTED:
+				print("%s is selected" % name)
+			Selectability.UNSELECTABLE:
+				print("%s is unselectable" % name)
 @onready var player_sprite: Sprite2D = %PlayerSprite
+@onready var player_nav: NavigationAgent2D = %PlayerNav
 
 # OVERRIDES
 
@@ -32,5 +42,13 @@ func _connect_signals() -> void:
 # RECEIVERS
 func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event.is_pressed() and event is InputEventMouseButton:
-		player_selected.emit()
-		print_debug("%s selected" % name)
+		player_clicked.emit()
+		print("%s clicked" % name)
+		match select_state:
+			Selectability.SELECTABLE:
+				print("You selected %s" % name)
+				select_state = Selectability.SELECTED
+			Selectability.SELECTED:
+				print("%s already selected" % name)
+			Selectability.UNSELECTABLE:
+				print("Sorry; %s cannot be selected right now" % name)

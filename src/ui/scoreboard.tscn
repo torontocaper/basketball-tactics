@@ -1,0 +1,79 @@
+[gd_scene format=3 uid="uid://ocnv6pom0ooy"]
+
+[ext_resource type="Texture2D" uid="uid://cbov7ehm1nda7" path="res://assets/icons/godot_icon_red.png" id="1_gsnw8"]
+[ext_resource type="Script" uid="uid://pj68vu3v0gqn" path="res://src/ui/scoreboard.gd" id="1_txiog"]
+[ext_resource type="FontFile" uid="uid://bitgv7nf07au6" path="res://assets/fonts/RobotoMono-Medium.ttf" id="2_txiog"]
+[ext_resource type="Texture2D" uid="uid://dijki3fgkldjg" path="res://assets/icons/godot_icon_blue.png" id="3_3vltl"]
+
+[node name="Scoreboard" type="PanelContainer" unique_id=754260294]
+offset_right = 326.0
+offset_bottom = 192.0
+size_flags_horizontal = 8
+size_flags_vertical = 8
+script = ExtResource("1_txiog")
+
+[node name="ScoreboardMargin" type="MarginContainer" parent="." unique_id=767383294]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="ScoreboardContainer" type="VBoxContainer" parent="ScoreboardMargin" unique_id=1086914308]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+
+[node name="AwayTeamContainer" type="HBoxContainer" parent="ScoreboardMargin/ScoreboardContainer" unique_id=1199669552]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="AwayTeamLogo" type="TextureRect" parent="ScoreboardMargin/ScoreboardContainer/AwayTeamContainer" unique_id=512270806]
+unique_name_in_owner = true
+layout_mode = 2
+texture = ExtResource("1_gsnw8")
+expand_mode = 3
+
+[node name="AwayTeamName" type="Label" parent="ScoreboardMargin/ScoreboardContainer/AwayTeamContainer" unique_id=575558235]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_txiog")
+theme_override_font_sizes/font_size = 64
+text = "xxx"
+horizontal_alignment = 1
+uppercase = true
+
+[node name="AwayTeamScore" type="Label" parent="ScoreboardMargin/ScoreboardContainer/AwayTeamContainer" unique_id=603737796]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_fonts/font = ExtResource("2_txiog")
+theme_override_font_sizes/font_size = 64
+text = "00"
+
+[node name="HomeTeamContainer" type="HBoxContainer" parent="ScoreboardMargin/ScoreboardContainer" unique_id=1615700358]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="HomeTeamLogo" type="TextureRect" parent="ScoreboardMargin/ScoreboardContainer/HomeTeamContainer" unique_id=1292442486]
+unique_name_in_owner = true
+layout_mode = 2
+texture = ExtResource("3_3vltl")
+expand_mode = 3
+
+[node name="HomeTeamName" type="Label" parent="ScoreboardMargin/ScoreboardContainer/HomeTeamContainer" unique_id=1645195778]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_txiog")
+theme_override_font_sizes/font_size = 64
+text = "OOO"
+horizontal_alignment = 1
+uppercase = true
+
+[node name="HomeTeamScore" type="Label" parent="ScoreboardMargin/ScoreboardContainer/HomeTeamContainer" unique_id=1308036091]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_fonts/font = ExtResource("2_txiog")
+theme_override_font_sizes/font_size = 64
+text = "00"
