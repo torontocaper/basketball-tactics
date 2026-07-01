@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bv21vx6lvidbx" path="res://src/actors/player.tscn" id="4_3cfgd"]
 [ext_resource type="Resource" uid="uid://bu08np83opwwo" path="res://resources/custom_resources/teams/team_pluto.tres" id="4_uewes"]
 [ext_resource type="Texture2D" uid="uid://dpdpan3jqk0qp" path="res://assets/sprites/orange-green-24-48-wing.png" id="5_kmhfv"]
-[ext_resource type="PackedScene" uid="uid://qscdb7q3way3" path="res://src/court.tscn" id="7_kf8lf"]
+[ext_resource type="PackedScene" uid="uid://qscdb7q3way3" path="res://src/world/court.tscn" id="7_kf8lf"]
 [ext_resource type="PackedScene" uid="uid://ocnv6pom0ooy" path="res://src/ui/scoreboard.tscn" id="7_uewes"]
 [ext_resource type="PackedScene" uid="uid://bi0p44r0siu7w" path="res://src/turn_manager.tscn" id="11_uewes"]
 
@@ -33,17 +33,17 @@ layout_mode = 2
 
 [node name="MatchManager" type="Node" parent="." unique_id=1379697505 node_paths=PackedStringArray("court", "selected_player")]
 script = ExtResource("2_5mrjc")
-court = NodePath("../CeresCourt")
-home_team = ExtResource("3_mgm53")
+court = NodePath("../MatchArea/CeresCourt")
 away_team = ExtResource("4_uewes")
-selected_player = NodePath("../Ceres1")
+home_team = ExtResource("3_mgm53")
+selected_player = NodePath("../MatchArea/Ceres1")
 
 [node name="TurnManager" parent="." unique_id=509745014 instance=ExtResource("11_uewes")]
 
-[node name="CeresCourt" parent="." unique_id=2070971773 instance=ExtResource("7_kf8lf")]
+[node name="MatchArea" type="Node2D" parent="." unique_id=1055426333]
 position = Vector2(0, 288)
 
-[node name="Ceres1" parent="." unique_id=860716830 instance=ExtResource("4_3cfgd")]
-position = Vector2(361, 877)
+[node name="CeresCourt" parent="MatchArea" unique_id=2070971773 instance=ExtResource("7_kf8lf")]
+
+[node name="Ceres1" parent="MatchArea" unique_id=860716830 instance=ExtResource("4_3cfgd")]
 player_texture = ExtResource("5_kmhfv")
-movement_speed = 100.0

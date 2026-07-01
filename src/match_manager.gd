@@ -6,25 +6,23 @@ extends Node
 
 @export var court: Court
 
-#@export_group("Teams")
-@export var home_team: Team
 @export var away_team: Team
+@export var home_team: Team
 
 @export var selected_player: Player:
 	set(value):
 		selected_player = value
 		print("%s is the currently selected player" % selected_player.name)
 
-var home_team_score: int = 0:
-	set(value):
-		home_team_score = value
-		scoreboard.home_team_score.text = "%02d" % home_team_score
-
 var away_team_score: int = 0:
 	set(value):
 		away_team_score = value
 		scoreboard.away_team_score.text = "%02d" % away_team_score
 
+var home_team_score: int = 0:
+	set(value):
+		home_team_score = value
+		scoreboard.home_team_score.text = "%02d" % home_team_score
 
 @onready var scoreboard: Scoreboard = %Scoreboard
 
@@ -33,16 +31,13 @@ func _ready() -> void:
 	_fill_in_scoreboard()
 
 func _fill_in_scoreboard() -> void:
-	await scoreboard.ready
-	scoreboard.away_team_name.text = away_team.team_name_short
-	scoreboard.home_team_name.text = home_team.team_name_short
-	scoreboard.home_team_logo.texture = home_team.team_logo
-	scoreboard.away_team_logo.texture = away_team.team_logo
+	scoreboard.away_team = away_team
+	scoreboard.home_team = home_team
 
 # PRIVATE/HELPER
 func _connect_signals() -> void:
 	court.connect("court_clicked", _on_court_clicked)
 
 # RECEIVERS
-func _on_court_clicked(click_position: Vector2) -> void:
-	selected_player.movement_target = click_position
+func _on_court_clicked(click_position: Vector2i) -> void:
+	selected_player.target_cell = click_position
