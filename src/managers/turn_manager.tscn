@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bi0p44r0siu7w"]
 
-[ext_resource type="Script" uid="uid://dm8m7g1mcuf2a" path="res://src/turn_manager.gd" id="1_p3xw8"]
+[ext_resource type="Script" uid="uid://dm8m7g1mcuf2a" path="res://src/managers/turn_manager.gd" id="1_p3xw8"]
 
 [node name="TurnManager" type="Node" unique_id=509745014]
 script = ExtResource("1_p3xw8")

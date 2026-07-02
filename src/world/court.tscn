@@ -3,12 +3,16 @@
 [ext_resource type="Script" uid="uid://draqmh32myhjb" path="res://src/world/court.gd" id="1_fynge"]
 [ext_resource type="Texture2D" uid="uid://bp37hvbuhinux" path="res://assets/sprites/hoop-54-41.png" id="2_fynge"]
 [ext_resource type="TileSet" uid="uid://dscaj5bdf2i7n" path="res://resources/court_map_tile_set.tres" id="2_oo67k"]
+[ext_resource type="PackedScene" uid="uid://bx2iapx1feelx" path="res://src/managers/move_manager.tscn" id="2_qhssv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mgm53"]
 size = Vector2(720, 672)
 
 [node name="Court" type="Area2D" unique_id=2070971773]
 script = ExtResource("1_fynge")
+
+[node name="MoveManager" parent="." unique_id=636880889 instance=ExtResource("2_qhssv")]
+unique_name_in_owner = true
 
 [node name="CourtMap" type="TileMapLayer" parent="." unique_id=2127892155]
 unique_name_in_owner = true
