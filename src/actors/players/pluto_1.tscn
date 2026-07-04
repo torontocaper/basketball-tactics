@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://06irs7j6orw8"]
+
+[ext_resource type="PackedScene" uid="uid://bv21vx6lvidbx" path="res://src/actors/player.tscn" id="1_fqpbx"]
+[ext_resource type="Texture2D" uid="uid://cxxhfy6cfywhp" path="res://assets/sprites/red-black-18-43-guard.png" id="2_gftvc"]
+
+[node name="Pluto1" unique_id=860716830 instance=ExtResource("1_fqpbx")]
+player_speed = 2
+
+[node name="PlayerSprite" parent="." index="0" unique_id=751967755]
+texture = ExtResource("2_gftvc")

@@ -3,11 +3,11 @@
 [ext_resource type="Script" uid="uid://cs7tndhgfcpfq" path="res://src/main.gd" id="1_ig7tw"]
 [ext_resource type="Script" uid="uid://bihlc2hktvfqj" path="res://src/managers/match_manager.gd" id="2_5mrjc"]
 [ext_resource type="Resource" uid="uid://c2makmrk3de71" path="res://resources/custom_resources/teams/team_ceres.tres" id="3_mgm53"]
-[ext_resource type="PackedScene" uid="uid://bv21vx6lvidbx" path="res://src/actors/player.tscn" id="4_3cfgd"]
 [ext_resource type="Resource" uid="uid://bu08np83opwwo" path="res://resources/custom_resources/teams/team_pluto.tres" id="4_uewes"]
-[ext_resource type="Texture2D" uid="uid://dpdpan3jqk0qp" path="res://assets/sprites/orange-green-24-48-wing.png" id="5_kmhfv"]
 [ext_resource type="PackedScene" uid="uid://qscdb7q3way3" path="res://src/world/court.tscn" id="7_kf8lf"]
 [ext_resource type="PackedScene" uid="uid://ocnv6pom0ooy" path="res://src/ui/scoreboard.tscn" id="7_uewes"]
+[ext_resource type="PackedScene" uid="uid://dkmmcs4bkjwe2" path="res://src/actors/players/ceres_1.tscn" id="8_kf8lf"]
+[ext_resource type="PackedScene" uid="uid://06irs7j6orw8" path="res://src/actors/players/pluto_1.tscn" id="9_mgm53"]
 [ext_resource type="PackedScene" uid="uid://bi0p44r0siu7w" path="res://src/managers/turn_manager.tscn" id="11_uewes"]
 
 [node name="Main" type="Node2D" unique_id=41571890]
@@ -36,7 +36,7 @@ script = ExtResource("2_5mrjc")
 court = NodePath("../MatchArea/CeresCourt")
 away_team = ExtResource("4_uewes")
 home_team = ExtResource("3_mgm53")
-players_on_court = [NodePath("../MatchArea/Ceres1")]
+players_on_court = [NodePath("../MatchArea/Ceres1"), NodePath("../MatchArea/Pluto1")]
 
 [node name="TurnManager" parent="." unique_id=509745014 instance=ExtResource("11_uewes")]
 
@@ -45,5 +45,8 @@ position = Vector2(0, 384)
 
 [node name="CeresCourt" parent="MatchArea" unique_id=2070971773 instance=ExtResource("7_kf8lf")]
 
-[node name="Ceres1" parent="MatchArea" unique_id=860716830 instance=ExtResource("4_3cfgd")]
-player_texture = ExtResource("5_kmhfv")
+[node name="Ceres1" parent="MatchArea" unique_id=860716830 instance=ExtResource("8_kf8lf")]
+position = Vector2(354, 488)
+
+[node name="Pluto1" parent="MatchArea" unique_id=249638624 instance=ExtResource("9_mgm53")]
+position = Vector2(355, 393)

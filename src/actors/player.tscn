@@ -12,11 +12,9 @@ input_pickable = true
 motion_mode = 1
 script = ExtResource("1_gdh0h")
 
+[node name="PlayerCollider" type="CollisionShape2D" parent="." unique_id=311264642]
+shape = SubResource("CapsuleShape2D_gdh0h")
+
 [node name="PlayerSprite" type="Sprite2D" parent="." unique_id=751967755]
 unique_name_in_owner = true
 texture = ExtResource("2_gdh0h")
-offset = Vector2(24, 16)
-
-[node name="PlayerCollider" type="CollisionShape2D" parent="." unique_id=311264642]
-position = Vector2(24, 16)
-shape = SubResource("CapsuleShape2D_gdh0h")
