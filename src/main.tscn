@@ -31,17 +31,17 @@ theme_override_constants/margin_bottom = 8
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="MatchManager" type="Node" parent="." unique_id=1379697505 node_paths=PackedStringArray("court", "selected_player")]
+[node name="MatchManager" type="Node" parent="." unique_id=1379697505 node_paths=PackedStringArray("court", "players_on_court")]
 script = ExtResource("2_5mrjc")
 court = NodePath("../MatchArea/CeresCourt")
 away_team = ExtResource("4_uewes")
 home_team = ExtResource("3_mgm53")
-selected_player = NodePath("../MatchArea/Ceres1")
+players_on_court = [NodePath("../MatchArea/Ceres1")]
 
 [node name="TurnManager" parent="." unique_id=509745014 instance=ExtResource("11_uewes")]
 
 [node name="MatchArea" type="Node2D" parent="." unique_id=1055426333]
-position = Vector2(0, 288)
+position = Vector2(0, 384)
 
 [node name="CeresCourt" parent="MatchArea" unique_id=2070971773 instance=ExtResource("7_kf8lf")]
 

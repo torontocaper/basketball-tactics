@@ -14,6 +14,7 @@
 # OVERRIDES
 
 func _ready() -> void:
+	print_debug("_CLASS_ ready")
 	_connect_signals()
 
 func _process(_delta: float) -> void:

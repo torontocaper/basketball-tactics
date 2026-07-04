@@ -28,22 +28,22 @@ const TILE_SIZE: Vector2 = Vector2(48.0, 48.0)
 @export var court_cells: Array[Vector2i]:
 	set(value):
 		court_cells = value
-		print("MoveManager has a list of %s court cells" % court_cells.size())
+		print_debug("MoveManager has a list of %s court cells" % court_cells.size())
 
 @export var selected_cell: Vector2i:
 	set(value):
 		selected_cell = value
-		print("MoveManager analysing cell %s" % selected_cell)
+		print_debug("MoveManager analysing cell %s" % selected_cell)
 		_move_selection_indicator(selected_cell)
 		var selected_cell_neighbours = get_neighbours(selected_cell)
-		print("This cell's neighbours: %s" % str(selected_cell_neighbours))
+		print_debug("This cell's neighbours: %s" % str(selected_cell_neighbours))
 
 @onready var selection_indicator: Polygon2D = %SelectionIndicator
 
 # OVERRIDES
 
 func _ready() -> void:
-	print("MoveManager ready")
+	print_debug("%s ready" % name)
 	_connect_signals()
 
 func _process(_delta: float) -> void:
@@ -56,7 +56,7 @@ func _physics_process(_delta: float) -> void:
 func get_neighbours(cell: Vector2i) -> Dictionary:
 	var neighbours: Dictionary = {}
 	if cell not in court_cells:
-		print("Not a valid cell")
+		print_debug("Not a valid cell")
 	else:
 		neighbours["east"] = cell + Vector2i.RIGHT
 		neighbours["southeast"] = cell + (Vector2i.RIGHT + Vector2i.DOWN)

@@ -1,13 +1,13 @@
 #@tool
 #@icon(icon_path: String)
-class_name Main
-extends Node2D
-## Parent object for the (video) game. 
+class_name CourtMap
+extends TileMapLayer
+## Documentation comments
 
 #signal
 #enum
 #const
-#@export var
+@export var occupied_cells: Array[Vector2i]
 #var
 #@onready var
 

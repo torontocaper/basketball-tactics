@@ -9,3 +9,6 @@ enum TeamTurn {HOME, AWAY}
 var current_turn: TeamTurn:
 	set(value):
 		current_turn = value
+
+func _ready() -> void:
+	print_debug("%s ready" % name)

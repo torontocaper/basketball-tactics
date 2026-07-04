@@ -7,7 +7,7 @@ extends CharacterBody2D
 const MOVEMENT_SPEED: float = 10.0
 
 signal player_clicked
-signal player_selected
+#signal player_selected
 
 enum Selectability {SELECTABLE, SELECTED, UNSELECTABLE}
 enum PlayerSpeed {SLOW, AVERAGE, FAST}
@@ -17,25 +17,26 @@ enum PlayerSpeed {SLOW, AVERAGE, FAST}
 
 var movement_points_per_turn: float
 var current_cell: Vector2i
-var target_cell: Vector2i:
-	set(value):
-		target_cell = value
-		print("%s has a target: %s" % [name, target_cell])
+#var target_cell: Vector2i:
+	#set(value):
+		#target_cell = value
+		#print_debug("%s has a target: %s" % [name, target_cell])
 
 var select_state: Selectability:
 	set(value):
 		select_state = value
 		match select_state:
 			Selectability.SELECTABLE:
-				print("%s is selectable" % name)
+				print_debug("%s is selectable" % name)
 			Selectability.SELECTED:
-				print("%s is selected" % name)
+				print_debug("%s is selected" % name)
 			Selectability.UNSELECTABLE:
-				print("%s is unselectable" % name)
+				print_debug("%s is unselectable" % name)
 
 @onready var player_sprite: Sprite2D = %PlayerSprite
 
 func _ready() -> void:
+	print_debug("%s ready" % name)
 	_connect_signals()
 	movement_points_per_turn = _set_movement_points(player_speed)
 	player_sprite.texture = player_texture
@@ -66,14 +67,14 @@ func _set_movement_points(value: PlayerSpeed) -> float:
 # RECEIVERS
 func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event.is_pressed() and event is InputEventMouseButton:
-		player_clicked.emit()
-		print("%s clicked" % name)
-		match select_state:
-			Selectability.SELECTABLE:
-				print("You selected %s" % name)
-				player_selected.emit()
-				select_state = Selectability.SELECTED
-			Selectability.SELECTED:
-				print("%s already selected" % name)
-			Selectability.UNSELECTABLE:
-				print("%s cannot be selected right now" % name)
+		player_clicked.emit(self)
+		print_debug("%s clicked" % name)
+		#match select_state:
+			#Selectability.SELECTABLE:
+				#print_debug("You selected %s" % name)
+				#player_selected.emit(self)
+				#select_state = Selectability.SELECTED
+			#Selectability.SELECTED:
+				#print_debug("%s already selected" % name)
+			#Selectability.UNSELECTABLE:
+				#print_debug("%s cannot be selected right now" % name)
