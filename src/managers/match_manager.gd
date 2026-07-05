@@ -44,7 +44,6 @@ func _ready() -> void:
 	print_debug("%s ready" % name)
 	_fill_in_scoreboard()
 	possessing_team = _flip_coin(away_team, home_team)
-	
 
 func _fill_in_scoreboard() -> void:
 	scoreboard.away_team = away_team
