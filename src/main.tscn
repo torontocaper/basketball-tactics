@@ -44,13 +44,7 @@ position = Vector2(0, 384)
 
 [node name="TeamPluto" parent="MatchArea" unique_id=741488408 instance=ExtResource("7_5mrjc")]
 
-[node name="Pluto1" parent="MatchArea/TeamPluto" index="0" unique_id=860716830]
-position = Vector2(357, 403)
-
 [node name="TeamCeres" parent="MatchArea" unique_id=836816754 instance=ExtResource("6_rlaii")]
-
-[node name="Ceres1" parent="MatchArea/TeamCeres" index="0" unique_id=860716830]
-position = Vector2(358, 495)
 
 [editable path="MatchArea/TeamPluto"]
 [editable path="MatchArea/TeamCeres"]

@@ -7,7 +7,10 @@ extends TileMapLayer
 #signal
 #enum
 #const
-@export var occupied_cells: Array[Vector2i]
+@export var occupied_cells: Array[Vector2i]:
+	set(value):
+		occupied_cells = value
+		print("There are %s cells occupied" % occupied_cells.size())
 #var
 #@onready var
 

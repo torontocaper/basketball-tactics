@@ -2,17 +2,15 @@
 
 [ext_resource type="Script" uid="uid://draqmh32myhjb" path="res://src/world/court.gd" id="1_fynge"]
 [ext_resource type="Texture2D" uid="uid://bp37hvbuhinux" path="res://assets/sprites/hoop-54-41.png" id="2_fynge"]
-[ext_resource type="PackedScene" uid="uid://bx2iapx1feelx" path="res://src/managers/move_manager.tscn" id="2_qhssv"]
 [ext_resource type="PackedScene" uid="uid://cnkx6ttvxcded" path="res://src/world/court_map.tscn" id="3_qhssv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mgm53"]
 size = Vector2(720, 528)
 
-[node name="Court" type="Area2D" unique_id=2070971773]
+[node name="Court" type="Area2D" unique_id=2070971773 node_paths=PackedStringArray("starting_points_offense", "starting_points_defense")]
 script = ExtResource("1_fynge")
-
-[node name="MoveManager" parent="." unique_id=636880889 instance=ExtResource("2_qhssv")]
-unique_name_in_owner = true
+starting_points_offense = [NodePath("StartPoints/StartPointO1"), NodePath("StartPoints/StartPoint02"), NodePath("StartPoints/StartPoint03")]
+starting_points_defense = [NodePath("StartPoints/StartPointD1"), NodePath("StartPoints/StartPointD2"), NodePath("StartPoints/StartPointD3")]
 
 [node name="CourtMap" parent="." unique_id=1602992682 instance=ExtResource("3_qhssv")]
 unique_name_in_owner = true
@@ -27,3 +25,23 @@ position = Vector2(360, 24)
 
 [node name="HoopSprite" type="Sprite2D" parent="Hoop" unique_id=415488603]
 texture = ExtResource("2_fynge")
+
+[node name="StartPoints" type="Node" parent="." unique_id=1033856030]
+
+[node name="StartPointO1" type="Marker2D" parent="StartPoints" unique_id=852815014]
+position = Vector2(360, 504)
+
+[node name="StartPoint02" type="Marker2D" parent="StartPoints" unique_id=894596577]
+position = Vector2(600, 408)
+
+[node name="StartPoint03" type="Marker2D" parent="StartPoints" unique_id=804419029]
+position = Vector2(120, 408)
+
+[node name="StartPointD1" type="Marker2D" parent="StartPoints" unique_id=1656368075]
+position = Vector2(360, 408)
+
+[node name="StartPointD2" type="Marker2D" parent="StartPoints" unique_id=743126414]
+position = Vector2(554, 360)
+
+[node name="StartPointD3" type="Marker2D" parent="StartPoints" unique_id=1316301840]
+position = Vector2(168, 360)

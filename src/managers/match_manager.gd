@@ -19,20 +19,21 @@ var away_team_players: Array[Player]:
 		away_team_players = value
 		print_debug("There are %s players on the away team" % away_team_players.size())
 
-var home_team_players: Array[Player]:
-	set(value):
-		home_team_players = value
-		print_debug("There are %s players on the home team" % home_team_players.size())
-
 var home_team_score: int = 0:
 	set(value):
 		home_team_score = value
 		scoreboard.home_team_score.text = "%02d" % home_team_score
 
-var players_on_court: Array[Player]:
+var home_team_players: Array[Player]:
 	set(value):
-		players_on_court = value
-		print_debug("There are %s players on the court" % players_on_court.size())
+		home_team_players = value
+		print_debug("There are %s players on the home team" % home_team_players.size())
+
+var players_in_game: Array[Player]:
+	set(value):
+		players_in_game = value
+		print_debug("There are %s players in the game" % players_in_game.size())
+		court.players_on_court = players_in_game
 
 var possessing_team: Team:
 	set(value):
@@ -53,13 +54,14 @@ var selected_player: Player:
 @onready var scoreboard: Scoreboard = %Scoreboard
 
 func _ready() -> void:
+	print_debug("MatchManager ready")
 	away_team_players = _add_players_to_team(away_team)
 	home_team_players = _add_players_to_team(home_team)
-	players_on_court = away_team_players + home_team_players
+	players_in_game = away_team_players + home_team_players
 	_connect_signals()
-	print_debug("MatchManager ready")
 	_fill_in_scoreboard()
 	possessing_team = _flip_coin(away_team, home_team)
+	_set_player_starting_positions()
 
 func _fill_in_scoreboard() -> void:
 	scoreboard.away_team = away_team
@@ -77,7 +79,7 @@ func _add_players_to_team(team: Team) -> Array[Player]:
 
 func _connect_signals() -> void:
 	#court.connect("court_clicked", _on_court_clicked)
-	for player in players_on_court:
+	for player in players_in_game:
 		player.connect("player_clicked", _on_player_clicked)
 
 func _flip_coin(team_1: Team, team_2: Team) -> Team:
@@ -85,6 +87,19 @@ func _flip_coin(team_1: Team, team_2: Team) -> Team:
 	var coin_toss_winner: Team = teams.pick_random()
 	print_debug("%s won the coin toss" % coin_toss_winner.team_name)
 	return coin_toss_winner
+
+func _set_player_starting_positions() -> void:
+	match possessing_team:
+		away_team:
+			for player in away_team_players:
+				player.position = court.starting_points_offense.pick_random().position
+			for player in home_team_players:
+				player.position = court.starting_points_defense.pick_random().position
+		home_team:
+			for player in home_team_players:
+				player.position = court.starting_points_offense.pick_random().position
+			for player in away_team_players:
+				player.position = court.starting_points_defense.pick_random().position
 
 ## RECEIVERS
 func _on_player_clicked(clicked_player: Player) -> void:
