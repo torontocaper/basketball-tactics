@@ -11,4 +11,4 @@ var current_turn: TeamTurn:
 		current_turn = value
 
 func _ready() -> void:
-	print_debug("%s ready" % name)
+	print_debug("TurnManager ready")

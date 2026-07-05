@@ -43,7 +43,7 @@ const TILE_SIZE: Vector2 = Vector2(48.0, 48.0)
 # OVERRIDES
 
 func _ready() -> void:
-	print_debug("%s ready" % name)
+	print_debug("MoveManager ready")
 	_connect_signals()
 
 func _process(_delta: float) -> void:

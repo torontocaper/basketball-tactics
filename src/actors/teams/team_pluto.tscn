@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://dwvj4sx15moky"]
+
+[ext_resource type="PackedScene" uid="uid://5emclh7k5l1w" path="res://src/actors/team.tscn" id="1_p4wwy"]
+[ext_resource type="Texture2D" uid="uid://byyfl3g3lo77o" path="res://assets/icons/team_icons/pluto-icon-80.png" id="2_d2acl"]
+[ext_resource type="PackedScene" uid="uid://06irs7j6orw8" path="res://src/actors/players/pluto_1.tscn" id="3_52orm"]
+
+[node name="TeamPluto" unique_id=741488408 instance=ExtResource("1_p4wwy")]
+team_logo = ExtResource("2_d2acl")
+team_name = "Pluto"
+team_name_short = "PLT"
+
+[node name="Pluto1" parent="." index="0" unique_id=860716830 instance=ExtResource("3_52orm")]

@@ -10,7 +10,7 @@ var clicked_tile_coords: Vector2i
 #@onready var move_manager: MoveManager = %MoveManager
 
 func _ready() -> void:
-	print_debug("%s ready" % name)
+	print_debug("Court ready")
 	_connect_signals()
 	#move_manager.court_cells = court_map.get_used_cells()
 

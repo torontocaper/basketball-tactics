@@ -28,3 +28,6 @@ extends PanelContainer
 @onready var home_team_name: Label = %HomeTeamName
 ## [Label] that displays the home [Team]'s score
 @onready var home_team_score: Label = %HomeTeamScore
+
+func _ready() -> void:
+	print_debug("Scoreboard ready")
