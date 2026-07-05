@@ -22,7 +22,7 @@ func _physics_process(_delta: float) -> void:
 
 # CORE
 func highlight_potential_moves(selected_player: Player) -> void:
-	print_debug("Court illustrating potential moves for %s on cell %s" % [selected_player.name, selected_player.current_cell])
+	print_debug("Court illustrating potential moves for %s on cell %s" % [selected_player.name, court_map.local_to_map(selected_player.position)])
 	print_debug("Player has %s movement points" % selected_player.movement_points_per_turn)
 
 # PRIVATE/HELPER

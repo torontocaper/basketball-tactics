@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://c8u0phq6dos4w"]
 
 [ext_resource type="Script" uid="uid://bdcjn7fwmhf7j" path="res://archive/court3D.gd" id="1_o08nf"]
-[ext_resource type="Texture2D" uid="uid://c1mc2o3y13iia" path="res://resources/court_mesh_texture.tres" id="2_u8opk"]
+[ext_resource type="Texture2D" uid="uid://c1mc2o3y13iia" path="res://archive/court_mesh_texture.tres" id="2_u8opk"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iotsf"]
 albedo_texture = ExtResource("2_u8opk")
