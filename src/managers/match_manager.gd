@@ -1,72 +1,86 @@
 #@tool
 @icon("uid://3qwgg5y3fkjd")
 class_name MatchManager
-extends Node
-## Manager class for a particular match/game. 
+extends Node2D
+## Manager class for a particular match/game. Delegates as necessary.
 
 @export var court: Court
 
-@export var away_team: Team
-@export var home_team: Team
+@export var away_team: Team:
+	set(value):
+		away_team = value
+		print_debug("MM has an away team")
+		#if not is_node_ready():
+			#await ready
+		scoreboard.away_team = away_team
+		#await turn_manager.ready
+		turn_manager.away_team = away_team
+		away_team_players = _add_players_to_team(away_team)
+		players_in_game.append(away_team_players)
+
+
+@export var home_team: Team:
+	set(value):
+		home_team = value
+		print_debug("MM has a home team")
+		#if not is_node_ready():
+			#await ready
+		#await scoreboard.ready
+		scoreboard.home_team = home_team
+		#await turn_manager.ready
+		turn_manager.home_team = home_team
+		home_team_players = _add_players_to_team(home_team)
+		players_in_game.append(away_team_players)
+
+@export var scoreboard: Scoreboard:
+	set(value):
+		scoreboard = value
 
 var away_team_score: int = 0:
 	set(value):
 		away_team_score = value
 		scoreboard.away_team_score.text = "%02d" % away_team_score
 
-var away_team_players: Array[Player]:
-	set(value):
-		away_team_players = value
-		print_debug("There are %s players on the away team" % away_team_players.size())
-
 var home_team_score: int = 0:
 	set(value):
 		home_team_score = value
 		scoreboard.home_team_score.text = "%02d" % home_team_score
 
+var away_team_players: Array[Player]:
+	set(value):
+		away_team_players = value
+		turn_manager.away_team_players = away_team_players
+
 var home_team_players: Array[Player]:
 	set(value):
 		home_team_players = value
-		print_debug("There are %s players on the home team" % home_team_players.size())
+		turn_manager.home_team_players = home_team_players
 
 var players_in_game: Array[Player]:
 	set(value):
 		players_in_game = value
-		print_debug("There are %s players in the game" % players_in_game.size())
 		court.players_on_court = players_in_game
 
 var possessing_team: Team:
 	set(value):
 		possessing_team = value
-		print_debug("%s has the ball" % possessing_team.team_name)
+		if not is_node_ready():
+			await ready
 		scoreboard.possessing_team = possessing_team
+		turn_manager.possessing_team = possessing_team
 
-var selected_player: Player:
-	set(value):
-		if selected_player: # If there's already a selected player, unselect them (make them selectable again)
-			selected_player.select_state = Player.Selectability.SELECTABLE
-		if value:
-			selected_player = value
-			print_debug("%s is the currently selected player" % selected_player.name)
-			court.highlight_potential_moves(selected_player)
-		else:
-			print_debug("No player selected")
-
-@onready var scoreboard: Scoreboard = %Scoreboard
+@onready var turn_manager: TurnManager = %TurnManager
 
 func _ready() -> void:
 	print_debug("MatchManager ready")
-	away_team_players = _add_players_to_team(away_team)
-	home_team_players = _add_players_to_team(home_team)
-	players_in_game = away_team_players + home_team_players
 	_connect_signals()
-	_fill_in_scoreboard()
-	possessing_team = _flip_coin(away_team, home_team)
-	_set_player_starting_positions()
+	#_fill_in_scoreboard()
 
-func _fill_in_scoreboard() -> void:
-	scoreboard.away_team = away_team
-	scoreboard.home_team = home_team
+func start_match() -> void:
+	print_debug("Starting match")
+	possessing_team = _flip_coin(away_team, home_team)
+	print_debug("%s gets first ball" % possessing_team.name)
+	_set_player_starting_positions()
 
 # PRIVATE/HELPER
 func _add_players_to_team(team: Team) -> Array[Player]:
@@ -79,9 +93,8 @@ func _add_players_to_team(team: Team) -> Array[Player]:
 	return players
 
 func _connect_signals() -> void:
-	#court.connect("court_clicked", _on_court_clicked)
 	for player in players_in_game:
-		player.connect("player_clicked", _on_player_clicked)
+		player.connect("player_clicked", turn_manager.on_player_clicked)
 
 func _flip_coin(team_1: Team, team_2: Team) -> Team:
 	var teams = [team_1, team_2]
@@ -111,18 +124,3 @@ func _set_player_starting_positions() -> void:
 				print_debug("Assigning %s to %s, position %s" % [player.name, starting_point.name, starting_point.position])
 
 ## RECEIVERS
-func _on_player_clicked(clicked_player: Player) -> void:
-	match clicked_player.select_state:
-		Player.Selectability.SELECTABLE:
-			print_debug("%s selected" % clicked_player.name)
-			selected_player = clicked_player
-			clicked_player.select_state = Player.Selectability.SELECTED
-		Player.Selectability.SELECTED:
-			print_debug("%s unselected" % clicked_player.name)
-			selected_player = null
-			clicked_player.select_state = Player.Selectability.SELECTABLE
-		Player.Selectability.UNSELECTABLE:
-			print_debug("%s cannot be selected right now" % clicked_player.name)
-
-#func _on_court_clicked(click_position: Vector2i) -> void:
-	#selected_player.target_cell = click_position

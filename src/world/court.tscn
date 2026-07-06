@@ -26,7 +26,7 @@ position = Vector2(360, 24)
 [node name="HoopSprite" type="Sprite2D" parent="Hoop" unique_id=415488603]
 texture = ExtResource("2_fynge")
 
-[node name="StartPoints" type="Node" parent="." unique_id=1033856030]
+[node name="StartPoints" type="Node2D" parent="." unique_id=1699348639]
 
 [node name="StartPointO1" type="Marker2D" parent="StartPoints" unique_id=852815014]
 position = Vector2(360, 504)
@@ -45,3 +45,6 @@ position = Vector2(554, 360)
 
 [node name="StartPointD3" type="Marker2D" parent="StartPoints" unique_id=1316301840]
 position = Vector2(168, 360)
+
+[node name="CourtLogo" type="Sprite2D" parent="." unique_id=210855339]
+position = Vector2(360, 264)

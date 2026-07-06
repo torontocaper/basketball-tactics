@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" uid="uid://cs7tndhgfcpfq" path="res://src/main.gd" id="1_ig7tw"]
 [ext_resource type="Script" uid="uid://bihlc2hktvfqj" path="res://src/managers/match_manager.gd" id="2_5mrjc"]
+[ext_resource type="Script" uid="uid://dm8m7g1mcuf2a" path="res://src/managers/turn_manager.gd" id="4_rlaii"]
 [ext_resource type="PackedScene" uid="uid://dms8yu1rjv1cf" path="res://src/actors/teams/team_ceres.tscn" id="6_rlaii"]
 [ext_resource type="PackedScene" uid="uid://dwvj4sx15moky" path="res://src/actors/teams/team_pluto.tscn" id="7_5mrjc"]
-[ext_resource type="PackedScene" uid="uid://qscdb7q3way3" path="res://src/world/court.tscn" id="7_kf8lf"]
+[ext_resource type="PackedScene" uid="uid://b3f0jrog5bi5t" path="res://src/world/courts/ceres_court.tscn" id="7_rlaii"]
 [ext_resource type="PackedScene" uid="uid://ocnv6pom0ooy" path="res://src/ui/scoreboard.tscn" id="7_uewes"]
-[ext_resource type="PackedScene" uid="uid://bi0p44r0siu7w" path="res://src/managers/turn_manager.tscn" id="11_uewes"]
 
 [node name="Main" type="Node2D" unique_id=41571890]
 script = ExtResource("1_ig7tw")
@@ -29,22 +29,20 @@ theme_override_constants/margin_bottom = 8
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="MatchManager" type="Node" parent="." unique_id=1379697505 node_paths=PackedStringArray("court", "away_team", "home_team")]
-script = ExtResource("2_5mrjc")
-court = NodePath("../MatchArea/CeresCourt")
-away_team = NodePath("../MatchArea/TeamPluto")
-home_team = NodePath("../MatchArea/TeamCeres")
-
-[node name="TurnManager" parent="." unique_id=509745014 instance=ExtResource("11_uewes")]
-
-[node name="MatchArea" type="Node2D" parent="." unique_id=1055426333]
+[node name="MatchManager" type="Node2D" parent="." unique_id=2018783408]
+unique_name_in_owner = true
 position = Vector2(0, 384)
+script = ExtResource("2_5mrjc")
 
-[node name="CeresCourt" parent="MatchArea" unique_id=2070971773 instance=ExtResource("7_kf8lf")]
+[node name="TurnManager" type="Node" parent="MatchManager" unique_id=509745014]
+unique_name_in_owner = true
+script = ExtResource("4_rlaii")
 
-[node name="TeamPluto" parent="MatchArea" unique_id=741488408 instance=ExtResource("7_5mrjc")]
+[node name="TeamPluto" parent="MatchManager" unique_id=741488408 instance=ExtResource("7_5mrjc")]
 
-[node name="TeamCeres" parent="MatchArea" unique_id=836816754 instance=ExtResource("6_rlaii")]
+[node name="TeamCeres" parent="MatchManager" unique_id=836816754 instance=ExtResource("6_rlaii")]
 
-[editable path="MatchArea/TeamPluto"]
-[editable path="MatchArea/TeamCeres"]
+[node name="CeresCourt" parent="MatchManager" unique_id=2070971773 instance=ExtResource("7_rlaii")]
+
+[editable path="MatchManager/TeamPluto"]
+[editable path="MatchManager/TeamCeres"]

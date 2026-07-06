@@ -9,11 +9,13 @@ extends PanelContainer
 		away_team = value
 		away_team_name.text = away_team.team_name_short
 		away_team_logo.texture = away_team.team_logo
+
 @export var home_team: Team:
 	set(value):
 		home_team = value
 		home_team_name.text = home_team.team_name_short
 		home_team_logo.texture = home_team.team_logo
+
 @export var possessing_team: Team:
 	set(value):
 		possessing_team = value

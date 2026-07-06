@@ -4,11 +4,59 @@ class_name TurnManager
 extends Node
 ### Turn controller.
 
-enum TeamTurn {HOME, AWAY}
-
-var current_turn: TeamTurn:
+@export var away_team: Team:
 	set(value):
-		current_turn = value
+		away_team = value
+
+@export var away_team_players: Array[Player]:
+	set(value):
+		away_team_players = value
+		
+@export var home_team: Team:
+	set(value):
+		home_team = value
+
+@export var home_team_players: Array[Player]:
+	set(value):
+		home_team_players = value
+
+@export var possessing_team: Team:
+	set(value):
+		possessing_team = value
+		match possessing_team:
+			away_team:
+				for player in home_team_players:
+					player.select_state = Player.Selectability.UNSELECTABLE
+			home_team:
+				for player in away_team_players:
+					player.select_state = Player.Selectability.UNSELECTABLE
+
+@export var selected_player: Player:
+	set(value):
+		if selected_player: # If there's already a selected player, unselect them (make them selectable again)
+			selected_player.select_state = Player.Selectability.SELECTABLE
+		if value:
+			selected_player = value
+			print_debug("%s is the currently selected player" % selected_player.name)
+			#court.highlight_potential_moves(selected_player)
+		else:
+			print_debug("No player selected")
 
 func _ready() -> void:
 	print_debug("TurnManager ready")
+
+func execute_turn() -> void:
+	pass
+
+func on_player_clicked(clicked_player: Player) -> void:
+	match clicked_player.select_state:
+		Player.Selectability.SELECTABLE:
+			print_debug("%s selected" % clicked_player.name)
+			selected_player = clicked_player
+			clicked_player.select_state = Player.Selectability.SELECTED
+		Player.Selectability.SELECTED:
+			print_debug("%s unselected" % clicked_player.name)
+			selected_player = null
+			clicked_player.select_state = Player.Selectability.SELECTABLE
+		Player.Selectability.UNSELECTABLE:
+			print_debug("%s cannot be selected right now" % clicked_player.name)
