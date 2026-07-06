@@ -3,6 +3,8 @@
 [ext_resource type="PackedScene" uid="uid://5emclh7k5l1w" path="res://src/actors/team.tscn" id="1_e0gkr"]
 [ext_resource type="Texture2D" uid="uid://ccqye8annk4e5" path="res://assets/icons/team_icons/ceres-icon-80.png" id="2_ncyv2"]
 [ext_resource type="PackedScene" uid="uid://dkmmcs4bkjwe2" path="res://src/actors/players/ceres_1.tscn" id="3_xexv4"]
+[ext_resource type="PackedScene" uid="uid://dw56qog7ax7yy" path="res://src/actors/players/ceres_2.tscn" id="4_3klt5"]
+[ext_resource type="PackedScene" uid="uid://bmx85kdyskkml" path="res://src/actors/players/ceres_3.tscn" id="5_pxv3g"]
 
 [node name="TeamCeres" unique_id=741488408 instance=ExtResource("1_e0gkr")]
 team_logo = ExtResource("2_ncyv2")
@@ -10,3 +12,7 @@ team_name = "Ceres"
 team_name_short = "CRS"
 
 [node name="Ceres1" parent="." index="0" unique_id=860716830 instance=ExtResource("3_xexv4")]
+
+[node name="Ceres2" parent="." index="1" unique_id=308813438 instance=ExtResource("4_3klt5")]
+
+[node name="Ceres3" parent="." index="2" unique_id=452135260 instance=ExtResource("5_pxv3g")]

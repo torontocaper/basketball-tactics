@@ -39,6 +39,7 @@ var possessing_team: Team:
 	set(value):
 		possessing_team = value
 		print_debug("%s has the ball" % possessing_team.team_name)
+		scoreboard.possessing_team = possessing_team
 
 var selected_player: Player:
 	set(value):
@@ -92,14 +93,22 @@ func _set_player_starting_positions() -> void:
 	match possessing_team:
 		away_team:
 			for player in away_team_players:
-				player.position = court.starting_points_offense.pick_random().position
+				var starting_point = court.starting_points_offense.pop_at(randi_range(0, court.starting_points_offense.size() - 1))
+				player.position = starting_point.position
+				print_debug("Assigning %s to %s, position %s" % [player.name, starting_point.name, starting_point.position])
 			for player in home_team_players:
-				player.position = court.starting_points_defense.pick_random().position
+				var starting_point = court.starting_points_defense.pop_at(randi_range(0, court.starting_points_defense.size() - 1))
+				player.position = starting_point.position
+				print_debug("Assigning %s to %s, position %s" % [player.name, starting_point.name, starting_point.position])
 		home_team:
 			for player in home_team_players:
-				player.position = court.starting_points_offense.pick_random().position
+				var starting_point = court.starting_points_offense.pop_at(randi_range(0, court.starting_points_offense.size() - 1))
+				player.position = starting_point.position
+				print_debug("Assigning %s to %s, position %s" % [player.name, starting_point.name, starting_point.position])
 			for player in away_team_players:
-				player.position = court.starting_points_defense.pick_random().position
+				var starting_point = court.starting_points_defense.pop_at(randi_range(0, court.starting_points_defense.size() - 1))
+				player.position = starting_point.position
+				print_debug("Assigning %s to %s, position %s" % [player.name, starting_point.name, starting_point.position])
 
 ## RECEIVERS
 func _on_player_clicked(clicked_player: Player) -> void:

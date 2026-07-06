@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://dw56qog7ax7yy"]
+
+[ext_resource type="PackedScene" uid="uid://bv21vx6lvidbx" path="res://src/actors/player.tscn" id="1_yt1fh"]
+[ext_resource type="Texture2D" uid="uid://dpdpan3jqk0qp" path="res://assets/sprites/orange-green-24-48-wing.png" id="2_fibp7"]
+
+[node name="Ceres2" unique_id=860716830 instance=ExtResource("1_yt1fh")]
+
+[node name="PlayerSprite" parent="." index="1" unique_id=751967755]
+texture = ExtResource("2_fibp7")

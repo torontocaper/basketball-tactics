@@ -41,7 +41,7 @@ func _ready() -> void:
 	print_debug("%s ready" % name)
 	_connect_signals()
 	movement_points_per_turn = _set_movement_points(player_speed)
-	position = position.snapped(TILE_SIZE) + TILE_SIZE * Vector2(0.5, 0.35)
+	#position = position.snapped(TILE_SIZE) + TILE_SIZE * Vector2(0.5, 0.35)
 
 func _process(_delta: float) -> void:
 	pass

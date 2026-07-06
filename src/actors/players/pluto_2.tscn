@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://c8tc342nb5xk2"]
+
+[ext_resource type="PackedScene" uid="uid://bv21vx6lvidbx" path="res://src/actors/player.tscn" id="1_mcjkt"]
+[ext_resource type="Texture2D" uid="uid://dd4rvcqypx3y" path="res://assets/sprites/red-black-24-48-wing.png" id="2_fkdjn"]
+
+[node name="Pluto2" unique_id=860716830 instance=ExtResource("1_mcjkt")]
+
+[node name="PlayerSprite" parent="." index="1" unique_id=751967755]
+texture = ExtResource("2_fkdjn")

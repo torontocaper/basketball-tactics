@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://cbov7ehm1nda7" path="res://assets/icons/godot_icon_red.png" id="1_gsnw8"]
 [ext_resource type="Script" uid="uid://pj68vu3v0gqn" path="res://src/ui/scoreboard.gd" id="1_txiog"]
+[ext_resource type="Texture2D" uid="uid://bt2ioehlblun0" path="res://assets/sprites/basketball_vector_512.png" id="2_3vltl"]
 [ext_resource type="FontFile" uid="uid://bitgv7nf07au6" path="res://assets/fonts/RobotoMono-Medium.ttf" id="2_txiog"]
 [ext_resource type="Texture2D" uid="uid://dijki3fgkldjg" path="res://assets/icons/godot_icon_blue.png" id="3_3vltl"]
 
@@ -27,6 +28,20 @@ size_flags_vertical = 8
 [node name="AwayTeamContainer" type="HBoxContainer" parent="ScoreboardMargin/ScoreboardContainer" unique_id=1199669552]
 layout_mode = 2
 theme_override_constants/separation = 16
+
+[node name="AwayPossessionMargin" type="MarginContainer" parent="ScoreboardMargin/ScoreboardContainer/AwayTeamContainer" unique_id=1461015365]
+custom_minimum_size = Vector2(36, 0)
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 25
+
+[node name="AwayPossessionIndicator" type="TextureRect" parent="ScoreboardMargin/ScoreboardContainer/AwayTeamContainer/AwayPossessionMargin" unique_id=1275921666]
+unique_name_in_owner = true
+layout_mode = 2
+texture = ExtResource("2_3vltl")
+expand_mode = 3
 
 [node name="AwayTeamLogo" type="TextureRect" parent="ScoreboardMargin/ScoreboardContainer/AwayTeamContainer" unique_id=512270806]
 unique_name_in_owner = true
@@ -54,6 +69,20 @@ text = "00"
 [node name="HomeTeamContainer" type="HBoxContainer" parent="ScoreboardMargin/ScoreboardContainer" unique_id=1615700358]
 layout_mode = 2
 theme_override_constants/separation = 16
+
+[node name="MarginContainer" type="MarginContainer" parent="ScoreboardMargin/ScoreboardContainer/HomeTeamContainer" unique_id=432444549]
+custom_minimum_size = Vector2(36, 0)
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 25
+
+[node name="HomePossessionIndicator" type="TextureRect" parent="ScoreboardMargin/ScoreboardContainer/HomeTeamContainer/MarginContainer" unique_id=1422034223]
+unique_name_in_owner = true
+layout_mode = 2
+texture = ExtResource("2_3vltl")
+expand_mode = 3
 
 [node name="HomeTeamLogo" type="TextureRect" parent="ScoreboardMargin/ScoreboardContainer/HomeTeamContainer" unique_id=1292442486]
 unique_name_in_owner = true
