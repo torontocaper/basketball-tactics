@@ -14,7 +14,7 @@ config/name="Basketball Tactics"
 config/description="Turn-based, tactical basketball simulator"
 config/tags=PackedStringArray("3d", "sports")
 run/main_scene="uid://dnivxgx1bk2pk"
-config/features=PackedStringArray("4.6", "GL Compatibility")
+config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="uid://bt2ioehlblun0"
 
 [display]
