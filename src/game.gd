@@ -6,7 +6,7 @@ extends Node2D
 
 signal game_state_changed
 
-enum GameState {ACTIVE}
+enum GameState {MATCH}
 
 const MATCH_MANAGER = preload("uid://c8ityv0juv884")
 
@@ -14,7 +14,7 @@ const MATCH_MANAGER = preload("uid://c8ityv0juv884")
 	set(value):
 		current_game_state = value
 		match current_game_state:
-			GameState.ACTIVE:
+			GameState.MATCH:
 				start_match()
 			_:
 				close_game()

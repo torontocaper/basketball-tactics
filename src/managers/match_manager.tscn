@@ -2,8 +2,6 @@
 
 [ext_resource type="Script" uid="uid://bihlc2hktvfqj" path="res://src/managers/match_manager.gd" id="1_ypgxh"]
 [ext_resource type="Script" uid="uid://dm8m7g1mcuf2a" path="res://src/managers/turn_manager.gd" id="2_2munw"]
-[ext_resource type="PackedScene" uid="uid://dwvj4sx15moky" path="res://src/actors/teams/team_pluto.tscn" id="3_5xxpp"]
-[ext_resource type="PackedScene" uid="uid://dms8yu1rjv1cf" path="res://src/actors/teams/team_ceres.tscn" id="4_6rsad"]
 [ext_resource type="PackedScene" uid="uid://qscdb7q3way3" path="res://src/world/court.tscn" id="5_ypgxh"]
 
 [node name="MatchManager" type="Node2D" unique_id=1970591658]
@@ -13,11 +11,4 @@ script = ExtResource("1_ypgxh")
 unique_name_in_owner = true
 script = ExtResource("2_2munw")
 
-[node name="TeamPluto" parent="." unique_id=741488408 instance=ExtResource("3_5xxpp")]
-
-[node name="TeamCeres" parent="." unique_id=635042907 instance=ExtResource("4_6rsad")]
-
 [node name="Court" parent="." unique_id=2070971773 instance=ExtResource("5_ypgxh")]
-
-[editable path="TeamPluto"]
-[editable path="TeamCeres"]

@@ -1,20 +1,20 @@
 [gd_scene format=3 uid="uid://bv21vx6lvidbx"]
 
 [ext_resource type="Script" uid="uid://b2a3vwihky1wh" path="res://src/actors/player.gd" id="1_gdh0h"]
-[ext_resource type="Texture2D" uid="uid://btmnhm3jpcwb2" path="res://assets/sprites/placeholder-player.png" id="2_gdh0h"]
+[ext_resource type="Texture2D" uid="uid://w7jubfn70spw" path="res://assets/sprites/chip-white-68.png" id="2_gdh0h"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gdh0h"]
-radius = 20.0
-height = 60.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_gdh0h"]
+radius = 24.0
 
 [node name="Player" type="CharacterBody2D" unique_id=860716830]
 input_pickable = true
 motion_mode = 1
 script = ExtResource("1_gdh0h")
 
-[node name="PlayerCollider" type="CollisionShape2D" parent="." unique_id=311264642]
-shape = SubResource("CapsuleShape2D_gdh0h")
-
 [node name="PlayerSprite" type="Sprite2D" parent="." unique_id=751967755]
 unique_name_in_owner = true
+scale = Vector2(0.7, 0.7)
 texture = ExtResource("2_gdh0h")
+
+[node name="PlayerCollider" type="CollisionShape2D" parent="." unique_id=311264642]
+shape = SubResource("CircleShape2D_gdh0h")

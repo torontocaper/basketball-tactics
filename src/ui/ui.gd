@@ -21,6 +21,7 @@ const UI_ERROR = preload("uid://dnsdv2iate647")
 # OVERRIDES
 func _ready():
 	print_debug("UI ready at %s ms" % Time.get_ticks_msec())
+	current_ui_state = UIState.OPEN
 	_connect_signals()
 
 # CORE

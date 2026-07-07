@@ -16,31 +16,19 @@ var ui: UI
 # OVERRIDES
 func _ready() -> void:
 	print_debug("Main ready at %s ms" % Time.get_ticks_msec())
-	game = create_game()
-	add_game(game)
-	ui = create_ui()
-	add_ui(ui)
+	game = GAME_PACKED.instantiate()
+	game_layer.add_child(game)
+	ui = UI_PACKED.instantiate()
+	ui_layer.add_child(ui)
+	_connect_signals()
 
 # CORE
-func create_game() -> Game:
-	var game_scene: Game = GAME_PACKED.instantiate()
-	return game_scene
 
-func add_game(new_game: Game) -> void:
-	#new_game.current_game_state = new_game.GameState.ACTIVE
-	new_game.connect("game_state_changed", _on_game_state_changed)
-	game_layer.add_child(new_game)
-
-func create_ui() -> UI:
-	var ui_scene: UI = UI_PACKED.instantiate()
-	return ui_scene
-
-func add_ui(new_ui: UI) -> void:
-	new_ui.current_ui_state = new_ui.UIState.OPEN
-	new_ui.connect("ui_state_changed", _on_ui_state_changed)
-	ui_layer.add_child(new_ui)
 
 # PRIVATE/HELPER
+func _connect_signals() -> void:
+	game.connect("game_state_changed", _on_game_state_changed)
+	ui.connect("ui_state_changed", _on_ui_state_changed)
 
 # RECEIVERS
 func _on_game_state_changed(_new_state: Game.GameState) -> void:
@@ -49,6 +37,6 @@ func _on_game_state_changed(_new_state: Game.GameState) -> void:
 func _on_ui_state_changed(new_state: UI.UIState) -> void:
 	match new_state:
 		UI.UIState.MAIN:
-			game.current_game_state = Game.GameState.ACTIVE
+			game.current_game_state = Game.GameState.MATCH
 		_:
 			print_debug("Invalid UI state")
