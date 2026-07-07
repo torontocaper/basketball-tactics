@@ -8,7 +8,7 @@ signal game_state_changed
 
 enum GameState {MATCH}
 
-const MATCH_MANAGER = preload("uid://c8ityv0juv884")
+const MATCH = preload("uid://c8ityv0juv884")
 
 @export var current_game_state: GameState:
 	set(value):
@@ -28,8 +28,8 @@ func _ready():
 
 # CORE
 func start_match() -> void:
-	var new_match_manager: MatchManager = MATCH_MANAGER.instantiate()
-	add_child(new_match_manager)
+	var new_match: Match = MATCH.instantiate()
+	add_child(new_match)
 
 func close_game() -> void:
 	var children = get_children()

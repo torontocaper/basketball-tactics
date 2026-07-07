@@ -1,6 +1,6 @@
 #@tool
 @icon("uid://3qwgg5y3fkjd")
-class_name MatchManager
+class_name Match
 extends Node2D
 ## Manager class for a particular match/game. Delegates as necessary.
 

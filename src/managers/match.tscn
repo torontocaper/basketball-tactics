@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://c8ityv0juv884"]
 
-[ext_resource type="Script" uid="uid://bihlc2hktvfqj" path="res://src/managers/match_manager.gd" id="1_ypgxh"]
+[ext_resource type="Script" uid="uid://bihlc2hktvfqj" path="res://src/managers/match.gd" id="1_ypgxh"]
 [ext_resource type="Script" uid="uid://dm8m7g1mcuf2a" path="res://src/managers/turn_manager.gd" id="2_2munw"]
 [ext_resource type="PackedScene" uid="uid://qscdb7q3way3" path="res://src/world/court.tscn" id="5_ypgxh"]
 
-[node name="MatchManager" type="Node2D" unique_id=1970591658]
+[node name="Match" type="Node2D" unique_id=1970591658]
 script = ExtResource("1_ypgxh")
 
 [node name="TurnManager" type="Node" parent="." unique_id=130908148]
