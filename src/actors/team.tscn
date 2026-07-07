@@ -1,6 +1,10 @@
 [gd_scene format=3 uid="uid://5emclh7k5l1w"]
 
 [ext_resource type="Script" uid="uid://dly3n2d856aom" path="res://src/actors/team.gd" id="1_vkk0t"]
+[ext_resource type="Texture2D" uid="uid://df8ts8vag03pt" path="res://assets/icon.svg" id="2_hcdoh"]
 
 [node name="Team" type="Node2D" unique_id=634722010]
 script = ExtResource("1_vkk0t")
+team_logo = ExtResource("2_hcdoh")
+team_name = "Godot Godettes"
+team_name_short = "GDT"
