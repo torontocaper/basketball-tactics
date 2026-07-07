@@ -1,10 +1,9 @@
 [gd_resource type="GradientTexture2D" format=3 uid="uid://cwtp85sau827"]
 
-[sub_resource type="Gradient" id="Gradient_md6p8"]
-colors = PackedColorArray(0.54509807, 0.27058825, 0.07450981, 1, 0.627451, 0.32156864, 0.1764706, 1)
+[ext_resource type="Gradient" uid="uid://2ycoluvjk7sv" path="res://resources/court_gradient_dark.tres" id="1_hla8a"]
 
 [resource]
-gradient = SubResource("Gradient_md6p8")
+gradient = ExtResource("1_hla8a")
 width = 48
 height = 48
 fill_to = Vector2(0.251, 0)

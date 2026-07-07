@@ -14,7 +14,7 @@ extends Control
 # OVERRIDES
 
 func _ready():
-	print_debug("UiOpen ready at %s ms" % Time.get_ticks_msec())
+	print_debug("UIOpen ready at %s ms" % Time.get_ticks_msec())
 	_connect_signals()
 
 func _process(_delta):
@@ -31,5 +31,5 @@ func _connect_signals():
 
 # RECEIVERS
 func _on_start_button_pressed() -> void:
-	var ui_parent: UI = get_parent()
+	var ui_parent: Control = get_parent()
 	ui_parent.current_ui_state = ui_parent.UIState.MAIN

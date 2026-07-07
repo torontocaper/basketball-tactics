@@ -1,0 +1,4 @@
+[gd_resource type="Gradient" format=3 uid="uid://2ycoluvjk7sv"]
+
+[resource]
+colors = PackedColorArray(0.54509807, 0.27058825, 0.07450981, 1, 0.627451, 0.32156864, 0.1764706, 1)

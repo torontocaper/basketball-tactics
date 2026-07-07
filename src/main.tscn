@@ -7,7 +7,5 @@ script = ExtResource("1_ig7tw")
 
 [node name="GameLayer" type="CanvasLayer" parent="." unique_id=1054251547]
 
-[node name="Game" type="Node2D" parent="GameLayer" unique_id=831126687]
-
 [node name="UILayer" type="CanvasLayer" parent="." unique_id=274550258]
 layer = 10

@@ -1,32 +1,33 @@
 [gd_scene format=3 uid="uid://qscdb7q3way3"]
 
 [ext_resource type="Script" uid="uid://draqmh32myhjb" path="res://src/world/court.gd" id="1_fynge"]
-[ext_resource type="Texture2D" uid="uid://bp37hvbuhinux" path="res://assets/sprites/hoop-54-41.png" id="2_fynge"]
+[ext_resource type="PackedScene" uid="uid://wlh5rptwwwsi" path="res://src/world/hoop.tscn" id="3_kptq6"]
 [ext_resource type="PackedScene" uid="uid://cnkx6ttvxcded" path="res://src/world/court_map.tscn" id="3_qhssv"]
+[ext_resource type="Texture2D" uid="uid://df8ts8vag03pt" path="res://assets/icon.svg" id="4_qhssv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mgm53"]
-size = Vector2(720, 528)
+size = Vector2(560, 1120)
 
-[node name="Court" type="Area2D" unique_id=2070971773 node_paths=PackedStringArray("starting_points_offense", "starting_points_defense")]
+[node name="Court" type="Area2D" unique_id=2070971773]
 script = ExtResource("1_fynge")
-starting_points_offense = [NodePath("StartPoints/StartPointO1"), NodePath("StartPoints/StartPoint02"), NodePath("StartPoints/StartPoint03")]
-starting_points_defense = [NodePath("StartPoints/StartPointD1"), NodePath("StartPoints/StartPointD2"), NodePath("StartPoints/StartPointD3")]
 
 [node name="CourtMap" parent="." unique_id=1602992682 instance=ExtResource("3_qhssv")]
 unique_name_in_owner = true
 
 [node name="CourtShape" type="CollisionShape2D" parent="." unique_id=1702401841]
-position = Vector2(360, 264)
+position = Vector2(360, 640)
 shape = SubResource("RectangleShape2D_mgm53")
 debug_color = Color(0.7, 0.6066667, 0, 0.41960785)
 
-[node name="Hoop" type="Node2D" parent="." unique_id=116970058]
-position = Vector2(360, 24)
+[node name="HoopNorth" parent="." unique_id=456007788 instance=ExtResource("3_kptq6")]
+position = Vector2(360, 120)
 
-[node name="HoopSprite" type="Sprite2D" parent="Hoop" unique_id=415488603]
-texture = ExtResource("2_fynge")
+[node name="HoopSouth" parent="." unique_id=605305775 instance=ExtResource("3_kptq6")]
+position = Vector2(360, 1160)
+rotation = 3.1415927
 
 [node name="StartPoints" type="Node2D" parent="." unique_id=1699348639]
+visible = false
 
 [node name="StartPointO1" type="Marker2D" parent="StartPoints" unique_id=852815014]
 position = Vector2(360, 504)
@@ -47,4 +48,10 @@ position = Vector2(554, 360)
 position = Vector2(168, 360)
 
 [node name="CourtLogo" type="Sprite2D" parent="." unique_id=210855339]
-position = Vector2(360, 264)
+modulate = Color(1, 1, 1, 0.59607846)
+position = Vector2(360, 640)
+texture = ExtResource("4_qhssv")
+
+[node name="CourtLine" type="Line2D" parent="." unique_id=658919327]
+points = PackedVector2Array(80, 80, 640, 80, 640, 1200, 80, 1200)
+closed = true

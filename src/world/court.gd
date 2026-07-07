@@ -10,13 +10,13 @@ extends Area2D
 		print_debug("There are %s players on the court" % players_on_court.size())
 		#court_map.occupied_cells = _set_occupied_cells()
 
-@export var starting_points_offense: Array[Marker2D]:
-	set(value):
-		starting_points_offense = value
-
-@export var starting_points_defense: Array[Marker2D]:
-	set(value):
-		starting_points_defense = value
+#@export var starting_points_offense: Array[Marker2D]:
+	#set(value):
+		#starting_points_offense = value
+#
+#@export var starting_points_defense: Array[Marker2D]:
+	#set(value):
+		#starting_points_defense = value
 
 var clicked_tile_coords: Vector2i
 

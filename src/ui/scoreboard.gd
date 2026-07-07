@@ -48,4 +48,4 @@ extends PanelContainer
 @onready var home_team_score: Label = %HomeTeamScore
 
 func _ready() -> void:
-	print_debug("Scoreboard ready")
+	print_debug("Scoreboard ready at %s ms" % Time.get_ticks_msec())

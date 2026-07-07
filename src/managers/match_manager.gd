@@ -4,8 +4,6 @@ class_name MatchManager
 extends Node2D
 ## Manager class for a particular match/game. Delegates as necessary.
 
-@export var court: Court
-
 @export var away_team: Team:
 	set(value):
 		away_team = value
@@ -35,6 +33,8 @@ extends Node2D
 @export var scoreboard: Scoreboard:
 	set(value):
 		scoreboard = value
+
+@onready var court = $Court
 
 var away_team_score: int = 0:
 	set(value):
