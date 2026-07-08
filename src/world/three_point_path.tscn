@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://od4jrhb31axd"]
+
+[ext_resource type="Script" uid="uid://c416cv87hl76o" path="res://src/world/three_point_path.gd" id="1_arwip"]
+[ext_resource type="PackedScene" uid="uid://dp0oo1isvwgel" path="res://src/world/two_point_polygon.tscn" id="2_0s31k"]
+
+[sub_resource type="Curve2D" id="Curve2D_kptq6"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 160, 0, 160, 0, 0, 0, 0, 200, 320, 0, 160, 0, 0, 400, 160, 0, 0, 0, 0, 400, 0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 6
+
+[node name="ThreePointPath" type="Path2D" unique_id=656159611]
+curve = SubResource("Curve2D_kptq6")
+script = ExtResource("1_arwip")
+
+[node name="TwoPointPolygon" parent="." unique_id=1751178606 instance=ExtResource("2_0s31k")]
