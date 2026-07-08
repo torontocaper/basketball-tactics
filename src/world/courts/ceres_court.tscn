@@ -1,9 +1,0 @@
-[gd_scene format=3 uid="uid://b3f0jrog5bi5t"]
-
-[ext_resource type="PackedScene" uid="uid://qscdb7q3way3" path="res://src/world/court.tscn" id="1_0orq8"]
-[ext_resource type="Texture2D" uid="uid://ccqye8annk4e5" path="res://assets/icons/team_icons/ceres-icon-80.png" id="2_56u5l"]
-
-[node name="CeresCourt" unique_id=2070971773 instance=ExtResource("1_0orq8")]
-
-[node name="CourtLogo" parent="." index="4" unique_id=210855339]
-texture = ExtResource("2_56u5l")

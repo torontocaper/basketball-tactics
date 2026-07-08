@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://wlh5rptwwwsi" path="res://src/world/hoop.tscn" id="3_kptq6"]
 [ext_resource type="PackedScene" uid="uid://cnkx6ttvxcded" path="res://src/world/court_map.tscn" id="3_qhssv"]
 [ext_resource type="PackedScene" uid="uid://b0y7egpbubpy0" path="res://src/world/half_court.tscn" id="6_8x06a"]
+[ext_resource type="PackedScene" uid="uid://dp0oo1isvwgel" path="res://src/world/two_point_polygon.tscn" id="6_agytx"]
 [ext_resource type="PackedScene" uid="uid://dgkigrdvr06pn" path="res://src/world/two_point_area.tscn" id="6_cjfcb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mgm53"]
@@ -67,3 +68,14 @@ position = Vector2(360, 360)
 
 [node name="HalfCourtSouth" parent="." unique_id=1233747312 instance=ExtResource("6_8x06a")]
 position = Vector2(360, 920)
+
+[node name="TwoPointPolygonNorth" parent="." unique_id=1751178606 instance=ExtResource("6_agytx")]
+position = Vector2(160, 80)
+color = Color(1, 1, 1, 0.2509804)
+texture_scale = Vector2(0.1, 0.1)
+
+[node name="TwoPointPolygonSouth" parent="." unique_id=798414921 instance=ExtResource("6_agytx")]
+position = Vector2(560, 1200)
+rotation = 3.1415927
+color = Color(1, 1, 1, 0.2509804)
+texture_scale = Vector2(0.1, 0.1)

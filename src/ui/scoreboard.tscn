@@ -6,103 +6,85 @@
 [ext_resource type="FontFile" uid="uid://bitgv7nf07au6" path="res://assets/fonts/RobotoMono-Medium.ttf" id="2_txiog"]
 [ext_resource type="Texture2D" uid="uid://dijki3fgkldjg" path="res://assets/icons/godot_icon_blue.png" id="3_3vltl"]
 
+[sub_resource type="LabelSettings" id="LabelSettings_da4bg"]
+font_size = 48
+
 [node name="Scoreboard" type="PanelContainer" unique_id=754260294]
-offset_right = 326.0
-offset_bottom = 192.0
-size_flags_horizontal = 8
-size_flags_vertical = 8
+offset_right = 286.0
+offset_bottom = 22.0
 script = ExtResource("1_txiog")
 
-[node name="ScoreboardMargin" type="MarginContainer" parent="." unique_id=767383294]
-layout_mode = 2
-theme_override_constants/margin_left = 8
-theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 8
-theme_override_constants/margin_bottom = 8
-
-[node name="ScoreboardContainer" type="VBoxContainer" parent="ScoreboardMargin" unique_id=1086914308]
+[node name="ScoreboardContainer" type="HBoxContainer" parent="." unique_id=1517089723]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
 
-[node name="AwayTeamContainer" type="HBoxContainer" parent="ScoreboardMargin/ScoreboardContainer" unique_id=1199669552]
+[node name="AwayTeamContainer" type="HBoxContainer" parent="ScoreboardContainer" unique_id=1199669552]
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="AwayPossessionMargin" type="MarginContainer" parent="ScoreboardMargin/ScoreboardContainer/AwayTeamContainer" unique_id=1461015365]
-custom_minimum_size = Vector2(36, 0)
-layout_mode = 2
-theme_override_constants/margin_left = 0
-theme_override_constants/margin_top = 25
-theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 25
-
-[node name="AwayPossessionIndicator" type="TextureRect" parent="ScoreboardMargin/ScoreboardContainer/AwayTeamContainer/AwayPossessionMargin" unique_id=1275921666]
+[node name="AwayTeamName" type="Label" parent="ScoreboardContainer/AwayTeamContainer" unique_id=575558235]
 unique_name_in_owner = true
 layout_mode = 2
-texture = ExtResource("2_3vltl")
-expand_mode = 3
+theme_override_fonts/font = ExtResource("2_txiog")
+theme_override_font_sizes/font_size = 16
+text = "xxx"
+label_settings = SubResource("LabelSettings_da4bg")
+horizontal_alignment = 1
+uppercase = true
 
-[node name="AwayTeamLogo" type="TextureRect" parent="ScoreboardMargin/ScoreboardContainer/AwayTeamContainer" unique_id=512270806]
+[node name="AwayTeamScore" type="Label" parent="ScoreboardContainer/AwayTeamContainer" unique_id=603737796]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_fonts/font = ExtResource("2_txiog")
+theme_override_font_sizes/font_size = 16
+text = "00"
+label_settings = SubResource("LabelSettings_da4bg")
+
+[node name="AwayTeamLogo" type="TextureRect" parent="ScoreboardContainer/AwayTeamContainer" unique_id=512270806]
 unique_name_in_owner = true
 layout_mode = 2
 texture = ExtResource("1_gsnw8")
 expand_mode = 3
 
-[node name="AwayTeamName" type="Label" parent="ScoreboardMargin/ScoreboardContainer/AwayTeamContainer" unique_id=575558235]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_fonts/font = ExtResource("2_txiog")
-theme_override_font_sizes/font_size = 64
-text = "xxx"
-horizontal_alignment = 1
-uppercase = true
-
-[node name="AwayTeamScore" type="Label" parent="ScoreboardMargin/ScoreboardContainer/AwayTeamContainer" unique_id=603737796]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 10
-theme_override_fonts/font = ExtResource("2_txiog")
-theme_override_font_sizes/font_size = 64
-text = "00"
-
-[node name="HomeTeamContainer" type="HBoxContainer" parent="ScoreboardMargin/ScoreboardContainer" unique_id=1615700358]
-layout_mode = 2
-theme_override_constants/separation = 16
-
-[node name="MarginContainer" type="MarginContainer" parent="ScoreboardMargin/ScoreboardContainer/HomeTeamContainer" unique_id=432444549]
-custom_minimum_size = Vector2(36, 0)
-layout_mode = 2
-theme_override_constants/margin_left = 0
-theme_override_constants/margin_top = 25
-theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 25
-
-[node name="HomePossessionIndicator" type="TextureRect" parent="ScoreboardMargin/ScoreboardContainer/HomeTeamContainer/MarginContainer" unique_id=1422034223]
+[node name="AwayPossessionIndicator" type="TextureRect" parent="ScoreboardContainer/AwayTeamContainer" unique_id=1275921666]
 unique_name_in_owner = true
 layout_mode = 2
 texture = ExtResource("2_3vltl")
 expand_mode = 3
 
-[node name="HomeTeamLogo" type="TextureRect" parent="ScoreboardMargin/ScoreboardContainer/HomeTeamContainer" unique_id=1292442486]
+[node name="HomeTeamContainer" type="HBoxContainer" parent="ScoreboardContainer" unique_id=1615700358]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="HomePossessionIndicator" type="TextureRect" parent="ScoreboardContainer/HomeTeamContainer" unique_id=1422034223]
+unique_name_in_owner = true
+layout_mode = 2
+texture = ExtResource("2_3vltl")
+expand_mode = 3
+
+[node name="HomeTeamLogo" type="TextureRect" parent="ScoreboardContainer/HomeTeamContainer" unique_id=1292442486]
 unique_name_in_owner = true
 layout_mode = 2
 texture = ExtResource("3_3vltl")
 expand_mode = 3
 
-[node name="HomeTeamName" type="Label" parent="ScoreboardMargin/ScoreboardContainer/HomeTeamContainer" unique_id=1645195778]
+[node name="HomeTeamName" type="Label" parent="ScoreboardContainer/HomeTeamContainer" unique_id=1645195778]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_txiog")
-theme_override_font_sizes/font_size = 64
+theme_override_font_sizes/font_size = 16
 text = "OOO"
+label_settings = SubResource("LabelSettings_da4bg")
 horizontal_alignment = 1
 uppercase = true
 
-[node name="HomeTeamScore" type="Label" parent="ScoreboardMargin/ScoreboardContainer/HomeTeamContainer" unique_id=1308036091]
+[node name="HomeTeamScore" type="Label" parent="ScoreboardContainer/HomeTeamContainer" unique_id=1308036091]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 10
 theme_override_fonts/font = ExtResource("2_txiog")
-theme_override_font_sizes/font_size = 64
+theme_override_font_sizes/font_size = 16
 text = "00"
+label_settings = SubResource("LabelSettings_da4bg")

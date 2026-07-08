@@ -12,16 +12,28 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_jlfe0")
 
-[node name="Scoreboard" parent="." unique_id=754260294 instance=ExtResource("2_da4bg")]
+[node name="ScoreboardSouth" parent="." unique_id=754260294 instance=ExtResource("2_da4bg")]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -189.0
-offset_top = -192.0
-offset_right = 189.0
+offset_left = -143.0
+offset_top = -22.0
+offset_right = 143.0
 offset_bottom = 0.0
 grow_horizontal = 2
 grow_vertical = 0
+
+[node name="ScoreboardNorth" parent="." unique_id=1183700406 instance=ExtResource("2_da4bg")]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -324.0
+offset_right = 324.0
+offset_bottom = 65.0
+grow_horizontal = 2
+rotation = 3.1415927
+pivot_offset_ratio = Vector2(0.5, 0.5)

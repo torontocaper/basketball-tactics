@@ -17,7 +17,7 @@ extends Node2D
 # OVERRIDES
 
 func _ready() -> void:
-	print_debug("Team ready")
+	print_debug("%s ready" % name)
 	_connect_signals()
 
 func _process(_delta: float) -> void:

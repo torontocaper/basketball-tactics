@@ -5,4 +5,5 @@
 [node name="Hoop" type="Node2D" unique_id=456007788]
 
 [node name="HoopSprite" type="Sprite2D" parent="." unique_id=454216060]
+z_index = 10
 texture = ExtResource("1_x2cw6")

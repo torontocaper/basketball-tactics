@@ -1,9 +1,0 @@
-[gd_scene format=3 uid="uid://b0702yopmebfs"]
-
-[ext_resource type="PackedScene" uid="uid://qscdb7q3way3" path="res://src/world/court.tscn" id="1_rlq8m"]
-[ext_resource type="Texture2D" uid="uid://byyfl3g3lo77o" path="res://assets/icons/team_icons/pluto-icon-80.png" id="2_mu7tm"]
-
-[node name="PlutoCourt" unique_id=2070971773 instance=ExtResource("1_rlq8m")]
-
-[node name="CourtLogo" parent="." index="4" unique_id=210855339]
-texture = ExtResource("2_mu7tm")
