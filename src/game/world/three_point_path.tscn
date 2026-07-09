@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://od4jrhb31axd"]
 
-[ext_resource type="Script" uid="uid://c416cv87hl76o" path="res://src/world/three_point_path.gd" id="1_arwip"]
-[ext_resource type="PackedScene" uid="uid://dp0oo1isvwgel" path="res://src/world/two_point_polygon.tscn" id="2_0s31k"]
+[ext_resource type="Script" uid="uid://c416cv87hl76o" path="res://src/game/world/three_point_path.gd" id="1_arwip"]
+[ext_resource type="PackedScene" uid="uid://dp0oo1isvwgel" path="res://src/game/world/two_point_polygon.tscn" id="2_0s31k"]
 
 [sub_resource type="Curve2D" id="Curve2D_kptq6"]
 _data = {

@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://b567xj1sggro"]
 
-[ext_resource type="PackedScene" uid="uid://5emclh7k5l1w" path="res://src/actors/team.tscn" id="1_a4wad"]
-[ext_resource type="PackedScene" uid="uid://ioi85kths377" path="res://src/actors/players/blue_player.tscn" id="2_dw12s"]
+[ext_resource type="PackedScene" uid="uid://5emclh7k5l1w" path="res://src/game/actors/team.tscn" id="1_a4wad"]
+[ext_resource type="PackedScene" uid="uid://ioi85kths377" path="res://src/game/actors/players/blue_player.tscn" id="2_dw12s"]
 [ext_resource type="Texture2D" uid="uid://bj2spbh2t2oqw" path="res://assets/sprites/chip-blue-68.png" id="2_xhhcw"]
 
 [node name="BlueTeam" unique_id=634722010 node_paths=PackedStringArray("players") instance=ExtResource("1_a4wad")]

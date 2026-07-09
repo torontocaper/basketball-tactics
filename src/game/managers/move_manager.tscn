@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bx2iapx1feelx"]
 
-[ext_resource type="Script" uid="uid://cwty3i0j2flcm" path="res://src/managers/move_manager.gd" id="1_jrn4i"]
+[ext_resource type="Script" uid="uid://cwty3i0j2flcm" path="res://src/game/managers/move_manager.gd" id="1_jrn4i"]
 
 [sub_resource type="Gradient" id="Gradient_jrn4i"]
 interpolation_mode = 1

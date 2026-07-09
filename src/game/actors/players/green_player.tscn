@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://b2vohbcnqvvur"]
 
-[ext_resource type="PackedScene" uid="uid://bv21vx6lvidbx" path="res://src/actors/player.tscn" id="1_lm74s"]
+[ext_resource type="PackedScene" uid="uid://bv21vx6lvidbx" path="res://src/game/actors/player.tscn" id="1_lm74s"]
 [ext_resource type="Texture2D" uid="uid://brv1pevqt7cgw" path="res://assets/sprites/chip-green-68.png" id="2_1l8mp"]
 
 [node name="GreenPlayer" unique_id=860716830 instance=ExtResource("1_lm74s")]

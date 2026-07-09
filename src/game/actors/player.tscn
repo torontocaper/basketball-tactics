@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bv21vx6lvidbx"]
 
-[ext_resource type="Script" uid="uid://b2a3vwihky1wh" path="res://src/actors/player.gd" id="1_gdh0h"]
+[ext_resource type="Script" uid="uid://b2a3vwihky1wh" path="res://src/game/actors/player.gd" id="1_gdh0h"]
 [ext_resource type="Texture2D" uid="uid://w7jubfn70spw" path="res://assets/sprites/chip-white-68.png" id="2_gdh0h"]
 [ext_resource type="LabelSettings" uid="uid://bufpa1ya1b8aa" path="res://resources/label_settings_player_number.tres" id="3_foe4e"]
 

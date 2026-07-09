@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://wxpvy2t8ocp"]
 
-[ext_resource type="PackedScene" uid="uid://5emclh7k5l1w" path="res://src/actors/team.tscn" id="1_or3a3"]
-[ext_resource type="PackedScene" uid="uid://b2vohbcnqvvur" path="res://src/actors/players/green_player.tscn" id="2_35v3k"]
+[ext_resource type="PackedScene" uid="uid://5emclh7k5l1w" path="res://src/game/actors/team.tscn" id="1_or3a3"]
+[ext_resource type="PackedScene" uid="uid://b2vohbcnqvvur" path="res://src/game/actors/players/green_player.tscn" id="2_35v3k"]
 [ext_resource type="Texture2D" uid="uid://brv1pevqt7cgw" path="res://assets/sprites/chip-green-68.png" id="2_1150m"]
 
 [node name="GreenTeam" unique_id=634722010 node_paths=PackedStringArray("players") instance=ExtResource("1_or3a3")]

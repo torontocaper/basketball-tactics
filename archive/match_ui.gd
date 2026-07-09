@@ -1,6 +1,6 @@
 #@tool
 #@icon(icon_path: String)
-class_name MatchUI
+#class_name MatchUI
 extends Control
 ## User Interface for main [Game] scene. Displays score, turn order and other game-level information.
 
