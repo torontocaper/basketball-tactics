@@ -33,10 +33,11 @@ func _connect_signals() -> void:
 	ui.connect("ui_state_changed", _on_ui_state_changed)
 
 # RECEIVERS
-func _on_game_state_changed(_new_state: Game.GameState) -> void:
-	pass
+func _on_game_state_changed(new_state: Game.GameState) -> void:
+	print_debug("Game has entered new state: %s" % Game.GameState.keys()[new_state])
 
 func _on_ui_state_changed(new_state: UI.UIState) -> void:
+	print_debug("UI has entered new state: %s" % UI.UIState.keys()[new_state])
 	match new_state:
 		UI.UIState.MAIN:
 			game.current_game_state = Game.GameState.MATCH
