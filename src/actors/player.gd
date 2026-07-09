@@ -13,6 +13,7 @@ signal player_clicked
 enum Selectability {SELECTABLE, SELECTED, UNSELECTABLE}
 enum PlayerSpeed {SLOW, AVERAGE, FAST}
 
+@export_range(1, 99, 1, "prefer_slider") var player_number: int
 @export var player_speed: PlayerSpeed = PlayerSpeed.AVERAGE
 
 var movement_points_per_turn: float
@@ -35,12 +36,14 @@ var select_state: Selectability:
 				player_sprite.scale = Vector2.ONE
 				player_sprite.modulate = Color.DIM_GRAY
 
-@onready var player_sprite: Sprite2D = %PlayerSprite
+@onready var player_number_label: Label = $PlayerNumberLabel
+@onready var player_sprite: Sprite2D = $PlayerSprite
 
 func _ready() -> void:
 	print_debug("%s ready" % name)
 	_connect_signals()
 	movement_points_per_turn = _set_movement_points(player_speed)
+	player_number_label.text = str(player_number)
 	#position = position.snapped(TILE_SIZE) + TILE_SIZE * Vector2(0.5, 0.35)
 
 func _process(_delta: float) -> void:

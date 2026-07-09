@@ -69,7 +69,7 @@ var possessing_team: Team:
 		scoreboard.possessing_team = possessing_team
 		turn_manager.possessing_team = possessing_team
 
-@onready var turn_manager: TurnManager = %TurnManager
+@onready var turn_manager: TurnManager = $TurnManager
 
 func _ready() -> void:
 	print_debug("MatchManager ready")

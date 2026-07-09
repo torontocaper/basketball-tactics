@@ -29,25 +29,24 @@ position = Vector2(360, 1160)
 rotation = 3.1415927
 
 [node name="StartPoints" type="Node2D" parent="." unique_id=1699348639]
-visible = false
 
 [node name="StartPointO1" type="Marker2D" parent="StartPoints" unique_id=852815014]
-position = Vector2(360, 504)
+position = Vector2(360, 1080)
 
 [node name="StartPoint02" type="Marker2D" parent="StartPoints" unique_id=894596577]
-position = Vector2(600, 408)
+position = Vector2(520, 920)
 
 [node name="StartPoint03" type="Marker2D" parent="StartPoints" unique_id=804419029]
-position = Vector2(120, 408)
+position = Vector2(200, 680)
 
 [node name="StartPointD1" type="Marker2D" parent="StartPoints" unique_id=1656368075]
-position = Vector2(360, 408)
+position = Vector2(360, 600)
 
 [node name="StartPointD2" type="Marker2D" parent="StartPoints" unique_id=743126414]
-position = Vector2(554, 360)
+position = Vector2(520, 520)
 
 [node name="StartPointD3" type="Marker2D" parent="StartPoints" unique_id=1316301840]
-position = Vector2(168, 360)
+position = Vector2(360, 280)
 
 [node name="CourtBoundary" type="Line2D" parent="." unique_id=658919327]
 points = PackedVector2Array(80, 80, 640, 80, 640, 1200, 80, 1200)

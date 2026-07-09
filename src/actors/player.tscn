@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b2a3vwihky1wh" path="res://src/actors/player.gd" id="1_gdh0h"]
 [ext_resource type="Texture2D" uid="uid://w7jubfn70spw" path="res://assets/sprites/chip-white-68.png" id="2_gdh0h"]
+[ext_resource type="LabelSettings" uid="uid://bufpa1ya1b8aa" path="res://resources/label_settings_player_number.tres" id="3_foe4e"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gdh0h"]
 radius = 34.0
@@ -12,8 +13,24 @@ motion_mode = 1
 script = ExtResource("1_gdh0h")
 
 [node name="PlayerSprite" type="Sprite2D" parent="." unique_id=751967755]
-unique_name_in_owner = true
 texture = ExtResource("2_gdh0h")
 
 [node name="PlayerCollider" type="CollisionShape2D" parent="." unique_id=311264642]
 shape = SubResource("CircleShape2D_gdh0h")
+
+[node name="PlayerNumberLabel" type="Label" parent="." unique_id=23348665]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -21.5
+offset_right = 20.0
+offset_bottom = 21.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "00"
+label_settings = ExtResource("3_foe4e")
+horizontal_alignment = 1
+vertical_alignment = 1
