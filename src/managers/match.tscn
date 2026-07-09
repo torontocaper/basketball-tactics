@@ -1,45 +1,6 @@
 [gd_scene format=3 uid="uid://c8ityv0juv884"]
 
 [ext_resource type="Script" uid="uid://bihlc2hktvfqj" path="res://src/managers/match.gd" id="1_ypgxh"]
-[ext_resource type="PackedScene" uid="uid://bi0p44r0siu7w" path="res://src/managers/turn_manager.tscn" id="3_iki04"]
-[ext_resource type="PackedScene" uid="uid://b567xj1sggro" path="res://src/actors/teams/blue_team.tscn" id="4_iki04"]
-[ext_resource type="PackedScene" uid="uid://wxpvy2t8ocp" path="res://src/actors/teams/green_team.tscn" id="5_qd5ig"]
-[ext_resource type="PackedScene" uid="uid://qscdb7q3way3" path="res://src/world/court.tscn" id="5_ypgxh"]
 
 [node name="Match" type="Node2D" unique_id=1970591658]
 script = ExtResource("1_ypgxh")
-
-[node name="TurnManager" parent="." unique_id=509745014 instance=ExtResource("3_iki04")]
-
-[node name="Court" parent="." unique_id=2070971773 instance=ExtResource("5_ypgxh")]
-
-[node name="BlueTeam" parent="." unique_id=634722010 instance=ExtResource("4_iki04")]
-
-[node name="BluePlayer" parent="BlueTeam" index="0" unique_id=860716830]
-position = Vector2(360, 440)
-player_number = 5
-
-[node name="BluePlayer2" parent="BlueTeam" index="1" unique_id=884478291]
-position = Vector2(280, 353)
-player_number = 23
-
-[node name="BluePlayer3" parent="BlueTeam" index="2" unique_id=1226553230]
-position = Vector2(596, 199)
-player_number = 30
-
-[node name="GreenTeam" parent="." unique_id=1846694260 instance=ExtResource("5_qd5ig")]
-
-[node name="GreenPlayer" parent="GreenTeam" index="0" unique_id=860716830]
-position = Vector2(363, 365)
-player_number = 3
-
-[node name="GreenPlayer2" parent="GreenTeam" index="1" unique_id=156980691]
-position = Vector2(282, 278)
-player_number = 8
-
-[node name="GreenPlayer3" parent="GreenTeam" index="2" unique_id=674392125]
-position = Vector2(444, 200)
-player_number = 32
-
-[editable path="BlueTeam"]
-[editable path="GreenTeam"]

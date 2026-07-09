@@ -2,7 +2,9 @@
 #@icon(icon_path: String)
 class_name Main
 extends Node2D
-## Parent object for the (video) game. Cooredinates between, e.g., MatchManager and UI.
+## Parent object for the (video) game. 
+## 
+## Coordinates between Game and UI layers. Manages high-level scene instantiation.
 
 const GAME_PACKED = preload("uid://cl8r0gwg28e12")
 const UI_PACKED = preload("uid://dw068pdf571h8")
