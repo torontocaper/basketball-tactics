@@ -5,13 +5,13 @@
 [ext_resource type="Texture2D" uid="uid://bj2spbh2t2oqw" path="res://assets/sprites/chip-blue-68.png" id="2_xhhcw"]
 
 [node name="BlueTeam" unique_id=634722010 node_paths=PackedStringArray("players") instance=ExtResource("1_a4wad")]
-players = [NodePath("BluePlayer"), NodePath("BluePlayer2"), NodePath("BluePlayer3")]
+players = [NodePath("Blue1"), NodePath("Blue2"), NodePath("Blue3")]
 team_logo = ExtResource("2_xhhcw")
 team_name = "Blue"
 team_name_short = "BLU"
 
-[node name="BluePlayer" parent="." index="0" unique_id=860716830 instance=ExtResource("2_dw12s")]
+[node name="Blue1" parent="." index="0" unique_id=860716830 instance=ExtResource("2_dw12s")]
 
-[node name="BluePlayer2" parent="." index="1" unique_id=884478291 instance=ExtResource("2_dw12s")]
+[node name="Blue2" parent="." index="1" unique_id=884478291 instance=ExtResource("2_dw12s")]
 
-[node name="BluePlayer3" parent="." index="2" unique_id=1226553230 instance=ExtResource("2_dw12s")]
+[node name="Blue3" parent="." index="2" unique_id=1226553230 instance=ExtResource("2_dw12s")]

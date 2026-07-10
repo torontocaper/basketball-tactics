@@ -4,7 +4,7 @@ class_name UI
 extends Control
 ## Documentation comments
 
-signal ui_state_changed
+signal ui_state_changed(state: UIState)
 
 enum UIState {OPEN, MAIN}
 
@@ -15,6 +15,7 @@ const UI_ERROR = preload("uid://dnsdv2iate647")
 @export var current_ui_state: UIState:
 	set(value):
 		current_ui_state = value
+		print_debug("UI has new state: %s" % UIState.keys()[current_ui_state])
 		ui_state_changed.emit(current_ui_state)
 		open_new_ui_scene(current_ui_state)
 
@@ -22,7 +23,6 @@ const UI_ERROR = preload("uid://dnsdv2iate647")
 func _ready():
 	print_debug("UI ready at %s ms" % Time.get_ticks_msec())
 	current_ui_state = UIState.OPEN
-	_connect_signals()
 
 # CORE
 func open_new_ui_scene(ui_state: UIState) -> void:
@@ -41,7 +41,5 @@ func open_new_ui_scene(ui_state: UIState) -> void:
 	add_child(instantiated_scene)
 
 # PRIVATE/HELPER
-func _connect_signals():
-	pass
 
 # RECEIVERS

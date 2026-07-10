@@ -19,13 +19,10 @@ var ui: UI
 func _ready() -> void:
 	print_debug("Main ready at %s ms" % Time.get_ticks_msec())
 	game = GAME_PACKED.instantiate()
-	game_layer.add_child(game)
 	ui = UI_PACKED.instantiate()
-	ui_layer.add_child(ui)
 	_connect_signals()
-
-# CORE
-
+	game_layer.add_child(game)
+	ui_layer.add_child(ui)
 
 # PRIVATE/HELPER
 func _connect_signals() -> void:
@@ -39,6 +36,8 @@ func _on_game_state_changed(new_state: Game.GameState) -> void:
 func _on_ui_state_changed(new_state: UI.UIState) -> void:
 	print_debug("UI has entered new state: %s" % UI.UIState.keys()[new_state])
 	match new_state:
+		UI.UIState.OPEN:
+			pass
 		UI.UIState.MAIN:
 			game.current_game_state = Game.GameState.MATCH
 		_:
