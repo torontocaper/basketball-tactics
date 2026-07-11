@@ -7,6 +7,7 @@
 team_name = "Green Goblins"
 
 [node name="Green1" parent="." index="0" unique_id=860716830 instance=ExtResource("2_35v3k")]
+player_number = 1
 player_speed = 2
 
 [node name="Green2" parent="." index="1" unique_id=156980691 instance=ExtResource("2_35v3k")]

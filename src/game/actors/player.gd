@@ -13,7 +13,7 @@ signal player_clicked
 enum Selectability {SELECTABLE, SELECTED, UNSELECTABLE}
 enum PlayerSpeed {SLOW, AVERAGE, FAST}
 
-@export_range(1, 99, 1, "prefer_slider") var player_number: int
+@export_range(0, 99, 1) var player_number: int = 0
 @export var player_speed: PlayerSpeed = PlayerSpeed.AVERAGE
 
 var movement_points_per_turn: float
