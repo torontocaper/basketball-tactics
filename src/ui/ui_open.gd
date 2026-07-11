@@ -17,12 +17,6 @@ func _ready():
 	print_debug("UIOpen ready at %s ms" % Time.get_ticks_msec())
 	_connect_signals()
 
-func _process(_delta):
-	pass
-
-func _physics_process(_delta):
-	pass
-
 # CORE
 
 # PRIVATE/HELPER

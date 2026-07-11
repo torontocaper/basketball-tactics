@@ -20,11 +20,15 @@ const MATCH = preload("uid://c8ityv0juv884")
 				close_game()
 		game_state_changed.emit(current_game_state)
 
+@export var ui: UI:
+	set(value):
+		ui = value
+		print_debug("Game has a UI")
+
 # OVERRIDES
 
 func _ready():
 	print_debug("Game ready at %s ms" % Time.get_ticks_msec())
-	_connect_signals()
 
 # CORE
 func start_match() -> void:
@@ -37,7 +41,6 @@ func close_game() -> void:
 		child.queue_free()
 
 # PRIVATE/HELPER
-func _connect_signals():
-	pass
+
 
 # RECEIVERS

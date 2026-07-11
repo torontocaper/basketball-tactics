@@ -20,6 +20,8 @@ func _ready() -> void:
 	print_debug("Main ready at %s ms" % Time.get_ticks_msec())
 	game = GAME_PACKED.instantiate()
 	ui = UI_PACKED.instantiate()
+	game.ui = ui
+	ui.game = game
 	_connect_signals()
 	game_layer.add_child(game)
 	ui_layer.add_child(ui)
