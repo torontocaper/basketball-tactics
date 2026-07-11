@@ -1,6 +1,15 @@
-[gd_scene format=3 uid="uid://cl8r0gwg28e12"]
+[gd_scene format=3 uid="uid://c8ityv0juv884"]
 
-[ext_resource type="Script" uid="uid://dub2a677rq4k0" path="res://src/game/game.gd" id="1_7uq6d"]
+[ext_resource type="Script" uid="uid://bihlc2hktvfqj" path="res://src/game/game.gd" id="1_4e6k0"]
+[ext_resource type="PackedScene" uid="uid://qscdb7q3way3" path="res://src/game/world/court.tscn" id="2_s6lek"]
+[ext_resource type="PackedScene" uid="uid://b567xj1sggro" path="res://src/game/actors/teams/blue_team.tscn" id="3_l80un"]
+[ext_resource type="PackedScene" uid="uid://wxpvy2t8ocp" path="res://src/game/actors/teams/green_team.tscn" id="4_xptat"]
 
-[node name="Game" type="Node2D" unique_id=648716703]
-script = ExtResource("1_7uq6d")
+[node name="Match" type="Node2D" unique_id=1970591658]
+script = ExtResource("1_4e6k0")
+
+[node name="Court" parent="." unique_id=2070971773 instance=ExtResource("2_s6lek")]
+
+[node name="BlueTeam" parent="." unique_id=634722010 instance=ExtResource("3_l80un")]
+
+[node name="GreenTeam" parent="." unique_id=975415349 instance=ExtResource("4_xptat")]

@@ -9,7 +9,7 @@ extends Control
 #@export var
 #var
 #@onready var
-@onready var start_button = $OpenContainer/StartButton
+@onready var start_button = %StartButton
 
 # OVERRIDES
 

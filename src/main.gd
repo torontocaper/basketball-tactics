@@ -4,9 +4,9 @@ class_name Main
 extends Node2D
 ## Parent object for the (video) game. 
 ## 
-## Coordinates between Game and UI layers. Manages high-level scene instantiation.
+## Coordinates between Game and UI layers.
 
-const GAME_PACKED = preload("uid://cl8r0gwg28e12")
+const GAME_PACKED = preload("uid://c8ityv0juv884")
 const UI_PACKED = preload("uid://dw068pdf571h8")
 
 var game: Game
@@ -18,29 +18,29 @@ var ui: UI
 # OVERRIDES
 func _ready() -> void:
 	print_debug("Main ready at %s ms" % Time.get_ticks_msec())
-	game = GAME_PACKED.instantiate()
 	ui = UI_PACKED.instantiate()
-	game.ui = ui
-	ui.game = game
-	_connect_signals()
-	game_layer.add_child(game)
 	ui_layer.add_child(ui)
-
-# PRIVATE/HELPER
-func _connect_signals() -> void:
-	game.connect("game_state_changed", _on_game_state_changed)
-	ui.connect("ui_state_changed", _on_ui_state_changed)
-
-# RECEIVERS
-func _on_game_state_changed(new_state: Game.GameState) -> void:
-	print_debug("Game has entered new state: %s" % Game.GameState.keys()[new_state])
-
-func _on_ui_state_changed(new_state: UI.UIState) -> void:
-	print_debug("UI has entered new state: %s" % UI.UIState.keys()[new_state])
-	match new_state:
-		UI.UIState.OPEN:
-			pass
-		UI.UIState.MAIN:
-			game.current_game_state = Game.GameState.MATCH
-		_:
-			print_debug("Invalid UI state")
+	game = GAME_PACKED.instantiate()
+	game_layer.add_child(game)
+	ui.game = game
+	game.ui = ui
+	#_connect_signals()
+#
+## PRIVATE/HELPER
+#func _connect_signals() -> void:
+	#game.connect("game_state_changed", _on_game_state_changed)
+	#ui.connect("ui_state_changed", _on_ui_state_changed)
+#
+## RECEIVERS
+#func _on_game_state_changed(new_state: Game.GameState) -> void:
+	#print_debug("Game has entered new state: %s" % Game.GameState.keys()[new_state])
+#
+#func _on_ui_state_changed(new_state: UI.UIState) -> void:
+	#print_debug("UI has entered new state: %s" % UI.UIState.keys()[new_state])
+	#match new_state:
+		#UI.UIState.OPEN:
+			#pass
+		#UI.UIState.MAIN:
+			#game.current_game_state = Game.GameState.MATCH
+		#_:
+			#print_debug("Invalid UI state")

@@ -4,32 +4,19 @@ class_name Team
 extends Node2D
 ## Base class for teams
 
-#signal
-#enum
-#const
 @export var players: Array[Player]
-@export var team_logo: Texture2D
 @export var team_name: String
-@export var team_name_short: String
-#var
-#@onready var
 
 # OVERRIDES
 
 func _ready() -> void:
-	print_debug("%s ready" % name)
-	_connect_signals()
+	print_debug("%s ready" % team_name)
+	_add_players_to_team()
 
-func _process(_delta: float) -> void:
-	pass
-
-func _physics_process(_delta: float) -> void:
-	pass
-
-# CORE
-
-# PRIVATE/HELPER
-func _connect_signals() -> void:
-	pass
-
-# RECEIVERS
+func _add_players_to_team() -> void:
+	print_debug("Adding players to %s" % team_name)
+	var player_nodes = get_children()
+	for node in player_nodes:
+		var player = node as Player
+		players.append(player)
+	print_debug("%s has %s players" % [team_name, str(players.size())])

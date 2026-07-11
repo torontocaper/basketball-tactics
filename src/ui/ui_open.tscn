@@ -2,33 +2,40 @@
 
 [ext_resource type="Script" uid="uid://goxocawrogp0" path="res://src/ui/ui_open.gd" id="1_tqe0r"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_22oau"]
+bg_color = Color(0, 0, 0, 0.61960787)
+
 [node name="UIOpen" type="Control" unique_id=655011192]
 layout_mode = 3
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_tqe0r")
 
-[node name="OpenContainer" type="VBoxContainer" parent="." unique_id=929259664]
-layout_mode = 0
-offset_left = -309.0
-offset_top = -89.0
-offset_right = 309.0
-offset_bottom = 89.0
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1111597093]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_22oau")
+
+[node name="OpenContainer" type="VBoxContainer" parent="PanelContainer" unique_id=929259664]
+layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="TitleLabel" type="Label" parent="OpenContainer" unique_id=561048301]
+[node name="TitleLabel" type="Label" parent="PanelContainer/OpenContainer" unique_id=561048301]
 layout_mode = 2
 theme_override_font_sizes/font_size = 72
 text = "Basketball Tactics"
 horizontal_alignment = 1
 
-[node name="StartButton" type="Button" parent="OpenContainer" unique_id=1259959745]
+[node name="StartButton" type="Button" parent="PanelContainer/OpenContainer" unique_id=1259959745]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 48
