@@ -1,10 +1,9 @@
 [gd_scene format=3 uid="uid://bfe1neokvy2mo"]
 
 [ext_resource type="Script" uid="uid://bj415qwm535nm" path="res://src/ui/ui_main.gd" id="1_jlfe0"]
-[ext_resource type="PackedScene" uid="uid://ocnv6pom0ooy" path="res://src/ui/scoreboard.tscn" id="2_da4bg"]
+[ext_resource type="PackedScene" uid="uid://cdnpjr0s863u7" path="res://src/ui/ui_user.tscn" id="2_da4bg"]
 
-[node name="UIMain" type="Control" unique_id=80628969]
-layout_mode = 3
+[node name="UIMain" type="VBoxContainer" unique_id=1097456108]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -12,28 +11,10 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_jlfe0")
 
-[node name="ScoreboardSouth" parent="." unique_id=754260294 instance=ExtResource("2_da4bg")]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -143.0
-offset_top = -22.0
-offset_right = 143.0
-offset_bottom = 0.0
-grow_horizontal = 2
-grow_vertical = 0
+[node name="UIUserNorth" parent="." unique_id=30669888 instance=ExtResource("2_da4bg")]
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_rotation = 3.1415927
 
-[node name="ScoreboardNorth" parent="." unique_id=1183700406 instance=ExtResource("2_da4bg")]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -324.0
-offset_right = 324.0
-offset_bottom = 65.0
-grow_horizontal = 2
-rotation = 3.1415927
-pivot_offset_ratio = Vector2(0.5, 0.5)
+[node name="UIUserSouth" parent="." unique_id=2022205279 instance=ExtResource("2_da4bg")]
+layout_mode = 2
