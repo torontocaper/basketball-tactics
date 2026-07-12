@@ -22,7 +22,7 @@ const UI_ERROR = preload("uid://dnsdv2iate647")
 @export var game: Game:
 	set(value):
 		game = value
-		print_debug("UI has a Game")
+		#print_debug("UI has a Game")
 
 # OVERRIDES
 func _ready():

@@ -8,7 +8,7 @@ const MOVEMENT_SPEED: float = 10.0
 const SELECTED_SCALE: float = 1.2
 const TILE_SIZE: Vector2 = Vector2(48.0, 48.0)
 
-signal player_clicked
+signal player_clicked(this_player: Player)
 
 enum Selectability {SELECTABLE, SELECTED, UNSELECTABLE}
 enum PlayerSpeed {SLOW, AVERAGE, FAST}
@@ -44,7 +44,6 @@ func _ready() -> void:
 	_connect_signals()
 	movement_points_per_turn = _set_movement_points(player_speed)
 	player_number_label.text = str(player_number)
-	#position = position.snapped(TILE_SIZE) + TILE_SIZE * Vector2(0.5, 0.35)
 
 func _process(_delta: float) -> void:
 	pass

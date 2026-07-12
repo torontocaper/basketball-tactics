@@ -10,6 +10,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 3
+mouse_filter = 2
 
 [node name="Scoreboard" parent="." unique_id=754260294 instance=ExtResource("1_ldpg4")]
 layout_mode = 1

@@ -11,7 +11,7 @@ extends Area2D
 
 var clicked_tile_coords: Vector2i
 
-@onready var court_map: CourtMap = %CourtMap
+@onready var court_map: CourtMap = $CourtMap
 
 func _ready() -> void:
 	print_debug("Court ready")

@@ -7,18 +7,13 @@ extends Node
 @export var away_team: Team:
 	set(value):
 		away_team = value
+		away_team_players = away_team.players
 
-@export var away_team_players: Array[Player]:
-	set(value):
-		away_team_players = value
-		
+
 @export var home_team: Team:
 	set(value):
 		home_team = value
-
-@export var home_team_players: Array[Player]:
-	set(value):
-		home_team_players = value
+		home_team_players = home_team.players
 
 @export var possessing_team: Team:
 	set(value):
@@ -42,11 +37,23 @@ extends Node
 		else:
 			print_debug("No player selected")
 
-func _ready() -> void:
-	print_debug("TurnManager ready")
+var away_team_players: Array[Player]:
+	set(value):
+		away_team_players = value
+		for player in away_team_players:
+			player.connect("player_clicked", on_player_clicked)
 
-func execute_turn() -> void:
-	pass
+var home_team_players: Array[Player]:
+	set(value):
+		home_team_players = value
+		for player in home_team_players:
+			player.connect("player_clicked", on_player_clicked)
+
+func _ready() -> void:
+	print_debug("TurnManager ready at %s ms" % Time.get_ticks_msec())
+
+#func execute_turn() -> void:
+	#pass
 
 func on_player_clicked(clicked_player: Player) -> void:
 	match clicked_player.select_state:

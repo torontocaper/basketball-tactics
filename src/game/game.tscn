@@ -4,11 +4,14 @@
 [ext_resource type="PackedScene" uid="uid://qscdb7q3way3" path="res://src/game/world/court.tscn" id="2_s6lek"]
 [ext_resource type="PackedScene" uid="uid://b567xj1sggro" path="res://src/game/actors/teams/blue_team.tscn" id="3_l80un"]
 [ext_resource type="PackedScene" uid="uid://wxpvy2t8ocp" path="res://src/game/actors/teams/green_team.tscn" id="4_xptat"]
+[ext_resource type="PackedScene" uid="uid://bi0p44r0siu7w" path="res://src/game/managers/turn_manager.tscn" id="5_xptat"]
 
-[node name="Match" type="Node2D" unique_id=1970591658]
+[node name="Game" type="Node2D" unique_id=1970591658]
 script = ExtResource("1_4e6k0")
 
 [node name="Court" parent="." unique_id=2070971773 instance=ExtResource("2_s6lek")]
+
+[node name="TurnManager" parent="." unique_id=509745014 instance=ExtResource("5_xptat")]
 
 [node name="BlueTeam" parent="." unique_id=634722010 instance=ExtResource("3_l80un")]
 
@@ -34,3 +37,6 @@ position = Vector2(199, 450)
 
 [editable path="BlueTeam"]
 [editable path="GreenTeam"]
+[editable path="GreenTeam/Green1"]
+[editable path="GreenTeam/Green2"]
+[editable path="GreenTeam/Green3"]

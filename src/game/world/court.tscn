@@ -14,7 +14,6 @@ size = Vector2(560, 1120)
 script = ExtResource("1_fynge")
 
 [node name="CourtMap" parent="." unique_id=1602992682 instance=ExtResource("3_qhssv")]
-unique_name_in_owner = true
 
 [node name="CourtShape" type="CollisionShape2D" parent="." unique_id=1702401841]
 position = Vector2(360, 640)
@@ -38,23 +37,23 @@ points = PackedVector2Array(80, 640, 640, 640)
 [node name="TwoPointAreaNorth" parent="." unique_id=1856263261 instance=ExtResource("6_cjfcb")]
 position = Vector2(160, 80)
 
+[node name="TwoPointPolygonNorth" parent="." unique_id=1751178606 instance=ExtResource("6_agytx")]
+position = Vector2(160, 80)
+color = Color(1, 1, 1, 0.2509804)
+texture_scale = Vector2(0.1, 0.1)
+
 [node name="TwoPointAreaSouth" parent="." unique_id=2012835147 instance=ExtResource("6_cjfcb")]
 position = Vector2(560, 1200)
 rotation = 3.1415927
+
+[node name="TwoPointPolygonSouth" parent="." unique_id=798414921 instance=ExtResource("6_agytx")]
+position = Vector2(560, 1200)
+rotation = -3.1415925
+color = Color(1, 1, 1, 0.2509804)
+texture_scale = Vector2(0.1, 0.1)
 
 [node name="HalfCourtNorth" parent="." unique_id=808029513 instance=ExtResource("6_8x06a")]
 position = Vector2(360, 360)
 
 [node name="HalfCourtSouth" parent="." unique_id=1233747312 instance=ExtResource("6_8x06a")]
 position = Vector2(360, 920)
-
-[node name="TwoPointPolygonNorth" parent="." unique_id=1751178606 instance=ExtResource("6_agytx")]
-position = Vector2(160, 80)
-color = Color(1, 1, 1, 0.2509804)
-texture_scale = Vector2(0.1, 0.1)
-
-[node name="TwoPointPolygonSouth" parent="." unique_id=798414921 instance=ExtResource("6_agytx")]
-position = Vector2(560, 1200)
-rotation = 3.1415927
-color = Color(1, 1, 1, 0.2509804)
-texture_scale = Vector2(0.1, 0.1)
