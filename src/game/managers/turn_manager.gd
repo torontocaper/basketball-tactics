@@ -50,6 +50,11 @@ var home_team_players: Array[Player]:
 func _ready() -> void:
 	print_debug("TurnManager ready at %s ms" % Time.get_ticks_msec())
 
+func flip_coin(team_1: Team, team_2: Team) -> Team:
+	var team_array: Array[Team] = [team_1, team_2]
+	var winning_team = team_array.pick_random()
+	return winning_team
+
 func on_player_clicked(clicked_player: Player) -> void:
 	match clicked_player.select_state:
 		Player.Selectability.SELECTABLE:

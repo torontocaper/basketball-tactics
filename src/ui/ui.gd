@@ -22,7 +22,6 @@ const UI_ERROR = preload("uid://dnsdv2iate647")
 @export var game: Game:
 	set(value):
 		game = value
-		#print_debug("UI has a Game")
 
 # OVERRIDES
 func _ready():
@@ -40,7 +39,6 @@ func open_new_ui_scene(ui_state: UIState) -> void:
 			scene_to_open = UI_OPEN
 		UIState.MAIN:
 			scene_to_open = UI_MAIN
-			game.start_game()
 		_:
 			scene_to_open = UI_ERROR
 	var instantiated_scene:= scene_to_open.instantiate()

@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://cdnpjr0s863u7"]
 
+[ext_resource type="Script" uid="uid://bv3jtg5siw651" path="res://src/ui/ui_user.gd" id="1_aeh18"]
 [ext_resource type="PackedScene" uid="uid://ocnv6pom0ooy" path="res://src/ui/scoreboard.tscn" id="1_ldpg4"]
 
 [node name="UIUser" type="Control" unique_id=30669888]
@@ -11,6 +12,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 3
 mouse_filter = 2
+script = ExtResource("1_aeh18")
 
 [node name="Scoreboard" parent="." unique_id=754260294 instance=ExtResource("1_ldpg4")]
 layout_mode = 1
