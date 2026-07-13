@@ -9,7 +9,6 @@ extends Node
 		away_team = value
 		away_team_players = away_team.players
 
-
 @export var home_team: Team:
 	set(value):
 		home_team = value
@@ -33,7 +32,6 @@ extends Node
 		if value:
 			selected_player = value
 			print_debug("%s is the currently selected player" % selected_player.name)
-			#court.highlight_potential_moves(selected_player)
 		else:
 			print_debug("No player selected")
 
@@ -51,9 +49,6 @@ var home_team_players: Array[Player]:
 
 func _ready() -> void:
 	print_debug("TurnManager ready at %s ms" % Time.get_ticks_msec())
-
-#func execute_turn() -> void:
-	#pass
 
 func on_player_clicked(clicked_player: Player) -> void:
 	match clicked_player.select_state:
