@@ -4,12 +4,12 @@
 [ext_resource type="PackedScene" uid="uid://ocnv6pom0ooy" path="res://src/ui/scoreboard.tscn" id="1_ldpg4"]
 
 [node name="UIUser" type="Control" unique_id=30669888]
+custom_minimum_size = Vector2(720, 640)
+custom_maximum_size = Vector2(720, 640)
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+anchors_preset = 0
+offset_right = 720.0
+offset_bottom = 640.0
 size_flags_vertical = 3
 mouse_filter = 2
 script = ExtResource("1_aeh18")

@@ -1,4 +1,3 @@
-#@tool
 @icon("uid://2dqc4hvtik6l")
 class_name Player
 extends CharacterBody2D
@@ -17,7 +16,15 @@ enum PlayerSpeed {SLOW, AVERAGE, FAST}
 @export var player_speed: PlayerSpeed = PlayerSpeed.AVERAGE
 
 var movement_points_per_turn: float
-var current_cell: Vector2i
+
+var current_cell: Vector2i:
+	set(value):
+		current_cell = value
+
+var court_map: CourtMap:
+	set(value):
+		court_map = value
+		print_debug("%s has a reference to the CourtMap" % name)
 
 var select_state: Selectability:
 	set(value):
@@ -44,12 +51,6 @@ func _ready() -> void:
 	_connect_signals()
 	movement_points_per_turn = _set_movement_points(player_speed)
 	player_number_label.text = str(player_number)
-
-func _process(_delta: float) -> void:
-	pass
-
-func _physics_process(_delta: float) -> void:
-	pass
 
 func _connect_signals() -> void:
 	connect("input_event", _on_input_event)

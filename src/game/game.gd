@@ -2,44 +2,23 @@
 @icon("uid://3qwgg5y3fkjd")
 class_name Game
 extends Node2D
-## The Game layer. Also a basketball game.
+## The game layer. Also a basketball game.
 
-signal possession_changed(value: Team)
-signal score_updated(away_score: int, home_score: int)
-
-const COURT = preload("uid://qscdb7q3way3")
-const BLUE_TEAM = preload("uid://b567xj1sggro")
-const GREEN_TEAM = preload("uid://wxpvy2t8ocp")
+signal score_updated(new_green_score: int, new_blue_score: int)
 
 @export var ui: UI:
 	set(value):
 		ui = value
 
-var away_team: Team:
+var green_score: int = 0:
 	set(value):
-		away_team = value
-		turn_manager.away_team = away_team
+		green_score = value
+		score_updated.emit(green_score, blue_score)
 
-var home_team: Team:
+var blue_score: int = 0:
 	set(value):
-		home_team = value
-		turn_manager.home_team = home_team
-
-var possessing_team: Team:
-	set(value):
-		possessing_team = value
-		turn_manager.possessing_team = possessing_team
-		possession_changed.emit(possessing_team)
-
-var away_team_score: int = 0:
-	set(value):
-		away_team_score = value
-		score_updated.emit(away_team_score, home_team_score)
-
-var home_team_score: int = 0:
-	set(value):
-		home_team_score = value
-		score_updated.emit(away_team_score, home_team_score)
+		blue_score = value
+		score_updated.emit(green_score, blue_score)
 
 @onready var court: Court = $Court
 @onready var turn_manager: TurnManager = $TurnManager
@@ -48,9 +27,17 @@ var home_team_score: int = 0:
 
 func _ready() -> void:
 	print_debug("Game ready at %s ms" % Time.get_ticks_msec())
+	turn_manager.green_team = green_team
+	turn_manager.blue_team = blue_team
+	court.players_on_court = blue_team.players + green_team.players
 
 func start_game() -> void:
-	home_team = blue_team
-	away_team = green_team
-	possessing_team = turn_manager.flip_coin(home_team, away_team)
-	print_debug("%s gets first ball" % possessing_team.team_name)
+	green_team.is_active = false
+	blue_team.is_active = false
+	var coin_toss_results = turn_manager.flip_coin(green_team, blue_team)
+	var coin_toss_winner = coin_toss_results[0]
+	var coin_toss_loser = coin_toss_results[1]
+	print_debug("%s gets first ball" % coin_toss_winner.team_name)
+	coin_toss_winner.has_ball = true
+	coin_toss_loser.has_ball = false
+	turn_manager.start_turn(coin_toss_winner)

@@ -4,29 +4,29 @@ class_name Scoreboard
 extends PanelContainer
 ## Displays the score.
 
-@export var away_team: Team:
+@export var green_team: Team:
 	set(value):
-		away_team = value
-		print_debug("Scoreboard has an away team: %s" % away_team.team_name)
+		green_team = value
+		print_debug("Scoreboard has a green team: %s" % green_team.team_name)
 
-@export var home_team: Team:
+@export var blue_team: Team:
 	set(value):
-		home_team = value
-		print_debug("Scoreboard has an away team: %s" % home_team.team_name)
+		blue_team = value
+		print_debug("Scoreboard has a blue team: %s" % blue_team.team_name)
 
 @export var current_game: Game:
 	set(value):
 		current_game = value
-		away_team = current_game.away_team
-		home_team = current_game.home_team
+		green_team = current_game.green_team
+		blue_team = current_game.blue_team
 		current_game.connect("score_updated", update_scoreboard)
 
-@onready var away_score_label: Label = %AwayTeamScore
-@onready var home_score_label: Label = %HomeTeamScore
+@onready var green_score_label: Label = %GreenTeamScore
+@onready var blue_score_label: Label = %BlueTeamScore
 
 func _ready() -> void:
 	print_debug("Scoreboard ready at %s ms" % Time.get_ticks_msec())
 
-func update_scoreboard(away_team_score: int, home_team_score:int) -> void:
-	away_score_label.text = "%02d" % away_team_score
-	home_score_label.text = "%02d" % home_team_score
+func update_scoreboard(green_team_score: int, blue_team_score:int) -> void:
+	green_score_label.text = "%02d" % green_team_score
+	blue_score_label.text = "%02d" % blue_team_score

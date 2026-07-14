@@ -1,5 +1,3 @@
-#@tool
-#@icon(icon_path)
 class_name UI
 extends Control
 ## Documentation comments
