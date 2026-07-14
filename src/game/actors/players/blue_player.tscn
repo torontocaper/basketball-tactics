@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://ioi85kths377"]
 
-[ext_resource type="PackedScene" uid="uid://bv21vx6lvidbx" path="res://src/game/actors/player.tscn" id="1_glsqr"]
+[ext_resource type="PackedScene" uid="uid://bv21vx6lvidbx" path="res://src/game/actors/players/player.tscn" id="1_glsqr"]
 [ext_resource type="Texture2D" uid="uid://bj2spbh2t2oqw" path="res://assets/sprites/chip-blue-68.png" id="2_spjc4"]
 
 [node name="BluePlayer" unique_id=860716830 instance=ExtResource("1_glsqr")]

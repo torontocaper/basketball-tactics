@@ -35,18 +35,22 @@ var select_state: Selectability:
 				print_debug("%s is selectable" % name)
 				player_sprite.scale = Vector2.ONE
 				player_sprite.modulate = Color.WHITE
+				player_light.visible = false
 			Selectability.SELECTED:
 				print_debug("%s is selected" % name)
 				player_sprite.scale = Vector2.ONE * SELECTED_SCALE
 				player_sprite.modulate = Color.WHITE
+				player_light.visible = true
 				highlight_movable_cells()
 			Selectability.UNSELECTABLE:
 				print_debug("%s is unselectable" % name)
 				player_sprite.scale = Vector2.ONE
 				player_sprite.modulate = Color.DIM_GRAY
+				player_light.visible = false
 
 @onready var player_number_label: Label = $PlayerNumberLabel
 @onready var player_sprite: Sprite2D = $PlayerSprite
+@onready var player_light: PointLight2D = $PlayerLight
 
 func _ready() -> void:
 	print_debug("%s ready" % name)

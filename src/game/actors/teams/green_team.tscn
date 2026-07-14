@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://wxpvy2t8ocp"]
 
-[ext_resource type="PackedScene" uid="uid://5emclh7k5l1w" path="res://src/game/actors/team.tscn" id="1_or3a3"]
+[ext_resource type="PackedScene" uid="uid://5emclh7k5l1w" path="res://src/game/actors/teams/team.tscn" id="1_or3a3"]
 [ext_resource type="PackedScene" uid="uid://b2vohbcnqvvur" path="res://src/game/actors/players/green_player.tscn" id="2_35v3k"]
 
 [node name="GreenTeam" unique_id=634722010 instance=ExtResource("1_or3a3")]

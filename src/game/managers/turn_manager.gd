@@ -9,15 +9,11 @@ extends Node
 		for player in green_team.players:
 			player.connect("player_clicked", on_player_clicked)
 
-		#green_team_players = green_team.players
-
 @export var blue_team: Team:
 	set(value):
 		blue_team = value
 		for player in blue_team.players:
 			player.connect("player_clicked", on_player_clicked)
-
-		#blue_team_players = blue_team.players
 
 @export var selected_player: Player:
 	set(value):
@@ -28,18 +24,6 @@ extends Node
 			print_debug("%s is the currently selected player" % selected_player.name)
 		else:
 			print_debug("No player selected")
-
-#var green_team_players: Array[Player]:
-	#set(value):
-		#green_team_players = value
-		#for player in green_team_players:
-			#player.connect("player_clicked", on_player_clicked)
-#
-#var blue_team_players: Array[Player]:
-	#set(value):
-		#blue_team_players = value
-		#for player in blue_team_players:
-			#player.connect("player_clicked", on_player_clicked)
 
 func _ready() -> void:
 	print_debug("TurnManager ready at %s ms" % Time.get_ticks_msec())

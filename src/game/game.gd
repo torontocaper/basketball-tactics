@@ -2,7 +2,7 @@
 @icon("uid://3qwgg5y3fkjd")
 class_name Game
 extends Node2D
-## The game layer. Also a basketball game.
+## The (basketball) game.
 
 signal score_updated(new_green_score: int, new_blue_score: int)
 
@@ -20,6 +20,8 @@ var blue_score: int = 0:
 		blue_score = value
 		score_updated.emit(green_score, blue_score)
 
+var players_in_game: Array[Player]
+
 @onready var court: Court = $Court
 @onready var turn_manager: TurnManager = $TurnManager
 @onready var blue_team: Team = $BlueTeam
@@ -27,9 +29,10 @@ var blue_score: int = 0:
 
 func _ready() -> void:
 	print_debug("Game ready at %s ms" % Time.get_ticks_msec())
-	turn_manager.green_team = green_team
-	turn_manager.blue_team = blue_team
-	court.players_on_court = blue_team.players + green_team.players
+	players_in_game = blue_team.players + green_team.players
+	for player in players_in_game:
+		player.connect("player_clicked", turn_manager.on_player_clicked)
+	court.players_on_court = players_in_game
 
 func start_game() -> void:
 	green_team.is_active = false
