@@ -10,8 +10,6 @@ colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_dsc2w"]
 gradient = SubResource("Gradient_cyj6k")
-width = 256
-height = 256
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 
@@ -24,8 +22,9 @@ motion_mode = 1
 script = ExtResource("1_gdh0h")
 
 [node name="PlayerLight" type="PointLight2D" parent="." unique_id=1440022582]
-energy = 10.0
+visible = false
 texture = SubResource("GradientTexture2D_dsc2w")
+texture_scale = 10.0
 
 [node name="PlayerSprite" type="Sprite2D" parent="." unique_id=751967755]
 texture = ExtResource("2_gdh0h")
