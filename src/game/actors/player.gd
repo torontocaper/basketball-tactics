@@ -20,6 +20,7 @@ var movement_points_per_turn: float
 var current_cell: Vector2i:
 	set(value):
 		current_cell = value
+		snap_to_grid()
 
 var court_map: CourtMap:
 	set(value):
@@ -38,6 +39,7 @@ var select_state: Selectability:
 				print_debug("%s is selected" % name)
 				player_sprite.scale = Vector2.ONE * SELECTED_SCALE
 				player_sprite.modulate = Color.WHITE
+				highlight_movable_cells()
 			Selectability.UNSELECTABLE:
 				print_debug("%s is unselectable" % name)
 				player_sprite.scale = Vector2.ONE
@@ -51,6 +53,22 @@ func _ready() -> void:
 	_connect_signals()
 	movement_points_per_turn = _set_movement_points(player_speed)
 	player_number_label.text = str(player_number)
+
+func highlight_movable_cells() -> void:
+	var neighbors = [
+		court_map.get_neighbor_cell(current_cell, TileSet.CELL_NEIGHBOR_BOTTOM_RIGHT_CORNER),
+		court_map.get_neighbor_cell(current_cell, TileSet.CELL_NEIGHBOR_BOTTOM_LEFT_CORNER),
+		court_map.get_neighbor_cell(current_cell, TileSet.CELL_NEIGHBOR_TOP_RIGHT_CORNER),
+		court_map.get_neighbor_cell(current_cell, TileSet.CELL_NEIGHBOR_TOP_LEFT_CORNER)
+		]
+	for neighbor in neighbors:
+		court_map.highlight_cell(neighbor)
+
+func snap_to_grid() -> void:
+	var cell_position = court_map.map_to_local(current_cell)
+	print_debug("Snapping %s to cell %s (position %s)" % [name, current_cell, cell_position])
+	#var tile_size:= court_map.tile_set.tile_size
+	position = cell_position
 
 func _connect_signals() -> void:
 	connect("input_event", _on_input_event)

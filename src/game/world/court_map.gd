@@ -4,6 +4,8 @@ class_name CourtMap
 extends TileMapLayer
 ## Documentation comments
 
+const HIGHLIGHT_POLYGON = preload("uid://djhx0s1dx8ks6")
+
 @export var occupied_cells: Array[Dictionary]:
 	set(value):
 		occupied_cells = value
@@ -12,6 +14,11 @@ extends TileMapLayer
 # OVERRIDES
 func _ready() -> void:
 	print_debug("CourtMap ready at %s ms" % Time.get_ticks_msec())
+
+func highlight_cell(cell: Vector2i) -> void:
+	var polygon_node: Polygon2D = HIGHLIGHT_POLYGON.instantiate()
+	polygon_node.position = map_to_local(cell)
+	add_child(polygon_node)
 
 func print_player_cells(players: Array[Player]) -> void:
 	for player in players:

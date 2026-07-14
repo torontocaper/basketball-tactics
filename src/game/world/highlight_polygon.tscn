@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://djhx0s1dx8ks6"]
+
+[node name="HighlightPolygon" type="Polygon2D" unique_id=545378697]
+color = Color(1, 1, 1, 0.5019608)
+polygon = PackedVector2Array(-40, -40, 40, -40, 40, 40, -40, 40)
