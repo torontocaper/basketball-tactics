@@ -1,10 +1,10 @@
 # Basketball Tactics
 
-A turn-based, tactical sports simulation with RPG and management elements. 
+A turn-based, tactical basketball game. Developed in Godot and targeted at mobile devices. 
 
 ## Core Concept
 
-*Basketball Tactics/BT* (working title) applies the tactical, turn-based action of games like *Final Fantasy Tactics*, *Into the Breach* and *Baldur's Gate 3* to the basketball court, with players taking turns executing context-dependent moves like shooting, passing and attempting steals. 
+*Basketball Tactics* (working title) applies the tactical, turn-based action of classic RPGs and strategy games (not to mention chess!) to the basketball court, with players taking turns executing context-dependent moves like shooting, passing and attempting steals. 
 
 ## Project Organization
 
