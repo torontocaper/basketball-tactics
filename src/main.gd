@@ -24,23 +24,13 @@ func _ready() -> void:
 	game_layer.add_child(game)
 	ui.game = game
 	game.ui = ui
-	#_connect_signals()
-#
-## PRIVATE/HELPER
-#func _connect_signals() -> void:
-	#game.connect("game_state_changed", _on_game_state_changed)
-	#ui.connect("ui_state_changed", _on_ui_state_changed)
-#
-## RECEIVERS
-#func _on_game_state_changed(new_state: Game.GameState) -> void:
-	#print_debug("Game has entered new state: %s" % Game.GameState.keys()[new_state])
-#
-#func _on_ui_state_changed(new_state: UI.UIState) -> void:
-	#print_debug("UI has entered new state: %s" % UI.UIState.keys()[new_state])
-	#match new_state:
-		#UI.UIState.OPEN:
-			#pass
-		#UI.UIState.MAIN:
-			#game.current_game_state = Game.GameState.MATCH
-		#_:
-			#print_debug("Invalid UI state")
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("screenshot"):
+		capture_screenshot()
+
+func capture_screenshot() -> void:
+	var image = get_viewport().get_texture().get_image()
+	var prefix: String = Time.get_date_string_from_system() 
+	var suffix: String = str(randi_range(0, 9))
+	image.save_png("res://docs/screenshots/%s-screenshot-%s.png" % [prefix, suffix])
