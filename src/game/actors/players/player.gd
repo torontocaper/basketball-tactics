@@ -16,7 +16,7 @@ enum PlayerSpeed {SLOW, AVERAGE, FAST}
 @export var player_speed: PlayerSpeed = PlayerSpeed.AVERAGE
 @export_color_no_alpha var unselectable_modulate_color: Color = Color.GRAY
 
-var movement_points_per_turn: float
+var movement_points_per_turn: int
 
 var current_cell: Vector2i:
 	set(value):
@@ -67,16 +67,16 @@ func snap_to_grid() -> void:
 func _connect_signals() -> void:
 	connect("input_event", _on_input_event)
 
-func _set_movement_points(value: PlayerSpeed) -> float:
+func _set_movement_points(value: PlayerSpeed) -> int:
 	match value:
 		PlayerSpeed.SLOW:
-			return 3.0
+			return 6
 		PlayerSpeed.AVERAGE:
-			return 4.5
+			return 9
 		PlayerSpeed.FAST:
-			return 6.0
+			return 12
 		_:
-			return 4.5
+			return 9
 
 func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event.is_pressed() and event is InputEventMouseButton:
