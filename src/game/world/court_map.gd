@@ -8,12 +8,8 @@ extends TileMapLayer
 const MOVEMENT_COST_DIAGONAL : float = 1.5
 const MOVEMENT_COST_ORTHOGONAL : float = 1.0
 
-var occupied_cells: Dictionary[Player, Vector2i]:
-	set(value):
-		occupied_cells = value
-		print("There are %s occupied cells" % occupied_cells.size())
-
 var all_cells: Array[Vector2i]
+var occupied_cells: Dictionary[Player, Vector2i]
 
 # OVERRIDES
 func _ready() -> void:
@@ -21,17 +17,37 @@ func _ready() -> void:
 	all_cells = get_used_cells()
 
 func get_traversable_cells(player: Player, starting_cell: Vector2i, movement_points: float) -> Dictionary:
-	print_debug("Getting traversable cells for %s on cell %s with range %s" % [player.name, starting_cell, movement_points])
-	var cell_costs: Dictionary[Vector2i, float]
+	
+	var travel_stats: Dictionary[Vector2i, Dictionary]
+
+	var traversable_cells: Dictionary
+	
 	for cell in all_cells:
-		cell_costs[cell] = INF
-	#for occupied_cell in occupied_cells.t_:
-		#cell_costs.erase(occupied_cell)
-	return cell_costs
+		travel_stats[cell] = {
+			"cost" = INF,
+			"route" = []
+		}
+
+	# Remove occupied cells from travel stat calculation
+	for occupied_cell in occupied_cells:
+		var cell_to_remove = occupied_cells.get(occupied_cell)
+		print_debug("removing %s from traversable cells" % cell_to_remove)
+		travel_stats.erase(cell_to_remove)
+
+	# Start Dijkstra calculation with immediately surrounding cells
+	var surrounding_cells:= get_surrounding_cells(starting_cell) 
+	for surrounding_cell in surrounding_cells:
+		if travel_stats.has(surrounding_cell):
+			travel_stats[surrounding_cell].cost = MOVEMENT_COST_ORTHOGONAL
+			travel_stats[surrounding_cell].route.append(surrounding_cell)
+			traversable_cells.get_or_add(travel_stats[surrounding_cell])
+
+	return traversable_cells
 
 func set_occupied_cells(players: Array[Player]) -> void:
 	for player in players:
-		var player_cell: Vector2i = local_to_map(to_local(player.global_position))
+		var player_local_position = to_local(player.global_position)
+		var player_cell: Vector2i = local_to_map(player_local_position)
 		player.current_cell = player_cell
 		occupied_cells[player] = player_cell
 

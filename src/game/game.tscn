@@ -10,16 +10,17 @@
 script = ExtResource("1_4e6k0")
 
 [node name="Court" parent="." unique_id=2070971773 instance=ExtResource("2_s6lek")]
+position = Vector2(80, 80)
 
 [node name="TurnManager" parent="." unique_id=509745014 instance=ExtResource("5_xptat")]
 
 [node name="BlueTeam" parent="." unique_id=634722010 instance=ExtResource("3_l80un")]
 
 [node name="Blue1" parent="BlueTeam" index="0" unique_id=860716830]
-position = Vector2(359, 1070)
+position = Vector2(366, 1077)
 
 [node name="Blue2" parent="BlueTeam" index="1" unique_id=884478291]
-position = Vector2(518, 844)
+position = Vector2(518, 849)
 
 [node name="Blue3" parent="BlueTeam" index="2" unique_id=1226553230]
 position = Vector2(197, 840)
@@ -27,16 +28,19 @@ position = Vector2(197, 840)
 [node name="GreenTeam" parent="." unique_id=975415349 instance=ExtResource("4_xptat")]
 
 [node name="Green1" parent="GreenTeam" index="0" unique_id=860716830]
-position = Vector2(357, 205)
+position = Vector2(361, 205)
 rotation = 3.1415927
 
 [node name="Green2" parent="GreenTeam" index="1" unique_id=156980691]
-position = Vector2(509, 440)
+position = Vector2(504, 446)
 rotation = 3.1415927
 
 [node name="Green3" parent="GreenTeam" index="2" unique_id=674392125]
-position = Vector2(199, 450)
+position = Vector2(192, 438)
 rotation = 3.1415927
 
 [editable path="BlueTeam"]
 [editable path="GreenTeam"]
+[editable path="GreenTeam/Green1"]
+[editable path="GreenTeam/Green2"]
+[editable path="GreenTeam/Green3"]

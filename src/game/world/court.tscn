@@ -16,44 +16,44 @@ script = ExtResource("1_fynge")
 [node name="CourtMap" parent="." unique_id=1602992682 instance=ExtResource("3_qhssv")]
 
 [node name="CourtShape" type="CollisionShape2D" parent="." unique_id=1702401841]
-position = Vector2(360, 640)
+position = Vector2(280, 560)
 shape = SubResource("RectangleShape2D_mgm53")
 debug_color = Color(0.7, 0.6066667, 0, 0.41960785)
 
 [node name="HoopNorth" parent="." unique_id=456007788 instance=ExtResource("3_kptq6")]
-position = Vector2(360, 120)
+position = Vector2(280, 40)
 
 [node name="HoopSouth" parent="." unique_id=605305775 instance=ExtResource("3_kptq6")]
-position = Vector2(360, 1160)
+position = Vector2(280, 1080)
 rotation = 3.1415927
 
 [node name="CourtBoundary" type="Line2D" parent="." unique_id=658919327]
-points = PackedVector2Array(80, 80, 640, 80, 640, 1200, 80, 1200)
+points = PackedVector2Array(0, 0, 560, 0, 560, 1120, 0, 1120)
 closed = true
 
 [node name="HalfCourtLine" type="Line2D" parent="." unique_id=1964750078]
-points = PackedVector2Array(80, 640, 640, 640)
+points = PackedVector2Array(0, 560, 560, 560)
 
 [node name="TwoPointAreaNorth" parent="." unique_id=1856263261 instance=ExtResource("6_cjfcb")]
-position = Vector2(160, 80)
+position = Vector2(80, 0)
 
 [node name="TwoPointPolygonNorth" parent="." unique_id=1751178606 instance=ExtResource("6_agytx")]
-position = Vector2(160, 80)
+position = Vector2(80, 0)
 color = Color(1, 1, 1, 0.2509804)
 texture_scale = Vector2(0.1, 0.1)
 
 [node name="TwoPointAreaSouth" parent="." unique_id=2012835147 instance=ExtResource("6_cjfcb")]
-position = Vector2(560, 1200)
+position = Vector2(480, 1120)
 rotation = 3.1415927
 
 [node name="TwoPointPolygonSouth" parent="." unique_id=798414921 instance=ExtResource("6_agytx")]
-position = Vector2(560, 1200)
+position = Vector2(480, 1120)
 rotation = -3.1415925
 color = Color(1, 1, 1, 0.2509804)
 texture_scale = Vector2(0.1, 0.1)
 
 [node name="HalfCourtNorth" parent="." unique_id=808029513 instance=ExtResource("6_8x06a")]
-position = Vector2(360, 360)
+position = Vector2(280, 280)
 
 [node name="HalfCourtSouth" parent="." unique_id=1233747312 instance=ExtResource("6_8x06a")]
-position = Vector2(360, 920)
+position = Vector2(280, 840)
