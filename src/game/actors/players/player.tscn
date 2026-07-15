@@ -24,9 +24,9 @@ unselectable_modulate_color = Color(0.3553136, 0.35531354, 0.35531357, 1)
 
 [node name="PlayerLight" type="PointLight2D" parent="." unique_id=1440022582]
 visible = false
-energy = 0.5
+energy = 0.25
 texture = SubResource("GradientTexture2D_dsc2w")
-texture_scale = 8.0
+texture_scale = 16.0
 
 [node name="PlayerSprite" type="Sprite2D" parent="." unique_id=751967755]
 texture = ExtResource("2_gdh0h")

@@ -4,6 +4,8 @@ class_name CourtMap
 extends TileMapLayer
 ## Documentation comments
 
+const HIGHLIGHTER = preload("uid://8g0gamnv6cvn")
+
 const MOVEMENT_COST_DIAGONAL : int = 3
 const MOVEMENT_COST_ORTHOGONAL : int = 2
 
@@ -40,16 +42,19 @@ func get_traversable_cells(player: Player, starting_cell: Vector2i, movement_poi
 		if travel_stats.has(neighbor):
 			travel_stats[neighbor].cost = MOVEMENT_COST_ORTHOGONAL
 			travel_stats[neighbor].route.append(neighbor)
-			traversable_cells.get_or_add(travel_stats[neighbor])
+			traversable_cells.get_or_add(neighbor)
+			traversable_cells[neighbor] = travel_stats[neighbor]
 
-	# Move on to diagonal neighbours (this may require a helper function)
+	# Move on to diagonal neighbours
 	var diagonal_neighbors : Array[Vector2i] = _get_diagonal_neighbors(starting_cell)
 	for neighbor in diagonal_neighbors:
 		if travel_stats.has(neighbor):
 			travel_stats[neighbor].cost = MOVEMENT_COST_DIAGONAL
 			travel_stats[neighbor].route.append(neighbor)
-			traversable_cells.get_or_add(travel_stats[neighbor])
+			traversable_cells.get_or_add(neighbor)
+			traversable_cells[neighbor] = travel_stats[neighbor]
 
+	_highlight_traversable_cells(traversable_cells)
 	return traversable_cells
 
 func set_occupied_cells(players: Array[Player]) -> void:
@@ -67,6 +72,14 @@ func _get_diagonal_neighbors(coords: Vector2i) -> Array[Vector2i]:
 		get_neighbor_cell(coords, TileSet.CellNeighbor.CELL_NEIGHBOR_BOTTOM_RIGHT_CORNER)
 	]
 	return diagonal_neighbors
+
+func _highlight_traversable_cells(cells: Dictionary) -> void:
+	for cell in cells:
+		print_debug(cell)
+		var new_highlighter: Highlighter = HIGHLIGHTER.instantiate()
+		new_highlighter.position = map_to_local(cell)
+		new_highlighter.movement_cost = cells[cell].cost
+		add_child(new_highlighter)
 #func highlight_cell(cell: Vector2i) -> void:
 	#var polygon_node: Polygon2D = HIGHLIGHT_POLYGON.instantiate()
 	#polygon_node.position = map_to_local(cell)

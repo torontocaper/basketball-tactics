@@ -10,25 +10,9 @@ team_name = "Green Goblins"
 player_number = 1
 player_speed = 2
 
-[node name="PlayerNumberLabel" parent="Green1" index="2" unique_id=23348665]
-rotation = 3.1415927
-pivot_offset_ratio = Vector2(0.5, 0.5)
-
 [node name="Green2" parent="." index="1" unique_id=156980691 instance=ExtResource("2_35v3k")]
 player_number = 2
-
-[node name="PlayerNumberLabel" parent="Green2" index="2" unique_id=23348665]
-rotation = 3.1415927
-pivot_offset_ratio = Vector2(0.5, 0.5)
 
 [node name="Green3" parent="." index="2" unique_id=674392125 instance=ExtResource("2_35v3k")]
 player_number = 3
 player_speed = 0
-
-[node name="PlayerNumberLabel" parent="Green3" index="2" unique_id=23348665]
-rotation = 3.1415927
-pivot_offset_ratio = Vector2(0.5, 0.5)
-
-[editable path="Green1"]
-[editable path="Green2"]
-[editable path="Green3"]
