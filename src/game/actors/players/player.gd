@@ -14,6 +14,7 @@ enum PlayerSpeed {SLOW, AVERAGE, FAST}
 
 @export_range(0, 99, 1) var player_number: int = 0
 @export var player_speed: PlayerSpeed = PlayerSpeed.AVERAGE
+@export_color_no_alpha var unselectable_modulate_color: Color = Color.GRAY
 
 var movement_points_per_turn: float
 
@@ -35,17 +36,16 @@ var select_state: Selectability:
 				print_debug("%s is selectable" % name)
 				player_sprite.scale = Vector2.ONE
 				player_sprite.modulate = Color.WHITE
-				player_light.visible = false
+				player_light.visible = true
 			Selectability.SELECTED:
 				print_debug("%s is selected" % name)
 				player_sprite.scale = Vector2.ONE * SELECTED_SCALE
 				player_sprite.modulate = Color.WHITE
-				player_light.visible = true
-				highlight_movable_cells()
+				court_map.highlight_movable_cells(self, current_cell, movement_points_per_turn)
 			Selectability.UNSELECTABLE:
 				print_debug("%s is unselectable" % name)
 				player_sprite.scale = Vector2.ONE
-				player_sprite.modulate = Color.DIM_GRAY
+				player_sprite.modulate = unselectable_modulate_color
 				player_light.visible = false
 
 @onready var player_number_label: Label = $PlayerNumberLabel
@@ -57,16 +57,6 @@ func _ready() -> void:
 	_connect_signals()
 	movement_points_per_turn = _set_movement_points(player_speed)
 	player_number_label.text = str(player_number)
-
-func highlight_movable_cells() -> void:
-	var neighbors = [
-		court_map.get_neighbor_cell(current_cell, TileSet.CELL_NEIGHBOR_BOTTOM_RIGHT_CORNER),
-		court_map.get_neighbor_cell(current_cell, TileSet.CELL_NEIGHBOR_BOTTOM_LEFT_CORNER),
-		court_map.get_neighbor_cell(current_cell, TileSet.CELL_NEIGHBOR_TOP_RIGHT_CORNER),
-		court_map.get_neighbor_cell(current_cell, TileSet.CELL_NEIGHBOR_TOP_LEFT_CORNER)
-		]
-	for neighbor in neighbors:
-		court_map.highlight_cell(neighbor)
 
 func snap_to_grid() -> void:
 	var cell_position = court_map.map_to_local(current_cell)

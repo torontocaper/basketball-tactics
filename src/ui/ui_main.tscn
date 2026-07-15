@@ -16,6 +16,7 @@ script = ExtResource("1_jlfe0")
 layout_mode = 2
 offset_transform_enabled = true
 offset_transform_rotation = 3.1415927
+offset_transform_visual_only = false
 
 [node name="UIUserSouth" parent="." unique_id=2022205279 instance=ExtResource("2_da4bg")]
 layout_mode = 2

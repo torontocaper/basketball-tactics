@@ -20,11 +20,11 @@ radius = 34.0
 input_pickable = true
 motion_mode = 1
 script = ExtResource("1_gdh0h")
+unselectable_modulate_color = Color(0.3553136, 0.35531354, 0.35531357, 1)
 
 [node name="PlayerLight" type="PointLight2D" parent="." unique_id=1440022582]
 visible = false
 texture = SubResource("GradientTexture2D_dsc2w")
-texture_scale = 10.0
 
 [node name="PlayerSprite" type="Sprite2D" parent="." unique_id=751967755]
 texture = ExtResource("2_gdh0h")

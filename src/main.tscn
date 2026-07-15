@@ -8,5 +8,8 @@ script = ExtResource("1_ig7tw")
 [node name="GameLayer" type="CanvasLayer" parent="." unique_id=1054251547]
 layer = 0
 
+[node name="CanvasModulate" type="CanvasModulate" parent="GameLayer" unique_id=2045270162]
+color = Color(0.827451, 0.827451, 0.827451, 1)
+
 [node name="UILayer" type="CanvasLayer" parent="." unique_id=274550258]
 layer = 10

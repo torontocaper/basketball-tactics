@@ -20,6 +20,17 @@ func highlight_cell(cell: Vector2i) -> void:
 	polygon_node.position = map_to_local(cell)
 	add_child(polygon_node)
 
+func highlight_movable_cells(player: Player, starting_cell: Vector2i, movement_range: float) -> void:
+	print_debug("Highlighting movable cells for %s on cell %s with range %s" % [player.name, starting_cell, movement_range])
+	var neighbors = [
+		get_neighbor_cell(starting_cell, TileSet.CELL_NEIGHBOR_BOTTOM_RIGHT_CORNER),
+		get_neighbor_cell(starting_cell, TileSet.CELL_NEIGHBOR_BOTTOM_LEFT_CORNER),
+		get_neighbor_cell(starting_cell, TileSet.CELL_NEIGHBOR_TOP_RIGHT_CORNER),
+		get_neighbor_cell(starting_cell, TileSet.CELL_NEIGHBOR_TOP_LEFT_CORNER)
+		]
+	for neighbor in neighbors:
+		highlight_cell(neighbor)
+
 func print_player_cells(players: Array[Player]) -> void:
 	for player in players:
 		print_debug("%s on cell %s" % [player.name, local_to_map(to_local(player.global_position))])
