@@ -41,7 +41,7 @@ var select_state: Selectability:
 				print_debug("%s is selected" % name)
 				player_sprite.scale = Vector2.ONE * SELECTED_SCALE
 				player_sprite.modulate = Color.WHITE
-				court_map.highlight_movable_cells(self, current_cell, movement_points_per_turn)
+				court_map.get_traversable_cells(self, current_cell, movement_points_per_turn)
 			Selectability.UNSELECTABLE:
 				print_debug("%s is unselectable" % name)
 				player_sprite.scale = Vector2.ONE
@@ -61,7 +61,6 @@ func _ready() -> void:
 func snap_to_grid() -> void:
 	var cell_position = court_map.map_to_local(current_cell)
 	print_debug("Snapping %s to cell %s (position %s)" % [name, current_cell, cell_position])
-	#var tile_size:= court_map.tile_set.tile_size
 	position = cell_position
 
 func _connect_signals() -> void:

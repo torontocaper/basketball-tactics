@@ -3,7 +3,7 @@ class_name Court
 extends Area2D
 ## The surface a [Game] is played on.
 
-@export var players_on_court: Array[Player]:
+var players_on_court: Array[Player]:
 	set(value):
 		players_on_court = value
 		print_debug("There are %s players on the court" % players_on_court.size())

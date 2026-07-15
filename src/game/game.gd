@@ -6,7 +6,7 @@ extends Node2D
 
 signal score_updated(new_green_score: int, new_blue_score: int)
 
-@export var ui: UI:
+var ui: UI:
 	set(value):
 		ui = value
 

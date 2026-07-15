@@ -3,19 +3,19 @@ class_name TurnManager
 extends Node
 ## Turn controller.
 
-@export var green_team: Team:
+var green_team: Team:
 	set(value):
 		green_team = value
 		for player in green_team.players:
 			player.connect("player_clicked", on_player_clicked)
 
-@export var blue_team: Team:
+var blue_team: Team:
 	set(value):
 		blue_team = value
 		for player in blue_team.players:
 			player.connect("player_clicked", on_player_clicked)
 
-@export var selected_player: Player:
+var selected_player: Player:
 	set(value):
 		if selected_player: # If there's already a selected player, unselect them (make them selectable again)
 			selected_player.select_state = Player.Selectability.SELECTABLE

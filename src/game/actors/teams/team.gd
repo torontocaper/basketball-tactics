@@ -4,8 +4,9 @@ class_name Team
 extends Node2D
 ## Base class for teams
 
-@export var players: Array[Player]
 @export var team_name: String
+
+var players: Array[Player]
 
 var has_ball: bool:
 	set(value):
