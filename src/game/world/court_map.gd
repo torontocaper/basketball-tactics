@@ -18,7 +18,6 @@ func _ready() -> void:
 	all_cells = get_used_cells()
 
 func get_traversable_cells(_player: Player, starting_cell: Vector2i, _movement_points: int) -> Dictionary:
-	#var travel_stats: Dictionary[Vector2i, Dictionary]
 	var traversable_cells: Dictionary[Vector2i, Dictionary]
 	
 	for cell in all_cells:
@@ -27,7 +26,7 @@ func get_traversable_cells(_player: Player, starting_cell: Vector2i, _movement_p
 			"route" = []
 		}
 
-	# Remove occupied cells from travel stat calculation
+	# Remove occupied cells from traversable cells
 	for occupied_cell in occupied_cells:
 		print_debug("removing %s from traversable cells" % occupied_cell)
 		traversable_cells.erase(occupied_cell)
@@ -46,13 +45,39 @@ func get_traversable_cells(_player: Player, starting_cell: Vector2i, _movement_p
 			traversable_cells[neighbor].cost = MOVEMENT_COST_DIAGONAL
 			traversable_cells[neighbor].route.append(neighbor)
 	
-	for neighbor in orthogonal_neighbors:
-		pass
+	# Go to the next degree of neighbor, starting with orthogonal...
+	for orthogonal_neighbor in orthogonal_neighbors:
+		var next_orthogonal_neighbors : Array[Vector2i] = get_surrounding_cells(orthogonal_neighbor)
+		for next_orthogonal_neighbor in next_orthogonal_neighbors:
+			if traversable_cells.has(next_orthogonal_neighbor):
+				if traversable_cells[next_orthogonal_neighbor].cost > MOVEMENT_COST_ORTHOGONAL * 2:
+					traversable_cells[next_orthogonal_neighbor].cost = MOVEMENT_COST_ORTHOGONAL * 2
+					traversable_cells[next_orthogonal_neighbor].route = [orthogonal_neighbor, next_orthogonal_neighbor]
+		var next_diagonal_neighbors : Array[Vector2i] = _get_diagonal_neighbors(orthogonal_neighbor)
+		for next_diagonal_neighbor in next_diagonal_neighbors:
+			if traversable_cells.has(next_diagonal_neighbor):
+				if traversable_cells[next_diagonal_neighbor].cost > MOVEMENT_COST_ORTHOGONAL + MOVEMENT_COST_DIAGONAL:
+					traversable_cells[next_diagonal_neighbor].cost = MOVEMENT_COST_ORTHOGONAL + MOVEMENT_COST_DIAGONAL
+					traversable_cells[next_diagonal_neighbor].route = [orthogonal_neighbor, next_diagonal_neighbor]
 	
-	# Now we have movement costs and routes for the immediate surrounding cells
-	# Now what?
-	# Go to the neighbors of the neighbors?
-	
+	# ...then diagonal
+	for diagonal_neighbor in diagonal_neighbors:
+		var next_orthogonal_neighbors : Array[Vector2i] = get_surrounding_cells(diagonal_neighbor)
+		for next_orthogonal_neighbor in next_orthogonal_neighbors:
+			if traversable_cells.has(next_orthogonal_neighbor):
+				if traversable_cells[next_orthogonal_neighbor].cost > MOVEMENT_COST_ORTHOGONAL * 2:
+					traversable_cells[next_orthogonal_neighbor].cost = MOVEMENT_COST_ORTHOGONAL * 2
+					traversable_cells[next_orthogonal_neighbor].route = [diagonal_neighbor, next_orthogonal_neighbor]
+		var next_diagonal_neighbors : Array[Vector2i] = _get_diagonal_neighbors(diagonal_neighbor)
+		for next_diagonal_neighbor in next_diagonal_neighbors:
+			if traversable_cells.has(next_diagonal_neighbor):
+				if traversable_cells[next_diagonal_neighbor].cost > MOVEMENT_COST_ORTHOGONAL + MOVEMENT_COST_DIAGONAL:
+					traversable_cells[next_diagonal_neighbor].cost = MOVEMENT_COST_ORTHOGONAL + MOVEMENT_COST_DIAGONAL
+					traversable_cells[next_diagonal_neighbor].route = [diagonal_neighbor, next_diagonal_neighbor]
+
+	for cell in traversable_cells.keys():
+		if traversable_cells[cell].cost == INF:
+			traversable_cells.erase(cell)
 
 	_highlight_traversable_cells(traversable_cells)
 	return traversable_cells
