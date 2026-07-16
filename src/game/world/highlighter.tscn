@@ -4,9 +4,9 @@
 [ext_resource type="Script" uid="uid://d1hdv3lhmk6f6" path="res://src/game/world/highlighter.gd" id="1_27oq0"]
 
 [node name="Highlighter" type="Line2D" unique_id=1118605264]
-points = PackedVector2Array(-36, -36, 36, -36, 36, 36, -36, 36)
+points = PackedVector2Array(-38, -38, 38, -38, 38, 38, -38, 38)
 closed = true
-width = 8.0
+width = 4.0
 script = ExtResource("1_27oq0")
 
 [node name="HighlighterLabel" type="Label" parent="." unique_id=978055726]

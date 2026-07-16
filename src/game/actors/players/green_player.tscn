@@ -1,9 +1,18 @@
 [gd_scene format=3 uid="uid://b2vohbcnqvvur"]
 
 [ext_resource type="PackedScene" uid="uid://bv21vx6lvidbx" path="res://src/game/actors/players/player.tscn" id="1_lm74s"]
-[ext_resource type="Texture2D" uid="uid://brv1pevqt7cgw" path="res://assets/sprites/chip-green-68.png" id="2_1l8mp"]
+
+[sub_resource type="Gradient" id="Gradient_bqfhs"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.7)
+colors = PackedColorArray(0, 1, 0, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_edxs3"]
+gradient = SubResource("Gradient_bqfhs")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
 
 [node name="GreenPlayer" unique_id=860716830 instance=ExtResource("1_lm74s")]
 
-[node name="PlayerSprite" parent="." index="0" unique_id=751967755]
-texture = ExtResource("2_1l8mp")
+[node name="PlayerSprite" parent="." index="1" unique_id=751967755]
+texture = SubResource("GradientTexture2D_edxs3")
