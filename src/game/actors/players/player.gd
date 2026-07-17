@@ -41,7 +41,7 @@ var select_state: Selectability:
 				print_debug("%s is selected" % name)
 				player_sprite.scale = Vector2.ONE * SELECTED_SCALE
 				player_sprite.modulate = Color.WHITE
-				var traversable_cells = court_map.get_traversable_cells(self, current_cell, movement_points_per_turn)
+				var traversable_cells = court_map.get_traversable_cells(current_cell)
 				print_debug("found %s traversable cells" % traversable_cells.size())
 			Selectability.UNSELECTABLE:
 				print_debug("%s is unselectable" % name)

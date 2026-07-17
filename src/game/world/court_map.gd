@@ -17,34 +17,37 @@ func _ready() -> void:
 	print_debug("CourtMap ready at %s ms" % Time.get_ticks_msec())
 	all_cells = get_used_cells()
 
-func get_traversable_cells(_player: Player, starting_cell: Vector2i, _movement_points: int) -> Dictionary:
+func get_traversable_cells(starting_cell: Vector2i) -> Dictionary:
+
+	# Create the traversable cells dictionary and add all used cells to it
 	var traversable_cells: Dictionary[Vector2i, Dictionary]
-	
+	var calculated_cells: Dictionary[Vector2i, Dictionary]
 	for cell in all_cells:
 		traversable_cells[cell] = {
 			"cost" = INF,
 			"route" = []
 		}
 
-	# Remove occupied cells from traversable cells
-	for occupied_cell in occupied_cells:
-		print_debug("removing %s from traversable cells" % occupied_cell)
-		traversable_cells.erase(occupied_cell)
+	# Define a lambda function for updating travel data
+	var lambda = func update_travel_data(coords: Vector2i, starting_cost: int, movement_cost: int):
+		if occupied_cells.has(coords):
+			pass
+		if traversable_cells[coords].cost == INF:
+			traversable_cells[coords].cost = starting_cost + movement_cost
+		traversable_cells[coords].route.append(coords)
+
 
 	# Start Dijkstra calculation with immediately surrounding cells
 	var orthogonal_neighbors := get_surrounding_cells(starting_cell) 
 	for neighbor in orthogonal_neighbors:
-		if traversable_cells.has(neighbor):
-			traversable_cells[neighbor].cost = MOVEMENT_COST_ORTHOGONAL
-			traversable_cells[neighbor].route.append(neighbor)
+		lambda.call(neighbor, 0, MOVEMENT_COST_ORTHOGONAL)
 
 	# Move on to diagonal neighbours
 	var diagonal_neighbors : Array[Vector2i] = _get_diagonal_neighbors(starting_cell)
 	for neighbor in diagonal_neighbors:
-		if traversable_cells.has(neighbor):
-			traversable_cells[neighbor].cost = MOVEMENT_COST_DIAGONAL
-			traversable_cells[neighbor].route.append(neighbor)
-	
+		lambda.call(neighbor, 0, MOVEMENT_COST_DIAGONAL)
+
+
 	# Go to the next degree of neighbor, starting with orthogonal...
 	for orthogonal_neighbor in orthogonal_neighbors:
 		var next_orthogonal_neighbors : Array[Vector2i] = get_surrounding_cells(orthogonal_neighbor)
@@ -74,6 +77,9 @@ func get_traversable_cells(_player: Player, starting_cell: Vector2i, _movement_p
 				if traversable_cells[next_diagonal_neighbor].cost > MOVEMENT_COST_ORTHOGONAL + MOVEMENT_COST_DIAGONAL:
 					traversable_cells[next_diagonal_neighbor].cost = MOVEMENT_COST_ORTHOGONAL + MOVEMENT_COST_DIAGONAL
 					traversable_cells[next_diagonal_neighbor].route = [diagonal_neighbor, next_diagonal_neighbor]
+
+
+
 
 	for cell in traversable_cells.keys():
 		if traversable_cells[cell].cost == INF:
