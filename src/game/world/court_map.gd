@@ -22,11 +22,13 @@ func _ready() -> void:
 	all_cells = get_used_cells()
 	dijkstra.graph = create_graph(all_cells)
 
-func create_graph(cells: Array[Vector2i]) -> Dictionary[Vector2i, Array]:
-	var new_graph : Dictionary[Vector2i, Array]
-	for cell in cells:
-		var cell_neighbors : Array = get_cell_neighbors(cell)
-		new_graph[cell] = cell_neighbors
+func create_graph(cell_coords: Array[Vector2i]) -> Array[Cell]:
+	var new_graph : Array[Cell]
+	for cell_coord in cell_coords:
+		var new_cell : Cell = Cell.new()
+		new_cell.coords = cell_coord
+		new_cell.neighbors = get_cell_neighbors(cell_coord)
+		new_graph.append(new_cell)
 	return new_graph
 
 func get_cell_neighbors(starting_cell: Vector2i) -> Array[Dictionary]:
