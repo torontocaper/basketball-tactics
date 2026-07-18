@@ -35,6 +35,28 @@ func get_cell_data(source_cell: Vector2i) -> void:
 
 func is_unsettled(cell: Cell) -> bool:
 	return not cell.is_settled
+
+func update_neighbors(cell: Cell) -> void:
+	# Get the cell's immediate neighbors from the graph
+	var starting_cell_distance : int = cell.distance
+	var starting_cell_path: Array[Cell] = cell.path
+	var neighbors : Array[Dictionary] = cell.neighbors
+	for neighbor in neighbors:
+		var neighbor_coords : Vector2i = neighbor.keys()[0]
+		var distance_to_neighbor : int = neighbor[neighbor_coords]
+		var index_of_neighbor_cell : int = cells.find_custom(find_neighbor_cell.bind(neighbor_coords)) 
+		var neighbor_cell : Cell = cells[index_of_neighbor_cell]
+		if neighbor_cell.distance > starting_cell_distance + distance_to_neighbor:
+			neighbor_cell.distance = starting_cell_distance + distance_to_neighbor
+			var neighbor_cell_path : Array[Cell] = starting_cell_path.duplicate()
+			neighbor_cell_path.append(neighbor_cell)
+			neighbor_cell.path = neighbor_cell_path
+
+func find_neighbor_cell(neighbor_cell, potential_neighbor_cell_coords) -> bool:
+	return neighbor_cell.coords == potential_neighbor_cell_coords
+
+
+
 #func sort_cells_by_distance(cell_1, cell_2) -> bool:
 	#return cell_1.distance < cell_2.distance
 	##var starting_cell = source_cell
@@ -62,25 +84,8 @@ func is_unsettled(cell: Cell) -> bool:
 	##queue.sort_custom(sort_keys)
 	##print_debug("Sorted queue: %s" % str(queue))
 	#return sorted_cells
-
-
-func update_neighbors(cell: Cell) -> void:
-	# Get the cell's immediate neighbors from the graph
-	var starting_cell_distance : int = cell.distance
-	var neighbors : Array[Dictionary] = cell.neighbors
-	for neighbor in neighbors:
-		var neighbor_coords : Vector2i = neighbor.keys()[0]
-		var distance_to_neighbor : int = neighbor[neighbor_coords]
-		var index_of_neighbor_cell : int = cells.find_custom(find_neighbor_cell.bind(neighbor_coords)) 
-		var neighbor_cell : Cell = cells[index_of_neighbor_cell]
-		if neighbor_cell.distance > starting_cell_distance + distance_to_neighbor:
-			neighbor_cell.distance = starting_cell_distance + distance_to_neighbor
-			neighbor_cell.path.append(neighbor_cell)
 		
 			#if unsettled_cells[neighbor_coords].cost > base_cost + cost_to_visit:
 				#unsettled_cells[neighbor_coords].cost = base_cost + cost_to_visit
 				##unsettled_cells[neighbor_coords].path.pop_back()
 				#unsettled_cells[neighbor_coords].path.append(neighbor_coords)
-
-func find_neighbor_cell(neighbor_cell, potential_neighbor_cell_coords) -> bool:
-	return neighbor_cell.coords == potential_neighbor_cell_coords
