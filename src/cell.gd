@@ -1,5 +1,5 @@
 class_name Cell
-extends RefCounted
+extends Object
 
 var coords: Vector2i
 var neighbors: Array[Dictionary]

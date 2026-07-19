@@ -14,5 +14,4 @@ var movement_cost: int
 # OVERRIDES
 
 func _ready() -> void:
-	print_debug("Highlighter ready")
 	highlighter_label.text = str(movement_cost)

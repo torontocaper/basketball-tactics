@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://d07nuioov3ubf"]
+
+[ext_resource type="Script" uid="uid://thkrdt1120q7" path="res://src/autoload/screenshot.gd" id="1_jwvce"]
+
+[node name="Screenshot" type="Node" unique_id=188834356]
+script = ExtResource("1_jwvce")

@@ -2,17 +2,36 @@
 #@icon(icon_path: String)
 class_name CourtMap
 extends TileMapLayer
-## Documentation comments
+## [TileMap]-based grid of cells representing the playable area
 
 const HIGHLIGHTER = preload("uid://8g0gamnv6cvn")
+const HIGHLIGHT_POLYGON = preload("uid://djhx0s1dx8ks6")
 
 const MOVEMENT_COST_DIAGONAL : int = 3
 const MOVEMENT_COST_ORTHOGONAL : int = 2
 
 var all_cells: Array[Vector2i]
-#var graph: Dictionary[Vector2i, Array]
-var calculated_cells: Dictionary[Vector2i, Dictionary]
+
+var dijkstra_updated_graph: Array[Cell]:
+	set(value):
+		dijkstra_updated_graph = value
+		clear_highlights()
+		for cell in dijkstra_updated_graph:
+			highlight_cell(cell)
+
 var occupied_cells: Dictionary[Vector2i, Player]
+
+var destination_cell: Vector2i:
+	set(value):
+		destination_cell = value
+		var destination_cell_path : Array[Cell] = dijkstra.get_path_to_cell_by_coords(destination_cell)
+		highlight_cell_path(destination_cell_path)
+
+var starting_cell: Vector2i:
+	set(value):
+		starting_cell = value
+		dijkstra.graph = create_graph(all_cells)
+		dijkstra_updated_graph = dijkstra.get_updated_graph(starting_cell)
 
 @onready var dijkstra: Dijkstra = $Dijkstra
 
@@ -20,21 +39,30 @@ var occupied_cells: Dictionary[Vector2i, Player]
 func _ready() -> void:
 	print_debug("CourtMap ready at %s ms" % Time.get_ticks_msec())
 	all_cells = get_used_cells()
-	dijkstra.graph = create_graph(all_cells)
 
-func create_graph(cell_coords: Array[Vector2i]) -> Array[Cell]:
+func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton and event.is_pressed() and event.button_index == 1:
+		var click_position = event.position
+		var clicked_cell : Vector2i = local_to_map(click_position)
+		print_debug("You clicked on tile %s" % clicked_cell)
+		if not starting_cell:
+			starting_cell = clicked_cell
+		else:
+			destination_cell = clicked_cell
+
+func create_graph(list_of_cells: Array[Vector2i]) -> Array[Cell]:
 	var new_graph : Array[Cell]
-	for cell_coord in cell_coords:
+	for cell in list_of_cells:
 		var new_cell : Cell = Cell.new()
-		new_cell.coords = cell_coord
-		new_cell.neighbors = get_cell_neighbors(cell_coord)
+		new_cell.coords = cell
+		new_cell.neighbors = get_cell_neighbors(cell)
 		new_graph.append(new_cell)
 	return new_graph
 
-func get_cell_neighbors(starting_cell: Vector2i) -> Array[Dictionary]:
+func get_cell_neighbors(cell: Vector2i) -> Array[Dictionary]:
 	var neighbors : Array[Dictionary] = []
-	var orthogonal_neighbors : Array[Vector2i] = get_surrounding_cells(starting_cell) 
-	var diagonal_neighbors : Array[Vector2i] = get_diagonal_neighbors(starting_cell)
+	var orthogonal_neighbors : Array[Vector2i] = get_surrounding_cells(cell) 
+	var diagonal_neighbors : Array[Vector2i] = get_diagonal_neighbors(cell)
 	for o in orthogonal_neighbors:
 		if o in all_cells:
 			neighbors.append({
@@ -56,116 +84,26 @@ func get_diagonal_neighbors(coords: Vector2i) -> Array[Vector2i]:
 		]
 	return diagonal_neighbors
 
+func highlight_cell(cell_to_highlight: Cell) -> void:
+	var new_highlighter : Highlighter = HIGHLIGHTER.instantiate()
+	new_highlighter.movement_cost = cell_to_highlight.distance
+	new_highlighter.position = map_to_local(cell_to_highlight.coords)
+	add_child(new_highlighter)
+
+func highlight_cell_path(path: Array[Cell]) -> void:
+	for cell in path:
+		var new_highlight_polygon = HIGHLIGHT_POLYGON.instantiate()
+		new_highlight_polygon.position = map_to_local(cell.coords)
+		add_child(new_highlight_polygon)
+
+func clear_highlights() -> void:
+	for child in get_children():
+		if child is Highlighter or Polygon2D:
+			child.queue_free()
+
 func set_occupied_cells(players: Array[Player]) -> void:
 	for player in players:
 		var player_local_position = to_local(player.global_position)
 		var player_cell: Vector2i = local_to_map(player_local_position)
 		player.current_cell = player_cell
 		occupied_cells[player_cell] = player
-
-
-
-	# Create the calculated cells dictionary and add all used cells to it
-	 #Define a lambda function for updating travel data
-	#var lambda = func update_travel_data(coords: Vector2i, starting_cost: int, movement_cost: int):
-		#if occupied_cells.has(coords):
-			#calculated_cells[coords] = {
-				#"cost" = INF,
-				#"route" = []
-			#}
-		#elif calculated_cells.has(coords):
-			#if calculated_cells[coords].cost >= starting_cost + movement_cost:
-				#calculated_cells[coords].cost = starting_cost + movement_cost
-				#calculated_cells[coords].route.append(coords)
-		#else:
-			#calculated_cells[coords] = {
-				#"cost" = starting_cost + movement_cost,
-				#"route" = [coords]
-			#}
-	#var orthogonal_neighbors := get_surrounding_cells(coords) 
-	#for neighbor in orthogonal_neighbors:
-		#lambda.call(neighbor, calcu, MOVEMENT_COST_ORTHOGONAL)
-#
-	## Move on to diagonal neighbours
-	#var diagonal_neighbors : Array[Vector2i] = _get_diagonal_neighbors(cell_to_update)
-	#for neighbor in diagonal_neighbors:
-		#lambda.call(neighbor, 0, MOVEMENT_COST_DIAGONAL)
-
-
-	##var cell_to_update = starting_cell
-	#while calculated_cells.size() < all_cells.size():
-	## Start Dijkstra calculation with immediately surrounding cells
-		#var orthogonal_neighbors := get_surrounding_cells(cell_to_update) 
-		#for neighbor in orthogonal_neighbors:
-			#lambda.call(neighbor, 0, MOVEMENT_COST_ORTHOGONAL)
-#
-		## Move on to diagonal neighbours
-		#var diagonal_neighbors : Array[Vector2i] = _get_diagonal_neighbors(cell_to_update)
-		#for neighbor in diagonal_neighbors:
-			#lambda.call(neighbor, 0, MOVEMENT_COST_DIAGONAL)
-
-func update_travel_data(coords: Vector2i, starting_cost: int, movement_cost: int):
-	if occupied_cells.has(coords):
-		calculated_cells[coords] = {
-			"cost" = INF,
-			"route" = []
-		}
-	elif calculated_cells.has(coords):
-		if calculated_cells[coords].cost >= starting_cost + movement_cost:
-			calculated_cells[coords].cost = starting_cost + movement_cost
-			calculated_cells[coords].route.append(coords)
-	else:
-		calculated_cells[coords] = {
-			"cost" = starting_cost + movement_cost,
-			"route" = [coords]
-		}
-	
-
-	# Go to the next degree of neighbor, starting with orthogonal...
-	#for orthogonal_neighbor in orthogonal_neighbors:
-		#var next_orthogonal_neighbors : Array[Vector2i] = get_surrounding_cells(orthogonal_neighbor)
-		#for next_orthogonal_neighbor in next_orthogonal_neighbors:
-			#if traversable_cells.has(next_orthogonal_neighbor):
-				#if traversable_cells[next_orthogonal_neighbor].cost > MOVEMENT_COST_ORTHOGONAL * 2:
-					#traversable_cells[next_orthogonal_neighbor].cost = MOVEMENT_COST_ORTHOGONAL * 2
-					#traversable_cells[next_orthogonal_neighbor].route = [orthogonal_neighbor, next_orthogonal_neighbor]
-		#var next_diagonal_neighbors : Array[Vector2i] = _get_diagonal_neighbors(orthogonal_neighbor)
-		#for next_diagonal_neighbor in next_diagonal_neighbors:
-			#if traversable_cells.has(next_diagonal_neighbor):
-				#if traversable_cells[next_diagonal_neighbor].cost > MOVEMENT_COST_ORTHOGONAL + MOVEMENT_COST_DIAGONAL:
-					#traversable_cells[next_diagonal_neighbor].cost = MOVEMENT_COST_ORTHOGONAL + MOVEMENT_COST_DIAGONAL
-					#traversable_cells[next_diagonal_neighbor].route = [orthogonal_neighbor, next_diagonal_neighbor]
-	#
-	## ...then diagonal
-	#for diagonal_neighbor in diagonal_neighbors:
-		#var next_orthogonal_neighbors : Array[Vector2i] = get_surrounding_cells(diagonal_neighbor)
-		#for next_orthogonal_neighbor in next_orthogonal_neighbors:
-			#if traversable_cells.has(next_orthogonal_neighbor):
-				#if traversable_cells[next_orthogonal_neighbor].cost > MOVEMENT_COST_ORTHOGONAL * 2:
-					#traversable_cells[next_orthogonal_neighbor].cost = MOVEMENT_COST_ORTHOGONAL * 2
-					#traversable_cells[next_orthogonal_neighbor].route = [diagonal_neighbor, next_orthogonal_neighbor]
-		#var next_diagonal_neighbors : Array[Vector2i] = _get_diagonal_neighbors(diagonal_neighbor)
-		#for next_diagonal_neighbor in next_diagonal_neighbors:
-			#if traversable_cells.has(next_diagonal_neighbor):
-				#if traversable_cells[next_diagonal_neighbor].cost > MOVEMENT_COST_ORTHOGONAL + MOVEMENT_COST_DIAGONAL:
-					#traversable_cells[next_diagonal_neighbor].cost = MOVEMENT_COST_ORTHOGONAL + MOVEMENT_COST_DIAGONAL
-					#traversable_cells[next_diagonal_neighbor].route = [diagonal_neighbor, next_diagonal_neighbor]
-#
-
-
-
-	#for cell in traversable_cells.keys():
-		#if traversable_cells[cell].cost == INF:
-			#traversable_cells.erase(cell)
-
-	#_highlight_calculated_cells(calculated_cells)
-	return calculated_cells
-
-
-#func _highlight_calculated_cells(cells: Dictionary) -> void:
-	#for cell in cells:
-		#print_debug(cell)
-		#var new_highlighter: Highlighter = HIGHLIGHTER.instantiate()
-		#new_highlighter.position = map_to_local(cell)
-		#new_highlighter.movement_cost = cells[cell].cost
-		#add_child(new_highlighter)
