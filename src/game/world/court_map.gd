@@ -2,7 +2,7 @@
 #@icon(icon_path: String)
 class_name CourtMap
 extends TileMapLayer
-## [TileMap]-based grid of cells representing the playable area
+## [TileMapLayer]-based grid of [Cell]s representing the playable area
 
 const HIGHLIGHTER = preload("uid://8g0gamnv6cvn")
 const HIGHLIGHT_POLYGON = preload("uid://djhx0s1dx8ks6")
@@ -12,11 +12,15 @@ const MOVEMENT_COST_ORTHOGONAL : int = 2
 
 var all_cells: Array[Vector2i]
 
-var dijkstra_updated_graph: Array[Cell]:
+@onready var player_path_line: Line2D = $PlayerPathLine
+@onready var dijkstra: Dijkstra = $Dijkstra
+
+var updated_graph: Array[Cell]:
 	set(value):
-		dijkstra_updated_graph = value
+		updated_graph = value
 		clear_highlights()
-		for cell in dijkstra_updated_graph:
+		player_path_line.clear_points()
+		for cell in updated_graph:
 			highlight_cell(cell)
 
 var occupied_cells: Dictionary[Vector2i, Player]
@@ -25,29 +29,29 @@ var destination_cell: Vector2i:
 	set(value):
 		destination_cell = value
 		var destination_cell_path : Array[Cell] = dijkstra.get_path_to_cell_by_coords(destination_cell)
-		highlight_cell_path(destination_cell_path)
+		highlight_path(destination_cell_path)
 
 var starting_cell: Vector2i:
 	set(value):
 		starting_cell = value
-		dijkstra.graph = create_graph(all_cells)
-		dijkstra_updated_graph = dijkstra.get_updated_graph(starting_cell)
-
-@onready var dijkstra: Dijkstra = $Dijkstra
+		#dijkstra.graph = create_graph(all_cells)
+		updated_graph = dijkstra.update_graph(starting_cell)
 
 # OVERRIDES
 func _ready() -> void:
 	print_debug("CourtMap ready at %s ms" % Time.get_ticks_msec())
 	all_cells = get_used_cells()
+	dijkstra.graph = create_graph(all_cells)
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventMouseButton and event.is_pressed() and event.button_index == 1:
-		var click_position = event.position
-		var clicked_cell : Vector2i = local_to_map(click_position)
-		print_debug("You clicked on tile %s" % clicked_cell)
-		if not starting_cell:
+	if event is InputEventMouseButton and event.is_pressed():
+		if event.button_index == 1:
+			var clicked_cell : Vector2i = local_to_map(event.position)
+			print_debug("You left-clicked on tile %s" % clicked_cell)
 			starting_cell = clicked_cell
-		else:
+		if event.button_index == 2:
+			var clicked_cell : Vector2i = local_to_map(event.position)
+			print_debug("You right-clicked on tile %s" % clicked_cell)
 			destination_cell = clicked_cell
 
 func create_graph(list_of_cells: Array[Vector2i]) -> Array[Cell]:
@@ -90,15 +94,15 @@ func highlight_cell(cell_to_highlight: Cell) -> void:
 	new_highlighter.position = map_to_local(cell_to_highlight.coords)
 	add_child(new_highlighter)
 
-func highlight_cell_path(path: Array[Cell]) -> void:
+func highlight_path(path: Array[Cell]) -> void:
+	player_path_line.clear_points()
+	#queue_redraw()
 	for cell in path:
-		var new_highlight_polygon = HIGHLIGHT_POLYGON.instantiate()
-		new_highlight_polygon.position = map_to_local(cell.coords)
-		add_child(new_highlight_polygon)
+		player_path_line.add_point(map_to_local(cell.coords))
 
 func clear_highlights() -> void:
 	for child in get_children():
-		if child is Highlighter or Polygon2D:
+		if child is Highlighter:
 			child.queue_free()
 
 func set_occupied_cells(players: Array[Player]) -> void:

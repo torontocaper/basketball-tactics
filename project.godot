@@ -28,6 +28,10 @@ window/size/viewport_height=1280
 window/stretch/mode="canvas_items"
 window/handheld/orientation=1
 
+[editor]
+
+movie_writer/movie_file="/home/torontocaper/Projects/Godot/basketball-tactics/docs/movies/movie.avi"
+
 [input]
 
 screenshot={

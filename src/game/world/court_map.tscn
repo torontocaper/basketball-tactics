@@ -12,3 +12,5 @@ script = ExtResource("2_xw6a4")
 
 [node name="Dijkstra" type="Node" parent="." unique_id=242786120]
 script = ExtResource("3_wjipi")
+
+[node name="PlayerPathLine" type="Line2D" parent="." unique_id=551296896]
