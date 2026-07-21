@@ -12,8 +12,13 @@ const MOVEMENT_COST_ORTHOGONAL : int = 2
 
 var all_cells: Array[Vector2i]
 
-@onready var player_path_line: Line2D = $PlayerPathLine
-@onready var dijkstra: Dijkstra = $Dijkstra
+var players: Array[Player]:
+	set(value):
+		players = value
+		print_debug("CourtMap has %s players" % players.size())
+		for player in players:
+			player.court_map = self
+		set_occupied_cells(players)
 
 var updated_graph: Array[Cell]:
 	set(value):
@@ -23,7 +28,7 @@ var updated_graph: Array[Cell]:
 		for cell in updated_graph:
 			highlight_cell(cell)
 
-var occupied_cells: Dictionary[Vector2i, Player]
+var occupied_cells: Array[Cell]
 
 var destination_cell: Vector2i:
 	set(value):
@@ -34,8 +39,10 @@ var destination_cell: Vector2i:
 var starting_cell: Vector2i:
 	set(value):
 		starting_cell = value
-		#dijkstra.graph = create_graph(all_cells)
 		updated_graph = dijkstra.update_graph(starting_cell)
+
+@onready var player_path_line: Line2D = $PlayerPathLine
+@onready var dijkstra: Dijkstra = $Dijkstra
 
 # OVERRIDES
 func _ready() -> void:
@@ -44,15 +51,16 @@ func _ready() -> void:
 	dijkstra.graph = create_graph(all_cells)
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventMouseButton and event.is_pressed():
+	if event.is_pressed() and event is InputEventMouseButton:
+		var click_global_position : Vector2 = event.global_position
+		var click_local_position : Vector2 = to_local(click_global_position)
+		var clicked_tile_coords = local_to_map(click_local_position)
 		if event.button_index == 1:
-			var clicked_cell : Vector2i = local_to_map(event.position)
-			print_debug("You left-clicked on tile %s" % clicked_cell)
-			starting_cell = clicked_cell
-		if event.button_index == 2:
-			var clicked_cell : Vector2i = local_to_map(event.position)
-			print_debug("You right-clicked on tile %s" % clicked_cell)
-			destination_cell = clicked_cell
+			print_debug("CourtMap left-clicked at tile %s" % clicked_tile_coords)
+			starting_cell = clicked_tile_coords
+		elif event.button_index == 2:
+			print_debug("CourtMap right-clicked at tile %s" % clicked_tile_coords)
+			destination_cell = clicked_tile_coords
 
 func create_graph(list_of_cells: Array[Vector2i]) -> Array[Cell]:
 	var new_graph : Array[Cell]
@@ -105,9 +113,13 @@ func clear_highlights() -> void:
 		if child is Highlighter:
 			child.queue_free()
 
-func set_occupied_cells(players: Array[Player]) -> void:
+func set_occupied_cells(players: Array[Player]) -> Array[Cell]:
+	var cells: Array[Cell]
 	for player in players:
 		var player_local_position = to_local(player.global_position)
-		var player_cell: Vector2i = local_to_map(player_local_position)
-		player.current_cell = player_cell
-		occupied_cells[player_cell] = player
+		var player_cell_coords: Vector2i = local_to_map(player_local_position)
+		player.current_cell = player_cell_coords
+		var occupied_cell : Cell = dijkstra.find_cell_by_coords(player_cell_coords)
+		occupied_cell.mark_cell_as_occupied(player)
+		cells.append(occupied_cell)
+	return cells
