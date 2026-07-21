@@ -32,7 +32,7 @@ func _ready() -> void:
 	players_in_game = blue_team.players + green_team.players
 	for player in players_in_game:
 		player.connect("player_clicked", turn_manager.on_player_clicked)
-	court.court_map.players = players_in_game
+	court.court_map.players_on_court = players_in_game
 
 func start_game() -> void:
 	green_team.is_active = false

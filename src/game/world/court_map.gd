@@ -12,13 +12,13 @@ const MOVEMENT_COST_ORTHOGONAL : int = 2
 
 var all_cells: Array[Vector2i]
 
-var players: Array[Player]:
+var players_on_court: Array[Player]:
 	set(value):
-		players = value
-		print_debug("CourtMap has %s players" % players.size())
-		for player in players:
+		players_on_court = value
+		print_debug("CourtMap has %s players" % players_on_court.size())
+		for player in players_on_court:
 			player.court_map = self
-		set_occupied_cells(players)
+		set_occupied_cells(players_on_court)
 
 var updated_graph: Array[Cell]:
 	set(value):
