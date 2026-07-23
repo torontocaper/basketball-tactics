@@ -5,10 +5,9 @@ extends TileMapLayer
 ## [TileMapLayer]-based grid of [Cell]s representing the playable area
 
 const HIGHLIGHTER = preload("uid://8g0gamnv6cvn")
-const HIGHLIGHT_POLYGON = preload("uid://djhx0s1dx8ks6")
 
-const MOVEMENT_COST_DIAGONAL : int = 3
 const MOVEMENT_COST_ORTHOGONAL : int = 2
+const MOVEMENT_COST_DIAGONAL : int = 3
 
 var all_cells: Array[Vector2i]
 
@@ -34,6 +33,7 @@ var destination_cell: Vector2i:
 	set(value):
 		destination_cell = value
 		var destination_cell_path : Array[Cell] = dijkstra.get_path_to_cell_by_coords(destination_cell)
+		print_debug("CourtMap has a path: %s" % str(destination_cell_path))
 		highlight_path(destination_cell_path)
 
 var starting_cell: Vector2i:
@@ -48,7 +48,8 @@ var starting_cell: Vector2i:
 func _ready() -> void:
 	print_debug("CourtMap ready at %s ms" % Time.get_ticks_msec())
 	all_cells = get_used_cells()
-	dijkstra.graph = create_graph(all_cells)
+	await get_tree().process_frame
+	dijkstra.graph = create_graph()
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_pressed() and event is InputEventMouseButton:
@@ -62,13 +63,21 @@ func _unhandled_input(event: InputEvent) -> void:
 			print_debug("CourtMap right-clicked at tile %s" % clicked_tile_coords)
 			destination_cell = clicked_tile_coords
 
-func create_graph(list_of_cells: Array[Vector2i]) -> Array[Cell]:
+func create_graph() -> Array[Cell]:
+	var children: Array[Node] = get_children()
 	var new_graph : Array[Cell]
-	for cell in list_of_cells:
-		var new_cell : Cell = Cell.new()
-		new_cell.coords = cell
-		new_cell.neighbors = get_cell_neighbors(cell)
-		new_graph.append(new_cell)
+	for child in children:
+		if child is Cell:
+			child.coords = local_to_map(child.position)
+			child.neighbors = get_cell_neighbors(child.coords)
+			new_graph.append(child)
+	
+	#for cell in list_of_cells:
+		#
+		#var new_cell : Cell = Cell.new()
+		#new_cell.coords = cell
+		#new_cell.neighbors = get_cell_neighbors(cell)
+		#new_graph.append(new_cell)
 	return new_graph
 
 func get_cell_neighbors(cell: Vector2i) -> Array[Dictionary]:
@@ -103,9 +112,13 @@ func highlight_cell(cell_to_highlight: Cell) -> void:
 	add_child(new_highlighter)
 
 func highlight_path(path: Array[Cell]) -> void:
+	print_debug("Highlighting path with %s points" % path.size())
 	player_path_line.clear_points()
 	#queue_redraw()
 	for cell in path:
+		var cell_coords : Vector2i = cell.coords
+		var local_coords : Vector2 = map_to_local(cell_coords)
+		print_debug("Adding cell %s with coords %s to the path" % [cell_coords, local_coords])
 		player_path_line.add_point(map_to_local(cell.coords))
 
 func clear_highlights() -> void:

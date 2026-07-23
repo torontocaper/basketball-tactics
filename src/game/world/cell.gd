@@ -1,7 +1,7 @@
 class_name Cell
-extends Node2D
+extends Sprite2D
 
-var coords: Vector2i
+@export var coords: Vector2i
 
 var neighbors: Array[Dictionary]
 

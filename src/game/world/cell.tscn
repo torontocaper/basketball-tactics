@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://cdoruxodchk3h"]
+
+[ext_resource type="Script" uid="uid://dypwvnt2ajx0m" path="res://src/game/world/cell.gd" id="1_5gn5x"]
+[ext_resource type="Texture2D" uid="uid://bn71ankfr077k" path="res://resources/square_tile_80.tres" id="1_jnv0d"]
+
+[node name="Cell" type="Sprite2D" unique_id=1872529404]
+texture = ExtResource("1_jnv0d")
+script = ExtResource("1_5gn5x")
