@@ -10,6 +10,7 @@ func _ready() -> void:
 # Graph of all cells, their immediate neighbors and the cost to reach those neighbors; assigned by CourtMap parent
 var graph: Array[Cell]:
 	set(value):
+		print_stack()
 		graph = value
 
 func update_graph(source_cell_coords: Vector2i) -> Array[Cell]:

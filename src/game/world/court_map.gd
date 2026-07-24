@@ -47,6 +47,7 @@ var starting_cell: Vector2i:
 # OVERRIDES
 func _ready() -> void:
 	print_debug("CourtMap ready at %s ms" % Time.get_ticks_msec())
+	child_entered_tree.connect(set_cell_coords)
 	all_cells = get_used_cells()
 	await get_tree().process_frame
 	dijkstra.graph = create_graph()
@@ -63,21 +64,20 @@ func _unhandled_input(event: InputEvent) -> void:
 			print_debug("CourtMap right-clicked at tile %s" % clicked_tile_coords)
 			destination_cell = clicked_tile_coords
 
+func set_cell_coords(potential_cell: Node) -> void:
+	if potential_cell is Cell:
+		#print_debug("%s with position %s has entered the tree" % [potential_cell.name, potential_cell.position])
+		potential_cell.coords = local_to_map(potential_cell.position)
+		print_debug("%s with coords %s has entered the tree" % [potential_cell.name, potential_cell.coords])
+
 func create_graph() -> Array[Cell]:
-	var children: Array[Node] = get_children()
+	var children : Array[Node] = get_children()
 	var new_graph : Array[Cell]
 	for child in children:
 		if child is Cell:
-			child.coords = local_to_map(child.position)
+			#child.coords = local_to_map(child.position)
 			child.neighbors = get_cell_neighbors(child.coords)
 			new_graph.append(child)
-	
-	#for cell in list_of_cells:
-		#
-		#var new_cell : Cell = Cell.new()
-		#new_cell.coords = cell
-		#new_cell.neighbors = get_cell_neighbors(cell)
-		#new_graph.append(new_cell)
 	return new_graph
 
 func get_cell_neighbors(cell: Vector2i) -> Array[Dictionary]:
@@ -128,11 +128,12 @@ func clear_highlights() -> void:
 
 func set_occupied_cells(players: Array[Player]) -> Array[Cell]:
 	var cells: Array[Cell]
+	print_stack()
 	for player in players:
 		var player_local_position = to_local(player.global_position)
 		var player_cell_coords: Vector2i = local_to_map(player_local_position)
-		player.current_cell = player_cell_coords
 		var occupied_cell : Cell = dijkstra.find_cell_by_coords(player_cell_coords)
-		occupied_cell.mark_cell_as_occupied(player)
+		occupied_cell.occupying_player = player
+		player.current_cell = occupied_cell
 		cells.append(occupied_cell)
 	return cells

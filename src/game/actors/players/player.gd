@@ -18,7 +18,7 @@ enum PlayerSpeed {SLOW, AVERAGE, FAST}
 
 var movement_points_per_turn: int
 
-var current_cell: Vector2i:
+var current_cell: Cell:
 	set(value):
 		current_cell = value
 		snap_to_grid()
@@ -58,7 +58,7 @@ func _ready() -> void:
 	player_number_label.text = str(player_number)
 
 func snap_to_grid() -> void:
-	var cell_position_local = court_map.map_to_local(current_cell)
+	var cell_position_local = court_map.map_to_local(current_cell.coords)
 	print_debug("Snapping %s to cell %s (position %s)" % [name, current_cell, cell_position_local])
 	global_position = court_map.to_global(cell_position_local)
 
