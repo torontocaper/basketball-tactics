@@ -1,19 +1,13 @@
 #@tool
 @icon("uid://cmi5knekkrb06")
-class_name Dijkstra
+#class_name Dijkstra
 extends Node
 ## Helper [Node] for implementing Dijkstra's algorithm
 
-func _ready() -> void:
-	print_debug("Dijkstra ready at %s ms" % Time.get_ticks_msec())
+## Graph of all cells, their immediate neighbors and the costs to reach those neighbors; assigned by CourtMap parent
+var graph: Array[Cell]
 
-# Graph of all cells, their immediate neighbors and the cost to reach those neighbors; assigned by CourtMap parent
-var graph: Array[Cell]:
-	set(value):
-		print_stack()
-		graph = value
-
-func update_graph(source_cell_coords: Vector2i) -> Array[Cell]:
+func update_distances(source_cell_coords: Vector2i) -> Array[Cell]:
 	for node in graph:
 		if node.coords == source_cell_coords:
 			node.distance = 0
@@ -65,3 +59,8 @@ func get_path_to_cell_by_coords(destination_cell_coords: Vector2i) -> Array[Cell
 	var destination_cell = find_cell_by_coords(destination_cell_coords)
 	var cell_path = destination_cell.path
 	return cell_path
+
+class DijkstraNode:
+	var cell : Cell
+	var distance : int
+	var path : Array[Cell]

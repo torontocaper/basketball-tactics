@@ -2,7 +2,11 @@
 
 [ext_resource type="Script" uid="uid://dypwvnt2ajx0m" path="res://src/game/world/cell.gd" id="1_5gn5x"]
 [ext_resource type="Texture2D" uid="uid://bn71ankfr077k" path="res://resources/square_tile_80.tres" id="1_jnv0d"]
+[ext_resource type="PackedScene" uid="uid://8g0gamnv6cvn" path="res://src/game/world/highlighter.tscn" id="3_ep85a"]
 
 [node name="Cell" type="Sprite2D" unique_id=1872529404]
 texture = ExtResource("1_jnv0d")
 script = ExtResource("1_5gn5x")
+
+[node name="Highlighter" parent="." unique_id=1118605264 instance=ExtResource("3_ep85a")]
+visible = false

@@ -19,7 +19,8 @@ config/icon="uid://bt2ioehlblun0"
 
 [autoload]
 
-Screenshot="*uid://d07nuioov3ubf"
+Dijkstra="*uid://b43komayl8phn"
+Screenshot="*uid://thkrdt1120q7"
 
 [display]
 
@@ -31,6 +32,15 @@ window/handheld/orientation=1
 [editor]
 
 movie_writer/movie_file="/home/torontocaper/Projects/Godot/basketball-tactics/docs/movies/movie.avi"
+
+[file_customization]
+
+folder_colors={
+"res://archive/": "gray",
+"res://src/": "purple",
+"res://src/game/": "blue",
+"res://src/ui/": "green"
+}
 
 [input]
 
