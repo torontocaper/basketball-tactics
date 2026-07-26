@@ -25,10 +25,10 @@ var is_occupied: bool = false:
 #endregion
 
 @onready var highlighter: Highlighter = $Highlighter
+@onready var cell_ui: CellUI = $CellUI
 
 func set_movement_cost(cost: int) -> void:
-	highlighter.movement_cost = cost
-	highlighter.visible = true
+	cell_ui.cell_cost = cost
 
 #region Algorithm-dependent values; should be moved
 #var distance: int:
