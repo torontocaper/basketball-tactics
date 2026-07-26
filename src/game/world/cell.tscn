@@ -1,12 +1,53 @@
 [gd_scene format=3 uid="uid://cdoruxodchk3h"]
 
 [ext_resource type="Script" uid="uid://dypwvnt2ajx0m" path="res://src/game/world/cell.gd" id="1_5gn5x"]
-[ext_resource type="Texture2D" uid="uid://bn71ankfr077k" path="res://resources/square_tile_80.tres" id="1_jnv0d"]
 [ext_resource type="PackedScene" uid="uid://8g0gamnv6cvn" path="res://src/game/world/highlighter.tscn" id="3_ep85a"]
 
-[node name="Cell" type="Sprite2D" unique_id=1872529404]
-texture = ExtResource("1_jnv0d")
+[sub_resource type="Gradient" id="Gradient_jnv0d"]
+colors = PackedColorArray(0.95686275, 0.6431373, 0.3764706, 1, 0.8619073, 0.46360207, 0.19690326, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_dsc2w"]
+gradient = SubResource("Gradient_jnv0d")
+width = 40
+height = 40
+fill_to = Vector2(0.26, 0)
+repeat = 1
+
+[sub_resource type="Gradient" id="Gradient_ep85a"]
+colors = PackedColorArray(0, 0, 0, 0.09019608, 1, 1, 1, 0.18039216)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_e7a2v"]
+gradient = SubResource("Gradient_ep85a")
+width = 80
+height = 80
+fill = 2
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 1)
+
+[node name="Cell" type="Node2D" unique_id=1481717284]
 script = ExtResource("1_5gn5x")
 
 [node name="Highlighter" parent="." unique_id=1118605264 instance=ExtResource("3_ep85a")]
 visible = false
+z_index = 10
+
+[node name="Parquet" type="Sprite2D" parent="." unique_id=1909446732]
+position = Vector2(-20, -20)
+texture = SubResource("GradientTexture2D_dsc2w")
+
+[node name="Parquet2" type="Sprite2D" parent="." unique_id=1289698392]
+position = Vector2(20, 20)
+texture = SubResource("GradientTexture2D_dsc2w")
+
+[node name="Parquet3" type="Sprite2D" parent="." unique_id=891688360]
+position = Vector2(20, -20)
+rotation = 1.5707964
+texture = SubResource("GradientTexture2D_dsc2w")
+
+[node name="Parquet4" type="Sprite2D" parent="." unique_id=1678864762]
+position = Vector2(-20, 20)
+rotation = 1.5707964
+texture = SubResource("GradientTexture2D_dsc2w")
+
+[node name="Border" type="Sprite2D" parent="." unique_id=2056456306]
+texture = SubResource("GradientTexture2D_e7a2v")

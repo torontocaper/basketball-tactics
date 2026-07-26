@@ -1,12 +1,6 @@
 [gd_resource type="TileSet" format=3 uid="uid://dscaj5bdf2i7n"]
 
-[ext_resource type="Texture2D" uid="uid://bn71ankfr077k" path="res://resources/square_tile_80.tres" id="1_gp13s"]
 [ext_resource type="PackedScene" uid="uid://cdoruxodchk3h" path="res://src/game/world/cell.tscn" id="2_gp13s"]
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_k5hng"]
-texture = ExtResource("1_gp13s")
-texture_region_size = Vector2i(80, 80)
-0:0/0 = 0
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_k5hng"]
 resource_name = "cell_scenes"
@@ -16,5 +10,4 @@ scenes/1/scene = ExtResource("2_gp13s")
 tile_size = Vector2i(80, 80)
 custom_data_layer_0/name = "Coords"
 custom_data_layer_0/type = 6
-sources/0 = SubResource("TileSetAtlasSource_k5hng")
 sources/2 = SubResource("TileSetScenesCollectionSource_k5hng")
