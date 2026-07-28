@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://dypwvnt2ajx0m" path="res://src/game/world/cell.gd" id="1_5gn5x"]
 [ext_resource type="PackedScene" uid="uid://c0ugvjwi51w23" path="res://src/ui/cell_ui.tscn" id="3_5l7ru"]
 [ext_resource type="PackedScene" uid="uid://8g0gamnv6cvn" path="res://src/game/world/highlighter.tscn" id="3_ep85a"]
+[ext_resource type="Texture2D" uid="uid://ckjw5n78nx7nu" path="res://assets/textures/Oak_Parquet_01_basecolor.png" id="4_5l7ru"]
 
 [sub_resource type="Gradient" id="Gradient_jnv0d"]
 colors = PackedColorArray(0.95686275, 0.6431373, 0.3764706, 1, 0.8619073, 0.46360207, 0.19690326, 1)
@@ -21,7 +22,10 @@ colors = PackedColorArray(0, 0, 0, 0.1254902, 0.75, 0.75, 0.75, 0.2509804)
 gradient = SubResource("Gradient_ep85a")
 width = 80
 height = 80
-fill_to = Vector2(0.67, 0.67)
+fill = 2
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 1)
+repeat = 2
 
 [node name="Cell" type="Node2D" unique_id=1481717284]
 script = ExtResource("1_5gn5x")
@@ -397,6 +401,11 @@ texture = SubResource("GradientTexture2D_dsc2w")
 position = Vector2(-20, 20)
 rotation = 1.5707964
 texture = SubResource("GradientTexture2D_dsc2w")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1562179678]
+scale = Vector2(0.625, 0.625)
+texture = ExtResource("4_5l7ru")
+region_rect = Rect2(0, 0, 80.223785, 91.46058)
 
 [node name="Overlay" type="Sprite2D" parent="." unique_id=2056456306]
 texture = SubResource("GradientTexture2D_e7a2v")
