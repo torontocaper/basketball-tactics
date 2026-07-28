@@ -5,7 +5,8 @@
 [ext_resource type="Texture2D" uid="uid://ckjw5n78nx7nu" path="res://assets/textures/Oak_Parquet_01_basecolor.png" id="4_5l7ru"]
 
 [sub_resource type="Gradient" id="Gradient_ep85a"]
-colors = PackedColorArray(0, 0, 0, 0.1254902, 0.75, 0.75, 0.75, 0.2509804)
+offsets = PackedFloat32Array(0.5, 1)
+colors = PackedColorArray(0, 0, 0, 0.1254902, 0.5, 0.5, 0.5, 0.1254902)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_e7a2v"]
 gradient = SubResource("Gradient_ep85a")

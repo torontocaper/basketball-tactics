@@ -16,6 +16,7 @@ mouse_filter = 2
 script = ExtResource("1_rjqbc")
 
 [node name="CellCost" type="Label" parent="." unique_id=1213532567]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -30,6 +31,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="CellOverlay" type="ColorRect" parent="." unique_id=1614539633]
+visible = false
 custom_minimum_size = Vector2(80, 80)
 custom_maximum_size = Vector2(80, 80)
 layout_mode = 0
