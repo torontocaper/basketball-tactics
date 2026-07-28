@@ -6,7 +6,7 @@ extends Control
 
 const CELL_ALPHA_FACTOR : float = 0.025
 
-@export var cell_cost : int:
+var cell_cost : int:
 	set(value):
 		cell_cost = value
 		cell_cost_label.text = str(cell_cost)

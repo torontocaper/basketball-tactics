@@ -2,7 +2,6 @@ class_name Cell
 extends Node2D
 ## Represents a cell/tile on the [CourtMap]
 
-#region Persistent values unique to this Cell
 ## Corresponds to the cell's position in the [CourtMap]
 var coords: Vector2i:
 	set(value):
@@ -22,27 +21,8 @@ var occupying_player: Player:
 var is_occupied: bool = false:
 	get():
 		return occupying_player != null
-#endregion
 
-@onready var highlighter: Highlighter = $Highlighter
 @onready var cell_ui: CellUI = $CellUI
 
 func set_movement_cost(cost: int) -> void:
 	cell_ui.cell_cost = cost
-
-#region Algorithm-dependent values; should be moved
-#var distance: int:
-	#get():
-		##print_stack()
-		#return distance
-#
-#var path: Array[Cell]:
-	#get():
-		##print_stack()
-		#return path
-#
-#var is_settled: bool = false:
-	#set(value):
-		##print_stack()
-		#is_settled = value
-#endregion
