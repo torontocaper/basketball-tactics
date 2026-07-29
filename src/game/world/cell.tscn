@@ -25,7 +25,7 @@ scale = Vector2(0.625, 0.625)
 texture = ExtResource("4_5l7ru")
 region_rect = Rect2(0, 0, 80.223785, 91.46058)
 
-[node name="Overlay" type="Sprite2D" parent="." unique_id=2056456306]
+[node name="Border" type="Sprite2D" parent="." unique_id=2056456306]
 texture = SubResource("GradientTexture2D_e7a2v")
 
 [node name="CellUI" parent="." unique_id=129190272 instance=ExtResource("3_5l7ru")]

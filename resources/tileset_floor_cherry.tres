@@ -1,0 +1,22 @@
+[gd_resource type="TileSet" format=3 uid="uid://d0rgxv1r3sjqu"]
+
+[ext_resource type="Texture2D" uid="uid://14b7bvgfkkvx" path="res://assets/textures/cherry/Cherry_Parquet_01_basecolor.png" id="2_7mo35"]
+[ext_resource type="Texture2D" uid="uid://iib8410vcfgu" path="res://assets/textures/cherry/Cherry_Parquet_01_normal.png" id="3_2m8u6"]
+[ext_resource type="Texture2D" uid="uid://dmawrrbuh28vc" path="res://assets/textures/cherry/Cherry_Parquet_01_roughness.png" id="4_rsw8c"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_ep85a"]
+diffuse_texture = ExtResource("2_7mo35")
+normal_texture = ExtResource("3_2m8u6")
+specular_texture = ExtResource("4_rsw8c")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hf65t"]
+texture = SubResource("CanvasTexture_ep85a")
+texture_region_size = Vector2i(80, 80)
+0:0/next_alternative_id = 9
+0:0/0 = 0
+0:0/1 = 1
+0:0/1/modulate = Color(0.74509805, 0.74509805, 0.74509805, 1)
+
+[resource]
+tile_size = Vector2i(80, 80)
+sources/4 = SubResource("TileSetAtlasSource_hf65t")
