@@ -19,7 +19,7 @@ config/icon="uid://bt2ioehlblun0"
 
 [autoload]
 
-Dijkstra="*uid://b43komayl8phn"
+MoveManager="*uid://b43komayl8phn"
 Screenshot="*uid://thkrdt1120q7"
 
 [display]

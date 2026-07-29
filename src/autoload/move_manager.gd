@@ -1,6 +1,6 @@
 @icon("uid://cmi5knekkrb06")
 extends Node
-## Helper [Node] for implementing Dijkstra's algorithm
+## Manages movement using Dijkstra's algorithm
 
 ## Graph of all cells, their immediate neighbors and the costs to reach those neighbors; assigned by CourtMap parent
 var graph: Array[Cell]

@@ -1,6 +1,6 @@
 #@tool
 @icon("uid://bfdiav77fq1x")
-class_name MoveManager
+#class_name MoveManager
 extends Node
 ## Documentation comments
 

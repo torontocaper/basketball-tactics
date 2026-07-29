@@ -23,12 +23,12 @@ var cells_by_coords: Dictionary[Vector2i, Cell]
 var starting_cell_coords: Vector2i:
 	set(value):
 		starting_cell_coords = value
-		Dijkstra.update_distances(starting_cell_coords)
+		MoveManager.update_distances(starting_cell_coords)
 
 #var target_cell_coords: Vector2i:
 	#set(value):
 		#target_cell_coords = value
-		#var destination_cell_path : Array[Cell] = Dijkstra.get_path_to_cell_by_coords(target_cell_coords)
+		#var destination_cell_path : Array[Cell] = MoveManager.get_path_to_cell_by_coords(target_cell_coords)
 		#print_debug("CourtMap has a path: %s" % str(destination_cell_path))
 		#highlight_path(destination_cell_path)
 
@@ -37,7 +37,7 @@ func _ready() -> void:
 	child_entered_tree.connect(_set_cell_coords)
 	await get_tree().process_frame # Wait one frame so that all child [Cell]s are added to the graph.
 	assign_cell_neighbors()
-	#Dijkstra.create_graph(cells_by_coords)
+	#MoveManager.create_graph(cells_by_coords)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_pressed() and event is InputEventMouseButton:
@@ -51,12 +51,12 @@ func _unhandled_input(event: InputEvent) -> void:
 			#print_debug("CourtMap right-clicked at tile %s" % clicked_tile_coords)
 			##target_cell_coords = clicked_tile_coords
 
-## Assign neighbors to each Cell. Best handled here rather than in Dijkstra.
+## Assign neighbors to each Cell. Best handled here rather than in MoveManager.
 func assign_cell_neighbors() -> void:
 	for cell_coords in cells_by_coords:
 		var cell : Cell = cells_by_coords[cell_coords]
 		cell.neighbors = get_cell_neighbors(cell_coords)
-		Dijkstra.graph.append(cell)
+		MoveManager.graph.append(cell)
 
 ## For each cell in the graph, find its immediate neighbors and assign travel distances to each. 
 ## We can't do this in `set_cell_coords` because not all neighbors have been added to the tree yet.
