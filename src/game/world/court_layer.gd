@@ -1,14 +1,14 @@
 #@tool
 #@icon(icon_path: String)
-#class_name _CLASS_
-#extends _BASE_
-## Documentation comments
+class_name CourtLayer
+extends TileMapLayer
+## A visual or data-based layer of the [Court]. 
 
 #signal
-#enum
+enum LayerType {DATA, VISUAL, NAVIGATION}
 #const
+@export var layer_type : LayerType
 #@export var
-#var
 #@onready var
 
 #region OVERRIDES
