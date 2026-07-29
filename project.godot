@@ -36,12 +36,7 @@ movie_writer/movie_file="/home/torontocaper/Projects/Godot/basketball-tactics/do
 [file_customization]
 
 folder_colors={
-"res://archive/": "gray",
-"res://sandbox/": "yellow",
-"res://src/": "purple",
-"res://src/autoload/": "red",
-"res://src/game/": "blue",
-"res://src/ui/": "green"
+"res://archive/": "gray"
 }
 
 [input]

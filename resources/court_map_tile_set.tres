@@ -1,6 +1,25 @@
 [gd_resource type="TileSet" format=3 uid="uid://dscaj5bdf2i7n"]
 
+[ext_resource type="Texture2D" uid="uid://ckjw5n78nx7nu" path="res://assets/textures/Oak_Parquet_01_basecolor.png" id="1_gp13s"]
 [ext_resource type="PackedScene" uid="uid://cdoruxodchk3h" path="res://src/game/world/cell.tscn" id="2_gp13s"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_k5hng"]
+texture = ExtResource("1_gp13s")
+texture_region_size = Vector2i(128, 128)
+0:0/next_alternative_id = 6
+0:0/0 = 0
+0:0/1 = 1
+0:0/1/modulate = Color(0.8, 0.8, 0.8, 1)
+0:0/1/custom_data_0 = "out_of_bounds"
+0:0/1/custom_data_1 = true
+0:0/2 = 2
+0:0/2/custom_data_0 = "two_point_home"
+0:0/3 = 3
+0:0/3/custom_data_0 = "two_point_away"
+0:0/4 = 4
+0:0/4/custom_data_0 = "three_point_home"
+0:0/5 = 5
+0:0/5/custom_data_0 = "three_point_away"
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_k5hng"]
 resource_name = "cell_scenes"
@@ -8,6 +27,9 @@ scenes/1/scene = ExtResource("2_gp13s")
 
 [resource]
 tile_size = Vector2i(80, 80)
-custom_data_layer_0/name = "Coords"
-custom_data_layer_0/type = 6
+custom_data_layer_0/name = "name"
+custom_data_layer_0/type = 4
+custom_data_layer_1/name = "is_out_of_bounds"
+custom_data_layer_1/type = 1
 sources/2 = SubResource("TileSetScenesCollectionSource_k5hng")
+sources/0 = SubResource("TileSetAtlasSource_k5hng")

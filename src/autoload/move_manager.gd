@@ -7,7 +7,7 @@ var graph: Array[Cell]
 
 #region Core functionality
 func update_distances(source_cell_coords: Vector2i) -> void:
-	print_debug("Creating a Dijkstra map with source cell at coords %s" % source_cell_coords)
+	print_debug("MoveManager creating a Dijkstra map with source cell at coords %s" % source_cell_coords)
 	var new_dijkstra_map : Array[DijkstraPoint] = []
 	for node in graph:
 		var new_dijkstra_point : DijkstraPoint = DijkstraPoint.new(node)
