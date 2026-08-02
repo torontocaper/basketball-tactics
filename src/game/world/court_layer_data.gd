@@ -9,8 +9,8 @@ signal court_tile_clicked(tile_coords : Vector2i)
 const MOVEMENT_COST_ORTHOGONAL : int = 2
 const MOVEMENT_COST_DIAGONAL : int = 3
 
-var court_cells : Array[Vector2i]
-var dijkstra_graph : Array[Dictionary]
+var court_cells : Array[Vector2i] ## The cells that are in play.
+var dijkstra_graph : Array[Dictionary] ## Array of cells (by coordinates) and their immediate neighbors, along with the movement costs for each neighbor. 
 
 #region OVERRIDES
 func _ready() -> void:
@@ -85,7 +85,4 @@ func _get_diagonal_neighbors(cell_coords: Vector2i) -> Array[Vector2i]:
 #endregion
 
 #region INNER_CLASSES
-#class DijkstraNode:
-	#var coords : Vector2i
-	#var neighbors : Dictionary[Vector2i, int]
 #endregion
