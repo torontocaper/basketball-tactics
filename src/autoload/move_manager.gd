@@ -67,6 +67,7 @@ var graph: Array[Dictionary]
 
 func handle_click(click_coords : Vector2i) -> void:
 	print("MoveManager handling click on tile %s" % str(click_coords))
+	
 
 #class DijkstraPoint:
 	#var cell : Cell
