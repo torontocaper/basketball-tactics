@@ -10,15 +10,15 @@ const MOVEMENT_COST_ORTHOGONAL : int = 2
 const MOVEMENT_COST_DIAGONAL : int = 3
 
 var court_cells : Array[Vector2i] ## The cells that are in play.
-var dijkstra_graph : Array[Dictionary] ## Array of cells (by coordinates) and their immediate neighbors, along with the movement costs for each neighbor. 
+var dijkstra_graph : Dictionary[Vector2i, Dictionary] ## Dictionary of cells and their immediate neighbors, along with the movement cost for each neighbor. 
 
 #region OVERRIDES
 func _ready() -> void:
 	court_tile_clicked.connect(MoveManager.handle_click)
 	court_cells = get_used_cells().filter(is_tile_in_play)
 	for cell in court_cells:
-		var dijkstra_node = create_node(cell)
-		dijkstra_graph.append(dijkstra_node)
+		var cell_neighbors : Dictionary[Vector2i, int] = get_cell_neighbors(cell)
+		dijkstra_graph[cell] = cell_neighbors
 	MoveManager.graph = dijkstra_graph
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -29,13 +29,13 @@ func _unhandled_input(event: InputEvent) -> void:
 #endregion
 
 #region CORE
-## Assign neighbors to each Cell. Best handled here rather than in MoveManager.
-func create_node(cell_coords: Vector2i) -> Dictionary[Vector2i, Dictionary]:
-	var node_neighbors : Dictionary[Vector2i, int] = get_cell_neighbors(cell_coords)
-	var new_node : Dictionary[Vector2i, Dictionary] = {
-		cell_coords: node_neighbors
-	}
-	return new_node
+## Assign neighbors to each cell. Best handled here rather than in MoveManager.
+#func create_node(cell_coords: Vector2i) -> Dictionary[Vector2i, Dictionary]:
+	#var node_neighbors : Dictionary[Vector2i, int] = get_cell_neighbors(cell_coords)
+	#var new_node : Dictionary[Vector2i, Dictionary] = {
+		#cell_coords: node_neighbors
+	#}
+	#return new_node
 
 ## For each cell in the graph, find its immediate neighbors and assign travel distances to each. 
 ## We can't do this in `set_cell_coords` because not all neighbors have been added to the tree yet.
