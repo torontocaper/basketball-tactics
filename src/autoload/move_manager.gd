@@ -10,7 +10,7 @@ var graph : Dictionary[Vector2i, Dictionary]
 var distance_map : Dictionary[Vector2i, Dictionary]
 
 #region Core functionality
-func update_map(source_cell_coords: Vector2i) -> Dictionary[Vector2i, Dictionary]:
+func update_map(source_cell_coords: Vector2i) -> void:
 	print_debug("MoveManager creating a Dijkstra map with source cell at coords %s" % source_cell_coords)
 	if distance_map:
 		distance_map.clear()
@@ -35,7 +35,7 @@ func update_map(source_cell_coords: Vector2i) -> Dictionary[Vector2i, Dictionary
 		var closest_unsettled_point : Dictionary = map_values[index_of_closest_unsettled_point]
 		update_neighbors(closest_unsettled_point.coords, map_values)
 		map_values = distance_map.values()
-	return distance_map
+	#return distance_map
 
 func update_neighbors(dijkstra_point_coords: Vector2i, dijkstra_map: Array[Dictionary]) -> void:
 	## Get the cell's immediate neighbors from the graph
@@ -76,6 +76,7 @@ func find_dp_by_coords(coords: Vector2i, dijkstra_map: Array[Dictionary]) -> Dic
 func handle_click(click_coords : Vector2i) -> void:
 	print("MoveManager handling click on tile %s" % str(click_coords))
 	update_map(click_coords)
+	map_updated.emit(distance_map)
 
 #class DijkstraPoint:
 	#var coords : Vector2i
