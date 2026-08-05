@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://bnm71kxddqynl"]
+
+[sub_resource type="Gradient" id="Gradient_s4tua"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0.28239202, 0.85)
+colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_s4tua"]
+gradient = SubResource("Gradient_s4tua")
+width = 80
+height = 80
+fill = 2
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="Curve" id="Curve_dsc2w"]
+_limits = [0.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0, 1.0984849), 0.0, -1.8074872, 0, 1, Vector2(0.054487176, 1), -1.8074872, 0.0, 1, 0]
+point_count = 2
+
+[node name="ClickIndicator" type="CPUParticles2D" unique_id=2093034420]
+emitting = false
+amount = 1
+texture = SubResource("GradientTexture2D_s4tua")
+lifetime = 3.0
+one_shot = true
+gravity = Vector2(0, 0)
+scale_amount_curve = SubResource("Curve_dsc2w")
