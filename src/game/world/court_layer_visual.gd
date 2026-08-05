@@ -13,14 +13,13 @@ const CLICK_INDICATOR = preload("uid://bnm71kxddqynl")
 #@onready var
 
 #region OVERRIDES
-#endregion
-
-#region CORE
 func handle_click_at_position(click_position):
 	super(click_position)
 	if _is_tile_in_play(clicked_cell):
 		indicate_click()
+#endregion
 
+#region CORE
 func indicate_click() -> void:
 	var new_indicator : CPUParticles2D = CLICK_INDICATOR.instantiate()
 	new_indicator.position = map_to_local(clicked_cell)
