@@ -56,7 +56,7 @@ func assign_cell_neighbors() -> void:
 	for cell_coords in cells_by_coords:
 		var cell : Cell = cells_by_coords[cell_coords]
 		cell.neighbors = get_cell_neighbors(cell_coords)
-		MoveManager.graph.append(cell)
+		#MoveManager.graph.append(cell)
 
 ## For each cell in the graph, find its immediate neighbors and assign travel distances to each. 
 ## We can't do this in `set_cell_coords` because not all neighbors have been added to the tree yet.
