@@ -6,12 +6,6 @@ A turn-based, tactical basketball game. Developed in Godot and targeted at mobil
 
 *Basketball Tactics* (working title) applies the tactical, turn-based action of classic RPGs and strategy games (not to mention chess!) to the basketball court, with players taking turns executing context-dependent moves like shooting, passing and attempting steals. 
 
-## Project Organization
-
-Alongside this document is `AGENTS.md`, which provides instructions for AI coding assistants. 
-
-The 'docs' folder also contains the Game Design Document, screenshots, concept and reference art. 
-
 ## Attributions
 
 ### Icons
