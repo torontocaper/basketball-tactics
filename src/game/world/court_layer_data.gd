@@ -9,13 +9,12 @@ signal court_tile_clicked(tile_coords : Vector2i)
 const MOVEMENT_COST_ORTHOGONAL : int = 2
 const MOVEMENT_COST_DIAGONAL : int = 3
 
-var court_cells : Array[Vector2i] ## The cells that are in play.
 var dijkstra_graph : Dictionary[Vector2i, Dictionary] ## Dictionary of cells and their immediate neighbors, along with the movement cost for each neighbor. Sent to [MoveManager] for pathfinding.
 
 #region OVERRIDES
 func _ready() -> void:
+	super()
 	court_tile_clicked.connect(MoveManager.handle_click)
-	court_cells = get_used_cells().filter(_is_tile_in_play)
 	for cell in court_cells:
 		var cell_neighbors : Dictionary[Vector2i, int] = get_cell_neighbors(cell)
 		dijkstra_graph[cell] = cell_neighbors

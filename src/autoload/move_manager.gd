@@ -4,12 +4,12 @@ extends Node
 
 signal map_updated(new_map: Array[Dictionary])
 
-## Graph of all cells, their immediate neighbors and the costs to reach those neighbors; assigned by CourtLayerData
+## Graph of all cells, their immediate neighbors and the costs to reach those neighbors
 var graph : Dictionary[Vector2i, Dictionary]
 ## Map of all cells and their total distances from the source cell
 var distance_map : Dictionary[Vector2i, Dictionary]
 
-#region Core functionality
+#region CORE
 func update_map(source_cell_coords: Vector2i) -> void:
 	print_debug("MoveManager creating a Dijkstra map with source cell at coords %s" % source_cell_coords)
 	if distance_map:
@@ -19,14 +19,12 @@ func update_map(source_cell_coords: Vector2i) -> void:
 			"coords" = node,
 			"is_settled" = false
 		}
-		#distance_map[node].coords = node
-		#distance_map[node].is_settled = false
 		if node == source_cell_coords:
 			distance_map[node].distance_from_source = 0
-			##new_dijkstra_point.path = [node]
+			distance_map[node].path_from_source = [node]
 		else:
 			distance_map[node].distance_from_source = 99
-			##new_dijkstra_point.path = []
+			distance_map[node].path_from_source = []
 	var map_values : Array[Dictionary] = distance_map.values()
 	while map_values.any(func(point): return not point.is_settled):
 		## create priority queue
@@ -37,31 +35,31 @@ func update_map(source_cell_coords: Vector2i) -> void:
 		map_values = distance_map.values()
 	#return distance_map
 
-func update_neighbors(dijkstra_point_coords: Vector2i, dijkstra_map: Array[Dictionary]) -> void:
+func update_neighbors(point_coords: Vector2i, map: Array[Dictionary]) -> void:
 	## Get the cell's immediate neighbors from the graph
-	var starting_point : Dictionary = find_dp_by_coords(dijkstra_point_coords, dijkstra_map)
+	var starting_point : Dictionary = find_point_by_coords(point_coords, map)
 	var starting_point_distance : int = starting_point.distance_from_source
-	#var starting_point_path: Array[Cell] = d_p.path
-	var neighbors : Dictionary = graph[dijkstra_point_coords]
+	var starting_point_path: Array = starting_point.path_from_source
+	var neighbors : Dictionary = graph[point_coords]
 	for neighbor in neighbors:
 		var distance_to_neighbor : int = neighbors[neighbor]
-		var neighbor_point : Dictionary = find_dp_by_coords(neighbor, dijkstra_map)
+		var neighbor_point : Dictionary = find_point_by_coords(neighbor, map)
 		#if neighbor_point.cell.is_occupied:
 			#continue
 		if neighbor_point.distance_from_source > starting_point_distance + distance_to_neighbor:
 			neighbor_point.distance_from_source = starting_point_distance + distance_to_neighbor
-			#var neighbor_point_path : Array[Cell] = starting_point_path.duplicate()
-			#neighbor_point_path.append(neighbor_point.cell)
-			#neighbor_point.path = neighbor_point_path
+			var neighbor_point_path : Array = starting_point_path.duplicate()
+			neighbor_point_path.append(neighbor_point.coords)
+			neighbor_point.path_from_source = neighbor_point_path
 		starting_point.is_settled = true
 #endregion
 
 func does_dp_match_coords(dijkstra_point : Dictionary, dp_to_find_coords: Vector2i) -> bool:
 	return dijkstra_point.coords == dp_to_find_coords
 
-func find_dp_by_coords(coords: Vector2i, dijkstra_map: Array[Dictionary]) -> Dictionary:
-	var index_of_dp = dijkstra_map.find_custom(does_dp_match_coords.bind(coords))
-	var found_dp : Dictionary = dijkstra_map[index_of_dp]
+func find_point_by_coords(coords: Vector2i, map: Array[Dictionary]) -> Dictionary:
+	var index_of_dp = map.find_custom(does_dp_match_coords.bind(coords))
+	var found_dp : Dictionary = map[index_of_dp]
 	return found_dp
 
 #func find_neighbor_cell(neighbor_cell, potential_neighbor_cell_coords) -> bool:

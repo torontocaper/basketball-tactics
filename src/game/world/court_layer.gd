@@ -10,9 +10,12 @@ extends TileMapLayer
 #@export var
 var clicked_cell : Vector2i
 var clicked_cell_data : TileData
+var court_cells : Array[Vector2i] ## The cells that are in play.
 #@onready var
 
 #region OVERRIDES
+func _ready() -> void:
+	court_cells = get_used_cells().filter(_is_tile_in_play)
 #endregion
 
 #region CORE

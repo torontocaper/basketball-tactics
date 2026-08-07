@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://d0ff6ot0c1vmd"]
+
+[ext_resource type="Texture2D" uid="uid://mpmsrb5ik0e0" path="res://assets/textures/maple/Maple_Parquet_01_basecolor.png" id="1_gt8ie"]
+[ext_resource type="Theme" uid="uid://c0lrucuyge77v" path="res://resources/main_theme.tres" id="2_4js1v"]
+
+[node name="TestCell" type="Sprite2D" unique_id=1070025287]
+position = Vector2(40, 40)
+texture = ExtResource("1_gt8ie")
+
+[node name="Label" type="Label" parent="." unique_id=1508150638]
+offset_right = 18.0
+offset_bottom = 45.0
+offset_transform_enabled = true
+offset_transform_position_ratio = Vector2(-0.505, -0.505)
+theme = ExtResource("2_4js1v")
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1

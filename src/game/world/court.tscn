@@ -10,6 +10,7 @@
 script = ExtResource("1_fynge")
 
 [node name="CourtLayerData" parent="." unique_id=311464305 instance=ExtResource("3_7v453")]
+z_index = -100
 
 [node name="CourtLayerVisual" parent="." unique_id=975631911 instance=ExtResource("2_7v453")]
 
