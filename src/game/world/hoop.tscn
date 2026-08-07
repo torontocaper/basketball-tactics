@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://bp37hvbuhinux" path="res://assets/sprites/hoop-54-41.png" id="1_x2cw6"]
 
 [node name="Hoop" type="Node2D" unique_id=456007788]
+scale = Vector2(1.5, 1.5)
 
 [node name="HoopSprite" type="Sprite2D" parent="." unique_id=454216060]
 z_index = 10

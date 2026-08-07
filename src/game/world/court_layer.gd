@@ -4,14 +4,9 @@ class_name CourtLayer
 extends TileMapLayer
 ## Abstract base class for [CourtLayerData] and [CourtLayerVisual]
 
-#signal
-#enum
-#const
-#@export var
 var clicked_cell : Vector2i
 var clicked_cell_data : TileData
 var court_cells : Array[Vector2i] ## The cells that are in play.
-#@onready var
 
 #region OVERRIDES
 func _ready() -> void:
@@ -27,7 +22,6 @@ func handle_click_at_position(click_position) -> void:
 	else:
 		clicked_cell_data = get_cell_tile_data(clicked_cell)
 	print_debug("%s registering click at cell %s" % [name, clicked_cell])
-
 #endregion
 
 #region PRIVATE/HELPER

@@ -2,17 +2,13 @@
 #@icon(icon_path: String)
 class_name CourtLayerVisual
 extends CourtLayer
-## Documentation comments
+## The visual court layer, responsible for displaying movement distances and paths
 
-#signal
-#enum
-#const
 const CLICK_INDICATOR = preload("uid://bnm71kxddqynl")
 const MAIN_THEME = preload("uid://c0lrucuyge77v")
-#@export var
+
 var court_cell_graphics : Dictionary[Vector2i, Dictionary]
 var indicator : CPUParticles2D
-#@onready var
 
 #region OVERRIDES
 func _ready() -> void:

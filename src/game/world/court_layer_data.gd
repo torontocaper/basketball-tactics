@@ -14,7 +14,7 @@ var dijkstra_graph : Dictionary[Vector2i, Dictionary] ## Dictionary of cells and
 #region OVERRIDES
 func _ready() -> void:
 	super()
-	court_tile_clicked.connect(MoveManager.handle_click)
+	connect("court_tile_clicked", MoveManager.update_map)
 	for cell in court_cells:
 		var cell_neighbors : Dictionary[Vector2i, int] = get_cell_neighbors(cell)
 		dijkstra_graph[cell] = cell_neighbors
