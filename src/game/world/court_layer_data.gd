@@ -4,7 +4,8 @@ class_name CourtLayerData
 extends CourtLayer
 ## The layer of the court responsible for data -- point values, player positions, etc. 
 
-signal court_tile_clicked(tile_coords : Vector2i)
+#signal court_tile_clicked(tile_coords : Vector2i)
+#signal target_cell_set(target_coords : Vector2i)
 
 const MOVEMENT_COST_ORTHOGONAL : int = 2
 const MOVEMENT_COST_DIAGONAL : int = 3
@@ -15,6 +16,7 @@ var dijkstra_graph : Dictionary[Vector2i, Dictionary] ## Dictionary of cells and
 func _ready() -> void:
 	super()
 	connect("court_tile_clicked", MoveManager.update_map)
+	connect("target_cell_set", MoveManager.get_path_to_cell_by_coords)
 	for cell in court_cells:
 		var cell_neighbors : Dictionary[Vector2i, int] = get_cell_neighbors(cell)
 		dijkstra_graph[cell] = cell_neighbors

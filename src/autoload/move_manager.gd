@@ -10,6 +10,13 @@ var graph : Dictionary[Vector2i, Dictionary]
 var distance_map : Dictionary[Vector2i, Dictionary]
 
 #region CORE
+func get_path_to_cell_by_coords(destination_cell_coords: Vector2i) -> Array:
+	print_debug("Getting path to cell %s" % destination_cell_coords)
+	var path = []
+	#var destination_cell = find_cell_by_coords(destination_cell_coords)
+	#var cell_path = destination_cell.path
+	return path
+
 ## Update the Dijkstra map based on the new source cell
 func update_map(source_cell_coords: Vector2i) -> void:
 	print_debug("MoveManager creating a Dijkstra map with source cell at coords %s" % source_cell_coords)
@@ -65,9 +72,3 @@ func _find_point_by_coords(coords: Vector2i, map: Array[Dictionary]) -> Dictiona
 
 #func find_neighbor_cell(neighbor_cell, potential_neighbor_cell_coords) -> bool:
 	#return neighbor_cell.coords == potential_neighbor_cell_coords
-
-#func get_path_to_cell_by_coords(destination_cell_coords: Vector2i) -> Array[Cell]:
-	#print_debug("Getting path to cell %s" % destination_cell_coords)
-	#var destination_cell = find_cell_by_coords(destination_cell_coords)
-	#var cell_path = destination_cell.path
-	#return cell_path

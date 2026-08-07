@@ -13,7 +13,7 @@ var indicator : CPUParticles2D
 #region OVERRIDES
 func _ready() -> void:
 	super()
-	court_cell_graphics = _create_graphics(court_cells)
+	court_cell_graphics = _create_cell_graphics(court_cells)
 	indicator = CLICK_INDICATOR.instantiate()
 	add_child(indicator)
 	MoveManager.connect("map_updated", update_distances)
@@ -37,7 +37,7 @@ func indicate_click() -> void:
 #endregion
 
 #region PRIVATE/HELPER
-func _create_graphics(cells : Array[Vector2i]) -> Dictionary[Vector2i, Dictionary]:
+func _create_cell_graphics(cells : Array[Vector2i]) -> Dictionary[Vector2i, Dictionary]:
 	var graphics : Dictionary[Vector2i, Dictionary] = {}
 	for cell in cells:
 		graphics[cell] = {}
