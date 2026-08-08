@@ -3,6 +3,7 @@ extends Node
 ## Manages movement using Dijkstra's algorithm
 
 signal map_updated(new_map: Array[Dictionary])
+signal path_found(new_path: Array[Vector2i])
 
 ## Graph of all cells, their immediate neighbors and the costs to reach those neighbors
 var graph : Dictionary[Vector2i, Dictionary]
@@ -10,12 +11,12 @@ var graph : Dictionary[Vector2i, Dictionary]
 var distance_map : Dictionary[Vector2i, Dictionary]
 
 #region CORE
-func get_path_to_cell_by_coords(destination_cell_coords: Vector2i) -> Array:
+## Finds the path from the current source cell to [member destination_cell_coords]
+func get_path_by_coords(destination_cell_coords : Vector2i) -> void:
 	print_debug("Getting path to cell %s" % destination_cell_coords)
-	var path = []
-	#var destination_cell = find_cell_by_coords(destination_cell_coords)
-	#var cell_path = destination_cell.path
-	return path
+	var destination_point : Dictionary = _find_point_by_coords(destination_cell_coords, distance_map.values())
+	var path_coords : Array = destination_point.path_from_source
+	path_found.emit(path_coords)
 
 ## Update the Dijkstra map based on the new source cell
 func update_map(source_cell_coords: Vector2i) -> void:

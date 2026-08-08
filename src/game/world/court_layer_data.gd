@@ -15,23 +15,22 @@ var dijkstra_graph : Dictionary[Vector2i, Dictionary] ## Dictionary of cells and
 #region OVERRIDES
 func _ready() -> void:
 	super()
-	connect("court_tile_clicked", MoveManager.update_map)
-	connect("target_cell_set", MoveManager.get_path_to_cell_by_coords)
+	connect("source_cell_set", MoveManager.update_map)
+	connect("target_cell_set", MoveManager.get_path_by_coords)
 	for cell in court_cells:
 		var cell_neighbors : Dictionary[Vector2i, int] = get_cell_neighbors(cell)
 		dijkstra_graph[cell] = cell_neighbors
 	MoveManager.graph = dijkstra_graph
 
-func handle_click_at_position(click_position: Vector2) -> void:
-	super(click_position)
-	if _is_tile_in_play(clicked_cell):
-		var tile_territory : String = clicked_cell_data.get_custom_data("team_territory")
-		var tile_points : int = clicked_cell_data.get_custom_data("points")
-		var tile_column : String = clicked_cell_data.get_custom_data("column")
-		var tile_row : String = clicked_cell_data.get_custom_data("row")
-		var tile_chess_notation : String = tile_territory[0] + tile_column + tile_row
-		print_debug("You clicked tile %s. Shots from here are worth %s points." % [tile_chess_notation, tile_points])
-		court_tile_clicked.emit(clicked_cell)
+func handle_click_at_position(click_position : Vector2, is_right_click : bool) -> void:
+	super(click_position, is_right_click)
+	if _is_cell_in_play(clicked_cell):
+		var cell_territory : String = clicked_cell_data.get_custom_data("team_territory")
+		var cell_points : int = clicked_cell_data.get_custom_data("points")
+		var cell_column : String = clicked_cell_data.get_custom_data("column")
+		var cell_row : String = clicked_cell_data.get_custom_data("row")
+		var cell_chess_notation : String = cell_territory[0] + cell_column + cell_row
+		print_debug("You clicked cell %s. Shots from here are worth %s points." % [cell_chess_notation, cell_points])
 #endregion
 
 #region CORE
