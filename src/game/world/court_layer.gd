@@ -4,7 +4,6 @@ class_name CourtLayer
 extends TileMapLayer
 ## Base class for [CourtLayerData] and [CourtLayerVisual]
 
-signal court_cell_clicked(cell_coords : Vector2i) ## Emitted when a cell on the [Court] is clicked.
 signal source_cell_set(source_cell_coords : Vector2i) ## Emitted when [member source_cell] is set.
 signal target_cell_set(target_cell_coords : Vector2i) ## Emitted when [member target_cell] is set.
 
