@@ -5,11 +5,11 @@ extends CharacterBody2D
 
 const MOVEMENT_SPEED: float = 10.0
 const SELECTED_SCALE: float = 1.2
-const TILE_SIZE: Vector2 = Vector2(48.0, 48.0)
+const TILE_SIZE: Vector2 = Vector2(80.0, 80.0)
 
 signal player_clicked(this_player: Player)
 
-enum Selectability {SELECTABLE, SELECTED, UNSELECTABLE}
+#enum Selectability {SELECTABLE, SELECTED, UNSELECTABLE}
 enum PlayerSpeed {SLOW, AVERAGE, FAST}
 
 @export_range(0, 99, 1) var player_number: int = 0
@@ -21,11 +21,12 @@ var is_selectable: bool:
 		if is_selectable:
 			player_sprite.scale = Vector2.ONE
 			player_sprite.modulate = Color.WHITE
-			player_light.visible = true
+			player_light.visible = false
 		else:
 			player_sprite.scale = Vector2.ONE
-			player_sprite.modulate = unselectable_modulate_color
+			player_sprite.modulate = Color.GRAY
 			player_light.visible = false
+
 var is_selected: bool:
 	set(value):
 		is_selected = value
@@ -33,12 +34,12 @@ var is_selected: bool:
 			is_selectable = false
 			player_sprite.scale = Vector2.ONE * SELECTED_SCALE
 			player_sprite.modulate = Color.WHITE
+			player_light.visible = true
 		else:
 			is_selectable = true
 
 var movement_points_per_turn: int
 var team : Team
-var unselectable_modulate_color: Color = Color.GRAY
 
 #var select_state: Selectability:
 	#set(value):
