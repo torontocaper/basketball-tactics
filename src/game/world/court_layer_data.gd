@@ -4,9 +4,6 @@ class_name CourtLayerData
 extends CourtLayer
 ## The layer of the court responsible for data -- point values, player positions, etc. 
 
-#signal court_tile_clicked(tile_coords : Vector2i)
-#signal target_cell_set(target_coords : Vector2i)
-
 const MOVEMENT_COST_ORTHOGONAL : int = 2
 const MOVEMENT_COST_DIAGONAL : int = 3
 
@@ -22,15 +19,14 @@ func _ready() -> void:
 		dijkstra_graph[cell] = cell_neighbors
 	MoveManager.graph = dijkstra_graph
 
-func handle_click_at_position(click_position : Vector2, is_right_click : bool) -> void:
-	super(click_position, is_right_click)
-	if _is_cell_in_play(clicked_cell):
-		var cell_territory : String = clicked_cell_data.get_custom_data("team_territory")
-		var cell_points : int = clicked_cell_data.get_custom_data("points")
-		var cell_column : String = clicked_cell_data.get_custom_data("column")
-		var cell_row : String = clicked_cell_data.get_custom_data("row")
-		var cell_chess_notation : String = cell_territory[0] + cell_column + cell_row
-		print_debug("You clicked cell %s. Shots from here are worth %s points." % [cell_chess_notation, cell_points])
+func handle_click_at_cell(clicked_cell : Vector2i, _is_right_click : bool) -> void:
+	var clicked_cell_data = get_cell_tile_data(clicked_cell)
+	var cell_territory : String = clicked_cell_data.get_custom_data("team_territory")
+	var cell_points : int = clicked_cell_data.get_custom_data("points")
+	var cell_column : String = clicked_cell_data.get_custom_data("column")
+	var cell_row : String = clicked_cell_data.get_custom_data("row")
+	var cell_chess_notation : String = cell_territory[0] + cell_column + cell_row
+	print_debug("You clicked cell %s. Shots from here are worth %s points." % [cell_chess_notation, cell_points])
 #endregion
 
 #region CORE
@@ -46,7 +42,6 @@ func get_cell_neighbors(cell_coords: Vector2i) -> Dictionary[Vector2i, int]:
 		if d in court_cells:
 			new_neighbors[d] = MOVEMENT_COST_DIAGONAL
 	return new_neighbors
-
 #endregion
 
 #region PRIVATE/HELPER

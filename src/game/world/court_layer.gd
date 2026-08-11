@@ -7,8 +7,6 @@ extends TileMapLayer
 signal source_cell_set(source_cell_coords : Vector2i) ## Emitted when [member source_cell] is set.
 signal target_cell_set(target_cell_coords : Vector2i) ## Emitted when [member target_cell] is set.
 
-var clicked_cell : Vector2i ## The coordinates of the cell that was most recently clicked.
-var clicked_cell_data : TileData ## The [TileData] associated with the [member clicked_cell].
 var court_cells : Array[Vector2i] ## The cells that are in play.
 var source_cell : Vector2i: ## The source/starting cell for movement calculations
 	set(value):
@@ -25,29 +23,24 @@ func _ready() -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_pressed() and event is InputEventMouseButton:
-		var click_position : Vector2 = event.position
 		event = event as InputEventMouseButton
+		var click_position : Vector2 = event.position
+		var clicked_cell = local_to_map(click_position)
+		if clicked_cell not in court_cells:
+			return
 		var is_right_click : bool
 		if event.button_index == 1:
 			is_right_click = false
-			clicked_cell = local_to_map(event.position)
+			source_cell = clicked_cell
 		elif event.button_index == 2: #TODO: change this to a context-dependent left-click/touch input for mobile devices
 			is_right_click = true
-			target_cell = local_to_map(event.position)
-		handle_click_at_position(click_position, is_right_click)
+			target_cell = clicked_cell
+		handle_click_at_cell(clicked_cell, is_right_click)
 #endregion
 
 #region CORE
-func handle_click_at_position(click_position : Vector2, is_right_click : bool) -> void:
-	clicked_cell = local_to_map(click_position)
-	if not _is_cell_in_play(clicked_cell):
-		print_debug("That cell is out of play.")
-		return
-	clicked_cell_data = get_cell_tile_data(clicked_cell)
-	if is_right_click:
-		target_cell = clicked_cell
-	else:
-		source_cell = clicked_cell
+func handle_click_at_cell(_clicked_cell : Vector2i, _is_right_click : bool) -> void:
+	pass
 #endregion
 
 #region PRIVATE/HELPER

@@ -20,27 +20,28 @@ var blue_score: int = 0:
 		blue_score = value
 		score_updated.emit(green_score, blue_score)
 
-var players_in_game: Array[Player]
+#var players_in_game: Array[Player]
 
 @onready var court: Court = $Court
-@onready var turn_manager: TurnManager = $TurnManager
 @onready var blue_team: Team = $BlueTeam
 @onready var green_team: Team = $GreenTeam
 
 func _ready() -> void:
-	print_debug("Game ready at %s ms" % Time.get_ticks_msec())
-	players_in_game = blue_team.players + green_team.players
-	for player in players_in_game:
-		player.connect("player_clicked", turn_manager.on_player_clicked)
-	court.court_map.players = players_in_game
+	#players_in_game = blue_team.players + green_team.players
+	#for player in players_in_game:
+		#player.connect("player_clicked", TurnManager.on_player_clicked)
+	#TODO: let the Court/Courtlayer(s) know who the players on the floor are
+	TurnManager.blue_team = blue_team
+	TurnManager.green_team = green_team
+	start_game()
 
 func start_game() -> void:
 	green_team.is_active = false
 	blue_team.is_active = false
-	var coin_toss_results = turn_manager.flip_coin(green_team, blue_team)
+	var coin_toss_results = TurnManager.flip_coin(green_team, blue_team)
 	var coin_toss_winner = coin_toss_results[0]
 	var coin_toss_loser = coin_toss_results[1]
 	print_debug("%s gets first ball" % coin_toss_winner.team_name)
 	coin_toss_winner.has_ball = true
 	coin_toss_loser.has_ball = false
-	turn_manager.start_turn(coin_toss_winner)
+	TurnManager.start_turn(coin_toss_winner)

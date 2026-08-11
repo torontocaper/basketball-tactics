@@ -17,14 +17,15 @@ var is_active: bool:
 		is_active = value
 		if is_active:
 			for player in players:
-				player.select_state = Player.Selectability.SELECTABLE
+				player.is_selectable = true
+				#player.select_state = Player.Selectability.SELECTABLE
 		else:
 			for player in players:
-				player.select_state = Player.Selectability.UNSELECTABLE
+				player.is_selectable = false
+				#player.select_state = Player.Selectability.UNSELECTABLE
 
 # OVERRIDES
 func _ready() -> void:
-	print_debug("%s ready" % team_name)
 	_add_players_to_team()
 
 func _add_players_to_team() -> void:
@@ -34,4 +35,5 @@ func _add_players_to_team() -> void:
 		var player = node as Player
 		print_debug("Adding %s to %s" % [player.name, team_name])
 		players.append(player)
+		player.team = self
 	print_debug("%s has %s players" % [team_name, str(players.size())])

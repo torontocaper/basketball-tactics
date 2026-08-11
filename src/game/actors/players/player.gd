@@ -14,38 +14,50 @@ enum PlayerSpeed {SLOW, AVERAGE, FAST}
 
 @export_range(0, 99, 1) var player_number: int = 0
 @export var player_speed: PlayerSpeed = PlayerSpeed.AVERAGE
-@export_color_no_alpha var unselectable_modulate_color: Color = Color.GRAY
+
+var is_selectable: bool:
+	set(value):
+		is_selectable = value
+		if is_selectable:
+			player_sprite.scale = Vector2.ONE
+			player_sprite.modulate = Color.WHITE
+			player_light.visible = true
+		else:
+			player_sprite.scale = Vector2.ONE
+			player_sprite.modulate = unselectable_modulate_color
+			player_light.visible = false
+var is_selected: bool:
+	set(value):
+		is_selected = value
+		if is_selected:
+			is_selectable = false
+			player_sprite.scale = Vector2.ONE * SELECTED_SCALE
+			player_sprite.modulate = Color.WHITE
+		else:
+			is_selectable = true
 
 var movement_points_per_turn: int
+var team : Team
+var unselectable_modulate_color: Color = Color.GRAY
 
-var current_cell: Cell:
-	set(value):
-		current_cell = value
-		snap_to_grid()
-
-var court_map: CourtMap:
-	set(value):
-		court_map = value
-		print_debug("%s has a reference to the CourtMap" % name)
-
-var select_state: Selectability:
-	set(value):
-		select_state = value
-		match select_state:
-			Selectability.SELECTABLE:
-				print_debug("%s is selectable" % name)
-				player_sprite.scale = Vector2.ONE
-				player_sprite.modulate = Color.WHITE
-				player_light.visible = true
-			Selectability.SELECTED:
-				print_debug("%s is selected" % name)
-				player_sprite.scale = Vector2.ONE * SELECTED_SCALE
-				player_sprite.modulate = Color.WHITE
-			Selectability.UNSELECTABLE:
-				print_debug("%s is unselectable" % name)
-				player_sprite.scale = Vector2.ONE
-				player_sprite.modulate = unselectable_modulate_color
-				player_light.visible = false
+#var select_state: Selectability:
+	#set(value):
+		#select_state = value
+		#match select_state:
+			#Selectability.SELECTABLE:
+				#print_debug("%s is selectable" % name)
+				#player_sprite.scale = Vector2.ONE
+				#player_sprite.modulate = Color.WHITE
+				#player_light.visible = true
+			#Selectability.SELECTED:
+				#print_debug("%s is selected" % name)
+				#player_sprite.scale = Vector2.ONE * SELECTED_SCALE
+				#player_sprite.modulate = Color.WHITE
+			#Selectability.UNSELECTABLE:
+				#print_debug("%s is unselectable" % name)
+				#player_sprite.scale = Vector2.ONE
+				#player_sprite.modulate = unselectable_modulate_color
+				#player_light.visible = false
 
 @onready var player_number_label: Label = $PlayerNumberLabel
 @onready var player_sprite: Sprite2D = $PlayerSprite
@@ -57,10 +69,10 @@ func _ready() -> void:
 	movement_points_per_turn = _set_movement_points(player_speed)
 	player_number_label.text = str(player_number)
 
-func snap_to_grid() -> void:
-	var cell_position_local = court_map.map_to_local(current_cell.coords)
-	print_debug("Snapping %s to cell %s (position %s)" % [name, current_cell, cell_position_local])
-	global_position = court_map.to_global(cell_position_local)
+#func snap_to_grid() -> void:
+	#var cell_position_local = court_map.map_to_local(current_cell.coords)
+	#print_debug("Snapping %s to cell %s (position %s)" % [name, current_cell, cell_position_local])
+	#global_position = court_map.to_global(cell_position_local)
 
 func _connect_signals() -> void:
 	connect("input_event", _on_input_event)
@@ -79,4 +91,3 @@ func _set_movement_points(value: PlayerSpeed) -> int:
 func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event.is_pressed() and event is InputEventMouseButton:
 		player_clicked.emit(self)
-		print_debug("%s clicked" % name)

@@ -23,10 +23,8 @@ func _ready() -> void:
 	MoveManager.connect("map_updated", update_distances)
 	MoveManager.connect("path_found", display_new_path)
 
-func handle_click_at_position(click_position : Vector2, is_right_click : bool):
-	super(click_position, is_right_click)
-	if _is_cell_in_play(clicked_cell):
-		indicate_click(clicked_cell)
+func handle_click_at_cell(clicked_cell : Vector2i, _is_right_click : bool) -> void:
+	indicate_click(clicked_cell)
 #endregion
 
 #region CORE

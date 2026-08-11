@@ -20,6 +20,7 @@ config/icon="uid://bt2ioehlblun0"
 [autoload]
 
 MoveManager="*uid://b43komayl8phn"
+TurnManager="*uid://dm8m7g1mcuf2a"
 Screenshot="*uid://thkrdt1120q7"
 
 [display]
