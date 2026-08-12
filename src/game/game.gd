@@ -41,7 +41,7 @@ func start_game() -> void:
 	var coin_toss_results = TurnManager.flip_coin(green_team, blue_team)
 	var coin_toss_winner = coin_toss_results[0]
 	var coin_toss_loser = coin_toss_results[1]
-	print_debug("%s gets first ball" % coin_toss_winner.team_name)
+	print_debug("%s gets first ball" % coin_toss_winner.name)
 	coin_toss_winner.has_ball = true
 	coin_toss_loser.has_ball = false
 	TurnManager.start_turn(coin_toss_winner)

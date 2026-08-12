@@ -1,4 +1,0 @@
-[gd_scene format=3 uid="uid://blt4mi3f1lmq6"]
-
-[node name="PlayerPathLine" type="Line2D" unique_id=1450470518]
-z_index = 10

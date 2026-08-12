@@ -3,17 +3,19 @@ class_name Player
 extends CharacterBody2D
 ## Class representing a player on the court (not the person playing the game).
 
-const MOVEMENT_SPEED: float = 10.0
-const SELECTED_SCALE: float = 1.2
-const TILE_SIZE: Vector2 = Vector2(80.0, 80.0)
-
 signal player_clicked(this_player: Player)
 
-#enum Selectability {SELECTABLE, SELECTED, UNSELECTABLE}
-enum PlayerSpeed {SLOW, AVERAGE, FAST}
+enum PlayerSpeed {
+	SLOW = 6,
+	AVERAGE = 9, 
+	FAST = 12
+	}
 
-@export_range(0, 99, 1) var player_number: int = 0
-@export var player_speed: PlayerSpeed = PlayerSpeed.AVERAGE
+const MOVEMENT_SPEED: float = 10.0
+const SELECTED_SCALE: float = 1.2
+
+@export_range(0, 99, 1) var player_number : int = 0
+@export var player_speed : PlayerSpeed = PlayerSpeed.AVERAGE
 
 var is_selectable: bool:
 	set(value):
@@ -38,56 +40,15 @@ var is_selected: bool:
 		else:
 			is_selectable = true
 
-var movement_points_per_turn: int
 var team : Team
-
-#var select_state: Selectability:
-	#set(value):
-		#select_state = value
-		#match select_state:
-			#Selectability.SELECTABLE:
-				#print_debug("%s is selectable" % name)
-				#player_sprite.scale = Vector2.ONE
-				#player_sprite.modulate = Color.WHITE
-				#player_light.visible = true
-			#Selectability.SELECTED:
-				#print_debug("%s is selected" % name)
-				#player_sprite.scale = Vector2.ONE * SELECTED_SCALE
-				#player_sprite.modulate = Color.WHITE
-			#Selectability.UNSELECTABLE:
-				#print_debug("%s is unselectable" % name)
-				#player_sprite.scale = Vector2.ONE
-				#player_sprite.modulate = unselectable_modulate_color
-				#player_light.visible = false
 
 @onready var player_number_label: Label = $PlayerNumberLabel
 @onready var player_sprite: Sprite2D = $PlayerSprite
 @onready var player_light: PointLight2D = $PlayerLight
 
 func _ready() -> void:
-	print_debug("%s ready" % name)
-	_connect_signals()
-	movement_points_per_turn = _set_movement_points(player_speed)
-	player_number_label.text = str(player_number)
-
-#func snap_to_grid() -> void:
-	#var cell_position_local = court_map.map_to_local(current_cell.coords)
-	#print_debug("Snapping %s to cell %s (position %s)" % [name, current_cell, cell_position_local])
-	#global_position = court_map.to_global(cell_position_local)
-
-func _connect_signals() -> void:
 	connect("input_event", _on_input_event)
-
-func _set_movement_points(value: PlayerSpeed) -> int:
-	match value:
-		PlayerSpeed.SLOW:
-			return 6
-		PlayerSpeed.AVERAGE:
-			return 9
-		PlayerSpeed.FAST:
-			return 12
-		_:
-			return 9
+	player_number_label.text = str(player_number)
 
 func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event.is_pressed() and event is InputEventMouseButton:

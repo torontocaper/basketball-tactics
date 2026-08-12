@@ -4,15 +4,14 @@
 [ext_resource type="PackedScene" uid="uid://b2vohbcnqvvur" path="res://src/game/actors/players/green_player.tscn" id="2_35v3k"]
 
 [node name="GreenTeam" unique_id=634722010 instance=ExtResource("1_or3a3")]
-team_name = "Green Goblins"
 
 [node name="Green1" parent="." index="0" unique_id=860716830 instance=ExtResource("2_35v3k")]
 player_number = 1
-player_speed = 2
+player_speed = 12
 
 [node name="Green2" parent="." index="1" unique_id=156980691 instance=ExtResource("2_35v3k")]
 player_number = 2
 
 [node name="Green3" parent="." index="2" unique_id=674392125 instance=ExtResource("2_35v3k")]
 player_number = 3
-player_speed = 0
+player_speed = 12

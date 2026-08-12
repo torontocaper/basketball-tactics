@@ -4,8 +4,6 @@ class_name Team
 extends Node2D
 ## Base class for teams
 
-@export var team_name: String
-
 var players: Array[Player]
 
 var has_ball: bool:
@@ -18,22 +16,19 @@ var is_active: bool:
 		if is_active:
 			for player in players:
 				player.is_selectable = true
-				#player.select_state = Player.Selectability.SELECTABLE
 		else:
 			for player in players:
 				player.is_selectable = false
-				#player.select_state = Player.Selectability.UNSELECTABLE
 
 # OVERRIDES
 func _ready() -> void:
-	_add_players_to_team()
+	players = _get_players()
 
-func _add_players_to_team() -> void:
-	print_debug("Adding players to %s" % team_name)
+func _get_players() -> Array[Player]:
+	var player_array : Array[Player]
 	var player_nodes = get_children()
 	for node in player_nodes:
 		var player = node as Player
-		print_debug("Adding %s to %s" % [player.name, team_name])
-		players.append(player)
+		player_array.append(player)
 		player.team = self
-	print_debug("%s has %s players" % [team_name, str(players.size())])
+	return player_array
