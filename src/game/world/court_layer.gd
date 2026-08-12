@@ -22,6 +22,7 @@ func _ready() -> void:
 	court_cells = get_used_cells().filter(_is_cell_in_play)
 
 func _unhandled_input(event: InputEvent) -> void:
+	#TODO i don't think this should be handled here
 	if event.is_pressed() and event is InputEventMouseButton:
 		event = event as InputEventMouseButton
 		var click_position : Vector2 = event.position

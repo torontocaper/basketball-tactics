@@ -16,7 +16,9 @@ const SELECTED_SCALE: float = 1.2
 
 @export_range(0, 99, 1) var player_number : int = 0
 @export var player_speed : PlayerSpeed = PlayerSpeed.AVERAGE
+@export var starting_coords : Vector2i
 
+var coords : Vector2i
 var is_selectable: bool:
 	set(value):
 		is_selectable = value
@@ -28,7 +30,6 @@ var is_selectable: bool:
 			player_sprite.scale = Vector2.ONE
 			player_sprite.modulate = Color.GRAY
 			player_light.visible = false
-
 var is_selected: bool:
 	set(value):
 		is_selected = value
@@ -39,7 +40,6 @@ var is_selected: bool:
 			player_light.visible = true
 		else:
 			is_selectable = true
-
 var team : Team
 
 @onready var player_number_label: Label = $PlayerNumberLabel

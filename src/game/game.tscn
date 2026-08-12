@@ -35,5 +35,6 @@ rotation = 3.1415927
 position = Vector2(209, 420)
 rotation = 3.1415927
 
+[editable path="Court"]
 [editable path="BlueTeam"]
 [editable path="GreenTeam"]
