@@ -39,10 +39,13 @@ func indicate_click(cell_to_indicate : Vector2i) -> void:
 
 func update_distances(dijkstra_map : Dictionary[Vector2i, Dictionary]) -> void:
 	path_indicator.clear_points()
-	for point in court_cells:
-		var point_distance : int = dijkstra_map[point].distance_from_source
-		var cell_label : Label = court_cell_graphics.get(point).label
-		cell_label.text = str(point_distance)
+	if dijkstra_map.size() == 0:
+		_hide_cell_graphics(court_cell_graphics)
+	else:
+		for point in court_cells:
+			var point_distance : int = dijkstra_map[point].distance_from_source
+			var cell_label : Label = court_cell_graphics.get(point).label
+			cell_label.text = str(point_distance)
 #endregion
 
 #region PRIVATE/HELPER
@@ -60,6 +63,11 @@ func _create_cell_graphics(cells : Array[Vector2i]) -> Dictionary[Vector2i, Dict
 		add_child(cell_label)
 		graphics[cell].label = cell_label
 	return graphics
+
+func _hide_cell_graphics(graphics : Dictionary[Vector2i, Dictionary]) -> void:
+	for graphic in graphics:
+		var cell_label : Label = graphics.get(graphic).label
+		cell_label.text = ""
 #endregion
 
 #region RECEIVERS

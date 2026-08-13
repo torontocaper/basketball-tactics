@@ -32,7 +32,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		var is_right_click : bool
 		if event.button_index == 1:
 			is_right_click = false
-			source_cell = clicked_cell
+			#source_cell = clicked_cell
 		elif event.button_index == 2: #TODO: change this to a context-dependent left-click/touch input for mobile devices
 			is_right_click = true
 			target_cell = clicked_cell

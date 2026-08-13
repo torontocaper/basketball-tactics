@@ -49,6 +49,7 @@ var team : Team
 func _ready() -> void:
 	connect("input_event", _on_input_event)
 	player_number_label.text = str(player_number)
+	coords = starting_coords
 
 func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event.is_pressed() and event is InputEventMouseButton:

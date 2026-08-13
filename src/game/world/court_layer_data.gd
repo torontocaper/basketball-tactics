@@ -12,6 +12,7 @@ var dijkstra_graph : Dictionary[Vector2i, Dictionary] ## Dictionary of cells and
 #region OVERRIDES
 func _ready() -> void:
 	super()
+	TurnManager.connect("player_selected", set_source_cell)
 	connect("source_cell_set", MoveManager.update_map)
 	connect("target_cell_set", MoveManager.get_path_by_coords)
 	for cell in court_cells:
@@ -42,6 +43,10 @@ func get_cell_neighbors(cell_coords: Vector2i) -> Dictionary[Vector2i, int]:
 		if d in court_cells:
 			new_neighbors[d] = MOVEMENT_COST_DIAGONAL
 	return new_neighbors
+
+func set_source_cell(source_player_coords : Vector2i) -> void:
+	print_debug("Setting source cell at %s" % source_player_coords)
+	source_cell = source_player_coords
 #endregion
 
 #region PRIVATE/HELPER

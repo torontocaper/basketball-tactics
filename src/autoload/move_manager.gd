@@ -7,6 +7,7 @@ signal path_found(new_path: Array[Vector2i])
 
 ## Graph of all cells, their immediate neighbors and the costs to reach those neighbors
 var graph : Dictionary[Vector2i, Dictionary]
+
 ## Map of all cells, along with their total distances and paths from the source cell, keyed by coords
 ## (There is also a key called coords in the value Dictionary, so that the 'values' array contains the coords too)
 var distance_map : Dictionary[Vector2i, Dictionary]
@@ -23,25 +24,29 @@ func update_map(source_cell_coords: Vector2i) -> void:
 	print_debug("MoveManager creating a Dijkstra map with source cell at coords %s" % source_cell_coords)
 	if distance_map:
 		distance_map.clear()
-	for node in graph:
-		distance_map[node] = {
-			"coords" = node,
-			"is_settled" = false
-		}
-		if node == source_cell_coords:
-			distance_map[node].distance_from_source = 0
-			distance_map[node].path_from_source = [node]
-		else:
-			distance_map[node].distance_from_source = 99
-			distance_map[node].path_from_source = []
-	var map_values : Array[Dictionary] = distance_map.values()
-	while map_values.any(func(point): return not point.is_settled):
-		# create priority queue
-		map_values.sort_custom(func(point_1, point_2): return point_1.distance_from_source < point_2.distance_from_source)
-		var index_of_closest_unsettled_point : int = map_values.find_custom(func(point): return not point.is_settled)
-		var closest_unsettled_point : Dictionary = map_values[index_of_closest_unsettled_point]
-		update_neighbors(closest_unsettled_point.coords, map_values)
-		map_values = distance_map.values()
+	if source_cell_coords == Vector2i(-1, -1):
+		print_debug("No source cell from which to update map")
+		map_updated.emit(distance_map)
+	else:
+		for node in graph:
+			distance_map[node] = {
+				"coords" = node,
+				"is_settled" = false
+			}
+			if node == source_cell_coords:
+				distance_map[node].distance_from_source = 0
+				distance_map[node].path_from_source = [node]
+			else:
+				distance_map[node].distance_from_source = 99
+				distance_map[node].path_from_source = []
+		var map_values : Array[Dictionary] = distance_map.values()
+		while map_values.any(func(point): return not point.is_settled):
+			# create priority queue
+			map_values.sort_custom(func(point_1, point_2): return point_1.distance_from_source < point_2.distance_from_source)
+			var index_of_closest_unsettled_point : int = map_values.find_custom(func(point): return not point.is_settled)
+			var closest_unsettled_point : Dictionary = map_values[index_of_closest_unsettled_point]
+			update_neighbors(closest_unsettled_point.coords, map_values)
+			map_values = distance_map.values()
 	map_updated.emit(distance_map)
 
 ## Update travel distances and paths for the immediate neighbors of a given cell 

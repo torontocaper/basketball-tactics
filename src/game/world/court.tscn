@@ -8,10 +8,10 @@
 [node name="Court" type="Node2D" unique_id=606232418]
 script = ExtResource("1_fynge")
 
-[node name="CourtLayerData" parent="." unique_id=311464305 instance=ExtResource("3_7v453")]
+[node name="DataLayer" parent="." unique_id=311464305 instance=ExtResource("3_7v453")]
 z_index = -100
 
-[node name="CourtLayerVisual" parent="." unique_id=975631911 instance=ExtResource("2_7v453")]
+[node name="VisualLayer" parent="." unique_id=975631911 instance=ExtResource("2_7v453")]
 
 [node name="HoopNorth" parent="." unique_id=456007788 instance=ExtResource("3_kptq6")]
 position = Vector2(360, 120)

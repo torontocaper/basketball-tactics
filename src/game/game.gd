@@ -29,6 +29,7 @@ var players_in_game: Array[Player]
 func _ready() -> void:
 	players_in_game = blue_team.players + green_team.players
 	#TODO: let the Court/Courtlayer(s) know who the players on the floor are
+	court.players_on_court = players_in_game
 	TurnManager.blue_team = blue_team
 	TurnManager.green_team = green_team
 	start_game()
