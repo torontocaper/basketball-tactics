@@ -6,9 +6,9 @@ extends CharacterBody2D
 signal player_clicked(this_player: Player)
 
 enum PlayerSpeed {
-	SLOW = 6,
-	AVERAGE = 9, 
-	FAST = 12
+	SLOW = 4,
+	AVERAGE = 5, 
+	FAST = 6
 	}
 
 const MOVEMENT_SPEED: float = 10.0

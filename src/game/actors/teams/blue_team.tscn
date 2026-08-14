@@ -4,15 +4,14 @@
 [ext_resource type="PackedScene" uid="uid://ioi85kths377" path="res://src/game/actors/players/blue_player.tscn" id="2_dw12s"]
 
 [node name="BlueTeam" unique_id=634722010 instance=ExtResource("1_a4wad")]
-team_name = "Blue Devils"
 
 [node name="Blue1" parent="." index="0" unique_id=860716830 instance=ExtResource("2_dw12s")]
 player_number = 1
-player_speed = 12
+player_speed = 6
 
 [node name="Blue2" parent="." index="1" unique_id=884478291 instance=ExtResource("2_dw12s")]
 player_number = 2
 
 [node name="Blue3" parent="." index="2" unique_id=1226553230 instance=ExtResource("2_dw12s")]
 player_number = 3
-player_speed = 6
+player_speed = 4

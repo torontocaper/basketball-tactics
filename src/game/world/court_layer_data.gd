@@ -5,6 +5,7 @@ extends CourtLayer
 ## The layer of the court responsible for data -- point values, player positions, etc. 
 
 signal source_cell_set(source_cell : Vector2i, occupied_cell_coords : Array[Vector2i], movement_range : int)
+signal target_cell_set(target_cell_coords : Vector2i) ## Emitted when [member target_cell] is set.
 
 const MOVEMENT_COST_ORTHOGONAL : int = 2
 const MOVEMENT_COST_DIAGONAL : int = 3
@@ -37,6 +38,9 @@ func set_source_cell(source_player : Player) -> void:
 		occupied_cell_coords = occupied_cells.keys()
 		source_player_range = source_player.player_speed
 	source_cell_set.emit(source_cell, occupied_cell_coords, source_player_range)
+
+func set_target_cell() -> void:
+	target_cell_set.emit()
 #endregion
 
 #region PRIVATE/HELPER

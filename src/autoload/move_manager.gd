@@ -27,7 +27,7 @@ func update_map(source_cell_coords: Vector2i, occupied_cells : Array[Vector2i] =
 		distance_map.clear()
 	if source_cell_coords == Vector2i(-1, -1): #TODO: make this less hack-y
 		print_debug("No source cell from which to update map")
-		map_updated.emit(distance_map)
+		map_updated.emit(distance_map, 0)
 	else:
 		for node in graph:
 			distance_map[node] = {

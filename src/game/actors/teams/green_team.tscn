@@ -7,11 +7,11 @@
 
 [node name="Green1" parent="." index="0" unique_id=860716830 instance=ExtResource("2_35v3k")]
 player_number = 1
-player_speed = 12
+player_speed = 6
 
 [node name="Green2" parent="." index="1" unique_id=156980691 instance=ExtResource("2_35v3k")]
 player_number = 2
 
 [node name="Green3" parent="." index="2" unique_id=674392125 instance=ExtResource("2_35v3k")]
 player_number = 3
-player_speed = 6
+player_speed = 4

@@ -17,9 +17,6 @@ var selected_player : Player :
 			print_debug("No player selected")
 			player_selected.emit(null)
 
-#func _ready() -> void:
-	#connect("player_selected", MoveManager.update_map)
-
 ## Flip coin to determine which team gets first ball
 func flip_coin(team_1 : Team, team_2 : Team) -> Array[Team] :
 	var team_array: Array[Team] = [team_1, team_2]
