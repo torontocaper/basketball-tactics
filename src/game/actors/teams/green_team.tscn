@@ -14,4 +14,4 @@ player_number = 2
 
 [node name="Green3" parent="." index="2" unique_id=674392125 instance=ExtResource("2_35v3k")]
 player_number = 3
-player_speed = 12
+player_speed = 6

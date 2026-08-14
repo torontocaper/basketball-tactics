@@ -2,8 +2,8 @@
 extends Node
 ## Manages movement using Dijkstra's algorithm
 
-signal map_updated(new_map: Array[Dictionary])
-signal path_found(new_path: Array[Vector2i])
+signal map_updated(new_map : Array[Dictionary], allowed_move_range : int)
+signal path_found(new_path : Array[Vector2i])
 
 ## Graph of all cells, their immediate neighbors and the costs to reach those neighbors
 var graph : Dictionary[Vector2i, Dictionary]
@@ -20,22 +20,28 @@ func get_path_by_coords(destination_cell_coords : Vector2i) -> void:
 	path_found.emit(path_coords)
 
 ## Updates the Dijkstra map based on the new source cell
-func update_map(source_cell_coords: Vector2i) -> void:
-	print_debug("MoveManager creating a Dijkstra map with source cell at coords %s" % source_cell_coords)
+func update_map(source_cell_coords: Vector2i, occupied_cells : Array[Vector2i] = [], player_move_range : int = 99) -> void:
+	print_debug("MoveManager updating the Dijkstra map with source cell at coords %s" % source_cell_coords)
+	#get_occupied_cells
 	if distance_map:
 		distance_map.clear()
-	if source_cell_coords == Vector2i(-1, -1):
+	if source_cell_coords == Vector2i(-1, -1): #TODO: make this less hack-y
 		print_debug("No source cell from which to update map")
 		map_updated.emit(distance_map)
 	else:
 		for node in graph:
 			distance_map[node] = {
 				"coords" = node,
-				"is_settled" = false
+				"is_settled" = false,
+				"is_occupied" = false,
 			}
 			if node == source_cell_coords:
 				distance_map[node].distance_from_source = 0
 				distance_map[node].path_from_source = [node]
+			elif node in occupied_cells:
+				distance_map[node].is_occupied = true
+				distance_map[node].distance_from_source = 99
+				distance_map[node].path_from_source = []
 			else:
 				distance_map[node].distance_from_source = 99
 				distance_map[node].path_from_source = []
@@ -47,7 +53,7 @@ func update_map(source_cell_coords: Vector2i) -> void:
 			var closest_unsettled_point : Dictionary = map_values[index_of_closest_unsettled_point]
 			update_neighbors(closest_unsettled_point.coords, map_values)
 			map_values = distance_map.values()
-	map_updated.emit(distance_map)
+	map_updated.emit(distance_map, player_move_range)
 
 ## Update travel distances and paths for the immediate neighbors of a given cell 
 func update_neighbors(point_coords: Vector2i, map: Array[Dictionary]) -> void:
@@ -59,8 +65,8 @@ func update_neighbors(point_coords: Vector2i, map: Array[Dictionary]) -> void:
 	for neighbor in neighbors:
 		var distance_to_neighbor : int = neighbors[neighbor]
 		var neighbor_point : Dictionary = _find_point_by_coords(neighbor, map)
-		#if neighbor_point.cell.is_occupied:
-			#continue
+		if neighbor_point.is_occupied:
+			continue
 		if neighbor_point.distance_from_source > starting_point_distance + distance_to_neighbor:
 			neighbor_point.distance_from_source = starting_point_distance + distance_to_neighbor
 			var neighbor_point_path : Array = starting_point_path.duplicate()

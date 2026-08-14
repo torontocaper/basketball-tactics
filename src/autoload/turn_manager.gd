@@ -2,30 +2,25 @@
 extends Node
 ## Turn controller.
 
-signal player_selected(selected_player_coords : Vector2i)
+## Emitted when a new player is selected. Sends their location to [CourtLayerData]
+signal player_selected(selected_player : Player)
 
-var green_team : Team :
-	set(value):
-		green_team = value
-		for player in green_team.players:
-			player.connect("player_clicked", on_player_clicked)
-
-var blue_team : Team :
-	set(value):
-		blue_team = value
-		for player in blue_team.players:
-			player.connect("player_clicked", on_player_clicked)
-
+var green_team : Team 
+var blue_team : Team 
 var selected_player : Player :
 	set(value):
 		selected_player = value
 		if selected_player:
 			print_debug("%s selected" % selected_player.name)
-			player_selected.emit(selected_player.coords)
+			player_selected.emit(selected_player)
 		else:
 			print_debug("No player selected")
-			player_selected.emit(Vector2i(-1, -1))
+			player_selected.emit(null)
 
+#func _ready() -> void:
+	#connect("player_selected", MoveManager.update_map)
+
+## Flip coin to determine which team gets first ball
 func flip_coin(team_1 : Team, team_2 : Team) -> Array[Team] :
 	var team_array: Array[Team] = [team_1, team_2]
 	var winning_team: Team = team_array.pick_random()
@@ -37,6 +32,7 @@ func flip_coin(team_1 : Team, team_2 : Team) -> Array[Team] :
 			losing_team = team_1
 	return [winning_team, losing_team]
 
+## Each [Player] connects their "player_clicked" signal to this method
 func on_player_clicked(clicked_player : Player) -> void :
 	if clicked_player.is_selectable:
 		clicked_player.is_selected = true

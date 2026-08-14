@@ -28,7 +28,7 @@ var is_selectable: bool:
 			player_light.visible = false
 		else:
 			player_sprite.scale = Vector2.ONE
-			player_sprite.modulate = Color.GRAY
+			player_sprite.modulate = Color.DIM_GRAY
 			player_light.visible = false
 var is_selected: bool:
 	set(value):
@@ -48,8 +48,9 @@ var team : Team
 
 func _ready() -> void:
 	connect("input_event", _on_input_event)
-	player_number_label.text = str(player_number)
+	connect("player_clicked", TurnManager.on_player_clicked)
 	coords = starting_coords
+	player_number_label.text = str(player_number)
 
 func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event.is_pressed() and event is InputEventMouseButton:

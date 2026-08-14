@@ -37,7 +37,7 @@ func indicate_click(cell_to_indicate : Vector2i) -> void:
 	click_indicator.position = map_to_local(cell_to_indicate)
 	click_indicator.restart()
 
-func update_distances(dijkstra_map : Dictionary[Vector2i, Dictionary]) -> void:
+func update_distances(dijkstra_map : Dictionary[Vector2i, Dictionary], move_range : int) -> void:
 	path_indicator.clear_points()
 	if dijkstra_map.size() == 0:
 		_hide_cell_graphics(court_cell_graphics)
@@ -45,7 +45,10 @@ func update_distances(dijkstra_map : Dictionary[Vector2i, Dictionary]) -> void:
 		for point in court_cells:
 			var point_distance : int = dijkstra_map[point].distance_from_source
 			var cell_label : Label = court_cell_graphics.get(point).label
-			cell_label.text = str(point_distance)
+			if point_distance == 0 or point_distance > move_range:
+				cell_label.text = ""
+			else:
+				cell_label.text = str(point_distance)
 #endregion
 
 #region PRIVATE/HELPER
