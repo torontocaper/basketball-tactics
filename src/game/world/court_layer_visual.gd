@@ -8,8 +8,10 @@ const CLICK_INDICATOR = preload("uid://bnm71kxddqynl")
 const MAIN_THEME = preload("uid://c0lrucuyge77v")
 const PATH_INDICATOR = preload("uid://dkswoobiwgwxy")
 
+var active_player_move_range : int
 var click_indicator : CPUParticles2D
 var court_cell_graphics : Dictionary[Vector2i, Dictionary]
+var current_dijkstra_map : Dictionary[Vector2i, Dictionary]
 var path_indicator : Line2D
 
 #region OVERRIDES
@@ -29,9 +31,16 @@ func handle_click_at_cell(clicked_cell : Vector2i, _is_right_click : bool) -> vo
 
 #region CORE
 func display_new_path(new_path : Array) -> void:
-	path_indicator.clear_points()
-	for point_coords in new_path:
-		path_indicator.add_point(map_to_local(point_coords))
+	if new_path:
+		var last_point = new_path.back()
+		if current_dijkstra_map[last_point].distance_from_source > active_player_move_range:
+			return
+		else:
+			path_indicator.clear_points()
+			for point_coords in new_path:
+				var point_distance : int = current_dijkstra_map[point_coords].distance_from_source
+				if point_distance <= active_player_move_range:
+					path_indicator.add_point(map_to_local(point_coords))
 
 func indicate_click(cell_to_indicate : Vector2i) -> void:
 	click_indicator.position = map_to_local(cell_to_indicate)
@@ -39,13 +48,15 @@ func indicate_click(cell_to_indicate : Vector2i) -> void:
 
 func update_distances(dijkstra_map : Dictionary[Vector2i, Dictionary], move_range : int) -> void:
 	path_indicator.clear_points()
-	if dijkstra_map.size() == 0:
+	active_player_move_range = move_range
+	current_dijkstra_map = dijkstra_map
+	if current_dijkstra_map.size() == 0:
 		_hide_cell_graphics(court_cell_graphics)
 	else:
 		for point in court_cells:
-			var point_distance : int = dijkstra_map[point].distance_from_source
+			var point_distance : int = current_dijkstra_map[point].distance_from_source
 			var cell_label : Label = court_cell_graphics.get(point).label
-			if point_distance == 0 or point_distance > move_range:
+			if point_distance == 0 or point_distance > active_player_move_range:
 				cell_label.text = ""
 			else:
 				cell_label.text = str(point_distance)

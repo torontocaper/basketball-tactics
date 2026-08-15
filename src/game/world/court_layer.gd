@@ -11,11 +11,6 @@ func _ready() -> void:
 	court_cells = get_used_cells().filter(_is_cell_in_play)
 #endregion
 
-#region CORE
-func handle_click_at_cell(_clicked_cell : Vector2i, _is_right_click : bool) -> void:
-	pass
-#endregion
-
 #region PRIVATE/HELPER
 func _is_cell_in_play(cell_coords : Vector2i) -> bool:
 	var tile_data : TileData = get_cell_tile_data(cell_coords)
