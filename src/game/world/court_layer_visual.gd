@@ -83,6 +83,3 @@ func _hide_cell_graphics(graphics : Dictionary[Vector2i, Dictionary]) -> void:
 		var cell_label : Label = graphics.get(graphic).label
 		cell_label.text = ""
 #endregion
-
-#region RECEIVERS
-#endregion

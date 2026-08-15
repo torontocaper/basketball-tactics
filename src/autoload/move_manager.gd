@@ -14,7 +14,7 @@ var distance_map : Dictionary[Vector2i, Dictionary]
 
 #region CORE
 ## Finds the path from the current source cell to destination_cell_coords
-func get_path_by_coords(destination_cell_coords : Vector2i) -> void:
+func get_move_path(destination_cell_coords : Vector2i) -> void:
 	var destination_point : Dictionary = _find_point_by_coords(destination_cell_coords, distance_map.values())
 	var path_coords : Array = destination_point.path_from_source
 	path_found.emit(path_coords)
@@ -22,7 +22,6 @@ func get_path_by_coords(destination_cell_coords : Vector2i) -> void:
 ## Updates the Dijkstra map based on the new source cell
 func update_map(source_cell_coords: Vector2i, occupied_cells : Array[Vector2i] = [], player_move_range : int = 99) -> void:
 	print_debug("MoveManager updating the Dijkstra map with source cell at coords %s" % source_cell_coords)
-	#get_occupied_cells
 	if distance_map:
 		distance_map.clear()
 	if source_cell_coords == Vector2i(-1, -1): #TODO: make this less hack-y
@@ -52,7 +51,8 @@ func update_map(source_cell_coords: Vector2i, occupied_cells : Array[Vector2i] =
 			var index_of_closest_unsettled_point : int = map_values.find_custom(func(point): return not point.is_settled)
 			var closest_unsettled_point : Dictionary = map_values[index_of_closest_unsettled_point]
 			update_neighbors(closest_unsettled_point.coords, map_values)
-			map_values = distance_map.values()
+			#map_values = distance_map.values()
+		# Now the whole map is up-to-date based on the source cell. Should we remove the entries that are out of range? 
 	map_updated.emit(distance_map, player_move_range)
 
 ## Update travel distances and paths for the immediate neighbors of a given cell 
@@ -81,6 +81,3 @@ func _find_point_by_coords(coords: Vector2i, map: Array[Dictionary]) -> Dictiona
 	var found_point : Dictionary = map[index_of_point]
 	return found_point
 #endregion
-
-#func find_neighbor_cell(neighbor_cell, potential_neighbor_cell_coords) -> bool:
-	#return neighbor_cell.coords == potential_neighbor_cell_coords

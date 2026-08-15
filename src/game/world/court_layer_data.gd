@@ -5,7 +5,7 @@ extends CourtLayer
 ## The layer of the court responsible for data -- point values, player positions, etc. 
 
 ## Emitted when a source cell for navigation is set
-signal source_cell_set(source_cell_coords : Vector2i, occupied_cell_coords : Array[Vector2i], movement_range : int)
+signal source_cell_set(source_cell_coords : Vector2i, occupied_cells_coords : Array[Vector2i], movement_range : int)
 ## Emitted when a target cell for navigation is set.
 signal target_cell_set(target_cell_coords : Vector2i)
 
@@ -20,7 +20,7 @@ func _ready() -> void:
 	set_process_input(false)
 	TurnManager.connect("active_player_set", set_source_cell)
 	connect("source_cell_set", MoveManager.update_map)
-	connect("target_cell_set", MoveManager.get_path_by_coords)
+	connect("target_cell_set", MoveManager.get_move_path)
 	MoveManager.graph = _create_dijkstra_graph(court_cells)
 
 func _input(event: InputEvent) -> void:
@@ -29,28 +29,19 @@ func _input(event: InputEvent) -> void:
 		if clicked_cell in court_cells:
 			set_target_cell(clicked_cell)
 
-func handle_click_at_cell(clicked_cell : Vector2i) -> void:
-	var clicked_cell_data = get_cell_tile_data(clicked_cell)
-	var cell_territory : String = clicked_cell_data.get_custom_data("team_territory")
-	var cell_points : int = clicked_cell_data.get_custom_data("points")
-	var cell_column : String = clicked_cell_data.get_custom_data("column")
-	var cell_row : String = clicked_cell_data.get_custom_data("row")
-	var cell_chess_notation : String = cell_territory[0] + cell_column + cell_row
-	print_debug("You clicked cell %s. Shots from here are worth %s points." % [cell_chess_notation, cell_points])
-
 ## Called from TurnManager when a player is selected
 func set_source_cell(source_player : Player) -> void:
 	var source_cell : Vector2i = Vector2i(-1, -1)
-	var occupied_cell_coords : Array[Vector2i] = []
+	var occupied_cells_coords : Array[Vector2i] = []
 	var source_player_range : int = 0
 	if source_player:
 		set_process_input(true)
 		source_cell = source_player.coords
-		occupied_cell_coords = occupied_cells.keys()
+		occupied_cells_coords = occupied_cells.keys()
 		source_player_range = source_player.player_speed
 	else:
 		set_process_input(false)
-	source_cell_set.emit(source_cell, occupied_cell_coords, source_player_range)
+	source_cell_set.emit(source_cell, occupied_cells_coords, source_player_range)
 
 func set_target_cell(click_location : Vector2i) -> void:
 	var target_cell = click_location
