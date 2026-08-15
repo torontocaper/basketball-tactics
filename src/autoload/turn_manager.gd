@@ -3,19 +3,19 @@ extends Node
 ## Turn controller.
 
 ## Emitted when a new player is selected. Sends their location to [CourtLayerData]
-signal player_selected(selected_player : Player)
+signal active_player_set(player_made_active : Player)
 
 var green_team : Team 
 var blue_team : Team 
-var selected_player : Player :
+var active_player : Player:
 	set(value):
-		selected_player = value
-		if selected_player:
-			print_debug("%s selected" % selected_player.name)
-			player_selected.emit(selected_player)
+		active_player = value
+		if active_player:
+			print_debug("%s selected" % active_player.name)
+			active_player_set.emit(active_player)
 		else:
 			print_debug("No player selected")
-			player_selected.emit(null)
+			active_player_set.emit(null)
 
 ## Flip coin to determine which team gets first ball
 func flip_coin(team_1 : Team, team_2 : Team) -> Array[Team] :
@@ -29,19 +29,24 @@ func flip_coin(team_1 : Team, team_2 : Team) -> Array[Team] :
 			losing_team = team_1
 	return [winning_team, losing_team]
 
-## Each [Player] connects their "player_clicked" signal to this method
-func on_player_clicked(clicked_player : Player) -> void :
-	if clicked_player.is_selectable:
-		clicked_player.is_selected = true
-		selected_player = clicked_player
-		for player in selected_player.team.players:
-			if player != selected_player:
-				player.is_selected = false
-	elif clicked_player.is_selected:
-		clicked_player.is_selected = false
-		clicked_player.is_selectable = true
-		selected_player = null
-
+## Each [Player] connects their "player_selected" signal to this method
+func on_player_clicked(clicked_player : Player) -> void:
+	match clicked_player.player_state:
+		Player.PlayerState.SELECTED:
+			clicked_player.player_state = Player.PlayerState.SELECTABLE
+			active_player = null
+		Player.PlayerState.SELECTABLE:
+			if active_player:
+				active_player.player_state = Player.PlayerState.SELECTABLE
+			clicked_player.player_state = Player.PlayerState.SELECTED
+			active_player = clicked_player
+		Player.PlayerState.UNSELECTABLE:
+			return
+		Player.PlayerState.MOVING:
+			return
+		_:
+			return
+	
 func end_turn(team : Team) -> void :
 	team.is_active = false
 

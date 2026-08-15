@@ -11,35 +11,41 @@ enum PlayerSpeed {
 	FAST = 6
 	}
 
+enum PlayerState {
+	SELECTED,
+	SELECTABLE,
+	UNSELECTABLE,
+	MOVING
+}
+
 const MOVEMENT_SPEED: float = 10.0
 const SELECTED_SCALE: float = 1.2
 
-@export_range(0, 99, 1) var player_number : int = 0
+@export_range(0, 99, 1) var player_number : int = 0 ## The Player's jersey number
 @export var player_speed : PlayerSpeed = PlayerSpeed.AVERAGE
 @export var starting_coords : Vector2i
 
 var coords : Vector2i
-var is_selectable: bool:
+var player_state : PlayerState:
 	set(value):
-		is_selectable = value
-		if is_selectable:
-			player_sprite.scale = Vector2.ONE
-			player_sprite.modulate = Color.WHITE
-			player_light.visible = false
-		else:
-			player_sprite.scale = Vector2.ONE
-			player_sprite.modulate = Color.DIM_GRAY
-			player_light.visible = false
-var is_selected: bool:
-	set(value):
-		is_selected = value
-		if is_selected:
-			is_selectable = false
-			player_sprite.scale = Vector2.ONE * SELECTED_SCALE
-			player_sprite.modulate = Color.WHITE
-			player_light.visible = true
-		else:
-			is_selectable = true
+		player_state = value
+		match player_state:
+			PlayerState.SELECTED:
+				player_sprite.scale = Vector2.ONE * SELECTED_SCALE
+				player_sprite.modulate = Color.WHITE
+				player_light.visible = true
+			PlayerState.SELECTABLE:
+				player_sprite.scale = Vector2.ONE
+				player_sprite.modulate = Color.WHITE
+				player_light.visible = false
+			PlayerState.UNSELECTABLE:
+				player_sprite.scale = Vector2.ONE
+				player_sprite.modulate = Color.DIM_GRAY
+				player_light.visible = false
+			PlayerState.MOVING:
+				pass
+			_:
+				pass
 var team : Team
 
 @onready var player_number_label: Label = $PlayerNumberLabel

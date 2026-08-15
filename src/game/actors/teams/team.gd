@@ -13,12 +13,11 @@ var has_ball: bool:
 var is_active: bool:
 	set(value):
 		is_active = value
-		if is_active:
-			for player in players:
-				player.is_selectable = true
-		else:
-			for player in players:
-				player.is_selectable = false
+		for player in players:
+			if is_active:
+					player.player_state = Player.PlayerState.SELECTABLE
+			else:
+					player.player_state = Player.PlayerState.UNSELECTABLE
 
 # OVERRIDES
 func _ready() -> void:

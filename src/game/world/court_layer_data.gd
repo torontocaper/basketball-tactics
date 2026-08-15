@@ -18,7 +18,7 @@ var occupied_cells : Dictionary[Vector2i, Player]
 func _ready() -> void:
 	super()
 	set_process_input(false)
-	TurnManager.connect("player_selected", set_source_cell)
+	TurnManager.connect("active_player_set", set_source_cell)
 	connect("source_cell_set", MoveManager.update_map)
 	connect("target_cell_set", MoveManager.get_path_by_coords)
 	MoveManager.graph = _create_dijkstra_graph(court_cells)
