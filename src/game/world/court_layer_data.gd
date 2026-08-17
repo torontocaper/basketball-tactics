@@ -5,14 +5,19 @@ extends CourtLayer
 ## The layer of the court responsible for data -- point values, player positions, etc. 
 
 ## Emitted when a source cell for navigation is set
-signal source_cell_set(source_cell_coords : Vector2i, occupied_cells_coords : Array[Vector2i], movement_range : int)
+signal source_cell_set(source_cell_coords : Vector2i, occupied_cells_coords : Array[Vector2i])
 ## Emitted when a target cell for navigation is set.
 signal target_cell_set(target_cell_coords : Vector2i)
 
 const MOVEMENT_COST_ORTHOGONAL : int = 2
 const MOVEMENT_COST_DIAGONAL : int = 3
 
-var occupied_cells : Dictionary[Vector2i, Player]
+var occupied_cells : Dictionary[Player, Vector2i]
+var source_cell : Vector2i
+var target_cell : Vector2i:
+	set(value):
+		target_cell = value
+		target_cell_set.emit(target_cell)
 
 #region OVERRIDES
 func _ready() -> void:
@@ -23,29 +28,33 @@ func _ready() -> void:
 	connect("target_cell_set", MoveManager.get_move_path)
 	MoveManager.graph = _create_dijkstra_graph(court_cells)
 
-func _input(event: InputEvent) -> void:
+func _input(event: InputEvent) -> void: ## Only runs when a player/source cell is selected
 	if event is InputEventMouseButton and event.is_pressed():
 		var clicked_cell = local_to_map(event.position)
 		if clicked_cell in court_cells:
-			set_target_cell(clicked_cell)
+			if target_cell == clicked_cell:
+				initiate_move()
+			else:
+				target_cell = clicked_cell
+
+func initiate_move() -> void:
+	var move_path_cells : Array = MoveManager.path_coords
+	var active_player : Player = TurnManager.active_player
+	var move_path_global : Array[Vector2]
+	for cell in move_path_cells:
+		var move_point_global : Vector2 = to_global(map_to_local(cell))
+		move_path_global.append(move_point_global)
+	active_player.move_along_path(move_path_global)
 
 ## Called from TurnManager when a player is selected
 func set_source_cell(source_player : Player) -> void:
-	var source_cell : Vector2i = Vector2i(-1, -1)
-	var occupied_cells_coords : Array[Vector2i] = []
-	var source_player_range : int = 0
+	source_cell = Vector2i(-1, -1)
 	if source_player:
 		set_process_input(true)
-		source_cell = source_player.coords
-		occupied_cells_coords = occupied_cells.keys()
-		source_player_range = source_player.player_speed
+		source_cell = local_to_map(to_local(source_player.global_position))
 	else:
 		set_process_input(false)
-	source_cell_set.emit(source_cell, occupied_cells_coords, source_player_range)
-
-func set_target_cell(click_location : Vector2i) -> void:
-	var target_cell = click_location
-	target_cell_set.emit(target_cell)
+	source_cell_set.emit(source_cell, occupied_cells.values())
 #endregion
 
 #region PRIVATE/HELPER

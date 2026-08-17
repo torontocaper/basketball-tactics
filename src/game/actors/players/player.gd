@@ -3,12 +3,13 @@ class_name Player
 extends CharacterBody2D
 ## Class representing a player on the court (not the person playing the game).
 
+signal move_completed
 signal player_clicked(this_player: Player)
 
 enum PlayerSpeed {
-	SLOW = 4,
-	AVERAGE = 5, 
-	FAST = 6
+	SLOW = 8,
+	AVERAGE = 10, 
+	FAST = 12
 	}
 
 enum PlayerState {
@@ -55,8 +56,15 @@ var team : Team
 func _ready() -> void:
 	connect("input_event", _on_input_event)
 	connect("player_clicked", TurnManager.on_player_clicked)
+	#connect("move_completed", MoveManager.update_map)
 	coords = starting_coords
 	player_number_label.text = str(player_number)
+
+func move_along_path(path : Array) -> void:
+	var movement_tween = create_tween()
+	for point in path:
+		movement_tween.tween_property(self, "global_position", point, 0.5)
+	move_completed.emit()
 
 func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event.is_pressed() and event is InputEventMouseButton:

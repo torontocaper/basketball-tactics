@@ -25,7 +25,7 @@ func _ready() -> void:
 	MoveManager.connect("map_updated", update_distances)
 	MoveManager.connect("path_found", display_new_path)
 
-func handle_click_at_cell(clicked_cell : Vector2i, _is_right_click : bool) -> void:
+func handle_click_at_cell(clicked_cell : Vector2i) -> void:
 	indicate_click(clicked_cell)
 #endregion
 
@@ -33,6 +33,7 @@ func handle_click_at_cell(clicked_cell : Vector2i, _is_right_click : bool) -> vo
 func display_new_path(new_path : Array) -> void:
 	if new_path:
 		var last_point = new_path.back()
+		active_player_move_range = TurnManager.active_player.player_speed
 		if current_dijkstra_map[last_point].distance_from_source > active_player_move_range:
 			return
 		else:
@@ -46,13 +47,13 @@ func indicate_click(cell_to_indicate : Vector2i) -> void:
 	click_indicator.position = map_to_local(cell_to_indicate)
 	click_indicator.restart()
 
-func update_distances(dijkstra_map : Dictionary[Vector2i, Dictionary], move_range : int) -> void:
+func update_distances(dijkstra_map : Dictionary[Vector2i, Dictionary]) -> void:
 	path_indicator.clear_points()
-	active_player_move_range = move_range
 	current_dijkstra_map = dijkstra_map
 	if current_dijkstra_map.size() == 0:
 		_hide_cell_graphics(court_cell_graphics)
 	else:
+		active_player_move_range = TurnManager.active_player.player_speed
 		for point in court_cells:
 			var point_distance : int = current_dijkstra_map[point].distance_from_source
 			var cell_label : Label = court_cell_graphics.get(point).label

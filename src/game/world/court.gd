@@ -8,7 +8,7 @@ var players_on_court : Array[Player]:
 		players_on_court = value
 		for player in players_on_court:
 			snap_player_to_grid(player)
-			data_layer.occupied_cells[player.coords] = player
+			data_layer.occupied_cells[player] = player.coords
 
 @onready var data_layer: CourtLayerData = $DataLayer
 @onready var visual_layer: CourtLayerVisual = $VisualLayer
