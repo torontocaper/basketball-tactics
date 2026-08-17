@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bv3jtg5siw651" path="res://src/ui/ui_user.gd" id="1_aeh18"]
 [ext_resource type="PackedScene" uid="uid://ocnv6pom0ooy" path="res://src/ui/scoreboard.tscn" id="1_ldpg4"]
+[ext_resource type="FontFile" uid="uid://bitgv7nf07au6" path="res://assets/fonts/RobotoMono-Medium.ttf" id="2_lx81v"]
 
 [node name="UIUser" type="Control" unique_id=30669888]
 custom_minimum_size = Vector2(720, 640)
@@ -14,5 +15,30 @@ size_flags_vertical = 3
 mouse_filter = 2
 script = ExtResource("1_aeh18")
 
-[node name="Scoreboard" parent="." unique_id=754260294 instance=ExtResource("1_ldpg4")]
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=152134442]
 layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -67.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="ActiveTeamLabel" type="Label" parent="HBoxContainer" unique_id=23225232]
+layout_mode = 2
+size_flags_horizontal = 2
+theme_override_fonts/font = ExtResource("2_lx81v")
+theme_override_font_sizes/font_size = 48
+text = "BlueTeam"
+
+[node name="Scoreboard" parent="HBoxContainer" unique_id=754260294 instance=ExtResource("1_ldpg4")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="ActivePlayerLabel" type="Label" parent="HBoxContainer" unique_id=1063821037]
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_fonts/font = ExtResource("2_lx81v")
+theme_override_font_sizes/font_size = 48
+text = "Blue1"

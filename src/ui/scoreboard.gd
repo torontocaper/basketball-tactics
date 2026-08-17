@@ -7,12 +7,12 @@ extends PanelContainer
 @export var green_team: Team:
 	set(value):
 		green_team = value
-		print_debug("Scoreboard has a green team: %s" % green_team.team_name)
+		print_debug("Scoreboard has a green team: %s" % green_team.name)
 
 @export var blue_team: Team:
 	set(value):
 		blue_team = value
-		print_debug("Scoreboard has a blue team: %s" % blue_team.team_name)
+		print_debug("Scoreboard has a blue team: %s" % blue_team.name)
 
 @export var current_game: Game:
 	set(value):

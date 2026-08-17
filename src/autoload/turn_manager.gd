@@ -4,6 +4,13 @@ extends Node
 
 ## Emitted when a new player is selected. Sends their location to [CourtLayerData]
 signal active_player_set(player_made_active : Player)
+## Emitted when a new active team is set
+signal active_team_set(team_made_active : Team)
+
+var active_team : Team:
+	set(value):
+		active_team = value
+		active_team_set.emit(active_team)
 
 var green_team : Team 
 var blue_team : Team 
@@ -11,10 +18,10 @@ var active_player : Player:
 	set(value):
 		active_player = value
 		if active_player:
-			print_debug("%s selected" % active_player.name)
+			print_debug("%s active" % active_player.name)
 			active_player_set.emit(active_player)
 		else:
-			print_debug("No player selected")
+			print_debug("No active player")
 			active_player_set.emit(null)
 
 ## Flip coin to determine which team gets first ball
@@ -22,6 +29,7 @@ func flip_coin(team_1 : Team, team_2 : Team) -> Array[Team] :
 	var team_array: Array[Team] = [team_1, team_2]
 	var winning_team: Team = team_array.pick_random()
 	var losing_team: Team
+	active_team = winning_team
 	match winning_team:
 		team_1:
 			losing_team = team_2
