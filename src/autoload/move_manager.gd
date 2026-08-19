@@ -3,7 +3,7 @@ extends Node
 ## Manages movement using Dijkstra's algorithm
 
 signal map_updated(new_map : Array[Dictionary])
-signal path_found(new_path : Array[Vector2i])
+signal path_found(new_path : Array[Vector2i], new_path_cost : int)
 
 ## Graph of all cells, their immediate neighbors and the costs to reach those neighbors
 var graph : Dictionary[Vector2i, Dictionary]
@@ -13,16 +13,20 @@ var graph : Dictionary[Vector2i, Dictionary]
 var distance_map : Dictionary[Vector2i, Dictionary]
 
 ## Path for the currently planned move
-var path_coords : Array:
-	set(value):
-		path_coords = value
-		path_found.emit(path_coords)
+var path_coords : Array
+## Cost for the currently planned move
+var path_cost : int
+	#set(value):
+		#path_coords = value
+		#path_found.emit(path_coords)
 
 #region CORE
 ## Finds the path from the current source cell to destination_cell_coords
 func get_move_path(destination_cell_coords : Vector2i) -> void:
-	var destination_point : Dictionary = _find_point_by_coords(destination_cell_coords, distance_map.values())
+	var destination_point : Dictionary = _find_point_by_coords(destination_cell_coords, distance_map)
 	path_coords = destination_point.path_from_source
+	path_cost = destination_point.distance_from_source
+	path_found.emit(path_coords, path_cost)
 
 ## Updates the Dijkstra map based on the new source cell
 func update_map(source_cell_coords: Vector2i, occupied_cells : Array[Vector2i] = []) -> void:
@@ -55,12 +59,12 @@ func update_map(source_cell_coords: Vector2i, occupied_cells : Array[Vector2i] =
 			map_values.sort_custom(func(point_1, point_2): return point_1.distance_from_source < point_2.distance_from_source)
 			var index_of_closest_unsettled_point : int = map_values.find_custom(func(point): return not point.is_settled)
 			var closest_unsettled_point : Dictionary = map_values[index_of_closest_unsettled_point]
-			update_neighbors(closest_unsettled_point.coords, map_values)
+			update_neighbors(closest_unsettled_point.coords, distance_map)
 		# Now the whole map is up-to-date based on the source cell. Should we remove the entries that are out of range? 
 	map_updated.emit(distance_map)
 
 ## Update travel distances and paths for the immediate neighbors of a given cell 
-func update_neighbors(point_coords: Vector2i, map: Array[Dictionary]) -> void:
+func update_neighbors(point_coords: Vector2i, map: Dictionary) -> void:
 	# Get the cell's immediate neighbors from the graph
 	var starting_point : Dictionary = _find_point_by_coords(point_coords, map)
 	var starting_point_distance : int = starting_point.distance_from_source
@@ -80,8 +84,8 @@ func update_neighbors(point_coords: Vector2i, map: Array[Dictionary]) -> void:
 #endregion
 
 #region PRIVATE/HELPER
-func _find_point_by_coords(coords: Vector2i, map: Array[Dictionary]) -> Dictionary:
-	var index_of_point = map.find_custom(func(point): return point.coords == coords)
-	var found_point : Dictionary = map[index_of_point]
+func _find_point_by_coords(coords: Vector2i, map: Dictionary) -> Dictionary:
+	var index_of_point = map.values().find_custom(func(point): return point.coords == coords)
+	var found_point : Dictionary = map.values()[index_of_point]
 	return found_point
 #endregion

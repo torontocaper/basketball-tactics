@@ -40,12 +40,13 @@ func _input(event: InputEvent) -> void: ## Only runs when a player/source cell i
 ## Called from _input when the target_cell is re-clicked, confirming the move
 func initiate_move() -> void:
 	var move_path_cells : Array = MoveManager.path_coords
+	var move_path_cost : int = MoveManager.path_cost
 	var active_player : Player = TurnManager.active_player
 	var move_path_global : Array[Vector2]
 	for cell in move_path_cells:
 		var move_point_global : Vector2 = to_global(map_to_local(cell))
 		move_path_global.append(move_point_global)
-	active_player.move_along_path(move_path_global)
+	active_player.move_along_path(move_path_global, move_path_cost)
 
 ## Called from TurnManager when a player is selected
 func set_source_cell(source_player : Player) -> void:

@@ -30,11 +30,11 @@ func handle_click_at_cell(clicked_cell : Vector2i) -> void:
 #endregion
 
 #region CORE
-func display_new_path(new_path : Array) -> void:
+func display_new_path(new_path : Array, new_path_cost : int) -> void:
 	if new_path:
-		var last_point = new_path.back()
-		active_player_move_range = TurnManager.active_player.player_speed
-		if current_dijkstra_map[last_point].distance_from_source > active_player_move_range:
+		#var last_point = new_path.back()
+		active_player_move_range = TurnManager.active_player.available_energy
+		if new_path_cost > active_player_move_range:
 			return
 		else:
 			path_indicator.clear_points()
@@ -53,7 +53,7 @@ func update_distances(dijkstra_map : Dictionary[Vector2i, Dictionary]) -> void:
 	if current_dijkstra_map.size() == 0:
 		_hide_cell_graphics(court_cell_graphics)
 	else:
-		active_player_move_range = TurnManager.active_player.player_speed
+		active_player_move_range = TurnManager.active_player.available_energy
 		for point in court_cells:
 			var point_distance : int = current_dijkstra_map[point].distance_from_source
 			var cell_label : Label = court_cell_graphics.get(point).label
