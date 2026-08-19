@@ -2,7 +2,7 @@
 #@icon(icon_path: String)
 class_name CourtLayer
 extends TileMapLayer
-## Base class for [CourtLayerData] and [CourtLayerVisual]
+## (Abstract?) Base class for [CourtLayerData] and [CourtLayerVisual]
 
 var court_cells : Array[Vector2i] ## The cells that are in play.
 

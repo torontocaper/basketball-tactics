@@ -37,6 +37,7 @@ func _input(event: InputEvent) -> void: ## Only runs when a player/source cell i
 			else:
 				target_cell = clicked_cell
 
+## Called from _input when the target_cell is re-clicked, confirming the move
 func initiate_move() -> void:
 	var move_path_cells : Array = MoveManager.path_coords
 	var active_player : Player = TurnManager.active_player
