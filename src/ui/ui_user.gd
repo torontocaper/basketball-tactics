@@ -14,9 +14,9 @@ var team: Team:
 		print_debug("%s represents %s" % [name, team.name])
 
 @onready var scoreboard: Scoreboard = %Scoreboard
-@onready var active_team_label: Label = $HBoxContainer/ActiveTeamLabel
-@onready var active_player_label: Label = $HBoxContainer/ActivePlayerLabel
-@onready var active_player_energy: ProgressBar = $HBoxContainer/ActivePlayerEnergy
+@onready var active_team_label: Label = %ActiveTeamLabel
+@onready var active_player_label: Label = %ActivePlayerLabel
+@onready var active_player_energy: ProgressBar = %ActivePlayerEnergy
 
 func _ready() -> void:
 	print_debug("%s ready at %s ms" % [name, Time.get_ticks_msec()])

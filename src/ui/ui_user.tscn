@@ -15,40 +15,64 @@ size_flags_vertical = 3
 mouse_filter = 2
 script = ExtResource("1_aeh18")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=152134442]
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1289687527]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -67.0
+offset_top = -65.0
 grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Scoreboard" parent="CenterContainer" unique_id=754260294 instance=ExtResource("1_ldpg4")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+
+[node name="TeamBox" type="HBoxContainer" parent="." unique_id=152134442]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -67.0
+offset_right = 231.0
 grow_vertical = 0
 alignment = 1
 
-[node name="ActiveTeamLabel" type="Label" parent="HBoxContainer" unique_id=23225232]
+[node name="ActiveTeamLabel" type="Label" parent="TeamBox" unique_id=23225232]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_fonts/font = ExtResource("2_lx81v")
 theme_override_font_sizes/font_size = 48
 text = "BlueTeam"
 
-[node name="Scoreboard" parent="HBoxContainer" unique_id=754260294 instance=ExtResource("1_ldpg4")]
+[node name="PlayerBox" type="HBoxContainer" parent="." unique_id=1140417146]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -152.0
+offset_top = -65.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="ActivePlayerLabel" type="Label" parent="PlayerBox" unique_id=1063821037]
 unique_name_in_owner = true
 layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 4
-
-[node name="ActivePlayerLabel" type="Label" parent="HBoxContainer" unique_id=1063821037]
-layout_mode = 2
-size_flags_horizontal = 8
 theme_override_fonts/font = ExtResource("2_lx81v")
 theme_override_font_sizes/font_size = 48
 text = "Blue1"
 
-[node name="ActivePlayerEnergy" type="ProgressBar" parent="HBoxContainer" unique_id=1967268551]
+[node name="ActivePlayerEnergy" type="ProgressBar" parent="PlayerBox" unique_id=1967268551]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 0)
+custom_maximum_size = Vector2(100, -1)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
-step = 1.0
 show_percentage = false
