@@ -6,7 +6,7 @@ signal map_updated(new_map : Array[Dictionary])
 signal path_found(new_path : Array[Vector2i], new_path_cost : int)
 
 ## Graph of all cells, their immediate neighbors and the costs to reach those neighbors
-var graph : Dictionary[Vector2i, Dictionary]
+var dijkstra_graph : Dictionary[Vector2i, Dictionary]
 
 ## Map of all cells, along with their total distances and paths from the source cell, keyed by coords
 ## (There is also a key called coords in the value Dictionary, so that the 'values' array contains the coords too)
@@ -37,7 +37,7 @@ func update_map(source_cell_coords: Vector2i, occupied_cells : Array[Vector2i] =
 		print_debug("No source cell from which to update map")
 		map_updated.emit(distance_map)
 	else:
-		for node in graph:
+		for node in dijkstra_graph:
 			distance_map[node] = {
 				"coords" = node,
 				"is_settled" = false,
@@ -65,11 +65,11 @@ func update_map(source_cell_coords: Vector2i, occupied_cells : Array[Vector2i] =
 
 ## Update travel distances and paths for the immediate neighbors of a given cell 
 func update_neighbors(point_coords: Vector2i, map: Dictionary) -> void:
-	# Get the cell's immediate neighbors from the graph
+	# Get the cell's immediate neighbors from the dijkstra_graph
 	var starting_point : Dictionary = _find_point_by_coords(point_coords, map)
 	var starting_point_distance : int = starting_point.distance_from_source
 	var starting_point_path: Array = starting_point.path_from_source
-	var neighbors : Dictionary = graph[point_coords]
+	var neighbors : Dictionary = dijkstra_graph[point_coords]
 	for neighbor in neighbors:
 		var distance_to_neighbor : int = neighbors[neighbor]
 		var neighbor_point : Dictionary = _find_point_by_coords(neighbor, map)

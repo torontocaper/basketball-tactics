@@ -6,12 +6,12 @@ var current_game: Game
 var green_team: Team:
 	set(value):
 		green_team = value
-		ui_user_north.team = green_team
+		ui_user_north.user_team = green_team
 
 var blue_team: Team:
 	set(value):
 		blue_team = value
-		ui_user_south.team = blue_team
+		ui_user_south.user_team = blue_team
 
 @onready var ui_user_north: UIUser = $UIUserNorth
 @onready var ui_user_south: UIUser = $UIUserSouth
@@ -24,5 +24,5 @@ func _ready():
 	green_team = current_game.green_team
 	blue_team = current_game.blue_team
 	var user_uis: Array[UIUser] = [ui_user_north, ui_user_south]
-	for ui in user_uis:
-		ui.scoreboard.current_game = current_game
+	for user_ui in user_uis:
+		user_ui.user_scoreboard.current_game = current_game

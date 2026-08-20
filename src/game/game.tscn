@@ -14,7 +14,6 @@ script = ExtResource("1_4e6k0")
 
 [node name="Blue1" parent="BlueTeam" index="0" unique_id=860716830]
 position = Vector2(359, 1057)
-player_speed = 12
 starting_coords = Vector2i(4, 13)
 
 [node name="Blue2" parent="BlueTeam" index="1" unique_id=884478291]
@@ -23,7 +22,6 @@ starting_coords = Vector2i(6, 10)
 
 [node name="Blue3" parent="BlueTeam" index="2" unique_id=1226553230]
 position = Vector2(216, 835)
-player_speed = 8
 starting_coords = Vector2i(2, 10)
 
 [node name="GreenTeam" parent="." unique_id=975415349 instance=ExtResource("4_xptat")]
@@ -31,7 +29,6 @@ starting_coords = Vector2i(2, 10)
 [node name="Green1" parent="GreenTeam" index="0" unique_id=860716830]
 position = Vector2(359, 233)
 rotation = 3.1415927
-player_speed = 12
 starting_coords = Vector2i(4, 2)
 
 [node name="Green2" parent="GreenTeam" index="1" unique_id=156980691]
@@ -42,7 +39,6 @@ starting_coords = Vector2i(6, 5)
 [node name="Green3" parent="GreenTeam" index="2" unique_id=674392125]
 position = Vector2(209, 420)
 rotation = 3.1415927
-player_speed = 8
 starting_coords = Vector2i(2, 5)
 
 [editable path="BlueTeam"]

@@ -26,7 +26,7 @@ func _ready() -> void:
 	TurnManager.connect("active_player_set", set_source_cell)
 	connect("source_cell_set", MoveManager.update_map)
 	connect("target_cell_set", MoveManager.get_move_path)
-	MoveManager.graph = _create_dijkstra_graph(court_cells)
+	MoveManager.dijkstra_graph = _create_dijkstra_graph(court_cells)
 
 func _input(event: InputEvent) -> void: ## Only runs when a player/source cell is selected
 	if event is InputEventMouseButton and event.is_pressed():
@@ -46,7 +46,12 @@ func initiate_move() -> void:
 	for cell in move_path_cells:
 		var move_point_global : Vector2 = to_global(map_to_local(cell))
 		move_path_global.append(move_point_global)
-	active_player.move_along_path(move_path_global, move_path_cost)
+	if active_player.available_energy >= move_path_cost:
+		var active_player_new_global_position = await active_player.move_along_path(move_path_global, move_path_cost)
+		var active_player_new_coords = local_to_map(to_local(active_player_new_global_position))
+		active_player.coords = active_player_new_coords
+		occupied_cells[active_player] = active_player.coords
+		source_cell_set.emit(active_player.coords, occupied_cells.values())
 
 ## Called from TurnManager when a player is selected
 func set_source_cell(source_player : Player) -> void:
