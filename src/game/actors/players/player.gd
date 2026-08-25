@@ -64,16 +64,18 @@ func _ready() -> void:
 	available_energy = player_base_energy
 	player_number_label.text = str(player_number)
 
-func move_along_path(path : Array, path_cost : int) -> Vector2:
+## Currently called from [CourtLayerData]
+func move_along_path(path : Array, path_cost : int) -> void:
 	player_state = PlayerState.MOVING
 	var movement_tween = create_tween()
-	for point in path:
+	for point in path.slice(1): # Don't 'move' to the starting point
+		print_debug("Moving to position %s" % str(point))
 		movement_tween.tween_property(self, "global_position", point, 0.5)
 		print_debug("New global position: %s" % str(global_position))
+	print_debug("New global position: %s" % str(global_position))
 	available_energy -= path_cost
 	await movement_tween.finished
 	player_state = PlayerState.SELECTED
-	return global_position
 
 func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event.is_pressed() and event is InputEventMouseButton:

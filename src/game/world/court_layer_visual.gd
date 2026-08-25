@@ -47,6 +47,9 @@ func indicate_click(cell_to_indicate : Vector2i) -> void:
 	click_indicator.position = map_to_local(cell_to_indicate)
 	click_indicator.restart()
 
+func snap_player_to_grid(player_to_snap : Player) -> void:
+	player_to_snap.position = map_to_local(player_to_snap.starting_coords)
+
 func update_distances(dijkstra_map : Dictionary[Vector2i, Dictionary]) -> void:
 	path_indicator.clear_points()
 	current_dijkstra_map = dijkstra_map

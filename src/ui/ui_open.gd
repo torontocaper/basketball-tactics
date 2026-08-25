@@ -13,13 +13,8 @@ var ui_parent: UI
 func _ready():
 	print_debug("UIOpen ready at %s ms" % Time.get_ticks_msec())
 	ui_parent = get_parent() as UI
-	_connect_signals()
-
-# CORE
-
-# PRIVATE/HELPER
-func _connect_signals():
 	start_button.connect("pressed", _on_start_button_pressed)
+	
 
 # RECEIVERS
 func _on_start_button_pressed() -> void:

@@ -28,10 +28,10 @@ func _ready():
 
 # CORE
 func open_new_ui_scene(ui_state: UIState) -> void:
-	var scenes_to_close: Array[Node] = get_children()
+	var scenes_to_close : Array[Node] = get_children()
 	for scene in scenes_to_close:
 		scene.queue_free()
-	var scene_to_open: PackedScene
+	var scene_to_open : PackedScene
 	match ui_state:
 		UIState.OPEN:
 			scene_to_open = UI_OPEN
@@ -39,9 +39,5 @@ func open_new_ui_scene(ui_state: UIState) -> void:
 			scene_to_open = UI_MAIN
 		_:
 			scene_to_open = UI_ERROR
-	var instantiated_scene:= scene_to_open.instantiate()
+	var instantiated_scene : Node = scene_to_open.instantiate()
 	add_child(instantiated_scene)
-
-# PRIVATE/HELPER
-
-# RECEIVERS

@@ -20,7 +20,10 @@ var blue_score: int = 0:
 		blue_score = value
 		score_updated.emit(green_score, blue_score)
 
-var players_in_game: Array[Player]
+var players_in_game: Array[Player]:
+	set(value):
+		players_in_game = value
+		court.players_on_court = players_in_game
 
 @onready var court: Court = $Court
 @onready var blue_team: Team = $BlueTeam
@@ -28,11 +31,10 @@ var players_in_game: Array[Player]
 
 func _ready() -> void:
 	players_in_game = blue_team.players + green_team.players
-	court.players_on_court = players_in_game
 	TurnManager.blue_team = blue_team
 	TurnManager.green_team = green_team
-	start_game()
 
+## Currently called from UIMain, which I'm not crazy about
 func start_game() -> void:
 	green_team.is_active = false
 	blue_team.is_active = false

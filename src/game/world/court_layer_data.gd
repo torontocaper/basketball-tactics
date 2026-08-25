@@ -9,10 +9,15 @@ signal source_cell_set(source_cell_coords : Vector2i, occupied_cells_coords : Ar
 ## Emitted when a target cell for navigation is set.
 signal target_cell_set(target_cell_coords : Vector2i)
 
-const MOVEMENT_COST_ORTHOGONAL : int = 2
-const MOVEMENT_COST_DIAGONAL : int = 3
+## Integers representing movement costs for orthogonal (N/W/S/E) and diagonal (NW/SW/SE/NE) neighbor cells
+enum MovementCost {
+	MOVEMENT_COST_ORTHOGONAL = 2,
+	MOVEMENT_COST_DIAGONAL = 3
+	}
 
+## Set of cells that are currently occupied by Players. 
 var occupied_cells : Dictionary[Player, Vector2i]
+
 var source_cell : Vector2i
 var target_cell : Vector2i:
 	set(value):
@@ -47,9 +52,8 @@ func initiate_move() -> void:
 		var move_point_global : Vector2 = to_global(map_to_local(cell))
 		move_path_global.append(move_point_global)
 	if active_player.available_energy >= move_path_cost:
-		var active_player_new_global_position = await active_player.move_along_path(move_path_global, move_path_cost)
-		var active_player_new_coords = local_to_map(to_local(active_player_new_global_position))
-		active_player.coords = active_player_new_coords
+		await active_player.move_along_path(move_path_global, move_path_cost)
+		active_player.coords = local_to_map(to_local(active_player.global_position))
 		occupied_cells[active_player] = active_player.coords
 		source_cell_set.emit(active_player.coords, occupied_cells.values())
 
@@ -80,10 +84,10 @@ func _get_cell_neighbors(cell_coords: Vector2i) -> Dictionary[Vector2i, int]:
 	var diagonal_neighbors : Array[Vector2i] = _get_diagonal_neighbors(cell_coords)
 	for o in orthogonal_neighbors:
 		if o in court_cells:
-			new_neighbors[o] = MOVEMENT_COST_ORTHOGONAL
+			new_neighbors[o] = MovementCost.MOVEMENT_COST_ORTHOGONAL
 	for d in diagonal_neighbors:
 		if d in court_cells:
-			new_neighbors[d] = MOVEMENT_COST_DIAGONAL
+			new_neighbors[d] = MovementCost.MOVEMENT_COST_DIAGONAL
 	return new_neighbors
 	
 ## Get the coordinates for the diagonal neighbors of the [Cell] at `cell_coords`.

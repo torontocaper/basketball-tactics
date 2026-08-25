@@ -3,15 +3,13 @@ class_name Court
 extends Node2D
 ## The surface a [Game] is played on.
 
+## The [Player]s on this court. Not sure we can't handle this another way.
 var players_on_court : Array[Player]:
 	set(value):
 		players_on_court = value
 		for player in players_on_court:
-			snap_player_to_grid(player)
+			visual_layer.snap_player_to_grid(player)
 			data_layer.occupied_cells[player] = player.coords
 
 @onready var data_layer: CourtLayerData = $DataLayer
 @onready var visual_layer: CourtLayerVisual = $VisualLayer
-
-func snap_player_to_grid(player_to_snap : Player) -> void:
-	player_to_snap.position = data_layer.map_to_local(player_to_snap.starting_coords)

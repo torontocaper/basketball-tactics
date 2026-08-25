@@ -31,7 +31,7 @@ size_flags_vertical = 4
 [node name="TitleLabel" type="Label" parent="PanelContainer/OpenContainer" unique_id=561048301]
 layout_mode = 2
 theme_override_font_sizes/font_size = 72
-text = "Basketball Tactics"
+text = "Chessketball"
 horizontal_alignment = 1
 
 [node name="StartButton" type="Button" parent="PanelContainer/OpenContainer" unique_id=1259959745]
