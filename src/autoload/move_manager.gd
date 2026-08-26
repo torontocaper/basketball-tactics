@@ -29,8 +29,8 @@ func get_move_path(destination_cell_coords : Vector2i) -> void:
 	path_found.emit(path_coords, path_cost)
 
 ## Updates the Dijkstra map based on the new source cell
-func update_map(source_cell_coords: Vector2i, occupied_cells : Array[Vector2i] = []) -> void:
-	print_debug("MoveManager updating the Dijkstra map with source cell at coords %s" % source_cell_coords)
+func update_map(source_cell_coords: Vector2i, occupied_cells : Dictionary[Player, Vector2i] = {}) -> void:
+	print_debug("MoveManager updating the Dijkstra map with source cell at coords %s\nOccupied cells: %s" % [source_cell_coords, occupied_cells])
 	if distance_map:
 		distance_map.clear()
 	if source_cell_coords == Vector2i(-1, -1): #TODO: make this less hack-y
@@ -46,7 +46,7 @@ func update_map(source_cell_coords: Vector2i, occupied_cells : Array[Vector2i] =
 			if node == source_cell_coords:
 				distance_map[node].distance_from_source = 0
 				distance_map[node].path_from_source = [node]
-			elif node in occupied_cells:
+			elif node in occupied_cells.values():
 				distance_map[node].is_occupied = true
 				distance_map[node].distance_from_source = 99
 				distance_map[node].path_from_source = []

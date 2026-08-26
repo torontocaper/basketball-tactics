@@ -3,7 +3,7 @@ class_name Court
 extends Node2D
 ## The surface a [Game] is played on.
 
-## The [Player]s on this court. Not sure we can't handle this another way.
+## The [Player]s on this court. Set from [Game]
 var players_on_court : Array[Player]:
 	set(value):
 		players_on_court = value

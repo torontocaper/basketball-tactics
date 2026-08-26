@@ -5,7 +5,7 @@ extends CourtLayer
 ## The layer of the court responsible for data -- point values, player positions, etc. 
 
 ## Emitted when a source cell for navigation is set
-signal source_cell_set(source_cell_coords : Vector2i, occupied_cells_coords : Array[Vector2i])
+signal source_cell_set(source_cell_coords : Vector2i, occupied_cells : Dictionary[Player, Vector2i])
 ## Emitted when a target cell for navigation is set.
 signal target_cell_set(target_cell_coords : Vector2i)
 
@@ -17,8 +17,12 @@ enum MovementCost {
 
 ## Set of cells that are currently occupied by Players. 
 var occupied_cells : Dictionary[Player, Vector2i]
-
-var source_cell : Vector2i
+## Source cell for navigation calculation. Usually the same as the active [Player]'s current coordinates
+var source_cell : Vector2i:
+	set(value):
+		source_cell = value
+		source_cell_set.emit(source_cell, occupied_cells)
+## Target cell for navigation calculation. Set by clicking on an unoccupied cell that's within the active [Player]'s movement range
 var target_cell : Vector2i:
 	set(value):
 		target_cell = value
@@ -55,17 +59,16 @@ func initiate_move() -> void:
 		await active_player.move_along_path(move_path_global, move_path_cost)
 		active_player.coords = local_to_map(to_local(active_player.global_position))
 		occupied_cells[active_player] = active_player.coords
-		source_cell_set.emit(active_player.coords, occupied_cells.values())
+		source_cell_set.emit(active_player.coords, occupied_cells)
 
 ## Called from TurnManager when a player is selected
 func set_source_cell(source_player : Player) -> void:
-	source_cell = Vector2i(-1, -1)
 	if source_player:
 		set_process_input(true)
 		source_cell = local_to_map(to_local(source_player.global_position))
 	else:
 		set_process_input(false)
-	source_cell_set.emit(source_cell, occupied_cells.values())
+		source_cell = Vector2i(-1, -1)
 #endregion
 
 #region PRIVATE/HELPER

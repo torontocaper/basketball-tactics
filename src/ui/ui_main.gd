@@ -1,8 +1,6 @@
 class_name UIMain
 extends Control
 
-var current_game: Game
-
 var green_team: Team:
 	set(value):
 		green_team = value
@@ -18,11 +16,11 @@ var blue_team: Team:
 
 func _ready():
 	print_debug("UIMain ready at %s ms" % Time.get_ticks_msec())
-	var ui_parent = get_parent() as UI
-	current_game = ui_parent.game
-	current_game.start_game()
-	green_team = current_game.green_team
-	blue_team = current_game.blue_team
+	var main : Main = get_tree().current_scene
+	var game : Game = main.game
+	game.start_game()
+	green_team = game.green_team
+	blue_team = game.blue_team
 	var user_uis: Array[UIUser] = [ui_user_north, ui_user_south]
 	for user_ui in user_uis:
-		user_ui.user_scoreboard.current_game = current_game
+		user_ui.user_scoreboard.current_game = game

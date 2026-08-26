@@ -4,12 +4,15 @@ class_name Team
 extends Node2D
 ## Base class for teams
 
+## The [Player]s on this team
 var players: Array[Player]
 
+## Does this team have the ball?
 var has_ball: bool:
 	set(value):
 		has_ball = value
 
+## Is it this team's turn?
 var is_active: bool:
 	set(value):
 		is_active = value

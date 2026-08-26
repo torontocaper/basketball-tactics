@@ -4,11 +4,12 @@ class_name Game
 extends Node2D
 ## The (basketball) game.
 
+## Emitted when the score changes
 signal score_updated(new_green_score: int, new_blue_score: int)
 
-var ui: UI:
-	set(value):
-		ui = value
+#var ui: UI: 
+	#set(value):
+		#ui = value
 
 var green_score: int = 0:
 	set(value):

@@ -7,7 +7,7 @@ signal active_player_set(player_made_active : Player)
 ## Emitted when a new active team is set
 signal active_team_set(team_made_active : Team)
 
-var active_team : Team:
+var active_team : Team: ## The currently active [Team]
 	set(value):
 		active_team = value
 		active_team_set.emit(active_team)
@@ -24,7 +24,7 @@ var active_player : Player:
 			print_debug("No active player")
 			active_player_set.emit(null)
 
-## Flip coin to determine which team gets first ball
+## Determine which team gets first ball
 func flip_coin(team_1 : Team, team_2 : Team) -> Array[Team] :
 	var team_array: Array[Team] = [team_1, team_2]
 	var winning_team: Team = team_array.pick_random()
@@ -37,7 +37,7 @@ func flip_coin(team_1 : Team, team_2 : Team) -> Array[Team] :
 			losing_team = team_1
 	return [winning_team, losing_team]
 
-## Each [Player] connects their "player_selected" signal to this method
+## What to do when a [Player] is clicked. Each [Player] connects their "player_clicked" signal to this method
 func on_player_clicked(clicked_player : Player) -> void:
 	match clicked_player.player_state:
 		Player.PlayerState.SELECTED:
@@ -54,7 +54,7 @@ func on_player_clicked(clicked_player : Player) -> void:
 			return
 		_:
 			return
-	
+
 func end_turn(team : Team) -> void :
 	team.is_active = false
 

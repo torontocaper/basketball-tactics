@@ -2,20 +2,17 @@
 #@icon(icon_path)
 class_name UIOpen
 extends Control
-## Documentation comments
-
-var ui_parent: UI
+## The opening/title screen
 
 @onready var start_button = %StartButton
 
-# OVERRIDES
-
 func _ready():
 	print_debug("UIOpen ready at %s ms" % Time.get_ticks_msec())
-	ui_parent = get_parent() as UI
+	#ui_parent = get_parent() as UI
 	start_button.connect("pressed", _on_start_button_pressed)
-	
 
 # RECEIVERS
 func _on_start_button_pressed() -> void:
-	ui_parent.current_ui_state = ui_parent.UIState.MAIN
+	var main : Main = get_tree().current_scene
+	var ui : UI = main.ui
+	ui.current_ui_state = ui.UIState.MAIN

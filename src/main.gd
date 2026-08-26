@@ -9,11 +9,11 @@ extends Node2D
 const GAME_PACKED = preload("uid://c8ityv0juv884")
 const UI_PACKED = preload("uid://dw068pdf571h8")
 
-var game: Game
-var ui: UI
+var game : Game
+var ui : UI
 
-@onready var game_layer = $GameLayer
-@onready var ui_layer = $UILayer
+@onready var game_layer : CanvasLayer = $GameLayer
+@onready var ui_layer : CanvasLayer = $UILayer
 
 # OVERRIDES
 func _ready() -> void:
@@ -22,5 +22,3 @@ func _ready() -> void:
 	ui_layer.add_child(ui)
 	game = GAME_PACKED.instantiate()
 	game_layer.add_child(game)
-	ui.game = game
-	game.ui = ui

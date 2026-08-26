@@ -17,10 +17,6 @@ const UI_ERROR = preload("uid://dnsdv2iate647")
 		ui_state_changed.emit(current_ui_state)
 		open_new_ui_scene(current_ui_state)
 
-@export var game: Game:
-	set(value):
-		game = value
-
 # OVERRIDES
 func _ready():
 	print_debug("UI ready at %s ms" % Time.get_ticks_msec())
