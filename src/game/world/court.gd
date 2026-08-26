@@ -3,6 +3,7 @@ class_name Court
 extends Node2D
 ## The surface a [Game] is played on.
 
+#region Properties
 ## The [Player]s on this court. Set from [Game]
 var players_on_court : Array[Player]:
 	set(value):
@@ -13,3 +14,4 @@ var players_on_court : Array[Player]:
 
 @onready var data_layer: CourtLayerData = $DataLayer
 @onready var visual_layer: CourtLayerVisual = $VisualLayer
+#endregion

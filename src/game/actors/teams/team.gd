@@ -4,6 +4,7 @@ class_name Team
 extends Node2D
 ## Base class for teams
 
+#region Properties
 ## The [Player]s on this team
 var players: Array[Player]
 
@@ -21,8 +22,9 @@ var is_active: bool:
 					player.player_state = Player.PlayerState.SELECTABLE
 			else:
 					player.player_state = Player.PlayerState.UNSELECTABLE
+#endregion
 
-# OVERRIDES
+#region Methods
 func _ready() -> void:
 	players = _get_players()
 
@@ -34,3 +36,4 @@ func _get_players() -> Array[Player]:
 		player_array.append(player)
 		player.team = self
 	return player_array
+#endregion

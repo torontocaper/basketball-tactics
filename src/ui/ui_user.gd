@@ -4,21 +4,8 @@ class_name UIUser
 extends Control
 ## Documentation comments
 
+#region Properties
 var active_player : Player
-	#set(value):
-		#if active_player:
-			#if active_player.is_connected("energy_updated", _update_energy_bar):
-				#active_player.disconnect("energy_updated", _update_energy_bar)
-		#if !value:
-			#active_player_label.text = ""
-			#active_player_energy.z_index = -100
-		#else:
-			#active_player = value
-			#active_player_label.text = active_player.name
-			#active_player_energy.z_index = 10
-			#active_player_energy.max_value = active_player.player_base_energy
-			#active_player_energy.value = active_player.available_energy
-			#active_player.connect("energy_updated", _update_energy_bar)
 
 var is_user_active: bool = false:
 	set(value):
@@ -33,7 +20,9 @@ var user_team: Team:
 @onready var active_team_label: Label = %ActiveTeamLabel
 @onready var active_player_label: Label = %ActivePlayerLabel
 @onready var active_player_energy: ProgressBar = %ActivePlayerEnergy
+#endregion
 
+#region Methods
 func _ready() -> void:
 	print_debug("%s ready at %s ms" % [name, Time.get_ticks_msec()])
 	active_player_label.text = ""
@@ -61,3 +50,4 @@ func set_active_team_label(active_team : Team) -> void:
 
 func _update_energy_bar(new_energy : int) -> void:
 	active_player_energy.value = new_energy
+#endregion

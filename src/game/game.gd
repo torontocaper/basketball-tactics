@@ -4,13 +4,12 @@ class_name Game
 extends Node2D
 ## The (basketball) game.
 
+#region Signals
 ## Emitted when the score changes
 signal score_updated(new_green_score: int, new_blue_score: int)
+#endregion
 
-#var ui: UI: 
-	#set(value):
-		#ui = value
-
+#region Properties
 var green_score: int = 0:
 	set(value):
 		green_score = value
@@ -29,13 +28,15 @@ var players_in_game: Array[Player]:
 @onready var court: Court = $Court
 @onready var blue_team: Team = $BlueTeam
 @onready var green_team: Team = $GreenTeam
+#endregion
 
+#region Methods
 func _ready() -> void:
 	players_in_game = blue_team.players + green_team.players
 	TurnManager.blue_team = blue_team
 	TurnManager.green_team = green_team
 
-## Currently called from UIMain, which I'm not crazy about
+## Start the game!
 func start_game() -> void:
 	green_team.is_active = false
 	blue_team.is_active = false

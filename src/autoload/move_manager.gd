@@ -2,9 +2,12 @@
 extends Node
 ## Manages movement using Dijkstra's algorithm
 
+#region Signals
 signal map_updated(new_map : Array[Dictionary])
 signal path_found(new_path : Array[Vector2i], new_path_cost : int)
+#endregion
 
+#region Properties
 ## Graph of all cells, their immediate neighbors and the costs to reach those neighbors
 var dijkstra_graph : Dictionary[Vector2i, Dictionary]
 
@@ -16,11 +19,9 @@ var distance_map : Dictionary[Vector2i, Dictionary]
 var path_coords : Array
 ## Cost for the currently planned move
 var path_cost : int
-	#set(value):
-		#path_coords = value
-		#path_found.emit(path_coords)
+#endregion
 
-#region CORE
+#region Methods
 ## Finds the path from the current source cell to destination_cell_coords
 func get_move_path(destination_cell_coords : Vector2i) -> void:
 	var destination_point : Dictionary = _find_point_by_coords(destination_cell_coords, distance_map)
@@ -81,9 +82,8 @@ func update_neighbors(point_coords: Vector2i, map: Dictionary) -> void:
 			neighbor_point_path.append(neighbor_point.coords)
 			neighbor_point.path_from_source = neighbor_point_path
 		starting_point.is_settled = true
-#endregion
 
-#region PRIVATE/HELPER
+## Find a point (complete with path and distance data) given its coordinates
 func _find_point_by_coords(coords: Vector2i, map: Dictionary) -> Dictionary:
 	var index_of_point = map.values().find_custom(func(point): return point.coords == coords)
 	var found_point : Dictionary = map.values()[index_of_point]

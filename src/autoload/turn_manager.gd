@@ -2,16 +2,18 @@
 extends Node
 ## Turn controller.
 
+#region Signals
 ## Emitted when a new player is selected. Sends their location to [CourtLayerData]
 signal active_player_set(player_made_active : Player)
 ## Emitted when a new active team is set
 signal active_team_set(team_made_active : Team)
+#endregion
 
+#region Properties
 var active_team : Team: ## The currently active [Team]
 	set(value):
 		active_team = value
 		active_team_set.emit(active_team)
-
 var green_team : Team 
 var blue_team : Team 
 var active_player : Player:
@@ -23,7 +25,9 @@ var active_player : Player:
 		else:
 			print_debug("No active player")
 			active_player_set.emit(null)
+#endregion
 
+#region Methods
 ## Determine which team gets first ball
 func flip_coin(team_1 : Team, team_2 : Team) -> Array[Team] :
 	var team_array: Array[Team] = [team_1, team_2]
@@ -60,3 +64,4 @@ func end_turn(team : Team) -> void :
 
 func start_turn(team : Team) -> void :
 	team.is_active = true
+#endregion

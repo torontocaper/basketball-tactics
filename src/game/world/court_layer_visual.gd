@@ -4,19 +4,23 @@ class_name CourtLayerVisual
 extends CourtLayer
 ## The visual court layer, responsible for displaying movement distances and paths
 
-const CLICK_INDICATOR = preload("uid://bnm71kxddqynl")
-const MAIN_THEME = preload("uid://c0lrucuyge77v")
-const PATH_INDICATOR = preload("uid://dkswoobiwgwxy")
+#region Constants
+const CLICK_INDICATOR = preload("uid://bnm71kxddqynl") ## [PackedScene] representing [member click_indicator]
+const MAIN_THEME = preload("uid://c0lrucuyge77v") ## [Theme] resource for displaying move costs
+const PATH_INDICATOR = preload("uid://dkswoobiwgwxy") ## [PackedScene] representing [member path_indicator]
+#endregion
 
-var active_player_move_range : int
-var click_indicator : CPUParticles2D
+#region Properties
+var active_player_move_range : int ## The movement range for the currently active player
+var click_indicator : CPUParticles2D ## [CPUParticles2D] that indicates a click
 var court_cell_graphics : Dictionary[Vector2i, Dictionary]
 var current_dijkstra_map : Dictionary[Vector2i, Dictionary]
-var path_indicator : Line2D
+var path_indicator : Line2D ## [Line2D] that shows a potential movement path
+#endregion
 
-#region OVERRIDES
+#region Methods
 func _ready() -> void:
-	super()
+	super() # Run the CourtLayer _ready function, which creates the cells_in_play variable
 	court_cell_graphics = _create_cell_graphics(court_cells)
 	click_indicator = CLICK_INDICATOR.instantiate()
 	add_child(click_indicator)
@@ -25,14 +29,14 @@ func _ready() -> void:
 	MoveManager.connect("map_updated", update_distances)
 	MoveManager.connect("path_found", display_new_path)
 
-func handle_click_at_cell(clicked_cell : Vector2i) -> void:
-	indicate_click(clicked_cell)
-#endregion
+func _input(event: InputEvent) -> void:
+	if event.is_pressed() and event is InputEventMouseButton:
+		event = event as InputEventMouseButton
+		indicate_click(local_to_map(event.position))
 
-#region CORE
+## Display the path to the selected target cell. Called when [MoveManager] finds a path
 func display_new_path(new_path : Array, new_path_cost : int) -> void:
 	if new_path:
-		#var last_point = new_path.back()
 		active_player_move_range = TurnManager.active_player.available_energy
 		if new_path_cost > active_player_move_range:
 			return
@@ -43,13 +47,16 @@ func display_new_path(new_path : Array, new_path_cost : int) -> void:
 				if point_distance <= active_player_move_range:
 					path_indicator.add_point(map_to_local(point_coords))
 
+## Indicate a click has occurred at a given cell
 func indicate_click(cell_to_indicate : Vector2i) -> void:
 	click_indicator.position = map_to_local(cell_to_indicate)
 	click_indicator.restart()
 
+## Snap a given [Player] to the closest cell on the map
 func snap_player_to_grid(player_to_snap : Player) -> void:
 	player_to_snap.position = map_to_local(player_to_snap.starting_coords)
 
+## Update distances displayed on (reachable) cells. Called when MoveManager updates the map from a new source cell
 func update_distances(dijkstra_map : Dictionary[Vector2i, Dictionary]) -> void:
 	path_indicator.clear_points()
 	current_dijkstra_map = dijkstra_map
@@ -64,9 +71,8 @@ func update_distances(dijkstra_map : Dictionary[Vector2i, Dictionary]) -> void:
 				cell_label.text = ""
 			else:
 				cell_label.text = str(point_distance)
-#endregion
 
-#region PRIVATE/HELPER
+## Initialize the Dictionary representing the graphics for each cell
 func _create_cell_graphics(cells : Array[Vector2i]) -> Dictionary[Vector2i, Dictionary]:
 	var graphics : Dictionary[Vector2i, Dictionary] = {}
 	for cell in cells:
@@ -82,6 +88,7 @@ func _create_cell_graphics(cells : Array[Vector2i]) -> Dictionary[Vector2i, Dict
 		graphics[cell].label = cell_label
 	return graphics
 
+## Hide the cell_graphics Dictionary
 func _hide_cell_graphics(graphics : Dictionary[Vector2i, Dictionary]) -> void:
 	for graphic in graphics:
 		var cell_label : Label = graphics.get(graphic).label

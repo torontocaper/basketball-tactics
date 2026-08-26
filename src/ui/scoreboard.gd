@@ -4,6 +4,7 @@ class_name Scoreboard
 extends PanelContainer
 ## Displays the score.
 
+#region Properties
 @export var green_team: Team:
 	set(value):
 		green_team = value
@@ -23,10 +24,13 @@ extends PanelContainer
 
 @onready var green_score_label: Label = %GreenTeamScore
 @onready var blue_score_label: Label = %BlueTeamScore
+#endregion
 
+#region Methods
 func _ready() -> void:
 	print_debug("Scoreboard ready at %s ms" % Time.get_ticks_msec())
 
 func update_scoreboard(green_team_score: int, blue_team_score:int) -> void:
 	green_score_label.text = "%02d" % green_team_score
 	blue_score_label.text = "%02d" % blue_team_score
+#endregion

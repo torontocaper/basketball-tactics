@@ -1,6 +1,7 @@
 class_name UIMain
 extends Control
 
+#region Properties
 var green_team: Team:
 	set(value):
 		green_team = value
@@ -13,7 +14,9 @@ var blue_team: Team:
 
 @onready var ui_user_north: UIUser = $UIUserNorth
 @onready var ui_user_south: UIUser = $UIUserSouth
+#endregion
 
+#region Methods
 func _ready():
 	print_debug("UIMain ready at %s ms" % Time.get_ticks_msec())
 	var main : Main = get_tree().current_scene
@@ -24,3 +27,4 @@ func _ready():
 	var user_uis: Array[UIUser] = [ui_user_north, ui_user_south]
 	for user_ui in user_uis:
 		user_ui.user_scoreboard.current_game = game
+#endregion
