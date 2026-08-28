@@ -7,6 +7,7 @@ extends CourtLayer
 #region Signals
 ## Emitted when a source cell for navigation is set
 signal source_cell_set(source_cell_coords : Vector2i, occupied_cells : Dictionary[Player, Vector2i])
+
 ## Emitted when a target cell for navigation is set.
 signal target_cell_set(target_cell_coords : Vector2i)
 #region
@@ -14,19 +15,21 @@ signal target_cell_set(target_cell_coords : Vector2i)
 #region Enums
 ## Integers representing movement costs for orthogonal (N/W/S/E) and diagonal (NW/SW/SE/NE) neighbor cells
 enum MovementCost {
-	MOVEMENT_COST_ORTHOGONAL = 2,
-	MOVEMENT_COST_DIAGONAL = 3
+	MOVEMENT_COST_ORTHOGONAL = 2, ## The cost for moving orthogonally (N/W/S/E)
+	MOVEMENT_COST_DIAGONAL = 3 ## The cost for moving diagonally (NW/SW/SE/NE)
 	}
 #region
 
 #region Properties
-## Set of cells that are currently occupied by Players. 
+## Set of cells that are currently occupied by [Player]s. 
 var occupied_cells : Dictionary[Player, Vector2i]
+
 ## Source cell for navigation calculation. Usually the same as the active [Player]'s current coordinates
 var source_cell : Vector2i:
 	set(value):
 		source_cell = value
 		source_cell_set.emit(source_cell, occupied_cells)
+
 ## Target cell for navigation calculation. Set by clicking on an unoccupied cell that's within the active [Player]'s movement range
 var target_cell : Vector2i:
 	set(value):
@@ -35,22 +38,24 @@ var target_cell : Vector2i:
 #region
 
 #region Methods
+	#region Overrides
 func _ready() -> void:
-	super() # Run the CourtLayer _ready function, which creates the cells_in_play variable
-	set_process_input(false)
-	TurnManager.connect("active_player_set", set_source_cell)
-	connect("source_cell_set", MoveManager.update_map)
-	connect("target_cell_set", MoveManager.get_move_path)
-	MoveManager.dijkstra_graph = _create_dijkstra_graph(court_cells)
+	super() # Run the CourtLayer _ready function, which creates the court_cells variable
+	set_process_input(false) # Disable input by default
+	TurnManager.connect("active_player_set", set_player_as_source) # When a new player is activated, set their location as the source cell for navigation
+	connect("source_cell_set", MoveManager.update_map) # When a source cell is set, get MoveManager to update the Dijkstra map
+	connect("target_cell_set", MoveManager.get_move_path) # When a target cell is set, get the path to that cell from MoveManager 
+	MoveManager.dijkstra_graph = _create_dijkstra_graph(court_cells) # Create the initial Dijkstra graph and send it to MoveManager
 
-func _input(event: InputEvent) -> void: ## Only runs when a player/source cell has already been selected
+func _input(event: InputEvent) -> void: # Only runs when a player/source cell has already been selected
 	if event is InputEventMouseButton and event.is_pressed():
-		var clicked_cell = local_to_map(event.position)
-		if clicked_cell in court_cells:
-			if target_cell == clicked_cell:
-				initiate_move()
+		var clicked_cell = local_to_map(event.position) # Get the click position as map coords
+		if clicked_cell in court_cells: # If the clicked cell is in-bounds ...
+			if clicked_cell == target_cell: # If the clicked cell is already the target cell ...
+				initiate_move() # This is a double-click, which confirms the move
 			else:
-				target_cell = clicked_cell
+				target_cell = clicked_cell # Otherwise, make the clicked cell the new target cell
+	#endregion
 
 ## Start moving the player. Called from _input when the target_cell is re-clicked, confirming the move
 func initiate_move() -> void:
@@ -65,17 +70,18 @@ func initiate_move() -> void:
 		await active_player.move_along_path(move_path_global, move_path_cost) # Move them to the target. Wait for the move to finish
 		active_player.coords = local_to_map(to_local(active_player.global_position)) # Update the Player's coords
 		occupied_cells[active_player] = active_player.coords # Update this player's cell in the occupied_cells Dictionary
-		source_cell_set.emit(active_player.coords, occupied_cells) # Update the source_cell for movement calculations
+		source_cell = active_player.coords # Update the source_cell for movement calculations
 
-## Called from TurnManager when a player is selected
-func set_source_cell(source_player : Player) -> void:
-	if source_player:
+## Set the navigation source cell based on a [Player]'s location. Called from TurnManager when a new active_player is set
+func set_player_as_source(source_player : Player) -> void:
+	if source_player: # If a valid player is selected
 		set_process_input(true)
 		source_cell = local_to_map(to_local(source_player.global_position))
-	else:
+	else: # The player has been deselected
 		set_process_input(false)
 		source_cell = Vector2i(-1, -1)
 
+	#region Helpers
 ## Create the Dijkstra graph for [MoveManager]
 func _create_dijkstra_graph(cells : Array[Vector2i]) -> Dictionary[Vector2i, Dictionary]:
 	var new_graph : Dictionary[Vector2i, Dictionary]
@@ -106,4 +112,5 @@ func _get_diagonal_neighbors(cell_coords: Vector2i) -> Array[Vector2i]:
 		get_neighbor_cell(cell_coords, TileSet.CellNeighbor.CELL_NEIGHBOR_BOTTOM_RIGHT_CORNER)
 		]
 	return diagonal_neighbors
+	#endregion
 #endregion
