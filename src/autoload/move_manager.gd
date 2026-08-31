@@ -23,6 +23,7 @@ var path_cost : int
 
 #region Methods
 ## Finds the path from the current source cell to destination_cell_coords
+## Called from [CourtLayerData] when new navigation target is set
 func get_move_path(destination_cell_coords : Vector2i) -> void:
 	var destination_point : Dictionary = _find_point_by_coords(destination_cell_coords, distance_map)
 	path_coords = destination_point.path_from_source
@@ -30,8 +31,12 @@ func get_move_path(destination_cell_coords : Vector2i) -> void:
 	path_found.emit(path_coords, path_cost)
 
 ## Updates the Dijkstra map based on the new source cell
+## Called from [CourtLayerData] when a new source cell is set
 func update_map(source_cell_coords: Vector2i, occupied_cells : Dictionary[Player, Vector2i] = {}) -> void:
-	print_debug("MoveManager updating the Dijkstra map with source cell at coords %s\nOccupied cells: %s" % [source_cell_coords, occupied_cells])
+	print_debug("MoveManager updating the Dijkstra map with source cell at coords %s" % source_cell_coords)
+	print_debug("Occupied cells:")
+	for cell in occupied_cells:
+		print_debug("%s: %s" % [cell.name, occupied_cells[cell]])
 	if distance_map:
 		distance_map.clear()
 	if source_cell_coords == Vector2i(-1, -1): #TODO: make this less hack-y

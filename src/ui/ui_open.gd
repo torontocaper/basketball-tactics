@@ -10,7 +10,7 @@ extends Control
 
 #region Methods
 func _ready():
-	print_debug("UIOpen ready at %s ms" % Time.get_ticks_msec())
+	#print_debug("UIOpen ready at %s ms" % Time.get_ticks_msec())
 	#ui_parent = get_parent() as UI
 	start_button.connect("pressed", _on_start_button_pressed)
 

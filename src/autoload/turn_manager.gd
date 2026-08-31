@@ -10,12 +10,12 @@ signal active_team_set(team_made_active : Team)
 #endregion
 
 #region Properties
-var active_team : Team: ## The currently active [Team]
+## The currently active [Team]
+var active_team : Team: 
 	set(value):
 		active_team = value
 		active_team_set.emit(active_team)
-var green_team : Team 
-var blue_team : Team 
+## The currently active [Player]
 var active_player : Player:
 	set(value):
 		active_player = value
@@ -44,24 +44,18 @@ func flip_coin(team_1 : Team, team_2 : Team) -> Array[Team] :
 ## What to do when a [Player] is clicked. Each [Player] connects their "player_clicked" signal to this method
 func on_player_clicked(clicked_player : Player) -> void:
 	match clicked_player.player_state:
-		Player.PlayerState.SELECTED:
+		Player.PlayerState.SELECTED: # If the player is already selected, unselect them
 			clicked_player.player_state = Player.PlayerState.SELECTABLE
 			active_player = null
-		Player.PlayerState.SELECTABLE:
+		Player.PlayerState.SELECTABLE: # If the player is selectable, select them
 			if active_player:
 				active_player.player_state = Player.PlayerState.SELECTABLE
 			clicked_player.player_state = Player.PlayerState.SELECTED
 			active_player = clicked_player
-		Player.PlayerState.UNSELECTABLE:
+		Player.PlayerState.UNSELECTABLE: # If the player is unselectable, do nothing
 			return
 		Player.PlayerState.MOVING:
 			return
 		_:
 			return
-
-func end_turn(team : Team) -> void :
-	team.is_active = false
-
-func start_turn(team : Team) -> void :
-	team.is_active = true
 #endregion

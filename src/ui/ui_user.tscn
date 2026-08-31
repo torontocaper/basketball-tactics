@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://bv3jtg5siw651" path="res://src/ui/ui_user.gd" id="1_aeh18"]
 [ext_resource type="PackedScene" uid="uid://ocnv6pom0ooy" path="res://src/ui/scoreboard.tscn" id="1_ldpg4"]
 [ext_resource type="FontFile" uid="uid://bitgv7nf07au6" path="res://assets/fonts/RobotoMono-Medium.ttf" id="2_lx81v"]
+[ext_resource type="StyleBox" uid="uid://b7wsgjbmvcoy7" path="res://resources/blue_border.tres" id="2_ovicl"]
 
 [node name="UIUser" type="Control" unique_id=30669888]
 custom_minimum_size = Vector2(720, 640)
@@ -15,60 +16,31 @@ size_flags_vertical = 3
 mouse_filter = 2
 script = ExtResource("1_aeh18")
 
-[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1289687527]
-layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -65.0
-grow_horizontal = 2
-grow_vertical = 0
-
-[node name="Scoreboard" parent="CenterContainer" unique_id=754260294 instance=ExtResource("1_ldpg4")]
+[node name="Border" type="PanelContainer" parent="." unique_id=1470341314]
 unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 4
-
-[node name="TeamBox" type="HBoxContainer" parent="." unique_id=152134442]
 layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -65.0
 grow_horizontal = 2
-grow_vertical = 0
-alignment = 1
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("2_ovicl")
 
-[node name="ActiveTeamLabel" type="Label" parent="TeamBox" unique_id=23225232]
-unique_name_in_owner = true
+[node name="PlayerBox" type="HBoxContainer" parent="Border" unique_id=1140417146]
 layout_mode = 2
-size_flags_horizontal = 2
-theme_override_fonts/font = ExtResource("2_lx81v")
-theme_override_font_sizes/font_size = 48
-text = "BlueTeam"
+size_flags_horizontal = 0
+size_flags_vertical = 8
 
-[node name="PlayerBox" type="HBoxContainer" parent="." unique_id=1140417146]
-layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -65.0
-grow_horizontal = 2
-grow_vertical = 0
-
-[node name="ActivePlayerLabel" type="Label" parent="PlayerBox" unique_id=1063821037]
+[node name="ActivePlayerLabel" type="Label" parent="Border/PlayerBox" unique_id=1063821037]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 10
 theme_override_fonts/font = ExtResource("2_lx81v")
-theme_override_font_sizes/font_size = 48
+theme_override_font_sizes/font_size = 32
 text = "Blue1"
 
-[node name="ActivePlayerEnergy" type="ProgressBar" parent="PlayerBox" unique_id=1967268551]
+[node name="ActivePlayerEnergy" type="ProgressBar" parent="Border/PlayerBox" unique_id=1967268551]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 0)
 custom_maximum_size = Vector2(100, -1)
@@ -76,3 +48,25 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 show_percentage = false
+
+[node name="ScoreboardBox" type="CenterContainer" parent="Border" unique_id=1289687527]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="Scoreboard" parent="Border/ScoreboardBox" unique_id=754260294 instance=ExtResource("1_ldpg4")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+
+[node name="ButtonBox" type="HBoxContainer" parent="Border" unique_id=837136975]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+
+[node name="Button" type="Button" parent="Border/ButtonBox" unique_id=28605550]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_fonts/font = ExtResource("2_lx81v")
+theme_override_font_sizes/font_size = 32
+text = "End Turn"

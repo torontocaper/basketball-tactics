@@ -13,14 +13,15 @@ const PATH_INDICATOR = preload("uid://dkswoobiwgwxy") ## [PackedScene] represent
 #region Properties
 var active_player_move_range : int ## The movement range for the currently active player
 var click_indicator : CPUParticles2D ## [CPUParticles2D] that indicates a click
-var court_cell_graphics : Dictionary[Vector2i, Dictionary]
-var current_dijkstra_map : Dictionary[Vector2i, Dictionary]
+var court_cell_graphics : Dictionary[Vector2i, Dictionary] ## Dictionary representing the graphics for each cell; created by the _create_cell_graphics method
+var current_dijkstra_map : Dictionary[Vector2i, Dictionary] ## Dictionary representing the current map provided by [MoveManager]
 var path_indicator : Line2D ## [Line2D] that shows a potential movement path
 #endregion
 
 #region Methods
+	#region Overrides
 func _ready() -> void:
-	super() # Run the CourtLayer _ready function, which creates the cells_in_play variable
+	super() # Run the CourtLayer _ready function, which creates the court_cells variable
 	court_cell_graphics = _create_cell_graphics(court_cells)
 	click_indicator = CLICK_INDICATOR.instantiate()
 	add_child(click_indicator)
@@ -29,11 +30,13 @@ func _ready() -> void:
 	MoveManager.connect("map_updated", update_distances)
 	MoveManager.connect("path_found", display_new_path)
 
-func _input(event: InputEvent) -> void:
+func _unhandled_input(event: InputEvent) -> void:
 	if event.is_pressed() and event is InputEventMouseButton:
 		event = event as InputEventMouseButton
 		indicate_click(local_to_map(event.position))
+	#endregion
 
+	#region Core
 ## Display the path to the selected target cell. Called when [MoveManager] finds a path
 func display_new_path(new_path : Array, new_path_cost : int) -> void:
 	if new_path:
@@ -71,8 +74,11 @@ func update_distances(dijkstra_map : Dictionary[Vector2i, Dictionary]) -> void:
 				cell_label.text = ""
 			else:
 				cell_label.text = str(point_distance)
+	#endregion
 
+	#region Private/Helper
 ## Initialize the Dictionary representing the graphics for each cell
+## Creates a Dictionary entry for each cell in 
 func _create_cell_graphics(cells : Array[Vector2i]) -> Dictionary[Vector2i, Dictionary]:
 	var graphics : Dictionary[Vector2i, Dictionary] = {}
 	for cell in cells:
@@ -93,4 +99,5 @@ func _hide_cell_graphics(graphics : Dictionary[Vector2i, Dictionary]) -> void:
 	for graphic in graphics:
 		var cell_label : Label = graphics.get(graphic).label
 		cell_label.text = ""
+	#endregion
 #endregion
