@@ -10,24 +10,31 @@ signal score_updated(new_green_score: int, new_blue_score: int)
 #endregion
 
 #region Properties
+	#region Regular variables
+## The score for the green team
 var green_score: int = 0:
 	set(value):
 		green_score = value
 		score_updated.emit(green_score, blue_score)
 
+## The score for the blue team
 var blue_score: int = 0:
 	set(value):
 		blue_score = value
 		score_updated.emit(green_score, blue_score)
 
+## The [Player]s in the game
 var players_in_game: Array[Player]:
 	set(value):
 		players_in_game = value
 		court.players_on_court = players_in_game
+	#endregion
 
-@onready var court: Court = $Court
-@onready var blue_team: Team = $BlueTeam
-@onready var green_team: Team = $GreenTeam
+	#region Onready/child nodes
+@onready var court: Court = $Court ## The Court scene
+@onready var blue_team: Team = $BlueTeam ## The blue [Team]
+@onready var green_team: Team = $GreenTeam ## The green [Team]
+	#endregion
 #endregion
 
 #region Methods
@@ -39,11 +46,7 @@ func _ready() -> void:
 	#region Core
 ## Start the game!
 func start_game() -> void:
-	var coin_toss_results = TurnManager.flip_coin(green_team, blue_team)
-	var coin_toss_winner = coin_toss_results[0]
-	var coin_toss_loser = coin_toss_results[1]
+	var coin_toss_winner = TurnManager.flip_coin(green_team, blue_team)
 	print_debug("%s gets first ball" % coin_toss_winner.name)
-	coin_toss_winner.team_state = Team.TeamState.ACTIVE
-	coin_toss_loser.team_state = Team.TeamState.INACTIVE
 	#endregion
 #endregion

@@ -1,6 +1,6 @@
 @icon("uid://hb3h3lrd8n4x")
 extends Node
-## Turn controller.
+## Turn controller. Responsible for changing Player and Team states.
 
 #region Signals
 ## Emitted when a new player is selected. Sends their location to [CourtLayerData]
@@ -13,8 +13,19 @@ signal active_team_set(team_made_active : Team)
 ## The currently active [Team]
 var active_team : Team: 
 	set(value):
+		if active_team:
+			inactive_team = active_team
 		active_team = value
+		active_team.team_state = Team.TeamState.ACTIVE
 		active_team_set.emit(active_team)
+		start_turn(active_team)
+
+## The currently inactive [Team]
+var inactive_team : Team:
+	set(value):
+		inactive_team = value
+		inactive_team.team_state = Team.TeamState.INACTIVE
+
 ## The currently active [Player]
 var active_player : Player:
 	set(value):
@@ -28,18 +39,15 @@ var active_player : Player:
 #endregion
 
 #region Methods
-## Determine which team gets first ball
-func flip_coin(team_1 : Team, team_2 : Team) -> Array[Team] :
-	var team_array: Array[Team] = [team_1, team_2]
-	var winning_team: Team = team_array.pick_random()
-	var losing_team: Team
-	active_team = winning_team
-	match winning_team:
-		team_1:
-			losing_team = team_2
-		team_2:
-			losing_team = team_1
-	return [winning_team, losing_team]
+## Determine which team gets first ball. Called from [Game] in [method Game.start_game]
+func flip_coin(team_1 : Team, team_2 : Team) -> Team:
+	if randi() % 2:
+		active_team = team_1
+		inactive_team = team_2
+	else:
+		active_team = team_2
+		inactive_team = team_1
+	return active_team
 
 ## What to do when a [Player] is clicked. Each [Player] connects their "player_clicked" signal to this method
 func on_player_clicked(clicked_player : Player) -> void:
@@ -58,4 +66,14 @@ func on_player_clicked(clicked_player : Player) -> void:
 			return
 		_:
 			return
+
+func end_turn() -> void:
+	print_debug("Ending turn for %s" % active_team.name)
+	active_team = inactive_team
+	#active_team.team_state = Team.TeamState.INACTIVE
+	#print_debug("Starting turn  for %s" % inactive_team.name)
+	#active_team = inactive_team
+
+func start_turn(turn_team : Team) -> void:
+	print_debug("Starting turn for %s" % turn_team.name)
 #endregion

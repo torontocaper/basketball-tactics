@@ -5,16 +5,13 @@ extends Control
 ## Documentation comments
 
 #region Constants
-const BLUE_BORDER = preload("uid://b7wsgjbmvcoy7")
-const GREEN_BORDER = preload("uid://baub6wgeedwof")
+const BLUE_BORDER = preload("uid://b7wsgjbmvcoy7") ## The green_border stylebox resource
+const GREEN_BORDER = preload("uid://baub6wgeedwof") ## The blue_border stylebox resource
 #endregion
 
 #region Properties
+	#region Regular variables
 var active_player : Player
-
-var is_user_active: bool = false:
-	set(value):
-		is_user_active = value
 
 ## The [Team] controlled by the user assigned to this UI
 var user_team: Team:
@@ -27,21 +24,23 @@ var user_team: Team:
 				border.add_theme_stylebox_override("panel", BLUE_BORDER)
 			_:
 				pass
+	#endregion
 
-@onready var border: PanelContainer = %Border
-@onready var user_scoreboard: Scoreboard = %Scoreboard
-#@onready var active_team_label: Label = %ActiveTeamLabel
-@onready var active_player_label: Label = %ActivePlayerLabel
+	#region Onready/child Nodes
 @onready var active_player_energy: ProgressBar = %ActivePlayerEnergy
+@onready var active_player_label: Label = %ActivePlayerLabel
+@onready var border: PanelContainer = %Border
+@onready var end_turn_button: Button = %EndTurnButton
+@onready var user_scoreboard: Scoreboard = %Scoreboard
+	#endregion
 #endregion
 
 #region Methods
 	#region Overrides
 func _ready() -> void:
 	active_player_label.text = ""
-	#active_team_label.text = ""
-	TurnManager.connect("active_player_set", set_new_active_player_or_null)
-	#TurnManager.connect("active_team_set", set_active_team_label)
+	TurnManager.active_player_set.connect(set_new_active_player_or_null)
+	end_turn_button.pressed.connect(TurnManager.end_turn)
 	#endregion
 
 	#region Core
@@ -59,9 +58,6 @@ func set_new_active_player_or_null(new_active_player : Player) -> void:
 		active_player_energy.max_value = active_player.player_base_energy
 		active_player_energy.value = active_player.available_energy
 		active_player.connect("energy_updated", _update_energy_bar)
-
-#func set_active_team_label(active_team : Team) -> void:
-	#active_team_label.text = active_team.name
 	#endregion
 
 	#region Private/Helper
