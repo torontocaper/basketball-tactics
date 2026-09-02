@@ -73,8 +73,9 @@ func _ready() -> void:
 	available_energy = player_base_energy
 	player_number_label.text = str(player_number)
 
-## Move the player along the given path. Currently called from [CourtLayerData]
+## Move the player along the given path. Currently called from [CourtLayerData], which converts the path from [MoveManager] to an [Array] of global points
 func move_along_path(path : Array, path_cost : int) -> void:
+	print_debug("Moving %s along path" % name)
 	player_state = PlayerState.MOVING
 	var movement_tween = create_tween()
 	for point in path.slice(1): # Don't 'move' to the starting point

@@ -40,12 +40,18 @@ var target_cell : Vector2i:
 #region Methods
 	#region Overrides
 func _ready() -> void:
-	super() # Run the CourtLayer _ready function, which creates the court_cells variable
-	set_process_input(false) # Disable input by default
-	TurnManager.connect("active_player_set", set_player_as_source) # When a new player is activated, set their location as the source cell for navigation
-	connect("source_cell_set", MoveManager.update_map) # When a source cell is set, get MoveManager to update the Dijkstra map
-	connect("target_cell_set", MoveManager.get_move_path) # When a target cell is set, get the path to that cell from MoveManager 
-	MoveManager.dijkstra_graph = _create_dijkstra_graph(court_cells) # Create the initial Dijkstra graph and send it to MoveManager
+	# Run the [CourtLayer] _ready function, which creates the [member court_cells] variable
+	super()
+	# Disable input by default
+	set_process_input(false) 
+	# When a new player is activated, set their location as the [member source_cell] for navigation
+	TurnManager.active_player_set.connect(set_player_as_source) 
+	# When [member source_cell] is set, get [MoveManager] to update the Dijkstra map
+	source_cell_set.connect(MoveManager.update_map) 
+	# When [member target_cell] is set, get the path to that cell from [MoveManager] 
+	target_cell_set.connect(MoveManager.get_move_path) 
+	# Create the initial Dijkstra graph and send it to [MoveManager]
+	MoveManager.dijkstra_graph = _create_dijkstra_graph(court_cells) 
 
 func _input(event: InputEvent) -> void: # Only runs when a player/source cell has already been selected
 	if event is InputEventMouseButton and event.is_pressed():
@@ -57,7 +63,7 @@ func _input(event: InputEvent) -> void: # Only runs when a player/source cell ha
 				target_cell = clicked_cell # Otherwise, make the clicked cell the new target cell
 	#endregion
 
-## Start moving the player. Called from _input when the target_cell is re-clicked, confirming the move
+## Start moving the [Player]. Called from _input when the target_cell is re-clicked, confirming the move
 func initiate_move() -> void:
 	var move_path_cells : Array = MoveManager.path_coords # Get the array of coords for the current path from MoveManager
 	var move_path_cost : int = MoveManager.path_cost # Get the cost for the given move from MoveManager
@@ -74,12 +80,18 @@ func initiate_move() -> void:
 
 ## Set the navigation source cell based on a [Player]'s location. Called from TurnManager when a new active_player is set
 func set_player_as_source(source_player : Player) -> void:
-	if source_player: # If a valid player is selected
-		set_process_input(true)
+	# If a valid [Player] is selected ... 
+	if source_player:
+		# ... set the navigation [member source_cell] to their location in map space ...
 		source_cell = local_to_map(to_local(source_player.global_position))
-	else: # The player has been deselected
-		set_process_input(false)
+		# ... and allow input
+		set_process_input(true)
+	# Otherwise, it's likely that the [Player] has been deselected ...
+	else: 
+		# ... so reset the [member source_cell] to the default ...
 		source_cell = Vector2i(-1, -1)
+		# ... and disable input until another [Player] is selected
+		set_process_input(false)
 
 	#region Helpers
 ## Create the Dijkstra graph for [MoveManager]

@@ -1,4 +1,3 @@
-#@tool
 @icon("uid://3qwgg5y3fkjd")
 class_name Game
 extends Node2D
@@ -9,8 +8,20 @@ extends Node2D
 signal score_updated(new_green_score: int, new_blue_score: int)
 #endregion
 
+#region Enums
+enum GameState {
+	PAUSED,
+	ACTIVE
+}
+#endregion
+
 #region Properties
 	#region Regular variables
+## The current state of the game
+var game_state : GameState = GameState.PAUSED:
+	set(value):
+		game_state = value
+
 ## The score for the green team
 var green_score: int = 0:
 	set(value):
@@ -31,7 +42,7 @@ var players_in_game: Array[Player]:
 	#endregion
 
 	#region Onready/child nodes
-@onready var court: Court = $Court ## The Court scene
+@onready var court: Court = $Court ## The Court scene, which contains both a 'data' layer and a 'visual' layer. Both receive references to the [member players_in_game]
 @onready var blue_team: Team = $BlueTeam ## The blue [Team]
 @onready var green_team: Team = $GreenTeam ## The green [Team]
 	#endregion

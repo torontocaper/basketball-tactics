@@ -8,7 +8,7 @@ signal path_found(new_path : Array[Vector2i], new_path_cost : int)
 #endregion
 
 #region Properties
-## Graph of all cells, their immediate neighbors and the costs to reach those neighbors
+## Graph of all cells, their immediate neighbors and the costs to reach those neighbors. Provided by [CourtLayerData]
 var dijkstra_graph : Dictionary[Vector2i, Dictionary]
 
 ## Map of all cells, along with their total distances and paths from the source cell, keyed by coords

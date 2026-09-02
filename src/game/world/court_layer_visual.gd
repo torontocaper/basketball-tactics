@@ -59,11 +59,11 @@ func indicate_click(cell_to_indicate : Vector2i) -> void:
 func snap_player_to_grid(player_to_snap : Player) -> void:
 	player_to_snap.position = map_to_local(player_to_snap.starting_coords)
 
-## Update distances displayed on (reachable) cells. Called when MoveManager updates the map from a new source cell
+## Update distances displayed on (reachable) cells. Called when [MoveManager] updates the map from a new source cell
 func update_distances(dijkstra_map : Dictionary[Vector2i, Dictionary]) -> void:
 	path_indicator.clear_points()
 	current_dijkstra_map = dijkstra_map
-	if current_dijkstra_map.size() == 0:
+	if current_dijkstra_map.size() == 0: # If there is no Dijkstra map to draw (ie: no valid source cell), hide all graphics
 		_hide_cell_graphics(court_cell_graphics)
 	else:
 		active_player_move_range = TurnManager.active_player.available_energy
@@ -74,6 +74,10 @@ func update_distances(dijkstra_map : Dictionary[Vector2i, Dictionary]) -> void:
 				cell_label.text = ""
 			else:
 				cell_label.text = str(point_distance)
+			if TurnManager.active_team.name == "GreenTeam":
+				cell_label.rotation_degrees = 180
+			else:
+				cell_label.rotation_degrees = 0
 	#endregion
 
 	#region Private/Helper
