@@ -7,6 +7,8 @@ extends Node
 signal active_player_set(player_made_active : Player)
 ## Emitted when a new active team is set
 signal active_team_set(team_made_active : Team)
+## Emitted when a turn is over
+signal turn_ended
 #endregion
 
 #region Properties
@@ -67,13 +69,14 @@ func on_player_clicked(clicked_player : Player) -> void:
 		_:
 			return
 
+## End the [member active_team]'s turn
 func end_turn() -> void:
 	print_debug("Ending turn for %s" % active_team.name)
 	active_team = inactive_team
-	#active_team.team_state = Team.TeamState.INACTIVE
-	#print_debug("Starting turn  for %s" % inactive_team.name)
-	#active_team = inactive_team
+	active_player = null
+	turn_ended.emit()
 
+## Start the turn for [param turn_team]
 func start_turn(turn_team : Team) -> void:
 	print_debug("Starting turn for %s" % turn_team.name)
 #endregion

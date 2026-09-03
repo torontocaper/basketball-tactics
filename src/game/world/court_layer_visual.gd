@@ -11,24 +11,32 @@ const PATH_INDICATOR = preload("uid://dkswoobiwgwxy") ## [PackedScene] represent
 #endregion
 
 #region Properties
-var active_player_move_range : int ## The movement range for the currently active player
+var active_player_move_range : int ## The movement range for the currently active [Player]
 var click_indicator : CPUParticles2D ## [CPUParticles2D] that indicates a click
-var court_cell_graphics : Dictionary[Vector2i, Dictionary] ## Dictionary representing the graphics for each cell; created by the _create_cell_graphics method
-var current_dijkstra_map : Dictionary[Vector2i, Dictionary] ## Dictionary representing the current map provided by [MoveManager]
+var court_cell_graphics : Dictionary[Vector2i, Dictionary] ## [Dictionary] representing the graphics for each cell; created by [method _create_cell_graphics]
+var current_dijkstra_map : Dictionary[Vector2i, Dictionary] ## [Dictionary] representing the current map provided by [MoveManager]
 var path_indicator : Line2D ## [Line2D] that shows a potential movement path
 #endregion
 
 #region Methods
 	#region Overrides
 func _ready() -> void:
-	super() # Run the CourtLayer _ready function, which creates the court_cells variable
+	# Run the CourtLayer _ready function, which creates the court_cells variable
+	super() 
+	# Fill in the court_cell_graphics Dictionary 
 	court_cell_graphics = _create_cell_graphics(court_cells)
+	# Add the click_ and path_ indicators to the scene
 	click_indicator = CLICK_INDICATOR.instantiate()
 	add_child(click_indicator)
 	path_indicator = PATH_INDICATOR.instantiate()
 	add_child(path_indicator)
-	MoveManager.connect("map_updated", update_distances)
-	MoveManager.connect("path_found", display_new_path)
+	# Connect signals:
+	# Update the displayed move distances when the map is updated, and;
+	MoveManager.map_updated.connect(update_distances)
+	# Display a new move path when a new path is found
+	MoveManager.path_found.connect(display_new_path)
+	# Hide graphics when a turn ends
+	TurnManager.turn_ended.connect(_hide_cell_graphics)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_pressed() and event is InputEventMouseButton:
@@ -64,7 +72,7 @@ func update_distances(dijkstra_map : Dictionary[Vector2i, Dictionary]) -> void:
 	path_indicator.clear_points()
 	current_dijkstra_map = dijkstra_map
 	if current_dijkstra_map.size() == 0: # If there is no Dijkstra map to draw (ie: no valid source cell), hide all graphics
-		_hide_cell_graphics(court_cell_graphics)
+		_hide_cell_graphics()
 	else:
 		active_player_move_range = TurnManager.active_player.available_energy
 		for point in court_cells:
@@ -81,8 +89,8 @@ func update_distances(dijkstra_map : Dictionary[Vector2i, Dictionary]) -> void:
 	#endregion
 
 	#region Private/Helper
-## Initialize the Dictionary representing the graphics for each cell
-## Creates a Dictionary entry for each cell in 
+## Initialize the [Dictionary] representing the graphics for each cell
+#NOTE: Is it worth creating an inner class for CellGraphics?
 func _create_cell_graphics(cells : Array[Vector2i]) -> Dictionary[Vector2i, Dictionary]:
 	var graphics : Dictionary[Vector2i, Dictionary] = {}
 	for cell in cells:
@@ -99,9 +107,9 @@ func _create_cell_graphics(cells : Array[Vector2i]) -> Dictionary[Vector2i, Dict
 	return graphics
 
 ## Hide the cell_graphics Dictionary
-func _hide_cell_graphics(graphics : Dictionary[Vector2i, Dictionary]) -> void:
-	for graphic in graphics:
-		var cell_label : Label = graphics.get(graphic).label
+func _hide_cell_graphics() -> void:
+	for graphic in court_cell_graphics:
+		var cell_label : Label = court_cell_graphics.get(graphic).label
 		cell_label.text = ""
 	#endregion
 #endregion

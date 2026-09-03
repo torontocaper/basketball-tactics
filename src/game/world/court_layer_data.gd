@@ -30,7 +30,7 @@ var source_cell : Vector2i:
 		source_cell = value
 		source_cell_set.emit(source_cell, occupied_cells)
 
-## Target cell for navigation calculation. Set by clicking on an unoccupied cell that's within the active [Player]'s movement range
+## Target cell for navigation calculation. Set by clicking on an unoccupied cell within the active [Player]'s movement range
 var target_cell : Vector2i:
 	set(value):
 		target_cell = value
@@ -40,45 +40,62 @@ var target_cell : Vector2i:
 #region Methods
 	#region Overrides
 func _ready() -> void:
-	# Run the [CourtLayer] _ready function, which creates the [member court_cells] variable
+	# Run the CourtLayer _ready function, which creates the court_cells variable
 	super()
 	# Disable input by default
 	set_process_input(false) 
-	# When a new player is activated, set their location as the [member source_cell] for navigation
+	# When a new player is activated, set their location as the source_cell for navigation
 	TurnManager.active_player_set.connect(set_player_as_source) 
-	# When [member source_cell] is set, get [MoveManager] to update the Dijkstra map
+	# When source_cell is set, get MoveManager to update the Dijkstra map
 	source_cell_set.connect(MoveManager.update_map) 
-	# When [member target_cell] is set, get the path to that cell from [MoveManager] 
+	# When target_cell is set, get the path to that cell from MoveManager
 	target_cell_set.connect(MoveManager.get_move_path) 
-	# Create the initial Dijkstra graph and send it to [MoveManager]
+	# Create the initial Dijkstra graph and send it to MoveManager
 	MoveManager.dijkstra_graph = _create_dijkstra_graph(court_cells) 
 
-func _input(event: InputEvent) -> void: # Only runs when a player/source cell has already been selected
+## Process [InputEvent]s on this Node. Used for detecting where the user wants to move a given [Player]
+## NOTE: This only runs when [member source_cell] has been selected
+func _input(event: InputEvent) -> void: 
 	if event is InputEventMouseButton and event.is_pressed():
-		var clicked_cell = local_to_map(event.position) # Get the click position as map coords
-		if clicked_cell in court_cells: # If the clicked cell is in-bounds ...
-			if clicked_cell == target_cell: # If the clicked cell is already the target cell ...
-				initiate_move() # This is a double-click, which confirms the move
+		# Get the click position in map space
+		var clicked_cell = local_to_map(event.position) 
+		# If the clicked cell is a) in-bounds and b) not already the source_cell ...
+		if clicked_cell in court_cells and clicked_cell != source_cell:
+			# If the clicked cell is already the [member target_cell] ...
+			if clicked_cell == target_cell: 
+				# ... this is a double-click, which confirms the move.
+				initiate_move() 
 			else:
-				target_cell = clicked_cell # Otherwise, make the clicked cell the new target cell
+				# ... otherwise, make the clicked cell the new target cell
+				target_cell = clicked_cell 
 	#endregion
 
-## Start moving the [Player]. Called from _input when the target_cell is re-clicked, confirming the move
+## Start moving the [Player]. Called from [method _input] when [member target_cell] is re-clicked, confirming the move
 func initiate_move() -> void:
-	var move_path_cells : Array = MoveManager.path_coords # Get the array of coords for the current path from MoveManager
-	var move_path_cost : int = MoveManager.path_cost # Get the cost for the given move from MoveManager
-	var active_player : Player = TurnManager.active_player # Get the active Player from TurnManager
-	var move_path_global : Array[Vector2] # Array that will eventually hold global coords for each cell in the move path
+	# Get the array of coords for the current path from MoveManager
+	var move_path_cells : Array = MoveManager.path_coords 
+	# Get the cost for the given move from MoveManager
+	var move_path_cost : int = MoveManager.path_cost 
+	# Get the active Player from TurnManager
+	var active_player : Player = TurnManager.active_player 
+	# Initialize Array that will eventually hold global coords for each cell in the move path
+	var move_path_global : Array[Vector2] 
+	# Get the global coordinates for each cell in the path, and add them to the Array
 	for cell in move_path_cells:
 		var move_point_global : Vector2 = to_global(map_to_local(cell))
 		move_path_global.append(move_point_global)
-	if active_player.available_energy >= move_path_cost: # If the currently active Player has enough energy...
-		await active_player.move_along_path(move_path_global, move_path_cost) # Move them to the target. Wait for the move to finish
-		active_player.coords = local_to_map(to_local(active_player.global_position)) # Update the Player's coords
-		occupied_cells[active_player] = active_player.coords # Update this player's cell in the occupied_cells Dictionary
-		source_cell = active_player.coords # Update the source_cell for movement calculations
+	# If the currently active Player has enough energy...
+	if active_player.available_energy >= move_path_cost: 
+		# ... move them to the target. Wait for the move to finish ...
+		await active_player.move_along_path(move_path_global, move_path_cost) 
+		# ... then update the Player's coords property ... 
+		active_player.coords = local_to_map(to_local(active_player.global_position)) 
+		# ... and their cell in the occupied_cells Dictionary ...
+		occupied_cells[active_player] = active_player.coords
+		# ... finally, update the source_cell for movement calculations
+		source_cell = active_player.coords 
 
-## Set the navigation source cell based on a [Player]'s location. Called from TurnManager when a new active_player is set
+## Set the navigation source cell based on a [Player]'s location. Called from [TurnManager] when a new [member TurnManager.active_player] is set
 func set_player_as_source(source_player : Player) -> void:
 	# If a valid [Player] is selected ... 
 	if source_player:
@@ -102,7 +119,7 @@ func _create_dijkstra_graph(cells : Array[Vector2i]) -> Dictionary[Vector2i, Dic
 		new_graph[cell] = cell_neighbors
 	return new_graph
 
-## For each cell in the graph, find its immediate neighbors and assign travel distances to each. 
+## For a given cell ([param cell_coords]) in the Dijkstra graph, find its immediate neighbors and assign travel distances to each. 
 func _get_cell_neighbors(cell_coords: Vector2i) -> Dictionary[Vector2i, int]:
 	var new_neighbors : Dictionary[Vector2i, int] = {}
 	var orthogonal_neighbors : Array[Vector2i] = get_surrounding_cells(cell_coords) 
@@ -115,7 +132,7 @@ func _get_cell_neighbors(cell_coords: Vector2i) -> Dictionary[Vector2i, int]:
 			new_neighbors[d] = MovementCost.MOVEMENT_COST_DIAGONAL
 	return new_neighbors
 	
-## Get the coordinates for the diagonal neighbors of the [Cell] at `cell_coords`.
+## Get the coordinates for the diagonal neighbors of the cell at [param cell_coords].
 func _get_diagonal_neighbors(cell_coords: Vector2i) -> Array[Vector2i]: 
 	var diagonal_neighbors : Array[Vector2i] = [
 		get_neighbor_cell(cell_coords, TileSet.CellNeighbor.CELL_NEIGHBOR_TOP_RIGHT_CORNER),
