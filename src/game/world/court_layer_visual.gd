@@ -80,6 +80,8 @@ func display_new_path(new_path : Array, new_path_cost : int) -> void:
 					path_indicator.add_point(map_to_local(point_coords))
 
 ## Indicate a click has occurred at a given cell
+## [br][br]
+## [param cell_to_indicate] should be in map space
 func indicate_click(cell_to_indicate : Vector2i) -> void:
 	click_indicator.position = map_to_local(cell_to_indicate)
 	click_indicator.restart()
