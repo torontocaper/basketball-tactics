@@ -61,12 +61,12 @@ func _input(event: InputEvent) -> void:
 		var clicked_cell = local_to_map(event.position) 
 		# If the clicked cell is a) in-bounds and b) not already the source_cell ...
 		if clicked_cell in court_cells and clicked_cell != source_cell:
-			# If the clicked cell is already the [member target_cell] ...
+			# If the clicked_cell is already the target_cell ...
 			if clicked_cell == target_cell: 
 				# ... this is a double-click, which confirms the move.
 				initiate_move() 
 			else:
-				# ... otherwise, make the clicked cell the new target cell
+				# ... otherwise, make the clicked_cell the new target_cell.
 				target_cell = clicked_cell 
 	#endregion
 
@@ -97,17 +97,17 @@ func initiate_move() -> void:
 
 ## Set the navigation source cell based on a [Player]'s location. Called from [TurnManager] when a new [member TurnManager.active_player] is set
 func set_player_as_source(source_player : Player) -> void:
-	# If a valid [Player] is selected ... 
+	# If a valid Player is selected ... 
 	if source_player:
-		# ... set the navigation [member source_cell] to their location in map space ...
+		# ... set the navigation source_cell to their location in map space ...
 		source_cell = local_to_map(to_local(source_player.global_position))
 		# ... and allow input
 		set_process_input(true)
-	# Otherwise, it's likely that the [Player] has been deselected ...
+	# Otherwise, it's likely that the Player has been deselected ...
 	else: 
-		# ... so reset the [member source_cell] to the default ...
+		# ... so reset the source_cell to the default ...
 		source_cell = Vector2i(-1, -1)
-		# ... and disable input until another [Player] is selected
+		# ... and disable input until another Player is selected
 		set_process_input(false)
 
 	#region Helpers

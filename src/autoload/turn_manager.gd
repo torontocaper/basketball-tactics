@@ -15,17 +15,23 @@ signal turn_ended
 ## The currently active [Team]
 var active_team : Team: 
 	set(value):
+		# If there's already an active_team, make that team inactive
 		if active_team:
 			inactive_team = active_team
+		# Assign the new team to the active_team variable
 		active_team = value
+		# Change that team's state to ACTIVE
 		active_team.team_state = Team.TeamState.ACTIVE
+		# Emit the active_team_set signal
 		active_team_set.emit(active_team)
+		# Start the turn for the new active_team
 		start_turn(active_team)
 
 ## The currently inactive [Team]
 var inactive_team : Team:
 	set(value):
 		inactive_team = value
+		# Change the team's state to INACTIVE
 		inactive_team.team_state = Team.TeamState.INACTIVE
 
 ## The currently active [Player]
@@ -54,15 +60,18 @@ func flip_coin(team_1 : Team, team_2 : Team) -> Team:
 ## What to do when a [Player] is clicked. Each [Player] connects their "player_clicked" signal to this method
 func on_player_clicked(clicked_player : Player) -> void:
 	match clicked_player.player_state:
-		Player.PlayerState.SELECTED: # If the player is already selected, unselect them
+		# If the player is already selected, unselect them
+		Player.PlayerState.SELECTED: 
 			clicked_player.player_state = Player.PlayerState.SELECTABLE
 			active_player = null
-		Player.PlayerState.SELECTABLE: # If the player is selectable, select them
+		# If the player is selectable, select them
+		Player.PlayerState.SELECTABLE: 
 			if active_player:
 				active_player.player_state = Player.PlayerState.SELECTABLE
 			clicked_player.player_state = Player.PlayerState.SELECTED
 			active_player = clicked_player
-		Player.PlayerState.UNSELECTABLE: # If the player is unselectable, do nothing
+		# If the player is unselectable, do nothing
+		Player.PlayerState.UNSELECTABLE: 
 			return
 		Player.PlayerState.MOVING:
 			return
@@ -72,7 +81,9 @@ func on_player_clicked(clicked_player : Player) -> void:
 ## End the [member active_team]'s turn
 func end_turn() -> void:
 	print_debug("Ending turn for %s" % active_team.name)
+	# Make the inactive_team the new active_team
 	active_team = inactive_team
+	# Clear the active_player variable
 	active_player = null
 	turn_ended.emit()
 

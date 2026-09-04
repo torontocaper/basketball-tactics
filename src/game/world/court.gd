@@ -4,7 +4,8 @@ extends Node2D
 ## The surface a [Game] is played on.
 
 #region Properties
-## The [Player]s on this court. Set from [Game]. References sent to both the [member data_layer] and [member visual_layer]
+## The [Player]s on this court. Set from [Game]. 
+## References sent to both [member data_layer] (for setting [member CourtLayerData.occupied_cells]) and [member visual_layer] (for grid-snapping).
 var players_on_court : Array[Player]:
 	set(value):
 		players_on_court = value
@@ -12,6 +13,9 @@ var players_on_court : Array[Player]:
 			visual_layer.snap_player_to_grid(player)
 			data_layer.occupied_cells[player] = player.coords
 
-@onready var data_layer: CourtLayerData = $DataLayer ## The [CourtLayer] that handles data processing, including navigation information and occupied cells
-@onready var visual_layer: CourtLayerVisual = $VisualLayer ## The [CourtLayer] that handles visual presentation, including displaying move distances and animations
+## The [CourtLayer] that handles data processing, including navigation information and occupied cells
+@onready var data_layer: CourtLayerData = $DataLayer 
+
+## The [CourtLayer] that handles visual presentation, including displaying move distances and animations
+@onready var visual_layer: CourtLayerVisual = $VisualLayer 
 #endregion

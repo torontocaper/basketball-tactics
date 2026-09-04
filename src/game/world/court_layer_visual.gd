@@ -45,16 +45,22 @@ func _unhandled_input(event: InputEvent) -> void:
 	#endregion
 
 	#region Core
-## Display the path to the selected target cell. Called when [MoveManager] finds a path
+## Display the path to the selected target cell. Called when [MoveManager] finds a path. [br]
+## [param new_path] is an [Array] of points in map space, which need to be converted to local space for display
 func display_new_path(new_path : Array, new_path_cost : int) -> void:
 	if new_path:
 		active_player_move_range = TurnManager.active_player.available_energy
+		# If the move is out of range ...
 		if new_path_cost > active_player_move_range:
+			# ... do nothing; otherwise ...
 			return
 		else:
+			# ... clear out the current path line ...
 			path_indicator.clear_points()
 			for point_coords in new_path:
+				# ... get the distance to each point in the path ... 
 				var point_distance : int = current_dijkstra_map[point_coords].distance_from_source
+				# ... and if it's within range, add that point to the path line.
 				if point_distance <= active_player_move_range:
 					path_indicator.add_point(map_to_local(point_coords))
 
@@ -67,22 +73,32 @@ func indicate_click(cell_to_indicate : Vector2i) -> void:
 func snap_player_to_grid(player_to_snap : Player) -> void:
 	player_to_snap.position = map_to_local(player_to_snap.starting_coords)
 
-## Update distances displayed on (reachable) cells. Called when [MoveManager] updates the map from a new source cell
+## Update distances displayed on (reachable) cells. Called when [MoveManager] updates the map from a new source_cell
 func update_distances(dijkstra_map : Dictionary[Vector2i, Dictionary]) -> void:
+	# Reset the path_indicator
 	path_indicator.clear_points()
+	# Assign the new dijkstra_map to the current_dijkstra_map variable
 	current_dijkstra_map = dijkstra_map
-	if current_dijkstra_map.size() == 0: # If there is no Dijkstra map to draw (ie: no valid source cell), hide all graphics
+	# If there is no Dijkstra map to draw (ie: no valid source cell) ...
+	if current_dijkstra_map.size() == 0: 
+		# ... hide all graphics
 		_hide_cell_graphics()
 	else:
+		# Get the move range for the active Player ...
 		active_player_move_range = TurnManager.active_player.available_energy
 		for point in court_cells:
 			var point_distance : int = current_dijkstra_map[point].distance_from_source
 			var cell_label : Label = court_cell_graphics.get(point).label
+			# If a given point is unreachable ...
 			if point_distance == 0 or point_distance > active_player_move_range:
+				# ... clear out the text on its label
 				cell_label.text = ""
 			else:
+				# ... otherwise, display its distance from the active Player
 				cell_label.text = str(point_distance)
+			# If the Green team is active ...
 			if TurnManager.active_team.name == "GreenTeam":
+				# ... rotate all labels by 180 degrees
 				cell_label.rotation_degrees = 180
 			else:
 				cell_label.rotation_degrees = 0
