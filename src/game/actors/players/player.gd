@@ -1,41 +1,62 @@
 @icon("uid://2dqc4hvtik6l")
 class_name Player
 extends CharacterBody2D
-## Class representing a player on the court (not the person playing the game).
+## Class representing a player on the court (not the person playing the game, which we'll call the user).
 
 #region Signals
 ## Emitted when the player's energy level changes
 signal energy_updated(new_energy : int)
+
 ## Emitted when the player is clicked (by a mouse or touch input)
 signal player_clicked(this_player : Player)
 #endregion
 
 #region Enums
-## Possible states that the player can be in (only one may be active at a time)
+## Possible states the player can be in (only one may be active at a time)
 enum PlayerState {
-	SELECTED, ## The player is currently selected
-	SELECTABLE, ## The player can be selected, but is not currently
-	UNSELECTABLE, ## The player cannot currently be selected
-	MOVING ## The player is in the process of moving
+	## The player is currently selected
+	SELECTED, 
+	## The player can be selected, but is not currently
+	SELECTABLE, 
+	## The player cannot currently be selected
+	UNSELECTABLE, 
+	## The player is in the process of moving
+	MOVING 
 }
 #endregion
 
 #region Constants
-const MOVEMENT_SPEED : float = 10.0 ## Determines how fast the player sprite moves across the screen
-const SELECTED_SCALE : float = 1.2 ## Determines how much to scale up the player sprite when this player is selected
+## Determines how fast the player sprite moves across the screen
+const MOVEMENT_SPEED : float = 10.0 
+
+## Determines how much to scale up the player sprite when this player is selected
+const SELECTED_SCALE : float = 1.2 
 #endregion
 
 #region Properties
-@export_range(0, 99, 1) var player_number : int = 0 ## The player's jersey number
-@export_range(8, 16, 1.0) var player_base_energy : int = 10 ## The player's base energy level per turn
-@export var starting_coords : Vector2i ## The coordinates the player starts on
+	#region Exports
+## The player's jersey number
+@export_range(0, 99, 1) var player_number : int = 0 
 
-var available_energy : int: ## The energy remaining for the player in this turn. Reduced by moving and/or taking an action
+## The player's base energy level per turn
+@export_range(8, 16, 1.0) var player_base_energy : int = 10 
+
+## The coordinates the player starts on
+@export var starting_coords : Vector2i 
+	#endregion
+
+	#region Regular variables
+## The energy remaining for the player in this turn. Reduced by moving and/or taking an action
+var available_energy : int: 
 	set(value):
 		available_energy = value
 		energy_updated.emit(available_energy)
-var coords : Vector2i ## The coordinates where the player is currently located
-var player_state : PlayerState: ## The state this player is currently in. Corresponds to one of the PlayerState enums
+
+## The coordinates where the player is currently located
+var coords : Vector2i 
+
+## The state this player is currently in. Corresponds to one of the [enum PlayerState] constants
+var player_state : PlayerState: 
 	set(value):
 		player_state = value
 		match player_state:
@@ -58,11 +79,16 @@ var player_state : PlayerState: ## The state this player is currently in. Corres
 				pass
 			_:
 				pass
-var team : Team ## The [Team] this player belongs to
 
+## The [Team] this player belongs to
+var team : Team 
+	#endregion
+
+	#region Onready/child Nodes
 @onready var player_number_label : Label = $PlayerNumberLabel
 @onready var player_sprite : Sprite2D = $PlayerSprite
 @onready var player_light : PointLight2D = $PlayerLight
+	#endregion
 #endregion
 
 #region Methods
@@ -73,7 +99,9 @@ func _ready() -> void:
 	available_energy = player_base_energy
 	player_number_label.text = str(player_number)
 
-## Move the player along the given path. Currently called from [CourtLayerData], which converts the path from [MoveManager] to an [Array] of global points
+## Move the player along the given path. 
+## [br][br]
+## Currently called from [CourtLayerData], which converts the path from [MoveManager] to an [Array] of global points
 func move_along_path(path : Array, path_cost : int) -> void:
 	print_debug("Moving %s along path" % name)
 	player_state = PlayerState.MOVING

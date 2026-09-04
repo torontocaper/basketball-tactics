@@ -5,17 +5,31 @@ extends CourtLayer
 ## The visual court layer, responsible for displaying movement distances and paths
 
 #region Constants
-const CLICK_INDICATOR = preload("uid://bnm71kxddqynl") ## [PackedScene] representing [member click_indicator]
-const MAIN_THEME = preload("uid://c0lrucuyge77v") ## [Theme] resource for displaying move costs
-const PATH_INDICATOR = preload("uid://dkswoobiwgwxy") ## [PackedScene] representing [member path_indicator]
+## [PackedScene] representing [member click_indicator]
+const CLICK_INDICATOR = preload("uid://bnm71kxddqynl")
+
+## [Theme] resource for displaying move costs
+const MAIN_THEME = preload("uid://c0lrucuyge77v") 
+
+## [PackedScene] representing [member path_indicator]
+const PATH_INDICATOR = preload("uid://dkswoobiwgwxy") 
 #endregion
 
 #region Properties
-var active_player_move_range : int ## The movement range for the currently active [Player]
-var click_indicator : CPUParticles2D ## [CPUParticles2D] that indicates a click
-var court_cell_graphics : Dictionary[Vector2i, Dictionary] ## [Dictionary] representing the graphics for each cell; created by [method _create_cell_graphics]
-var current_dijkstra_map : Dictionary[Vector2i, Dictionary] ## [Dictionary] representing the current map provided by [MoveManager]
-var path_indicator : Line2D ## [Line2D] that shows a potential movement path
+## The movement range for the currently active [Player]
+var active_player_move_range : int 
+
+## [CPUParticles2D] that indicates a click
+var click_indicator : CPUParticles2D 
+
+## [Dictionary] representing the graphics for each cell; created by [method _create_cell_graphics]
+var court_cell_graphics : Dictionary[Vector2i, Dictionary] 
+
+## [Dictionary] representing the current map provided by [MoveManager]
+var current_dijkstra_map : Dictionary[Vector2i, Dictionary] 
+
+## [Line2D] that shows a potential movement path
+var path_indicator : Line2D 
 #endregion
 
 #region Methods
@@ -45,7 +59,8 @@ func _unhandled_input(event: InputEvent) -> void:
 	#endregion
 
 	#region Core
-## Display the path to the selected target cell. Called when [MoveManager] finds a path. [br]
+## Display the path to the selected target cell. Called when [MoveManager] finds a path.
+## [br][br]
 ## [param new_path] is an [Array] of points in map space, which need to be converted to local space for display
 func display_new_path(new_path : Array, new_path_cost : int) -> void:
 	if new_path:
@@ -69,7 +84,9 @@ func indicate_click(cell_to_indicate : Vector2i) -> void:
 	click_indicator.position = map_to_local(cell_to_indicate)
 	click_indicator.restart()
 
-## Snap a given [Player] to the closest cell on the map
+## Snap a given [Player] to the closest cell on the map.
+## [br][br]
+## Called from [Court] after players are added to [member Court.players_on_court]
 func snap_player_to_grid(player_to_snap : Player) -> void:
 	player_to_snap.position = map_to_local(player_to_snap.starting_coords)
 
