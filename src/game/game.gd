@@ -42,9 +42,12 @@ var players_in_game: Array[Player]:
 	#endregion
 
 	#region Onready/child nodes
-@onready var court: Court = $Court ## The Court scene, which contains both a 'data' layer and a 'visual' layer. Both receive references to the [member players_in_game]
-@onready var blue_team: Team = $BlueTeam ## The blue [Team]
-@onready var green_team: Team = $GreenTeam ## The green [Team]
+## The [Court] scene, which contains both a 'data' layer and a 'visual' layer. Both receive references to [member players_in_game]
+@onready var court: Court = $Court
+## The blue [Team]
+@onready var blue_team: Team = $BlueTeam 
+## The green [Team]
+@onready var green_team: Team = $GreenTeam
 	#endregion
 #endregion
 

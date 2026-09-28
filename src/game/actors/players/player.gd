@@ -69,6 +69,7 @@ var player_state : PlayerState:
 				player_sprite.modulate = Color.WHITE
 				player_light.visible = false
 			PlayerState.UNSELECTABLE:
+				reset_energy()
 				player_sprite.scale = Vector2.ONE
 				player_sprite.modulate = Color.DIM_GRAY
 				player_light.visible = false
@@ -114,6 +115,9 @@ func move_along_path(path : Array, path_cost : int) -> void:
 	available_energy -= path_cost
 	await movement_tween.finished
 	player_state = PlayerState.SELECTED
+
+func reset_energy() -> void:
+	available_energy = player_base_energy
 
 func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event.is_pressed() and event is InputEventMouseButton:
