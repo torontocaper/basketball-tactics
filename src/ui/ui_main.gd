@@ -18,7 +18,6 @@ var blue_team: Team:
 
 #region Methods
 func _ready():
-	#print_debug("UIMain ready at %s ms" % Time.get_ticks_msec())
 	var main : Main = get_tree().current_scene
 	var game : Game = main.game
 	game.start_game()

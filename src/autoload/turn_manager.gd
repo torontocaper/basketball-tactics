@@ -28,6 +28,7 @@ var active_team : Team:
 		start_turn(active_team)
 
 ## The currently inactive [Team]
+#NOTE Is this necessary?
 var inactive_team : Team:
 	set(value):
 		inactive_team = value
