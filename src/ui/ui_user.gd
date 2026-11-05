@@ -12,7 +12,6 @@ const GREEN_BORDER = preload("uid://baub6wgeedwof") ## The blue_border stylebox 
 #region Properties
 #region Regular variables
 var active_player : Player
-var active_team : Team
 
 ## The [Team] controlled by the user assigned to this UI
 var user_team: Team:
@@ -42,7 +41,7 @@ var user_team: Team:
 #region Overrides
 func _ready() -> void:
 	await get_parent().ready
-	_hide_player_box()
+	player_box.hide()
 	set_new_active_player_or_null(null)
 	TurnManager.active_player_set.connect(set_new_active_player_or_null)
 	set_new_active_team(TurnManager.active_team)
@@ -52,38 +51,31 @@ func _ready() -> void:
 
 #region Core
 func set_new_active_player_or_null(new_active_player : Player) -> void:
-	if active_team != user_team:
+	if TurnManager.active_team != user_team:
 		return
 	if active_player:
 		if active_player.is_connected("energy_updated", _update_energy_bar):
 			active_player.disconnect("energy_updated", _update_energy_bar)
 	if !new_active_player:
-		_hide_player_box()
+		player_box.hide()
 	else:
 		active_player = new_active_player
 		active_player_label.text = active_player.name
-		_show_player_box()
-		active_player_energy.modulate = Color.WHITE
+		player_box.show()
 		active_player_energy.max_value = active_player.player_base_energy
 		active_player_energy.value = active_player.available_energy
 		active_player.connect("energy_updated", _update_energy_bar)
 
 func set_new_active_team(new_active_team : Team) -> void:
 	print_debug("Setting new active team on %s" % name)
-	active_team = new_active_team
-	if active_team == user_team:
+	if new_active_team == user_team:
 		button_box.show()
 	else:
 		button_box.hide()
+		player_box.hide()
 #endregion
 
 #region Private/Helper
-func _hide_player_box() -> void:
-	player_box.hide()
-
-func _show_player_box() -> void:
-	player_box.show()
-
 func _update_energy_bar(new_energy : int) -> void:
 	active_player_energy.value = new_energy
 #endregion
