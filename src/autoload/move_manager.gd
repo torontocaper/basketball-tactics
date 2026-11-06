@@ -2,7 +2,7 @@
 extends Node
 ## Manages movement using Dijkstra's algorithm
 
-#region Signals
+#region SIGNALS
 ## Emitted when the Dijkstra map is updated based on a new source cell
 signal map_updated(new_map : Array[Dictionary])
 
@@ -10,7 +10,7 @@ signal map_updated(new_map : Array[Dictionary])
 signal path_found(new_path : Array[Vector2i], new_path_cost : int)
 #endregion
 
-#region Properties
+#region PROPERTIES
 ## Static graph of all cells, their immediate neighbors and the costs to reach those neighbors. 
 ## [br][br]
 ## Provided by [method CourtLayerData._create_dijkstra_graph]
@@ -32,8 +32,8 @@ var path_coords : Array
 var path_cost : int
 #endregion
 
-#region Methods
-	#region Core Functionality
+#region METHODS
+#region Core 
 ## Finds the path from the current source cell to destination_cell_coords
 ## [br][br]
 ## Called from [CourtLayerData] when new navigation target is set
@@ -123,13 +123,13 @@ func update_neighbors(point_coords: Vector2i, map: Dictionary) -> void:
 			neighbor_point.path_from_source = neighbor_point_path
 		# Once all of a starting point's neighbors are updated, that starting point is 'settled'
 		starting_point.is_settled = true
-	#endregion
+#endregion
 
-	#region Helpers
+#region Helpers
 ## Find a point (complete with path and distance data) given its coordinates
 func _find_point_by_coords(coords: Vector2i, map: Dictionary) -> Dictionary:
 	var index_of_point = map.values().find_custom(func(point): return point.coords == coords)
 	var found_point : Dictionary = map.values()[index_of_point]
 	return found_point
-	#endregion
+#endregion
 #endregion

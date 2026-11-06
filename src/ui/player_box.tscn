@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://b5mgy0q34v81v"]
+
+[ext_resource type="Script" uid="uid://gvtujqul1bip" path="res://src/ui/player_box.gd" id="1_66cxw"]
+[ext_resource type="FontFile" uid="uid://bitgv7nf07au6" path="res://assets/fonts/RobotoMono-Medium.ttf" id="1_ne50e"]
+
+[node name="PlayerBox" type="HBoxContainer" unique_id=280926494]
+show_behind_parent = true
+size_flags_horizontal = 0
+size_flags_vertical = 8
+script = ExtResource("1_66cxw")
+
+[node name="PlayerLabel" type="Label" parent="." unique_id=1554943974]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_fonts/font = ExtResource("1_ne50e")
+theme_override_font_sizes/font_size = 32
+text = "Blue1"
+
+[node name="PlayerEnergy" type="ProgressBar" parent="." unique_id=1455320990]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 0)
+custom_maximum_size = Vector2(100, -1)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+show_percentage = false

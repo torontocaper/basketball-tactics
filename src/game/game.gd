@@ -3,20 +3,20 @@ class_name Game
 extends Node2D
 ## The (basketball) game.
 
-#region Signals
+#region SIGNALS
 ## Emitted when the score changes
 signal score_updated(new_green_score: int, new_blue_score: int)
 #endregion
 
-#region Enums
+#region ENUMS
 enum GameState {
 	PAUSED,
 	ACTIVE
 }
 #endregion
 
-#region Properties
-	#region Regular variables
+#region PROPERTIES
+#region Regular variables
 ## The current state of the game
 var game_state : GameState = GameState.PAUSED:
 	set(value):
@@ -39,28 +39,28 @@ var players_in_game: Array[Player]:
 	set(value):
 		players_in_game = value
 		court.players_on_court = players_in_game
-	#endregion
+#endregion
 
-	#region Onready/child nodes
+#region Onready/child nodes
 ## The [Court] scene, which contains both a 'data' layer and a 'visual' layer. Both receive references to [member players_in_game]
 @onready var court: Court = $Court
 ## The blue [Team]
 @onready var blue_team: Team = $BlueTeam 
 ## The green [Team]
 @onready var green_team: Team = $GreenTeam
-	#endregion
+#endregion
 #endregion
 
-#region Methods
-	#region Overrides
+#region METHODS
+#region Overrides
 func _ready() -> void:
 	players_in_game = blue_team.players + green_team.players
-	#endregion
+#endregion
 
-	#region Core
+#region Core
 ## Start the game!
 func start_game() -> void:
 	var coin_toss_winner = TurnManager.flip_coin(green_team, blue_team)
 	print_debug("%s gets first ball" % coin_toss_winner.name)
-	#endregion
+#endregion
 #endregion

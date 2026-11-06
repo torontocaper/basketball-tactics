@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://ocnv6pom0ooy" path="res://src/ui/scoreboard.tscn" id="1_ldpg4"]
 [ext_resource type="FontFile" uid="uid://bitgv7nf07au6" path="res://assets/fonts/RobotoMono-Medium.ttf" id="2_lx81v"]
 [ext_resource type="StyleBox" uid="uid://b7wsgjbmvcoy7" path="res://resources/blue_border.tres" id="2_ovicl"]
+[ext_resource type="PackedScene" uid="uid://b5mgy0q34v81v" path="res://src/ui/player_box.tscn" id="4_whh6w"]
 
 [node name="UIUser" type="Control" unique_id=30669888]
 custom_minimum_size = Vector2(720, 640)
@@ -38,30 +39,9 @@ layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
 
-[node name="PlayerBox" type="HBoxContainer" parent="Border" unique_id=1140417146]
-unique_name_in_owner = true
-visible = false
-show_behind_parent = true
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 8
-
-[node name="ActivePlayerLabel" type="Label" parent="Border/PlayerBox" unique_id=1063821037]
+[node name="PlayerBox" parent="Border" unique_id=280926494 instance=ExtResource("4_whh6w")]
 unique_name_in_owner = true
 layout_mode = 2
-size_flags_horizontal = 10
-theme_override_fonts/font = ExtResource("2_lx81v")
-theme_override_font_sizes/font_size = 32
-text = "Blue1"
-
-[node name="ActivePlayerEnergy" type="ProgressBar" parent="Border/PlayerBox" unique_id=1967268551]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(100, 0)
-custom_maximum_size = Vector2(100, -1)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 1
-show_percentage = false
 
 [node name="ButtonBox" type="HBoxContainer" parent="Border" unique_id=837136975]
 unique_name_in_owner = true

@@ -2,18 +2,18 @@
 #@icon(icon_path: String)
 class_name UIUser
 extends Control
-## Documentation comments
+## UI scene for a particular User
+## 
+## Occupies half of the screen, and is rotated toward the User.
 
-#region Constants
-const BLUE_BORDER = preload("uid://b7wsgjbmvcoy7") ## The green_border stylebox resource
-const GREEN_BORDER = preload("uid://baub6wgeedwof") ## The blue_border stylebox resource
+#region CONSTANTS
+const BLUE_BORDER = preload("uid://b7wsgjbmvcoy7") ## The green_border stylebox resource; assigned to the User controlling the blue team
+const GREEN_BORDER = preload("uid://baub6wgeedwof") ## The blue_border stylebox resource; assigned to the User controlling the green team
 #endregion
 
-#region Properties
+#region PROPERTIES
 #region Regular variables
-var active_player : Player
-
-## The [Team] controlled by the user assigned to this UI
+## The [Team] controlled by the user assigned to this UI; assigned by parent UIMain
 var user_team: Team:
 	set(value):
 		user_team = value
@@ -26,21 +26,20 @@ var user_team: Team:
 				pass
 #endregion
 
-#region Onready/child Nodes
-@onready var active_player_energy: ProgressBar = %ActivePlayerEnergy
-@onready var active_player_label: Label = %ActivePlayerLabel
+#region Onready/child nodes
 @onready var border: PanelContainer = %Border
 @onready var end_turn_button: Button = %EndTurnButton
-@onready var user_scoreboard: Scoreboard = %Scoreboard
-@onready var player_box: HBoxContainer = %PlayerBox
+@onready var player_box: PlayerBox = %PlayerBox
 @onready var button_box: HBoxContainer = %ButtonBox
 #endregion
 #endregion
 
-#region Methods
+#region METHODS
 #region Overrides
 func _ready() -> void:
+	# Parent 'ui_main' assigns user; wait until it's ready before doing anything
 	await get_parent().ready
+	# Hide the player name/energy bar by default
 	player_box.hide()
 	set_new_active_player_or_null(null)
 	TurnManager.active_player_set.connect(set_new_active_player_or_null)
@@ -51,20 +50,16 @@ func _ready() -> void:
 
 #region Core
 func set_new_active_player_or_null(new_active_player : Player) -> void:
+	# If this User isn't active, ignore
 	if TurnManager.active_team != user_team:
 		return
-	if active_player:
-		if active_player.is_connected("energy_updated", _update_energy_bar):
-			active_player.disconnect("energy_updated", _update_energy_bar)
-	if !new_active_player:
+	# If there's no active player, hide the player UI
+	elif !new_active_player:
 		player_box.hide()
+	# Otherwise, assign the new active player to the PlayerBox
 	else:
-		active_player = new_active_player
-		active_player_label.text = active_player.name
+		player_box.player = new_active_player
 		player_box.show()
-		active_player_energy.max_value = active_player.player_base_energy
-		active_player_energy.value = active_player.available_energy
-		active_player.connect("energy_updated", _update_energy_bar)
 
 func set_new_active_team(new_active_team : Team) -> void:
 	print_debug("Setting new active team on %s" % name)
@@ -73,10 +68,5 @@ func set_new_active_team(new_active_team : Team) -> void:
 	else:
 		button_box.hide()
 		player_box.hide()
-#endregion
-
-#region Private/Helper
-func _update_energy_bar(new_energy : int) -> void:
-	active_player_energy.value = new_energy
 #endregion
 #endregion
