@@ -1,6 +1,6 @@
 @icon("uid://3qwgg5y3fkjd")
 class_name Game
-extends Node2D
+extends Node
 ## The (basketball) game.
 
 #region SIGNALS
@@ -34,7 +34,7 @@ var blue_score: int = 0:
 		blue_score = value
 		score_updated.emit(green_score, blue_score)
 
-## The [Player]s in the game
+## The [Player]s in the game; sent to the [member court] when set
 var players_in_game: Array[Player]:
 	set(value):
 		players_in_game = value
@@ -53,13 +53,18 @@ var players_in_game: Array[Player]:
 
 #region METHODS
 #region Overrides
+func _init() -> void:
+	print_debug("starting a new game")
+
 func _ready() -> void:
 	players_in_game = blue_team.players + green_team.players
 #endregion
 
 #region Core
-## Start the game!
+## Start (or restart) the game!
 func start_game() -> void:
+	blue_score = 0
+	green_score = 0
 	var coin_toss_winner = TurnManager.flip_coin(green_team, blue_team)
 	print_debug("%s gets first ball" % coin_toss_winner.name)
 #endregion
