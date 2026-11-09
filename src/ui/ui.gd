@@ -1,5 +1,5 @@
-class_name UI
-extends Control
+#class_name UI
+extends Node
 ## Documentation comments
 
 #region Signals
@@ -27,7 +27,6 @@ const UI_ERROR = preload("uid://dnsdv2iate647")
 
 #region Methods
 func _ready():
-	#print_debug("UI ready at %s ms" % Time.get_ticks_msec())
 	current_ui_state = UIState.OPEN
 
 func open_new_ui_scene(ui_state: UIState) -> void:

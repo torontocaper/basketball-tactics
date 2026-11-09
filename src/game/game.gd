@@ -5,34 +5,26 @@ extends Node
 
 #region SIGNALS
 ## Emitted when the score changes
-signal score_updated(new_green_score: int, new_blue_score: int)
-#endregion
-
-#region ENUMS
-enum GameState {
-	PAUSED,
-	ACTIVE
-}
+signal score_updated(team : Team, new_score : int)
 #endregion
 
 #region PROPERTIES
-#region Regular variables
-## The current state of the game
-var game_state : GameState = GameState.PAUSED:
-	set(value):
-		game_state = value
+#region Exports
+@export var home_team : Team
+@export var away_team : Team
 
+#region Regular variables
 ## The score for the green team
-var green_score: int = 0:
+var home_score: int = 0:
 	set(value):
-		green_score = value
-		score_updated.emit(green_score, blue_score)
+		home_score = value
+		score_updated.emit(home_team, home_score)
 
 ## The score for the blue team
-var blue_score: int = 0:
+var away_score: int = 0:
 	set(value):
-		blue_score = value
-		score_updated.emit(green_score, blue_score)
+		away_score = value
+		score_updated.emit(away_team, away_score)
 
 ## The [Player]s in the game; sent to the [member court] when set
 var players_in_game: Array[Player]:
@@ -53,18 +45,16 @@ var players_in_game: Array[Player]:
 
 #region METHODS
 #region Overrides
-func _init() -> void:
-	print_debug("starting a new game")
-
-func _ready() -> void:
-	players_in_game = blue_team.players + green_team.players
+func _init(home : Team, away : Team) -> void:
+	print_debug("Initializing a game with home team %s and away team %s" % [home.name, away.name])
+	home_team = home
+	away_team = away
+	players_in_game = home_team.players + away_team.players
 #endregion
 
 #region Core
 ## Start (or restart) the game!
 func start_game() -> void:
-	blue_score = 0
-	green_score = 0
 	var coin_toss_winner = TurnManager.flip_coin(green_team, blue_team)
 	print_debug("%s gets first ball" % coin_toss_winner.name)
 #endregion

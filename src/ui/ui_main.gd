@@ -19,11 +19,8 @@ var blue_team: Team:
 #region Methods
 func _ready():
 	var main : Main = get_tree().current_scene
-	var game : Game = main.game
-	game.start_game()
-	green_team = game.green_team
-	blue_team = game.blue_team
-	#var user_uis: Array[UIUser] = [ui_user_north, ui_user_south]
-	#for user_ui in user_uis:
-		#user_ui.user_scoreboard.current_game = game
+	#var game : Game = main.game
+	#game.start_game()
+	#green_team = game.green_team
+	#blue_team = game.blue_team
 #endregion
