@@ -8,19 +8,20 @@ extends Node2D
 
 #region PROPERTIES
 #region Onready/child nodes
-@onready var game_layer : CanvasLayer = $GameLayer ## The layer on which the [Game] is displayed
-@onready var ui_layer : CanvasLayer = $UILayer ## The layer on which the [UI] is displayed
+@onready var game_layer : CanvasLayer = $GameLayer ## The layer on which gameplay elements are displayed
+@onready var ui_layer : CanvasLayer = $UILayer ## The layer on which user interface elements are displayed
 #region
 #endregion
 
 #region METHODS
 func _ready() -> void:
 	UiManager.ui_updated.connect(_update_ui)
-	GameManager.game_started.connect(_update_game)
+	GameManager.game_updated.connect(_update_game)
 	UiManager.current_ui_state = UiManager.UIState.OPEN
+	GameManager.current_game_state = GameManager.GameState.HIDDEN
 
-func _update_game(new_game : Game) -> void:
-	game_layer.add_child(new_game)
+func _update_game(game : Game, game_state : GameManager.GameState) -> void:
+	game_layer.add_child(game)
 
 func _update_ui(new_ui_scene : Control) -> void:
 	# Clear existing UI nodes, if necessary

@@ -5,7 +5,10 @@ extends Node
 signal ui_updated(new_ui_scene : Control)
 
 #region ENUMS
-enum UIState {OPEN, MAIN}
+enum UIState {
+	OPEN, 
+	MAIN
+}
 #endregion
 
 #region CONSTANTS
@@ -15,16 +18,16 @@ const UI_ERROR = preload("uid://dnsdv2iate647")
 #endregion
 
 #region PROPERTIES
-@export var current_ui_state: UIState:
-	set(value):
-		current_ui_state = value
-		print_debug("UI has new state: %s" % UIState.keys()[current_ui_state])
-		current_ui_scene = open_new_ui_scene(current_ui_state)
-
 var current_ui_scene : Control:
 	set(value):
 		current_ui_scene = value
 		ui_updated.emit(current_ui_scene)
+
+var current_ui_state : UIState:
+	set(value):
+		current_ui_state = value
+		print_debug("UI has new state: %s" % UIState.keys()[current_ui_state])
+		current_ui_scene = open_new_ui_scene(current_ui_state)
 #endregion
 
 #region METHODS

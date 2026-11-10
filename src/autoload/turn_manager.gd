@@ -2,7 +2,7 @@
 extends Node
 ## Turn controller. Responsible for changing Player and Team states.
 
-#region Signals
+#region SIGNALS
 ## Emitted when a new player is selected. Sends their location to [CourtLayerData]
 signal active_player_set(player_made_active : Player)
 ## Emitted when a new active team is set
@@ -11,7 +11,7 @@ signal active_team_set(team_made_active : Team)
 signal turn_ended
 #endregion
 
-#region Properties
+#region PROPERTIES
 ## The currently active [Team]
 var active_team : Team: 
 	set(value):
@@ -47,7 +47,7 @@ var active_player : Player:
 			active_player_set.emit(null)
 #endregion
 
-#region Methods
+#region METHODS
 ## Determine which team gets first ball. Called from [Game] in [method Game.start_game]
 func flip_coin(team_1 : Team, team_2 : Team) -> Team:
 	if randi() % 2:

@@ -1,9 +1,7 @@
 [gd_scene format=3 uid="uid://coo2i8qmmqdt3"]
 
 [ext_resource type="Script" uid="uid://goxocawrogp0" path="res://src/ui/ui_open.gd" id="1_tqe0r"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_22oau"]
-bg_color = Color(0, 0, 0, 0.61960787)
+[ext_resource type="StyleBox" uid="uid://cgcacxlmvoc0e" path="res://resources/dark_gray_style_box.tres" id="2_22oau"]
 
 [node name="UIOpen" type="Control" unique_id=655011192]
 layout_mode = 3
@@ -21,7 +19,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_22oau")
+theme_override_styles/panel = ExtResource("2_22oau")
 
 [node name="OpenContainer" type="VBoxContainer" parent="PanelContainer" unique_id=929259664]
 layout_mode = 2

@@ -3,8 +3,15 @@
 [ext_resource type="Script" uid="uid://bv3jtg5siw651" path="res://src/ui/ui_user.gd" id="1_aeh18"]
 [ext_resource type="PackedScene" uid="uid://ocnv6pom0ooy" path="res://src/ui/scoreboard.tscn" id="1_ldpg4"]
 [ext_resource type="FontFile" uid="uid://bitgv7nf07au6" path="res://assets/fonts/RobotoMono-Medium.ttf" id="2_lx81v"]
-[ext_resource type="StyleBox" uid="uid://b7wsgjbmvcoy7" path="res://resources/blue_border.tres" id="2_ovicl"]
 [ext_resource type="PackedScene" uid="uid://b5mgy0q34v81v" path="res://src/ui/player_box.tscn" id="4_whh6w"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pv81u"]
+bg_color = Color(1, 1, 1, 0)
+draw_center = false
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
 
 [node name="UIUser" type="Control" unique_id=30669888]
 custom_minimum_size = Vector2(720, 640)
@@ -26,9 +33,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-theme_override_styles/panel = ExtResource("2_ovicl")
+theme_override_styles/panel = SubResource("StyleBoxFlat_pv81u")
 
 [node name="ScoreboardBox" type="CenterContainer" parent="Border" unique_id=1289687527]
+unique_name_in_owner = true
 show_behind_parent = true
 layout_mode = 2
 size_flags_vertical = 8
@@ -45,7 +53,6 @@ layout_mode = 2
 
 [node name="ButtonBox" type="HBoxContainer" parent="Border" unique_id=837136975]
 unique_name_in_owner = true
-visible = false
 show_behind_parent = true
 layout_mode = 2
 size_flags_horizontal = 8

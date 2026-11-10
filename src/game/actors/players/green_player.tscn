@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://b2vohbcnqvvur"]
 
-[ext_resource type="PackedScene" uid="uid://bv21vx6lvidbx" path="res://src/game/actors/players/player.tscn" id="1_lm74s"]
+[ext_resource type="PackedScene" uid="uid://bv21vx6lvidbx" path="res://src/game/actors/player.tscn" id="1_lm74s"]
 
 [sub_resource type="Gradient" id="Gradient_bqfhs"]
 interpolation_mode = 1
