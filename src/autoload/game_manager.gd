@@ -2,19 +2,28 @@
 extends Node
 ## Autoload responsible for creating and maintaining [Game]s
 
+#region SIGNALS
+signal game_started(game : Game)
+#endregion
+
+#region CONSTANTS
+const GAME = preload("uid://c8ityv0juv884")
+#endregion
+
+#region PROPERTIES
 ## The [Game] that is currently underway
 var current_game : Game:
 	set(value):
-		if current_game:
-			end_game(current_game)
 		current_game = value
+		game_started.emit(current_game)
+#endregion
 
-## End the [member current_game]
-func end_game(game_to_end : Game) -> void:
-	print_debug("Ending game %s" % game_to_end.name)
-
+#region METHODS
 ## Start a new [Game]
-func start_game(home_team : Team, away_team : Team) -> Game:
-	print_debug("GM attempting to start a new game with home team %s and away team %s" % [home_team.name, away_team.name])
-	var new_game = Game.new(home_team, away_team)
-	return new_game
+func start_game(home : Team, away : Team) -> void:
+	print_debug("GM attempting to start a new game with home team %s and away team %s" % [home.name, away.name])
+	var new_game = GAME.instantiate() as Game
+	new_game.home_team = home
+	new_game.away_team = away
+	current_game = new_game
+#endregion

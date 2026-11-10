@@ -13,7 +13,7 @@ const GREEN_BORDER = preload("uid://baub6wgeedwof") ## The blue_border stylebox 
 
 #region PROPERTIES
 #region Regular variables
-## The [Team] controlled by the user assigned to this UI; assigned by parent UIMain
+## The [Team] controlled by the user assigned to this UI
 var user_team: Team:
 	set(value):
 		user_team = value

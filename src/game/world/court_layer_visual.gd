@@ -90,7 +90,7 @@ func indicate_click(cell_to_indicate : Vector2i) -> void:
 ## [br][br]
 ## Called from [Court] after players are added to [member Court.players_on_court]
 func snap_player_to_grid(player_to_snap : Player) -> void:
-	player_to_snap.position = map_to_local(player_to_snap.starting_coords)
+	player_to_snap.position = map_to_local(player_to_snap.coords)
 
 ## Update distances displayed on (reachable) cells. Called when [MoveManager] updates the map from a new source_cell
 func update_distances(dijkstra_map : Dictionary[Vector2i, Dictionary]) -> void:

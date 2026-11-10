@@ -6,13 +6,7 @@ extends Node2D
 ## 
 ## Coordinates between Game and UI layers.
 
-#region CONSTANTS
-#endregion
-
 #region PROPERTIES
-#region Regular variables
-#endregion
-
 #region Onready/child nodes
 @onready var game_layer : CanvasLayer = $GameLayer ## The layer on which the [Game] is displayed
 @onready var ui_layer : CanvasLayer = $UILayer ## The layer on which the [UI] is displayed
@@ -21,8 +15,12 @@ extends Node2D
 
 #region METHODS
 func _ready() -> void:
-	ui_layer.add_child(UiManager.current_ui_scene)
 	UiManager.ui_updated.connect(_update_ui)
+	GameManager.game_started.connect(_update_game)
+	UiManager.current_ui_state = UiManager.UIState.OPEN
+
+func _update_game(new_game : Game) -> void:
+	game_layer.add_child(new_game)
 
 func _update_ui(new_ui_scene : Control) -> void:
 	# Clear existing UI nodes, if necessary

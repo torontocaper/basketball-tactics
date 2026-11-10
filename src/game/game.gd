@@ -36,26 +36,27 @@ var players_in_game: Array[Player]:
 #region Onready/child nodes
 ## The [Court] scene, which contains both a 'data' layer and a 'visual' layer. Both receive references to [member players_in_game]
 @onready var court: Court = $Court
-## The blue [Team]
-@onready var blue_team: Team = $BlueTeam 
-## The green [Team]
-@onready var green_team: Team = $GreenTeam
 #endregion
 #endregion
 
 #region METHODS
 #region Overrides
-func _init(home : Team, away : Team) -> void:
-	print_debug("Initializing a game with home team %s and away team %s" % [home.name, away.name])
-	home_team = home
-	away_team = away
-	players_in_game = home_team.players + away_team.players
+func _ready() -> void:
+	if home_team and away_team:
+		print_debug("Starting a new game")
+		var children := get_children()
+		for child in children:
+			if child is Team:
+				child.queue_free()
+		add_child(home_team)
+		add_child(away_team)
+		start_game()
 #endregion
 
 #region Core
 ## Start (or restart) the game!
 func start_game() -> void:
-	var coin_toss_winner = TurnManager.flip_coin(green_team, blue_team)
+	var coin_toss_winner = TurnManager.flip_coin(home_team, away_team)
 	print_debug("%s gets first ball" % coin_toss_winner.name)
 #endregion
 #endregion

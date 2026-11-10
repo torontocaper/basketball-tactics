@@ -20,15 +20,14 @@ const UI_ERROR = preload("uid://dnsdv2iate647")
 		current_ui_state = value
 		print_debug("UI has new state: %s" % UIState.keys()[current_ui_state])
 		current_ui_scene = open_new_ui_scene(current_ui_state)
-		ui_updated.emit(current_ui_scene)
 
-var current_ui_scene : Control
+var current_ui_scene : Control:
+	set(value):
+		current_ui_scene = value
+		ui_updated.emit(current_ui_scene)
 #endregion
 
 #region METHODS
-func _ready():
-	current_ui_state = UIState.OPEN
-
 func open_new_ui_scene(ui_state: UIState) -> Control:
 	var scene_to_open : PackedScene
 	match ui_state:
