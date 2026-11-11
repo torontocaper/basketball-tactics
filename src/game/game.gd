@@ -50,7 +50,6 @@ func _ready() -> void:
 		add_child(away_team, true)
 		court.home_players = home_team.players
 		court.away_players = away_team.players
-		#players_in_game = home_team.players + away_team.players
 		start_game()
 #endregion
 

@@ -38,15 +38,6 @@ var away_players : Array[Player]:
 				player_starting_cell = away_starting_cells.pick_random()
 			player.coords = player_starting_cell
 
-## The [Player]s on this court. Set from [Game]. 
-## References sent to both [member data_layer] (for setting [member CourtLayerData.occupied_cells]) and [member visual_layer] (for grid-snapping).
-var players_on_court : Array[Player]:
-	set(value):
-		players_on_court = value
-		for player in players_on_court:
-			player.court = self
-			data_layer.occupied_cells[player] = player.coords #TODO: can hopefully eliminate this
-
 ## The [CourtLayer] that handles data processing, including navigation information and occupied cells
 @onready var data_layer: CourtLayerData = $DataLayer 
 
@@ -57,6 +48,7 @@ var players_on_court : Array[Player]:
 #region METHODS
 func _ready() -> void:
 	var all_cells : Array[Vector2i] = data_layer.court_cells
+	#TODO these are all kinda clunky
 	home_cells = all_cells.filter(func(cell): return data_layer.get_cell_tile_data(cell).get_custom_data("team_territory") == "home")
 	away_cells = all_cells.filter(func(cell): return data_layer.get_cell_tile_data(cell).get_custom_data("team_territory") == "away")
 	home_starting_cells = home_cells.filter(func(cell): return data_layer.get_cell_tile_data(cell).get_custom_data("points") == 2 and data_layer.get_cell_tile_data(cell).get_custom_data("is_hoop") == false)

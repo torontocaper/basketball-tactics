@@ -40,9 +40,6 @@ const SELECTED_SCALE : float = 1.2
 
 ## The player's base energy level per turn
 @export_range(8, 16, 1.0) var player_base_energy : int = 10 
-
-## The coordinates the player starts on
-@export var starting_coords : Vector2i 
 #endregion
 
 #region Regular variables
@@ -113,15 +110,12 @@ var team : Team
 
 #region METHODS
 func _ready() -> void:
-	connect("input_event", _on_input_event)
-	connect("player_clicked", TurnManager.on_player_clicked)
-	coords = starting_coords
+	input_event.connect(_on_input_event)
+	player_clicked.connect(TurnManager.on_player_clicked)
 	available_energy = player_base_energy
 	player_number_label.text = str(player_number)
 
-## Move the player along the given path. 
-## [br][br]
-## Currently called from [CourtLayerData], which converts the path from [MoveManager] to an [Array] of global points
+## Move the player along the given path. Called from [CourtLayerData], which converts the path from [MoveManager] to an [Array] of global points
 func move_along_path(path : Array, path_cost : int) -> void:
 	print_debug("Moving %s along path" % name)
 	player_state = PlayerState.MOVING
@@ -131,6 +125,7 @@ func move_along_path(path : Array, path_cost : int) -> void:
 	available_energy -= path_cost
 	await movement_tween.finished
 	player_state = PlayerState.SELECTED
+	coords = court.data_layer.local_to_map(position)
 
 ## Reset the [Player]'s energy 
 #TODO: Make this add some energy back to the player after each turn (not full reset)

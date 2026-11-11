@@ -42,13 +42,9 @@ var user_team: Team:
 @onready var team_select: Control = %TeamSelect
 @onready var team_select_title: Label = %TeamSelectTitle
 @onready var scoreboard: Scoreboard = %Scoreboard
-
-
-
 @onready var end_turn_button: Button = %EndTurnButton
 @onready var button_box: HBoxContainer = %ButtonBox
 @onready var player_box: PlayerBox = %PlayerBox
-@onready var scoreboard_box: CenterContainer = %ScoreboardBox
 #endregion
 #endregion
 
@@ -70,14 +66,6 @@ func _ready() -> void:
 	ready_button.disabled = true
 	# Use the item_selected signal to choose a team for this user
 	team_list.item_selected.connect(_on_team_list_item_selected)
-	
-	
-	#CAUTION: don't delete; refactor below code to happen after team selection
-	#set_new_active_player_or_null(null)
-	#TurnManager.active_player_set.connect(set_new_active_player_or_null)
-	#set_new_active_team(TurnManager.active_team)
-	#TurnManager.active_team_set.connect(set_new_active_team)
-	#end_turn_button.pressed.connect(TurnManager.end_turn)
 #endregion
 
 #region Core

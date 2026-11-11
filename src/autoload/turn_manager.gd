@@ -48,7 +48,7 @@ var active_player : Player:
 #endregion
 
 #region METHODS
-## Determine which team gets first ball. Called from [Game] in [method Game.start_game]
+## Determine which team gets first ball. Called from [Game]
 func flip_coin(team_1 : Team, team_2 : Team) -> Team:
 	if randi() % 2:
 		active_team = team_1
