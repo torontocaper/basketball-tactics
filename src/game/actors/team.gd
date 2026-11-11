@@ -1,5 +1,4 @@
-#@tool
-@icon("uid://b6h3hpklksw7i")
+@icon("uid://by1gybw2wgs33")
 class_name Team
 extends Node2D
 ## Base class for teams

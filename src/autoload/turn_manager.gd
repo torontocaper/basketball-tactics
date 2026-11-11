@@ -1,4 +1,4 @@
-@icon("uid://hb3h3lrd8n4x")
+@icon("uid://w065r5o1n7nf")
 extends Node
 ## Turn controller. Responsible for changing Player and Team states.
 

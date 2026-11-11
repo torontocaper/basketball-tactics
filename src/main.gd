@@ -18,7 +18,7 @@ func _ready() -> void:
 	UiManager.ui_updated.connect(_update_ui)
 	GameManager.game_updated.connect(_update_game)
 	UiManager.current_ui_state = UiManager.UIState.OPEN
-	GameManager.current_game_state = GameManager.GameState.HIDDEN
+	#GameManager.current_game_state = GameManager.GameState.HIDDEN
 
 func _update_game(game : Game, game_state : GameManager.GameState) -> void:
 	if game_state == GameManager.GameState.ACTIVE:

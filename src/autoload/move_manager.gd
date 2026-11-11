@@ -1,4 +1,4 @@
-@icon("uid://cmi5knekkrb06")
+@icon("uid://riw6fbb0p50g")
 extends Node
 ## Manages movement using Dijkstra's algorithm
 

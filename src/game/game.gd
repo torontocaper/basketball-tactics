@@ -1,7 +1,7 @@
-@icon("uid://3qwgg5y3fkjd")
+@icon("uid://b03b5v1eswnsf")
 class_name Game
 extends Node
-## The (basketball) game.
+## The (basketball) game. Created by [GameManager] after users select their teams
 
 #region SIGNALS
 ## Emitted when the score changes
@@ -9,18 +9,21 @@ signal score_updated(team : Team, new_score : int)
 #endregion
 
 #region PROPERTIES
-#region Exports
-@export var home_team : Team
-@export var away_team : Team
 
 #region Regular variables
-## The score for the green team
+## The home team
+var home_team : Team
+
+## The away team
+var away_team : Team
+
+## The score for the home team
 var home_score: int = 0:
 	set(value):
 		home_score = value
 		score_updated.emit(home_team, home_score)
 
-## The score for the blue team
+## The score for the away team
 var away_score: int = 0:
 	set(value):
 		away_score = value

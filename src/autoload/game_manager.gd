@@ -1,4 +1,4 @@
-@icon("uid://lh2py1qa2s3n")
+@icon("uid://b03b5v1eswnsf")
 extends Node
 ## Autoload responsible for creating and maintaining [Game]s
 
@@ -25,7 +25,7 @@ var current_game : Game:
 	set(value):
 		current_game = value
 
-## The state of the current [Game]
+## The state of the current [Game]. Update signal is sent to [Main]
 var current_game_state : GameState = GameState.HIDDEN:
 	set(value):
 		current_game_state = value
@@ -33,7 +33,7 @@ var current_game_state : GameState = GameState.HIDDEN:
 #endregion
 
 #region METHODS
-## Set up a new [Game]
+## Set up a new [Game]. Called from [UIMain] when both users have selected a team and clicked 'ready'
 func set_up_game(home : Team, away : Team) -> void:
 	print_debug("GM attempting to set up a new game with home team %s and away team %s" % [home.name, away.name])
 	var new_game = GAME_PACKED.instantiate() as Game

@@ -12,9 +12,9 @@ enum UserSide {
 }
 #endregion
 
-
 #region PROPERTIES
 #region Regular variables
+## Which 'side' this user represents (ie: Home or Away)
 @export var user_side : UserSide
 
 ## The [Team] controlled by the user assigned to this UI
@@ -22,11 +22,13 @@ var user_team: Team:
 	set(value):
 		if !value:
 			user_team = null
+			# no team assigned; reset border to white
 			var new_panel : StyleBoxFlat = border.get_theme_stylebox("panel").duplicate()
 			new_panel.border_color = Color.WHITE
 			border.add_theme_stylebox_override("panel", new_panel)
 		else:
 			user_team = value
+			# set border to team color
 			var new_panel : StyleBoxFlat = border.get_theme_stylebox("panel").duplicate()
 			new_panel.border_color = user_team.team_color
 			border.add_theme_stylebox_override("panel", new_panel)
@@ -55,14 +57,17 @@ var user_team: Team:
 func _ready() -> void:
 	# Hide the active game items 
 	game_controls.hide()
+	# Set the label text to home/away
+	team_select_title.text = "Select %s team:" % UserSide.keys()[user_side]
 	# Clear out the team list
 	team_list.clear()
 	# Add the actual teams to the list
 	for team in Teams.teams:
 		team_list.add_item(team.name)
+	# Disable the 'ready' button
+	ready_button.disabled = true
 	# Use the item_selected signal to choose a team for this user
 	team_list.item_selected.connect(_set_user_team)
-	team_select_title.text = "Select %s team:" % UserSide.keys()[user_side]
 	
 	
 	#CAUTION: don't delete; refactor below code to happen after team selection
@@ -98,4 +103,6 @@ func set_new_active_team(new_active_team : Team) -> void:
 #region Helpers
 func _set_user_team(team_index : int) -> void:
 	user_team = Teams.teams[team_index]
+	ready_button.disabled = false
+#endregion
 #endregion

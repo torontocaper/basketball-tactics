@@ -1,4 +1,4 @@
-@icon("uid://2dqc4hvtik6l")
+@icon("uid://b4bk4iphpq50s")
 class_name Player
 extends CharacterBody2D
 ## Class representing a player on the court (not the person playing the game, which we'll call the user).
