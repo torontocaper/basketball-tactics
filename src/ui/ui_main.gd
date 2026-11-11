@@ -21,7 +21,7 @@ func _attempt_to_start_game(_is_toggled : bool) -> void:
 	# if both users have indicated that they're ready...
 	if ui_user_north.ready_button.button_pressed and ui_user_south.ready_button.button_pressed:
 		print_debug("Both teams are ready to start!")
-		# if they've picked the same team, reset everything
+		# if both users have picked the same team, reset everything
 		if ui_user_north.user_team == ui_user_south.user_team:
 			print_debug("Too bad you both have the same team selected. Try again!")
 			for ui in user_uis:

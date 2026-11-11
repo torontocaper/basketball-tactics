@@ -59,6 +59,6 @@ func _ready() -> void:
 	var all_cells : Array[Vector2i] = data_layer.court_cells
 	home_cells = all_cells.filter(func(cell): return data_layer.get_cell_tile_data(cell).get_custom_data("team_territory") == "home")
 	away_cells = all_cells.filter(func(cell): return data_layer.get_cell_tile_data(cell).get_custom_data("team_territory") == "away")
-	home_starting_cells = home_cells.filter(func(cell): return data_layer.get_cell_tile_data(cell).get_custom_data("points") == 2)
-	away_starting_cells = away_cells.filter(func(cell): return data_layer.get_cell_tile_data(cell).get_custom_data("points") == 2)
+	home_starting_cells = home_cells.filter(func(cell): return data_layer.get_cell_tile_data(cell).get_custom_data("points") == 2 and data_layer.get_cell_tile_data(cell).get_custom_data("is_hoop") == false)
+	away_starting_cells = away_cells.filter(func(cell): return data_layer.get_cell_tile_data(cell).get_custom_data("points") == 2 and data_layer.get_cell_tile_data(cell).get_custom_data("is_hoop") == false)
 #endregion

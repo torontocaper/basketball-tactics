@@ -40,6 +40,7 @@ texture_region_size = Vector2i(80, 80)
 4:1/0/custom_data_2 = 2
 4:1/0/custom_data_3 = "D"
 4:1/0/custom_data_4 = "1"
+4:1/0/custom_data_5 = true
 5:1/0 = 0
 5:1/0/custom_data_0 = true
 5:1/0/custom_data_1 = "away"
@@ -612,6 +613,7 @@ texture_region_size = Vector2i(80, 80)
 4:14/0/custom_data_2 = 2
 4:14/0/custom_data_3 = "D"
 4:14/0/custom_data_4 = "1"
+4:14/0/custom_data_5 = true
 5:14/0 = 0
 5:14/0/custom_data_0 = true
 5:14/0/custom_data_1 = "home"
@@ -653,6 +655,8 @@ custom_data_layer_3/name = "column"
 custom_data_layer_3/type = 4
 custom_data_layer_4/name = "row"
 custom_data_layer_4/type = 4
+custom_data_layer_5/name = "is_hoop"
+custom_data_layer_5/type = 1
 sources/0 = SubResource("TileSetAtlasSource_5tsbs")
 
 [node name="CourtLayerData" type="TileMapLayer" unique_id=311464305]

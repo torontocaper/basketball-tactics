@@ -57,6 +57,8 @@ var user_team: Team:
 func _ready() -> void:
 	# Hide the active game items 
 	game_controls.hide()
+	# Connect the game controls' visibility signal 
+	game_controls.visibility_changed.connect(_on_game_controls_visibility_changed)
 	# Set the label text to home/away
 	team_select_title.text = "Select %s team:" % UserSide.keys()[user_side]
 	# Clear out the team list
@@ -67,7 +69,7 @@ func _ready() -> void:
 	# Disable the 'ready' button
 	ready_button.disabled = true
 	# Use the item_selected signal to choose a team for this user
-	team_list.item_selected.connect(_set_user_team)
+	team_list.item_selected.connect(_on_team_list_item_selected)
 	
 	
 	#CAUTION: don't delete; refactor below code to happen after team selection
@@ -101,7 +103,15 @@ func set_new_active_team(new_active_team : Team) -> void:
 #endregion
 
 #region Helpers
-func _set_user_team(team_index : int) -> void:
+func _on_game_controls_visibility_changed() -> void:
+	if game_controls.visible:
+		set_new_active_player_or_null(null)
+		TurnManager.active_player_set.connect(set_new_active_player_or_null)
+		set_new_active_team(TurnManager.active_team)
+		TurnManager.active_team_set.connect(set_new_active_team)
+		end_turn_button.pressed.connect(TurnManager.end_turn)
+
+func _on_team_list_item_selected(team_index : int) -> void:
 	user_team = Teams.teams[team_index]
 	ready_button.disabled = false
 #endregion
