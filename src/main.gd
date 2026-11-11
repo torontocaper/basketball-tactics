@@ -21,7 +21,8 @@ func _ready() -> void:
 	GameManager.current_game_state = GameManager.GameState.HIDDEN
 
 func _update_game(game : Game, game_state : GameManager.GameState) -> void:
-	game_layer.add_child(game)
+	if game_state == GameManager.GameState.ACTIVE:
+		game_layer.add_child(game)
 
 func _update_ui(new_ui_scene : Control) -> void:
 	# Clear existing UI nodes, if necessary

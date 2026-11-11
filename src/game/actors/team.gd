@@ -4,18 +4,21 @@ class_name Team
 extends Node2D
 ## Base class for teams
 
-#region Signals
+#region SIGNALS
 signal team_state_changed(new_state : TeamState)
 #endregion
 
-#region Enums
+#region ENUMS
 enum TeamState {
 	ACTIVE,
 	INACTIVE
 }
 #endregion
 
-#region Properties
+#region PROPERTIES
+## The team's primary color
+@export var team_color : Color
+
 ## The [Player]s on this team
 var players : Array[Player]
 

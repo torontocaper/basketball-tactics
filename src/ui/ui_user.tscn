@@ -7,7 +7,6 @@
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pv81u"]
 bg_color = Color(1, 1, 1, 0)
-draw_center = false
 border_width_left = 4
 border_width_top = 4
 border_width_right = 4
@@ -35,33 +34,101 @@ grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_pv81u")
 
-[node name="ScoreboardBox" type="CenterContainer" parent="Border" unique_id=1289687527]
+[node name="GameControls" type="Control" parent="Border" unique_id=1704357431]
 unique_name_in_owner = true
-show_behind_parent = true
 layout_mode = 2
 size_flags_vertical = 8
 
-[node name="Scoreboard" parent="Border/ScoreboardBox" unique_id=754260294 instance=ExtResource("1_ldpg4")]
+[node name="ScoreboardBox" type="CenterContainer" parent="Border/GameControls" unique_id=1289687527]
+unique_name_in_owner = true
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -65.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_vertical = 8
+
+[node name="Scoreboard" parent="Border/GameControls/ScoreboardBox" unique_id=754260294 instance=ExtResource("1_ldpg4")]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
 
-[node name="PlayerBox" parent="Border" unique_id=280926494 instance=ExtResource("4_whh6w")]
+[node name="PlayerBox" parent="Border/GameControls" unique_id=280926494 instance=ExtResource("4_whh6w")]
 unique_name_in_owner = true
-layout_mode = 2
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -43.0
+offset_right = 200.0
+grow_vertical = 0
 
-[node name="ButtonBox" type="HBoxContainer" parent="Border" unique_id=837136975]
+[node name="ButtonBox" type="HBoxContainer" parent="Border/GameControls" unique_id=837136975]
 unique_name_in_owner = true
 show_behind_parent = true
-layout_mode = 2
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -162.0
+offset_top = -51.0
+grow_horizontal = 0
+grow_vertical = 0
 size_flags_horizontal = 8
 size_flags_vertical = 8
 
-[node name="EndTurnButton" type="Button" parent="Border/ButtonBox" unique_id=28605550]
+[node name="EndTurnButton" type="Button" parent="Border/GameControls/ButtonBox" unique_id=28605550]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 8
 theme_override_fonts/font = ExtResource("2_lx81v")
 theme_override_font_sizes/font_size = 32
 text = "End Turn"
+
+[node name="TeamSelect" type="Control" parent="Border" unique_id=1314982564]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+offset_transform_visual_only = false
+
+[node name="TeamSelectBox" type="VBoxContainer" parent="Border/TeamSelect" unique_id=2041365034]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+offset_transform_visual_only = false
+
+[node name="TeamSelectTitle" type="Label" parent="Border/TeamSelect/TeamSelectBox" unique_id=571734260]
+unique_name_in_owner = true
+layout_mode = 2
+offset_transform_visual_only = false
+theme_override_font_sizes/font_size = 32
+text = "Select YOUR team:"
+
+[node name="TeamList" type="ItemList" parent="Border/TeamSelect/TeamSelectBox" unique_id=301159943]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 160)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 32
+item_count = 3
+item_0/text = "Green"
+item_1/text = "Blue"
+item_2/text = "Red"
+
+[node name="ReadyButton" type="Button" parent="Border/TeamSelect/TeamSelectBox" unique_id=217082724]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+toggle_mode = true
+text = "READY"

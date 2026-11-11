@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://dhxaxppe4sfut" path="res://src/game/actors/players/red_player.tscn" id="2_ukuq6"]
 
 [node name="RedTeam" unique_id=634722010 instance=ExtResource("1_sldrn")]
+team_color = Color(1, 0, 0, 1)
 
 [node name="Red1" parent="." index="0" unique_id=860716830 instance=ExtResource("2_ukuq6")]
 player_number = 1

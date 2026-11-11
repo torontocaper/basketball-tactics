@@ -5,33 +5,44 @@ extends Control
 ## UI scene for a particular User
 ## 
 ## Occupies half of the screen, and is rotated toward the User.
+#region ENUMS
+enum UserSide {
+	HOME,
+	AWAY
+}
+#endregion
 
-##region CONSTANTS
-#const BLUE_BORDER = preload("uid://b7wsgjbmvcoy7") ## The green_border stylebox resource; assigned to the User controlling the blue team
-#const GREEN_BORDER = preload("uid://baub6wgeedwof") ## The blue_border stylebox resource; assigned to the User controlling the green team
-##endregion
 
 #region PROPERTIES
 #region Regular variables
+@export var user_side : UserSide
+
 ## The [Team] controlled by the user assigned to this UI
 var user_team: Team:
 	set(value):
-		user_team = value
-		var new_panel = border.get_theme_stylebox("panel").duplicate()
-		match user_team.name:
-			"GreenTeam":
-				new_panel.border_color = Color.GREEN
-			"BlueTeam":
-				new_panel.border_color = Color.BLUE
-			"RedTeam":
-				new_panel.border_color = Color.RED
-			_:
-				pass
-		border.add_theme_stylebox_override("panel", new_panel)
+		if !value:
+			user_team = null
+			var new_panel : StyleBoxFlat = border.get_theme_stylebox("panel").duplicate()
+			new_panel.border_color = Color.WHITE
+			border.add_theme_stylebox_override("panel", new_panel)
+		else:
+			user_team = value
+			var new_panel : StyleBoxFlat = border.get_theme_stylebox("panel").duplicate()
+			new_panel.border_color = user_team.team_color
+			border.add_theme_stylebox_override("panel", new_panel)
 #endregion
 
 #region Onready/child nodes
 @onready var border: PanelContainer = %Border
+@onready var game_controls: Control = %GameControls
+@onready var team_list: ItemList = %TeamList
+@onready var ready_button: Button = %ReadyButton
+@onready var team_select: Control = %TeamSelect
+@onready var team_select_title: Label = %TeamSelectTitle
+@onready var scoreboard: Scoreboard = %Scoreboard
+
+
+
 @onready var end_turn_button: Button = %EndTurnButton
 @onready var button_box: HBoxContainer = %ButtonBox
 @onready var player_box: PlayerBox = %PlayerBox
@@ -43,9 +54,17 @@ var user_team: Team:
 #region Overrides
 func _ready() -> void:
 	# Hide the active game items 
-	player_box.hide()
-	button_box.hide()
-	scoreboard_box.hide()
+	game_controls.hide()
+	# Clear out the team list
+	team_list.clear()
+	# Add the actual teams to the list
+	for team in Teams.teams:
+		team_list.add_item(team.name)
+	# Use the item_selected signal to choose a team for this user
+	team_list.item_selected.connect(_set_user_team)
+	team_select_title.text = "Select %s team:" % UserSide.keys()[user_side]
+	
+	
 	#CAUTION: don't delete; refactor below code to happen after team selection
 	#set_new_active_player_or_null(null)
 	#TurnManager.active_player_set.connect(set_new_active_player_or_null)
@@ -75,4 +94,8 @@ func set_new_active_team(new_active_team : Team) -> void:
 		button_box.hide()
 		player_box.hide()
 #endregion
+
+#region Helpers
+func _set_user_team(team_index : int) -> void:
+	user_team = Teams.teams[team_index]
 #endregion
