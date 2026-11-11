@@ -23,7 +23,7 @@ var current_ui_scene : Control:
 		current_ui_scene = value
 		ui_updated.emit(current_ui_scene)
 
-var current_ui_state : UIState:
+var current_ui_state : UIState = UIState.OPEN:
 	set(value):
 		current_ui_state = value
 		print_debug("UI has new state: %s" % UIState.keys()[current_ui_state])

@@ -4,25 +4,25 @@
 #extends _BASE_
 ## Documentation comments
 
-#region Signals
+#region SIGNALS
 #signal
 #endregion
 
-#region Enums
+#region ENUMS
 #enum
 #endregion
 
-#region Constants
+#region CONSTANTS
 #const
 #endregion
 
-#region Properties
+#region PROPERTIES
 #@export var
 #var
 #@onready var
 #endregion
 
-#region Methods
+#region METHODS
 #func _ready() -> void:
 	#pass
 
@@ -30,6 +30,6 @@
 	#pass
 #endregion
 
-#region Inner Classes
+#region CLASSES
 #class 
 #endregion

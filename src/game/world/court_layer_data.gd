@@ -4,7 +4,7 @@ class_name CourtLayerData
 extends CourtLayer
 ## The layer of the court responsible for data -- point values, player positions, etc. 
 
-#region Signals
+#region SIGNALS
 ## Emitted when a source cell for navigation is set
 signal source_cell_set(source_cell_coords : Vector2i, occupied_cells : Dictionary[Player, Vector2i])
 
@@ -12,7 +12,7 @@ signal source_cell_set(source_cell_coords : Vector2i, occupied_cells : Dictionar
 signal target_cell_set(target_cell_coords : Vector2i)
 #region
 
-#region Enums
+#region ENUMS
 ## Integers representing movement costs for orthogonal (N/W/S/E) and diagonal (NW/SW/SE/NE) neighbor cells
 enum MovementCost {
 	MOVEMENT_COST_ORTHOGONAL = 2, ## The cost for moving orthogonally (N/W/S/E)
@@ -20,7 +20,7 @@ enum MovementCost {
 	}
 #region
 
-#region Properties
+#region PROPERTIES
 ## Set of cells that are currently occupied by [Player]s. 
 var occupied_cells : Dictionary[Player, Vector2i]
 
@@ -37,8 +37,8 @@ var target_cell : Vector2i:
 		target_cell_set.emit(target_cell)
 #region
 
-#region Methods
-	#region Overrides
+#region METHODS
+#region Overrides
 func _ready() -> void:
 	# Run the CourtLayer _ready function, which creates the court_cells variable
 	super()
@@ -68,7 +68,7 @@ func _input(event: InputEvent) -> void:
 			else:
 				# ... otherwise, make the clicked_cell the new target_cell.
 				target_cell = clicked_cell 
-	#endregion
+#endregion
 
 ## Start moving the [Player]. Called from [method _input] when [member target_cell] is re-clicked, confirming the move
 func initiate_move() -> void:
@@ -110,7 +110,7 @@ func set_player_as_source(source_player : Player) -> void:
 		# ... and disable input until another Player is selected
 		set_process_input(false)
 
-	#region Helpers
+#region Helpers
 ## Create the Dijkstra graph for [MoveManager]
 func _create_dijkstra_graph(cells : Array[Vector2i]) -> Dictionary[Vector2i, Dictionary]:
 	var new_graph : Dictionary[Vector2i, Dictionary]
@@ -141,5 +141,5 @@ func _get_diagonal_neighbors(cell_coords: Vector2i) -> Array[Vector2i]:
 		get_neighbor_cell(cell_coords, TileSet.CellNeighbor.CELL_NEIGHBOR_BOTTOM_RIGHT_CORNER)
 		]
 	return diagonal_neighbors
-	#endregion
+#endregion
 #endregion

@@ -53,9 +53,28 @@ var available_energy : int:
 		energy_updated.emit(available_energy)
 
 ## The coordinates where the player is currently located
-var coords : Vector2i 
+var coords : Vector2i:
+	set(value):
+		coords = value
+		if is_on_court:
+			court.visual_layer.snap_player_to_grid(self)
+			court.data_layer.occupied_cells[self] = coords
 
-## The state this player is currently in. Corresponds to one of the [enum PlayerState] constants
+## The [Court] this player is on
+var court : Court:
+	set(value):
+		if value:
+			court = value
+			is_on_court = true
+
+## Whether the player is on a [Court]
+var is_on_court : bool = false:
+	set(value):
+		is_on_court = value
+		if is_on_court:
+			court.visual_layer.snap_player_to_grid(self)
+
+## The state this player is currently in. Corresponds to one of the [enum PlayerState] enums
 var player_state : PlayerState: 
 	set(value):
 		player_state = value
@@ -113,6 +132,8 @@ func move_along_path(path : Array, path_cost : int) -> void:
 	await movement_tween.finished
 	player_state = PlayerState.SELECTED
 
+## Reset the [Player]'s energy 
+#TODO: Make this add some energy back to the player after each turn (not full reset)
 func reset_energy() -> void:
 	available_energy = player_base_energy
 

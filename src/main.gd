@@ -16,13 +16,11 @@ extends Node2D
 #region METHODS
 func _ready() -> void:
 	UiManager.ui_updated.connect(_update_ui)
-	GameManager.game_updated.connect(_update_game)
 	UiManager.current_ui_state = UiManager.UIState.OPEN
-	#GameManager.current_game_state = GameManager.GameState.HIDDEN
+	GameManager.game_ready.connect(_add_new_game)
 
-func _update_game(game : Game, game_state : GameManager.GameState) -> void:
-	if game_state == GameManager.GameState.ACTIVE:
-		game_layer.add_child(game)
+func _add_new_game(game : Game) -> void:
+	game_layer.add_child(game)
 
 func _update_ui(new_ui_scene : Control) -> void:
 	# Clear existing UI nodes, if necessary
