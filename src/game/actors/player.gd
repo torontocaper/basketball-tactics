@@ -114,6 +114,7 @@ func _ready() -> void:
 	player_clicked.connect(TurnManager.on_player_clicked)
 	available_energy = player_base_energy
 	player_number_label.text = str(player_number)
+	player_number_label.pivot_offset_ratio = Vector2(0.5, 0.5)
 
 ## Move the player along the given path. Called from [CourtLayerData], which converts the path from [MoveManager] to an [Array] of global points
 func move_along_path(path : Array, path_cost : int) -> void:

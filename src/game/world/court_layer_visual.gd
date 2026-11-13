@@ -116,7 +116,7 @@ func update_distances(dijkstra_map : Dictionary[Vector2i, Dictionary]) -> void:
 				# ... otherwise, display its distance from the active Player
 				cell_label.text = str(point_distance)
 			# If the Green team is active ...
-			if TurnManager.active_team.name == "GreenTeam":
+			if TurnManager.active_team == GameManager.current_game.away_team:
 				# ... rotate all labels by 180 degrees
 				cell_label.rotation_degrees = 180
 			else:
@@ -134,6 +134,7 @@ func _create_cell_graphics(cells : Array[Vector2i]) -> Dictionary[Vector2i, Dict
 		cell_label.name = "label_%s_%s" % [str(cell.x), str(cell.y)]
 		cell_label.theme = MAIN_THEME
 		cell_label.position = map_to_local(cell)
+		#NOTE: I don't understand why it has to use offset transform 
 		cell_label.offset_transform_enabled = true
 		cell_label.offset_transform_position_ratio = Vector2(-0.5, -0.5)
 		cell_label.z_index = 100

@@ -7,10 +7,12 @@
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pv81u"]
 bg_color = Color(1, 1, 1, 0)
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
+draw_center = false
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_blend = true
 
 [node name="UIUser" type="Control" unique_id=30669888]
 custom_minimum_size = Vector2(720, 640)

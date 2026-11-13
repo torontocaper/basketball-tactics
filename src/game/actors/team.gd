@@ -49,7 +49,7 @@ func _get_players() -> Array[Player]:
 	var player_array : Array[Player]
 	var player_nodes = get_children()
 	for node in player_nodes:
-		var player = node as Player
+		var player : Player = node
 		player_array.append(player)
 		player.team = self
 	return player_array

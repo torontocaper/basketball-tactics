@@ -50,6 +50,8 @@ func _ready() -> void:
 		add_child(away_team, true)
 		court.home_players = home_team.players
 		court.away_players = away_team.players
+		for player in away_team.players:
+			player.player_number_label.rotation_degrees = 180
 		start_game()
 #endregion
 
