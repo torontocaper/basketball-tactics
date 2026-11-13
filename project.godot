@@ -10,8 +10,8 @@ config_version=5
 
 [application]
 
-config/name="Basketball Tactics"
-config/description="Turn-based, tactical basketball simulator"
+config/name="Chessketball"
+config/description="A turn-based, tactical basketball simulator made in Godot and playable in a mobile browser. "
 config/tags=PackedStringArray("2d", "mobile", "sports")
 run/main_scene="uid://dnivxgx1bk2pk"
 config/features=PackedStringArray("4.7", "GL Compatibility")
