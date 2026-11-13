@@ -1,12 +1,14 @@
-# Basketball Tactics
+# Chessketball
 
-A turn-based, tactical basketball game. Developed in Godot and targeted at mobile devices. 
+A turn-based, tactical basketball simulator, developed in Godot and playable in a mobile browser. 
 
 ## Core Concept
 
-*Basketball Tactics* (working title) applies the tactical, turn-based action of classic RPGs and strategy games (not to mention chess!) to the basketball court, with players taking turns executing context-dependent moves like shooting, passing and attempting steals. 
+*Chessketball* (working title) applies the tactical, turn-based action of classic RPGs and strategy games (not to mention chess!) to the basketball court.
 
-## Attributions
+Players take turns executing context-dependent moves like shooting, passing and attempting steals. 
+
+## Attributions (work in progress)
 
 ### Icons
 
@@ -16,6 +18,6 @@ A turn-based, tactical basketball game. Developed in Godot and targeted at mobil
 - Chess by Lewen Design from <a href="https://thenounproject.com/browse/icons/term/chess/" target="_blank" title="Chess Icons">Noun Project</a> (CC BY 3.0)
 - Next by Nanda Ririz from <a href="https://thenounproject.com/browse/icons/term/next/" target="_blank" title="Next Icons">Noun Project</a> (CC BY 3.0)
 
-### Court
+### Court lines
 
 - By Jenspo - Own work, CC BY 3.0, https://commons.wikimedia.org/w/index.php?curid=11598705
